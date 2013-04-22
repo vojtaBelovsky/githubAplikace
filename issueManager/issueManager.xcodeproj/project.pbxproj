@@ -26,6 +26,12 @@
 		10E3FC681721A66B00607EBA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E3FC671721A66B00607EBA /* Default@2x.png */; };
 		10E3FC6A1721A66B00607EBA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E3FC691721A66B00607EBA /* Default-568h@2x.png */; };
 		10F32E4D17252360005E80F8 /* libMantle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F32E4A17252347005E80F8 /* libMantle.a */; };
+		10F32E9D172525E7005E80F8 /* BCHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E92172525E7005E80F8 /* BCHTTPClient.m */; };
+		10F32E9E172525E7005E80F8 /* BCIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E94172525E7005E80F8 /* BCIssue.m */; };
+		10F32E9F172525E7005E80F8 /* BCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E96172525E7005E80F8 /* BCLabel.m */; };
+		10F32EA0172525E7005E80F8 /* BCMilestone.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E98172525E7005E80F8 /* BCMilestone.m */; };
+		10F32EA1172525E7005E80F8 /* BCRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E9A172525E7005E80F8 /* BCRepository.m */; };
+		10F32EA2172525E7005E80F8 /* BCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E9C172525E7005E80F8 /* BCUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +106,18 @@
 		10E3FC671721A66B00607EBA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		10E3FC691721A66B00607EBA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		10F32E3C17252346005E80F8 /* Mantle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mantle.xcodeproj; path = ../../../frameworks/Mantle/Mantle.xcodeproj; sourceTree = "<group>"; };
+		10F32E91172525E7005E80F8 /* BCHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCHTTPClient.h; sourceTree = "<group>"; };
+		10F32E92172525E7005E80F8 /* BCHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCHTTPClient.m; sourceTree = "<group>"; };
+		10F32E93172525E7005E80F8 /* BCIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCIssue.h; path = issueManager/BCIssue.h; sourceTree = "<group>"; };
+		10F32E94172525E7005E80F8 /* BCIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCIssue.m; path = issueManager/BCIssue.m; sourceTree = "<group>"; };
+		10F32E95172525E7005E80F8 /* BCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCLabel.h; path = issueManager/BCLabel.h; sourceTree = "<group>"; };
+		10F32E96172525E7005E80F8 /* BCLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCLabel.m; path = issueManager/BCLabel.m; sourceTree = "<group>"; };
+		10F32E97172525E7005E80F8 /* BCMilestone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCMilestone.h; path = issueManager/BCMilestone.h; sourceTree = "<group>"; };
+		10F32E98172525E7005E80F8 /* BCMilestone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCMilestone.m; path = issueManager/BCMilestone.m; sourceTree = "<group>"; };
+		10F32E99172525E7005E80F8 /* BCRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCRepository.h; path = issueManager/BCRepository.h; sourceTree = "<group>"; };
+		10F32E9A172525E7005E80F8 /* BCRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCRepository.m; path = issueManager/BCRepository.m; sourceTree = "<group>"; };
+		10F32E9B172525E7005E80F8 /* BCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCUser.h; path = issueManager/BCUser.h; sourceTree = "<group>"; };
+		10F32E9C172525E7005E80F8 /* BCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCUser.m; path = issueManager/BCUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +147,16 @@
 		10E3005E1721A70300607EBA /* models */ = {
 			isa = PBXGroup;
 			children = (
+				10F32E93172525E7005E80F8 /* BCIssue.h */,
+				10F32E94172525E7005E80F8 /* BCIssue.m */,
+				10F32E95172525E7005E80F8 /* BCLabel.h */,
+				10F32E96172525E7005E80F8 /* BCLabel.m */,
+				10F32E97172525E7005E80F8 /* BCMilestone.h */,
+				10F32E98172525E7005E80F8 /* BCMilestone.m */,
+				10F32E99172525E7005E80F8 /* BCRepository.h */,
+				10F32E9A172525E7005E80F8 /* BCRepository.m */,
+				10F32E9B172525E7005E80F8 /* BCUser.h */,
+				10F32E9C172525E7005E80F8 /* BCUser.m */,
 			);
 			name = models;
 			path = ..;
@@ -137,6 +165,8 @@
 		10E3005F1721A71F00607EBA /* API */ = {
 			isa = PBXGroup;
 			children = (
+				10F32E91172525E7005E80F8 /* BCHTTPClient.h */,
+				10F32E92172525E7005E80F8 /* BCHTTPClient.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -348,6 +378,12 @@
 				10E302BC1722D1C700607EBA /* AFURLConnectionOperation.m in Sources */,
 				10E302BD1722D1C700607EBA /* AFXMLRequestOperation.m in Sources */,
 				10E302BE1722D1C700607EBA /* UIImageView+AFNetworking.m in Sources */,
+				10F32E9D172525E7005E80F8 /* BCHTTPClient.m in Sources */,
+				10F32E9E172525E7005E80F8 /* BCIssue.m in Sources */,
+				10F32E9F172525E7005E80F8 /* BCLabel.m in Sources */,
+				10F32EA0172525E7005E80F8 /* BCMilestone.m in Sources */,
+				10F32EA1172525E7005E80F8 /* BCRepository.m in Sources */,
+				10F32EA2172525E7005E80F8 /* BCUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
