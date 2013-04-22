@@ -32,6 +32,11 @@
 		10F32EA0172525E7005E80F8 /* BCMilestone.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E98172525E7005E80F8 /* BCMilestone.m */; };
 		10F32EA1172525E7005E80F8 /* BCRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E9A172525E7005E80F8 /* BCRepository.m */; };
 		10F32EA2172525E7005E80F8 /* BCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E9C172525E7005E80F8 /* BCUser.m */; };
+		10F32EA6172526C4005E80F8 /* BCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EA5172526C4005E80F8 /* BCViewController.m */; };
+		10F32EBA17252D50005E80F8 /* BCRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EB917252D50005E80F8 /* BCRepositoryViewController.m */; };
+		10F32EBE17252D8B005E80F8 /* BCRepositoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EBD17252D8B005E80F8 /* BCRepositoryView.m */; };
+		10F32EC317253465005E80F8 /* BCRepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EC217253465005E80F8 /* BCRepositoryCell.m */; };
+		10F32EC6172534F5005E80F8 /* BCRepositoryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EC5172534F5005E80F8 /* BCRepositoryDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +123,16 @@
 		10F32E9A172525E7005E80F8 /* BCRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCRepository.m; path = issueManager/BCRepository.m; sourceTree = "<group>"; };
 		10F32E9B172525E7005E80F8 /* BCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCUser.h; path = issueManager/BCUser.h; sourceTree = "<group>"; };
 		10F32E9C172525E7005E80F8 /* BCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCUser.m; path = issueManager/BCUser.m; sourceTree = "<group>"; };
+		10F32EA4172526C4005E80F8 /* BCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCViewController.h; sourceTree = "<group>"; };
+		10F32EA5172526C4005E80F8 /* BCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCViewController.m; sourceTree = "<group>"; };
+		10F32EB817252D50005E80F8 /* BCRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCRepositoryViewController.h; sourceTree = "<group>"; };
+		10F32EB917252D50005E80F8 /* BCRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRepositoryViewController.m; sourceTree = "<group>"; };
+		10F32EBC17252D8B005E80F8 /* BCRepositoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCRepositoryView.h; sourceTree = "<group>"; };
+		10F32EBD17252D8B005E80F8 /* BCRepositoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRepositoryView.m; sourceTree = "<group>"; };
+		10F32EC117253465005E80F8 /* BCRepositoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCRepositoryCell.h; sourceTree = "<group>"; };
+		10F32EC217253465005E80F8 /* BCRepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRepositoryCell.m; sourceTree = "<group>"; };
+		10F32EC4172534F5005E80F8 /* BCRepositoryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCRepositoryDataSource.h; sourceTree = "<group>"; };
+		10F32EC5172534F5005E80F8 /* BCRepositoryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRepositoryDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +244,7 @@
 		10E3FC591721A66B00607EBA /* issueManager */ = {
 			isa = PBXGroup;
 			children = (
+				10F32EA3172526B2005E80F8 /* UI */,
 				10E3005F1721A71F00607EBA /* API */,
 				10E3005E1721A70300607EBA /* models */,
 				10E3FC621721A66B00607EBA /* BCAppDelegate.h */,
@@ -261,6 +277,55 @@
 				10F32E4C17252347005E80F8 /* Mantle iOS Tests.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		10F32EA3172526B2005E80F8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				10F32EB717252D12005E80F8 /* repository */,
+				10F32EA4172526C4005E80F8 /* BCViewController.h */,
+				10F32EA5172526C4005E80F8 /* BCViewController.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		10F32EB717252D12005E80F8 /* repository */ = {
+			isa = PBXGroup;
+			children = (
+				10F32EBF172533E2005E80F8 /* dataSource */,
+				10F32EBB17252D54005E80F8 /* view */,
+				10F32EB817252D50005E80F8 /* BCRepositoryViewController.h */,
+				10F32EB917252D50005E80F8 /* BCRepositoryViewController.m */,
+			);
+			name = repository;
+			sourceTree = "<group>";
+		};
+		10F32EBB17252D54005E80F8 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				10F32EBC17252D8B005E80F8 /* BCRepositoryView.h */,
+				10F32EBD17252D8B005E80F8 /* BCRepositoryView.m */,
+				10F32EC0172533F1005E80F8 /* cell */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		10F32EBF172533E2005E80F8 /* dataSource */ = {
+			isa = PBXGroup;
+			children = (
+				10F32EC4172534F5005E80F8 /* BCRepositoryDataSource.h */,
+				10F32EC5172534F5005E80F8 /* BCRepositoryDataSource.m */,
+			);
+			name = dataSource;
+			sourceTree = "<group>";
+		};
+		10F32EC0172533F1005E80F8 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				10F32EC117253465005E80F8 /* BCRepositoryCell.h */,
+				10F32EC217253465005E80F8 /* BCRepositoryCell.m */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +449,11 @@
 				10F32EA0172525E7005E80F8 /* BCMilestone.m in Sources */,
 				10F32EA1172525E7005E80F8 /* BCRepository.m in Sources */,
 				10F32EA2172525E7005E80F8 /* BCUser.m in Sources */,
+				10F32EA6172526C4005E80F8 /* BCViewController.m in Sources */,
+				10F32EBA17252D50005E80F8 /* BCRepositoryViewController.m in Sources */,
+				10F32EBE17252D8B005E80F8 /* BCRepositoryView.m in Sources */,
+				10F32EC317253465005E80F8 /* BCRepositoryCell.m in Sources */,
+				10F32EC6172534F5005E80F8 /* BCRepositoryDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

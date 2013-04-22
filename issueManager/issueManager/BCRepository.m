@@ -7,6 +7,7 @@
 //
 
 #import "BCRepository.h"
+#import "BCHTTPClient.h"
 
 @implementation BCRepository
 
@@ -24,6 +25,21 @@
     } reverseBlock:^(NSString *str) {
         return [[NSString alloc] initWithFormat:@"%@%@", str, @"{/number}"];
     }];
+}
+
++ (void)getAllRepositoriesWithSuccess:(void (^)(NSArray *repositories))success failure:(void(^) (NSError *error)) failure{
+    [[BCHTTPClient sharedInstance] getPath:@"user/repos" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
+        NSArray *response = [NSArray arrayWithArray:responseObject];
+        
+        NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:[response count]];
+        
+        for (NSDictionary *object in response) {
+            [repositories addObject:[MTLJSONAdapter modelOfClass:[BCRepository class] fromJSONDictionary:object error:nil]];
+        }
+    }
+                                   failure:^(AFHTTPRequestOperation *operation, NSError *error){
+                                       NSLog(@"fail");
+                                   }];
 }
 
 @end

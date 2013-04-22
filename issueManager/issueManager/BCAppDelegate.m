@@ -7,6 +7,8 @@
 //
 
 #import "BCAppDelegate.h"
+#import "BCViewController.h"
+#import "BCRepositoryViewController.h"
 
 @implementation BCAppDelegate
 
@@ -16,6 +18,8 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[BCRepositoryViewController alloc] init]];
+    self.window.rootViewController = navController;
     return YES;
 }
 
