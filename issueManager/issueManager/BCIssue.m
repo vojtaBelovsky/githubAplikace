@@ -36,7 +36,7 @@
              };
 }
 
-+ (NSValueTransformer *)labeslJSONTransformer {
++ (NSValueTransformer *)labesJSONTransformer {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *labels) {
         NSMutableArray *labelObjects = [NSMutableArray arrayWithCapacity:[labels count]];
         for(NSDictionary *object in labels){
