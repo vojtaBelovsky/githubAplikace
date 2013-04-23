@@ -13,4 +13,6 @@
     NSArray *_repositories;
 }
 
+- (id)initWithRepositories:(NSArray *)repositories;
+
 @end

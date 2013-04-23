@@ -7,7 +7,7 @@
 //
 
 #import "BCRepositoryDataSource.h"
-#import "BCRepository.h"
+#import "BCRepositoryCell.h"
 
 @implementation BCRepositoryDataSource
 
@@ -19,8 +19,12 @@
     return self;
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [_repositories count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [[BCRepositoryCell alloc] initWithRepository:[_repositories objectAtIndex:indexPath.row]];
+}
 
 @end

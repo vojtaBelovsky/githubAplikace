@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BCRepository;
 
 @interface BCRepositoryCell : UITableViewCell
+
+- (id)initWithRepository:(BCRepository *)repository;
 
 @end

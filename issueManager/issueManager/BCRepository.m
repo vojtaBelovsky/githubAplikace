@@ -27,7 +27,7 @@
     }];
 }
 
-+ (void)getAllRepositoriesWithSuccess:(void (^)(NSArray *repositories))success failure:(void(^) (NSError *error)) failure{
++ (void)getAllRepositoriesWithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error)) failure{
     [[BCHTTPClient sharedInstance] getPath:@"user/repos" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
         NSArray *response = [NSArray arrayWithArray:responseObject];
         
@@ -36,6 +36,7 @@
         for (NSDictionary *object in response) {
             [repositories addObject:[MTLJSONAdapter modelOfClass:[BCRepository class] fromJSONDictionary:object error:nil]];
         }
+        success ( repositories );
     }
                                    failure:^(AFHTTPRequestOperation *operation, NSError *error){
                                        NSLog(@"fail");

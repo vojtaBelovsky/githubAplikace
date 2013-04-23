@@ -7,10 +7,12 @@
 //
 
 @class BCRepositoryView;
+@class BCRepositoryDataSource;
 
 @interface BCRepositoryViewController : UIViewController<UITableViewDelegate> {
 @private
     BCRepositoryView *_repoView;
+    BCRepositoryDataSource *_dataSource;
 }
 
 @end

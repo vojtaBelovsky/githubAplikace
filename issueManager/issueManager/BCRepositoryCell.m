@@ -7,13 +7,20 @@
 //
 
 #import "BCRepositoryCell.h"
+#import "BCRepository.h"
+
+#define BCRepositoryCellIdentifier @"BCRepositoryCellIdentifier"
 
 @implementation BCRepositoryCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithRepository:(BCRepository *)repository
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BCRepositoryCellIdentifier];
     if (self) {
+        [self.textLabel setFont:[UIFont fontWithName:@"arial" size:5]];
+        [self.textLabel setText:repository.name];
+        
+        
         // Initialization code
     }
     return self;
