@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		102B8B1C17268BBD003BA22F /* BCIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B1B17268BBD003BA22F /* BCIssueViewController.m */; };
+		102B8B2217268C90003BA22F /* BCIssueDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B2117268C90003BA22F /* BCIssueDataSource.m */; };
+		102B8B2517268CCC003BA22F /* BCIssueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B2417268CCC003BA22F /* BCIssueView.m */; };
+		102B8B2817268D38003BA22F /* BCIssueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B2717268D38003BA22F /* BCIssueCell.m */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
 		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
@@ -78,6 +82,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		102B8B1A17268BBD003BA22F /* BCIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueViewController.h; sourceTree = "<group>"; };
+		102B8B1B17268BBD003BA22F /* BCIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueViewController.m; sourceTree = "<group>"; };
+		102B8B2017268C90003BA22F /* BCIssueDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueDataSource.h; sourceTree = "<group>"; };
+		102B8B2117268C90003BA22F /* BCIssueDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueDataSource.m; sourceTree = "<group>"; };
+		102B8B2317268CCC003BA22F /* BCIssueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueView.h; sourceTree = "<group>"; };
+		102B8B2417268CCC003BA22F /* BCIssueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueView.m; sourceTree = "<group>"; };
+		102B8B2617268D38003BA22F /* BCIssueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueCell.h; sourceTree = "<group>"; };
+		102B8B2717268D38003BA22F /* BCIssueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueCell.m; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -150,6 +162,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		102B8B1617268B86003BA22F /* issue */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B1F17268C79003BA22F /* dataSource */,
+				102B8B1D17268C68003BA22F /* view */,
+				102B8B1A17268BBD003BA22F /* BCIssueViewController.h */,
+				102B8B1B17268BBD003BA22F /* BCIssueViewController.m */,
+			);
+			name = issue;
+			sourceTree = "<group>";
+		};
+		102B8B1D17268C68003BA22F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B2317268CCC003BA22F /* BCIssueView.h */,
+				102B8B2417268CCC003BA22F /* BCIssueView.m */,
+				102B8B1E17268C72003BA22F /* cell */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		102B8B1E17268C72003BA22F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B2617268D38003BA22F /* BCIssueCell.h */,
+				102B8B2717268D38003BA22F /* BCIssueCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		102B8B1F17268C79003BA22F /* dataSource */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B2017268C90003BA22F /* BCIssueDataSource.h */,
+				102B8B2117268C90003BA22F /* BCIssueDataSource.m */,
+			);
+			name = dataSource;
+			sourceTree = "<group>";
+		};
 		10E300481721A6AA00607EBA /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,9 +333,10 @@
 		10F32EA3172526B2005E80F8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				10F32EB717252D12005E80F8 /* repository */,
 				10F32EA4172526C4005E80F8 /* BCViewController.h */,
 				10F32EA5172526C4005E80F8 /* BCViewController.m */,
+				102B8B1617268B86003BA22F /* issue */,
+				10F32EB717252D12005E80F8 /* repository */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -454,6 +506,10 @@
 				10F32EBE17252D8B005E80F8 /* BCRepositoryView.m in Sources */,
 				10F32EC317253465005E80F8 /* BCRepositoryCell.m in Sources */,
 				10F32EC6172534F5005E80F8 /* BCRepositoryDataSource.m in Sources */,
+				102B8B1C17268BBD003BA22F /* BCIssueViewController.m in Sources */,
+				102B8B2217268C90003BA22F /* BCIssueDataSource.m in Sources */,
+				102B8B2517268CCC003BA22F /* BCIssueView.m in Sources */,
+				102B8B2817268D38003BA22F /* BCIssueCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

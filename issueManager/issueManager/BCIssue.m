@@ -7,6 +7,12 @@
 //
 
 #import "BCIssue.h"
+#import "BCHTTPClient.h"
+#import "BCUser.h"
+#import "BCMilestone.h"
+#import "BCRepository.h"
+#import "BCLabel.h"
+
 
 @implementation BCIssue
 
@@ -85,6 +91,22 @@
     } reverseBlock:^(NSDate *date) {
         return [self.dateFormatter stringFromDate:date];
     }];
+}
+
++(void)getAllIssuesFromRepository:(BCRepository *)repository WithSuccess:(void(^)(NSArray* issues))success failure:(void(^)(NSError * error))failrue{
+    [BCHTTPClient sharedInstance] getPath:repository.issuesUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *responseIssues = [[NSArray alloc] initWithArray:responseObject];
+        NSMutableArray *issues = [[NSMutableArray alloc] initWithCapacity:[responseIssues count]];
+        int i = 0;
+        for(NSDictionary *object in responseIssues){
+            [issues addObject:[MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:object error:nil]];
+            [[issues objectAtIndex:i] setRepository:repository];
+            i++;
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        <#code#>
+    }
 }
 
 @end

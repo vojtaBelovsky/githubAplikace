@@ -21,9 +21,10 @@
 
 + (NSValueTransformer *)issuesUrlJSONTransformer {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
-        return [str substringToIndex:[str length]-[@"{/number}" length]];
+        NSString *newStr = [[NSString alloc] initWithString:[str substringToIndex:[str length]-[@"{/number}" length]]];
+        return [newStr substringFromIndex:[@"https://api.github.com/" length]];
     } reverseBlock:^(NSString *str) {
-        return [[NSString alloc] initWithFormat:@"%@%@", str, @"{/number}"];
+        return [[NSString alloc] initWithFormat:@"%@%@%@",@"https://api.github.com/", str, @"{/number}"];
     }];
 }
 

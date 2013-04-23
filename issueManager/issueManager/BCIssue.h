@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <Mantle/Mantle.h>
-#import "BCUser.h"
-#import "BCMilestone.h"
-#import "BCRepository.h"
-#import "BCLabel.h"
+@class BCUser;
+@class BCMilestone;
+@class BCRepository;
 
 typedef enum : NSUInteger {
     GHIssueStateOpen,
@@ -20,18 +19,18 @@ typedef enum : NSUInteger {
 
 @interface BCIssue : MTLModel <MTLJSONSerializing>
 
-@property (nonatomic, copy, readonly) NSURL *htmlUrl;
-@property (nonatomic, copy, readonly) NSNumber *idOfIssue;
-@property (nonatomic, copy, readonly) NSNumber *number;
+@property (nonatomic, copy) NSURL *htmlUrl;
+@property (nonatomic, copy) NSNumber *idOfIssue;
+@property (nonatomic, copy) NSNumber *number;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *body;
-@property (nonatomic, assign, readonly) GHIssueState state;
-@property (nonatomic, copy, readonly) NSDate *updatedAt;
-@property (nonatomic, copy, readonly) NSArray *labels;
-@property (nonatomic, strong, readonly) BCUser *assignee;
-@property (nonatomic, strong, readonly) BCUser *user;
-@property (nonatomic, strong, readonly) BCMilestone *milestone;
-@property (nonatomic, strong, readonly) BCRepository *repository;
+@property (nonatomic, assign) GHIssueState state;
+@property (nonatomic, copy) NSDate *updatedAt;
+@property (nonatomic, copy) NSArray *labels;
+@property (nonatomic, strong) BCUser *assignee;
+@property (nonatomic, strong) BCUser *user;
+@property (nonatomic, strong) BCMilestone *milestone;
+@property (nonatomic, strong) BCRepository *repository;
 
 
 @end
