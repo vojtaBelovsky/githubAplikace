@@ -17,7 +17,7 @@
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BCRepositoryCellIdentifier];
     if (self) {
-        [self.textLabel setFont:[UIFont fontWithName:@"arial" size:5]];
+        [self.textLabel setFont:[UIFont fontWithName:@"arial" size:15]];
         [self.textLabel setText:repository.name];
         
         

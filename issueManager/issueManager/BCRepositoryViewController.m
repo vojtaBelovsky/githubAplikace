@@ -31,14 +31,16 @@
 
 - (void)loadView {
     [super loadView];
-    
     _repoView = [[BCRepositoryView alloc] init];
     self.view = _repoView;
     [self createModel];
-    [_repoView.tableView setDataSource:_dataSource];
     [_repoView.tableView setDelegate:self];
-    [_repoView.tableView reloadData];
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
 
 #pragma mark -
 #pragma mark Private
@@ -46,6 +48,8 @@
 -(void)createModel{
     [BCRepository getAllRepositoriesWithSuccess:^(NSArray *repositories) {
         _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:repositories];
+        [_repoView.tableView setDataSource:_dataSource];
+        [_repoView.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"fail");
     }];
