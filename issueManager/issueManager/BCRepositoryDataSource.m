@@ -27,4 +27,8 @@
     return [[BCRepositoryCell alloc] initWithRepository:[_repositories objectAtIndex:indexPath.row]];
 }
 
+-(BCRepository *)getRepositoryAtIndex:(NSUInteger)row{
+    return [_repositories objectAtIndex:row];
+}
+
 @end

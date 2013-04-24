@@ -9,13 +9,17 @@
 #import <UIKit/UIKit.h>
 @class BCRepository;
 @class BCIssue;
+@class BCIssueView;
+@class BCIssueDataSource;
 
 @interface BCIssueViewController : UIViewController<UITableViewDelegate>{
 @private
     BCRepository *_repository;
     NSArray *_issues;
+    BCIssueView *_tableView;
+    BCIssueDataSource *_dataSource;
 }
 
-
+- (id) initWithRepository:(BCRepository *)repository;
 
 @end

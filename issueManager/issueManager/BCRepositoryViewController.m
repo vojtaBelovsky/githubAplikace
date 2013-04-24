@@ -10,6 +10,7 @@
 #import "BCRepositoryView.h"
 #import "BCRepository.h"
 #import "BCRepositoryDataSource.h"
+#import "BCIssueViewController.h"
 
 @interface BCRepositoryViewController ()
 - (void)createModel;
@@ -38,7 +39,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    BCIssueViewController *issueViewController = [[BCIssueViewController alloc] initWithRepository:[_dataSource getRepositoryAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:issueViewController animated:YES];
 }
 
 

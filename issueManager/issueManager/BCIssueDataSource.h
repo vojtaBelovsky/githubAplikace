@@ -13,4 +13,6 @@
     NSArray *_issues;
 }
 
+-(id) initWithIssues:(NSArray *)issues;
+
 @end

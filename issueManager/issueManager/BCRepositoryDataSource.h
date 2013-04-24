@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class BCRepository;
 
 @interface BCRepositoryDataSource : NSObject<UITableViewDataSource>{
 @private
@@ -15,4 +16,5 @@
 
 - (id)initWithRepositories:(NSArray *)repositories;
 
+-(BCRepository *)getRepositoryAtIndex:(NSUInteger)row;
 @end

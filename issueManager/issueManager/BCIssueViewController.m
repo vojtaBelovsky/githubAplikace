@@ -8,6 +8,9 @@
 
 #import "BCIssueViewController.h"
 #import "BCRepository.h"
+#import "BCIssue.h"
+#import "BCIssueView.h"
+#import "BCIssueDataSource.h"
 
 @interface BCIssueViewController ()
 
@@ -18,6 +21,7 @@
 - (id) initWithRepository:(BCRepository *)repository{
     self = [super init];
     if(self){
+        [self setTitle:NSLocalizedString(@"issues", @"")];
         _repository = repository;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonAction)];
     }
@@ -28,16 +32,25 @@
     NSLog(@"do action");
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+- (void)loadView {
+    [super loadView];
+    _tableView = [[BCIssueView alloc] init];
+    self.view = _tableView;
+    [self createModel];
+    [_tableView.tableView setDelegate:self];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark -
+#pragma mark private
+
+-(void)createModel{
+    [BCIssue getAllIssuesFromRepository:_repository WithSuccess:^(NSArray *issues) {
+        _dataSource = [[BCIssueDataSource alloc] initWithIssues:issues];
+        [_tableView.tableView setDataSource:_dataSource];
+        [_tableView.tableView reloadData];
+    } failure:^(NSError *error) {
+        NSLog(@"fail");
+    }];
 }
 
 @end

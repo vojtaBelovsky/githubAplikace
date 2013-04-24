@@ -10,22 +10,23 @@
 
 @implementation BCIssueView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+-(id)init{
+    self = [super init];
+    if(self){
+        _tableView = [[UITableView alloc] init];
+        [self addSubview:_tableView];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    
+    CGRect frame = CGRectZero;
+    frame.size = self.bounds.size;
+    if(!CGRectEqualToRect(frame, _tableView.frame)){
+        _tableView.frame = frame;
+    }
 }
-*/
 
 @end

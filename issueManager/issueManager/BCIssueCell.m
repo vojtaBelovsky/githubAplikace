@@ -7,14 +7,18 @@
 //
 
 #import "BCIssueCell.h"
+#import "BCIssue.h"
+
+#define IssueCellReuseIdentifier @"IssueCellReuseIdentifier"
 
 @implementation BCIssueCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithIssue:(BCIssue *)issue
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
     if (self) {
-        // Initialization code
+        [self.textLabel setText:issue.title];
+        
     }
     return self;
 }

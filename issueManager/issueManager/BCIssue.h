@@ -32,5 +32,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) BCMilestone *milestone;
 @property (nonatomic, strong) BCRepository *repository;
 
++(void)getAllIssuesFromRepository:(BCRepository *)repository WithSuccess:(void(^)(NSArray* issues))success failure:(void(^)(NSError * error))failrue;
 
 @end

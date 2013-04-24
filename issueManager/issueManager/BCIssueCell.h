@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BCIssue;
 
 @interface BCIssueCell : UITableViewCell
+
+- (id)initWithIssue:(BCIssue *)issue;
 
 @end
