@@ -16,6 +16,32 @@
 
 @implementation BCIssue
 
+- (id)copyWithZone:(NSZone *)zone{
+    BCIssue *newIssue = [[BCIssue alloc] init];
+    
+    if(newIssue){
+        [newIssue.htmlUrl copyWithZone:zone];
+        [newIssue.idOfIssue copyWithZone:zone];
+        [newIssue.number copyWithZone:zone];
+        [newIssue.title copyWithZone:zone];
+        [newIssue.body copyWithZone:zone];
+        [newIssue.updatedAt copyWithZone:zone];
+        [newIssue.labels copyWithZone:zone];
+        [newIssue.assignee copyWithZone:zone];
+        [newIssue.user copyWithZone:zone];
+        [newIssue.milestone copyWithZone:zone];
+        [newIssue.repository copyWithZone:zone];
+        
+        if(_state == GHIssueStateClosed){
+            newIssue.state = GHIssueStateClosed;
+        }else{
+            newIssue.state = GHIssueStateOpen;
+        }
+    }
+    
+    
+}
+
 + (NSDateFormatter *)dateFormatter {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];

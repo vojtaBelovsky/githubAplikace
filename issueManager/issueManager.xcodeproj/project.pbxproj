@@ -11,6 +11,9 @@
 		102B8B2217268C90003BA22F /* BCIssueDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B2117268C90003BA22F /* BCIssueDataSource.m */; };
 		102B8B2517268CCC003BA22F /* BCIssueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B2417268CCC003BA22F /* BCIssueView.m */; };
 		102B8B2817268D38003BA22F /* BCIssueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B2717268D38003BA22F /* BCIssueCell.m */; };
+		102B8B32172A621B003BA22F /* BCIssueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B31172A621B003BA22F /* BCIssueDetailViewController.m */; };
+		102B8B3A172A6289003BA22F /* BCIssueDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B39172A6289003BA22F /* BCIssueDetailView.m */; };
+		102B8B40172A6646003BA22F /* gravatar-user-420.png in Resources */ = {isa = PBXBuildFile; fileRef = 102B8B3F172A6646003BA22F /* gravatar-user-420.png */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
 		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
@@ -90,6 +93,11 @@
 		102B8B2417268CCC003BA22F /* BCIssueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueView.m; sourceTree = "<group>"; };
 		102B8B2617268D38003BA22F /* BCIssueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueCell.h; sourceTree = "<group>"; };
 		102B8B2717268D38003BA22F /* BCIssueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueCell.m; sourceTree = "<group>"; };
+		102B8B30172A621B003BA22F /* BCIssueDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueDetailViewController.h; sourceTree = "<group>"; };
+		102B8B31172A621B003BA22F /* BCIssueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueDetailViewController.m; sourceTree = "<group>"; };
+		102B8B38172A6289003BA22F /* BCIssueDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueDetailView.h; sourceTree = "<group>"; };
+		102B8B39172A6289003BA22F /* BCIssueDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueDetailView.m; sourceTree = "<group>"; };
+		102B8B3F172A6646003BA22F /* gravatar-user-420.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gravatar-user-420.png"; path = "../../../../Desktop/gravatar-user-420.png"; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -201,6 +209,25 @@
 			name = dataSource;
 			sourceTree = "<group>";
 		};
+		102B8B2C172A61E3003BA22F /* issueDetail */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B33172A624C003BA22F /* view */,
+				102B8B30172A621B003BA22F /* BCIssueDetailViewController.h */,
+				102B8B31172A621B003BA22F /* BCIssueDetailViewController.m */,
+			);
+			name = issueDetail;
+			sourceTree = "<group>";
+		};
+		102B8B33172A624C003BA22F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B38172A6289003BA22F /* BCIssueDetailView.h */,
+				102B8B39172A6289003BA22F /* BCIssueDetailView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 		10E300481721A6AA00607EBA /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +335,7 @@
 		10E3FC5A1721A66B00607EBA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				102B8B3F172A6646003BA22F /* gravatar-user-420.png */,
 				10E3FC5B1721A66B00607EBA /* issueManager-Info.plist */,
 				10E3FC5C1721A66B00607EBA /* InfoPlist.strings */,
 				10E3FC5F1721A66B00607EBA /* main.m */,
@@ -335,6 +363,7 @@
 			children = (
 				10F32EA4172526C4005E80F8 /* BCViewController.h */,
 				10F32EA5172526C4005E80F8 /* BCViewController.m */,
+				102B8B2C172A61E3003BA22F /* issueDetail */,
 				102B8B1617268B86003BA22F /* issue */,
 				10F32EB717252D12005E80F8 /* repository */,
 			);
@@ -474,6 +503,7 @@
 				10E3FC661721A66B00607EBA /* Default.png in Resources */,
 				10E3FC681721A66B00607EBA /* Default@2x.png in Resources */,
 				10E3FC6A1721A66B00607EBA /* Default-568h@2x.png in Resources */,
+				102B8B40172A6646003BA22F /* gravatar-user-420.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +540,8 @@
 				102B8B2217268C90003BA22F /* BCIssueDataSource.m in Sources */,
 				102B8B2517268CCC003BA22F /* BCIssueView.m in Sources */,
 				102B8B2817268D38003BA22F /* BCIssueCell.m in Sources */,
+				102B8B32172A621B003BA22F /* BCIssueDetailViewController.m in Sources */,
+				102B8B3A172A6289003BA22F /* BCIssueDetailView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
