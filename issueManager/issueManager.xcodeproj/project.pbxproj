@@ -14,6 +14,10 @@
 		102B8B32172A621B003BA22F /* BCIssueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B31172A621B003BA22F /* BCIssueDetailViewController.m */; };
 		102B8B3A172A6289003BA22F /* BCIssueDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B39172A6289003BA22F /* BCIssueDetailView.m */; };
 		102B8B40172A6646003BA22F /* gravatar-user-420.png in Resources */ = {isa = PBXBuildFile; fileRef = 102B8B3F172A6646003BA22F /* gravatar-user-420.png */; };
+		102B8B49172E931D003BA22F /* BCSelectAssigneeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B48172E931D003BA22F /* BCSelectAssigneeViewController.m */; };
+		102B8B4D172E9350003BA22F /* BCSelectAssigneeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B4C172E9350003BA22F /* BCSelectAssigneeView.m */; };
+		102B8B51172E9385003BA22F /* BCSelectAssigneeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B50172E9385003BA22F /* BCSelectAssigneeCell.m */; };
+		102B8B55172E93B0003BA22F /* BCSelectAssigneeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B54172E93B0003BA22F /* BCSelectAssigneeDataSource.m */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
 		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
@@ -98,6 +102,14 @@
 		102B8B38172A6289003BA22F /* BCIssueDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueDetailView.h; sourceTree = "<group>"; };
 		102B8B39172A6289003BA22F /* BCIssueDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueDetailView.m; sourceTree = "<group>"; };
 		102B8B3F172A6646003BA22F /* gravatar-user-420.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gravatar-user-420.png"; path = "../../../../Desktop/gravatar-user-420.png"; sourceTree = "<group>"; };
+		102B8B47172E931D003BA22F /* BCSelectAssigneeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectAssigneeViewController.h; sourceTree = "<group>"; };
+		102B8B48172E931D003BA22F /* BCSelectAssigneeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectAssigneeViewController.m; sourceTree = "<group>"; };
+		102B8B4B172E9350003BA22F /* BCSelectAssigneeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectAssigneeView.h; sourceTree = "<group>"; };
+		102B8B4C172E9350003BA22F /* BCSelectAssigneeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectAssigneeView.m; sourceTree = "<group>"; };
+		102B8B4F172E9385003BA22F /* BCSelectAssigneeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectAssigneeCell.h; sourceTree = "<group>"; };
+		102B8B50172E9385003BA22F /* BCSelectAssigneeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectAssigneeCell.m; sourceTree = "<group>"; };
+		102B8B53172E93B0003BA22F /* BCSelectAssigneeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectAssigneeDataSource.h; sourceTree = "<group>"; };
+		102B8B54172E93B0003BA22F /* BCSelectAssigneeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectAssigneeDataSource.m; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -226,6 +238,45 @@
 				102B8B39172A6289003BA22F /* BCIssueDetailView.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		102B8B45172E92FD003BA22F /* selectAssignee */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B52172E9394003BA22F /* dataSource */,
+				102B8B46172E930D003BA22F /* view */,
+				102B8B47172E931D003BA22F /* BCSelectAssigneeViewController.h */,
+				102B8B48172E931D003BA22F /* BCSelectAssigneeViewController.m */,
+			);
+			name = selectAssignee;
+			sourceTree = "<group>";
+		};
+		102B8B46172E930D003BA22F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B4B172E9350003BA22F /* BCSelectAssigneeView.h */,
+				102B8B4C172E9350003BA22F /* BCSelectAssigneeView.m */,
+				102B8B4A172E9337003BA22F /* cell */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		102B8B4A172E9337003BA22F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B4F172E9385003BA22F /* BCSelectAssigneeCell.h */,
+				102B8B50172E9385003BA22F /* BCSelectAssigneeCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		102B8B52172E9394003BA22F /* dataSource */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B53172E93B0003BA22F /* BCSelectAssigneeDataSource.h */,
+				102B8B54172E93B0003BA22F /* BCSelectAssigneeDataSource.m */,
+			);
+			name = dataSource;
 			sourceTree = "<group>";
 		};
 		10E300481721A6AA00607EBA /* 3rd */ = {
@@ -363,6 +414,7 @@
 			children = (
 				10F32EA4172526C4005E80F8 /* BCViewController.h */,
 				10F32EA5172526C4005E80F8 /* BCViewController.m */,
+				102B8B45172E92FD003BA22F /* selectAssignee */,
 				102B8B2C172A61E3003BA22F /* issueDetail */,
 				102B8B1617268B86003BA22F /* issue */,
 				10F32EB717252D12005E80F8 /* repository */,
@@ -542,6 +594,10 @@
 				102B8B2817268D38003BA22F /* BCIssueCell.m in Sources */,
 				102B8B32172A621B003BA22F /* BCIssueDetailViewController.m in Sources */,
 				102B8B3A172A6289003BA22F /* BCIssueDetailView.m in Sources */,
+				102B8B49172E931D003BA22F /* BCSelectAssigneeViewController.m in Sources */,
+				102B8B4D172E9350003BA22F /* BCSelectAssigneeView.m in Sources */,
+				102B8B51172E9385003BA22F /* BCSelectAssigneeCell.m in Sources */,
+				102B8B55172E93B0003BA22F /* BCSelectAssigneeDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

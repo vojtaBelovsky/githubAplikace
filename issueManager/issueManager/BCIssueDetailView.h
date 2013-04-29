@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class BCIssue;
+@class BCIssueDetailViewController;
 
 @interface BCIssueDetailView : UIView
 
@@ -16,7 +17,8 @@
 @property UITextView *title;
 @property UITextField *body;
 
--(id) initWithIssue:(BCIssue *) issue;
+-(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
 
+-(void) rewriteContentWithIssue:(BCIssue *)issue;
 
 @end

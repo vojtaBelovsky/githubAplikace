@@ -21,6 +21,7 @@
     self = [super init];
     if (self) {
         _issue = issue;
+        _editedIssue = issue;
         //_editedIssue = [issue copy]; //ZKUSIT JETLI POTREBUJU HLUBOKOU KOPII!!!
         _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
         _editButton = [self editButtonItem];
@@ -35,7 +36,9 @@
 
 -(void) loadView{
     [super loadView];
-    _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue];
+    _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue andController:self];
+    [_issueDetailview.title setDelegate:self];
+    [_issueDetailview.body setDelegate:self];
     self.view = _issueDetailview;
     self.navigationItem.rightBarButtonItems = _buttons;
 }
@@ -49,21 +52,50 @@
 #pragma mark -
 #pragma mark ButtonActions
 
+-(void) selectAssignee{
+    NSLog(@"select assignee");//PUSH SELECT ASSIGNEE VIEW CONTROLLER
+}
+
 -(void) editButtionAction{
-    [self setEditing:YES];
-    [_issueDetailview.title setEditable:YES];
-    [_issueDetailview.body setEnabled:YES];
-    
+    if([self isEditing]){
+        [self setEditing:NO];
+        //poslat zmeny na server
+    }else{
+        [self setEditing:YES];
+        [self setItemsEditable:YES];
+        [_issueDetailview.title becomeFirstResponder];
+    }
 }
 
 -(void) cancelButtonAction{
+    [self setItemsEditable:NO];
+    [_issueDetailview rewriteContentWithIssue:_issue];
+}
+
+#pragma mark -
+#pragma mark delegateMethods
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    [_editedIssue setTitle:textView.text];
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [_editedIssue setBody:textField.text];
+    return YES;
+}
+
+#pragma mark -
+#pragma mark private
+
+-(void)createAndPushSelectAssigneVC{
+    
+}
+
+-(void)setItemsEditable:(BOOL)isEditable{
+    [_issueDetailview.title setEditable:isEditable];
+    [_issueDetailview.body setEnabled:isEditable];
+    [_issueDetailview.assignee setEnabled:isEditable];
 }
 
 @end

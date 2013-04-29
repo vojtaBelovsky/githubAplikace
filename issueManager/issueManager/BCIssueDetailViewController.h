@@ -16,12 +16,13 @@
 }
 
 @property BCIssue *issue;
-@property BCIssue *editedIssue;
+@property (copy) BCIssue *editedIssue;
 //@property BOOL isEditing;
 @property NSArray *buttons;
 @property UIBarButtonItem *cancelButton;
 @property UIBarButtonItem *editButton;
 
 - (id)initWithIssue:(BCIssue *)issue;
+-(void) selectAssignee;
 
 @end

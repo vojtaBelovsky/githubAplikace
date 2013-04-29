@@ -10,10 +10,11 @@
 #import "BCIssue.h"
 #import "UIImageView+AFNetworking.h"
 #import "BCUser.h"
+#import "BCIssueDetailViewController.h"
 
 @implementation BCIssueDetailView
 
--(id) initWithIssue:(BCIssue *) issue{
+-(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller{
     self = [super init];
     if(self){
         [self setBackgroundColor:[UIColor blackColor]];
@@ -22,6 +23,8 @@
         
         _assignee = [[UIButton alloc] init];
         [_assignee setTitle:issue.assignee.userLogin forState:UIControlStateNormal];
+        [_assignee addTarget:controller action:@selector(selectAssignee) forControlEvents:UIControlEventTouchDown];
+        [_assignee setEnabled:NO];
         //setSelecable !!!
         //[_assignee setText:issue.assignee.userLogin];
         //[_assignee setFont:[UIFont fontWithName:@"arial" size:15]];
@@ -43,6 +46,13 @@
         [self addSubview:_body];        
     }
     return self;
+}
+
+-(void) rewriteContentWithIssue:(BCIssue *)issue{
+    [_avatar setImageWithURL:issue.assignee.avatarUrl placeholderImage:[UIImage imageNamed:@"gravatar-user-420.png"]];
+    [_assignee setTitle:issue.assignee.userLogin forState:UIControlStateNormal];
+    [_title setText:issue.title];
+    [_body setText:issue.body];
 }
 
 -(void) layoutSubviews{
