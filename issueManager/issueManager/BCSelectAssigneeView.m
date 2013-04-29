@@ -10,13 +10,24 @@
 
 @implementation BCSelectAssigneeView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)init
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
-        // Initialization code
+        _tableView = [[UITableView alloc] init];
+        [self addSubview:_tableView];
     }
     return self;
+}
+
+-(void) layoutSubviews{
+    [super layoutSubviews];
+    
+    CGRect frame = CGRectZero;
+    frame.size = self.bounds.size;
+    if(!CGRectEqualToRect(frame, _tableView.frame)){
+        _tableView.frame = frame;
+    }
 }
 
 /*

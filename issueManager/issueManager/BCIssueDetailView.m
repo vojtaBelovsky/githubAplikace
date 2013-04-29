@@ -29,15 +29,16 @@
         //[_assignee setText:issue.assignee.userLogin];
         //[_assignee setFont:[UIFont fontWithName:@"arial" size:15]];
         
-        _title = [[UITextView alloc] init];
-        [_title setEditable:NO];
+        _title = [[UITextField alloc] init];
+        [_title setEnabled:NO];
         [_title setText:issue.title];
         [_title setFont:[UIFont fontWithName:@"arial" size:15]];
+        [_title setReturnKeyType:UIReturnKeyNext];
+        [_title setBackgroundColor:[UIColor whiteColor]];
 
-        _body = [[UITextField alloc] init];//povolit at muze byt viceradkovy
-        [_body setEnabled:NO];
+        _body = [[UITextView alloc] init];//povolit at muze byt viceradkovy
+        [_body setEditable:NO];
         [_body setText:issue.body];
-        [_body setBackgroundColor:[UIColor whiteColor]];
         [_body setFont:[UIFont fontWithName:@"arial" size:15]];
         
         [self addSubview:_avatar];

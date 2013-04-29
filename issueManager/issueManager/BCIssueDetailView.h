@@ -14,8 +14,8 @@
 
 @property UIImageView *avatar;
 @property UIButton *assignee;
-@property UITextView *title;
-@property UITextField *body;
+@property UITextField *title;
+@property UITextView *body;
 
 -(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
 

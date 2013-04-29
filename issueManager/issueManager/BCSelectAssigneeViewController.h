@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 @class BCRepository;
+@class BCSelectAssigneeDataSource;
+@class BCSelectAssigneeView;
 
 @interface BCSelectAssigneeViewController : UIViewController<UITableViewDelegate>{
 @private
     BCRepository *_repository;
+    BCSelectAssigneeView *_tableView;
+    BCSelectAssigneeDataSource *_dataSource;
 }
+
+- (id)initWithRepository:(BCRepository *)repository;
 
 @end

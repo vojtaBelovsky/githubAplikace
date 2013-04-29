@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BCUser;
 
 @interface BCSelectAssigneeCell : UITableViewCell
+
+- (id)initWithAssignee:(BCUser *)assignee;
 
 @end

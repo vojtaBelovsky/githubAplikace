@@ -20,4 +20,6 @@ BCUser *owner;
 
 + (void)getAllRepositoriesWithSuccess:(void (^)(NSArray *repositories))success failure:(void(^) (NSError *error)) failure;
 
++(void)getAllCollaboratorsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allCollaborators))success failure:(void(^) (NSError * error))failure;
+
 @end

@@ -18,7 +18,6 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
     if (self) {
         [self.textLabel setText:issue.title];
-        
     }
     return self;
 }

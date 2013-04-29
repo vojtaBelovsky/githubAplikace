@@ -10,4 +10,6 @@
 
 @interface BCSelectAssigneeView : UIView
 
+@property (strong) UITableView *tableView;
+
 @end

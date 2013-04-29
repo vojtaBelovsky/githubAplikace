@@ -7,14 +7,17 @@
 //
 
 #import "BCSelectAssigneeCell.h"
+#import "BCUser.h"
+
+#define SelectAssigneeCellReuseIdentifier @"SelectAssigneeCellReuseIdentifier"
 
 @implementation BCSelectAssigneeCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithAssignee:(BCUser *)assignee
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SelectAssigneeCellReuseIdentifier];
     if (self) {
-        // Initialization code
+        [self.textLabel setText:assignee.userLogin];
     }
     return self;
 }

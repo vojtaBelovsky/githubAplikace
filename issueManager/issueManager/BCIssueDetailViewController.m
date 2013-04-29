@@ -9,6 +9,7 @@
 #import "BCIssueDetailViewController.h"
 #import "BCIssueDetailView.h"
 #import "BCIssue.h"
+#import "BCSelectAssigneeViewController.h"
 
 @interface BCIssueDetailViewController ()
 
@@ -53,7 +54,7 @@
 #pragma mark ButtonActions
 
 -(void) selectAssignee{
-    NSLog(@"select assignee");//PUSH SELECT ASSIGNEE VIEW CONTROLLER
+    [self createAndPushSelectAssigneVC];
 }
 
 -(void) editButtionAction{
@@ -76,12 +77,12 @@
 #pragma mark delegateMethods
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    [_editedIssue setTitle:textView.text];
-    
+    [_editedIssue setBody:textView.text];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [_editedIssue setBody:textField.text];
+    [_editedIssue setTitle:textField.text];
+    [self createAndPushSelectAssigneVC];
     return YES;
 }
 
@@ -89,12 +90,13 @@
 #pragma mark private
 
 -(void)createAndPushSelectAssigneVC{
-    
+    BCSelectAssigneeViewController *selectAssigneeVC = [[BCSelectAssigneeViewController alloc] initWithRepository:_issue.repository];
+    [self.navigationController pushViewController:selectAssigneeVC animated:YES];
 }
 
 -(void)setItemsEditable:(BOOL)isEditable{
-    [_issueDetailview.title setEditable:isEditable];
-    [_issueDetailview.body setEnabled:isEditable];
+    [_issueDetailview.body setEditable:isEditable];
+    [_issueDetailview.title setEnabled:isEditable];
     [_issueDetailview.assignee setEnabled:isEditable];
 }
 

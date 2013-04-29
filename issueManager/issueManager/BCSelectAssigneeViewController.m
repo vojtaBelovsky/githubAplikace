@@ -8,6 +8,8 @@
 
 #import "BCSelectAssigneeViewController.h"
 #import "BCRepository.h"
+#import "BCSelectAssigneeDataSource.h"
+#import "BCSelectAssigneeView.h"
 
 @interface BCSelectAssigneeViewController ()
 
@@ -26,13 +28,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _tableView = [[BCSelectAssigneeView alloc] init];
+    [_tableView.tableView setDelegate:self];
+    [self setView:_tableView];
+    [self createModel];
+    
 	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark -
+#pragma mark private
+
+-(void)createModel{
+    [BCRepository getAllCollaboratorsOfRepository:_repository withSuccess:^(NSArray *allCollaborators) {
+        _dataSource = [[BCSelectAssigneeDataSource alloc] initWithCollaborators:allCollaborators];
+        [_tableView.tableView setDataSource:_dataSource];
+        [_tableView.tableView reloadData];
+    } failure:^(NSError *error) {
+        NSLog(@"fail");
+    }];
 }
 
 @end
