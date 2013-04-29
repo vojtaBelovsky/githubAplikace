@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BCSelectAssigneeDataSource : NSObject
+@interface BCSelectAssigneeDataSource : NSObject<UITableViewDataSource>
 
 @end

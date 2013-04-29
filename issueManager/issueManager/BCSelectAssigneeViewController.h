@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BCRepository;
 
-@interface BCSelectAssigneeViewController : UIViewController
+@interface BCSelectAssigneeViewController : UIViewController<UITableViewDelegate>{
+@private
+    BCRepository *_repository;
+}
 
 @end

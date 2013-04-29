@@ -7,6 +7,7 @@
 //
 
 #import "BCSelectAssigneeViewController.h"
+#import "BCRepository.h"
 
 @interface BCSelectAssigneeViewController ()
 
@@ -14,11 +15,10 @@
 
 @implementation BCSelectAssigneeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithRepository:(BCRepository *)repository{
+    self = [super init];
     if (self) {
-        // Custom initialization
+        _repository = repository;
     }
     return self;
 }
