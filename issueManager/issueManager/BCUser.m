@@ -19,7 +19,7 @@
              };
 }
 
-+ (NSValueTransformer *)avatarUrllJSONTransformer {
++ (NSValueTransformer *)avatarUrlJSONTransformer {
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 

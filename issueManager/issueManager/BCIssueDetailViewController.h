@@ -10,16 +10,18 @@
 @class BCIssue;
 @class BCIssueDetailView;
 
-@interface BCIssueDetailViewController : UIViewController{
+@interface BCIssueDetailViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate>{
 @private
     BCIssueDetailView *_issueDetailview;
 }
 
 @property BCIssue *issue;
 @property BCIssue *editedIssue;
-@property BOOL isEditing;
+//@property BOOL isEditing;
 @property NSArray *buttons;
 @property UIBarButtonItem *cancelButton;
 @property UIBarButtonItem *editButton;
+
+- (id)initWithIssue:(BCIssue *)issue;
 
 @end

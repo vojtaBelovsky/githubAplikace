@@ -11,6 +11,7 @@
 #import "BCIssue.h"
 #import "BCIssueView.h"
 #import "BCIssueDataSource.h"
+#import "BCIssueDetailViewController.h"
 
 @interface BCIssueViewController ()
 
@@ -30,6 +31,11 @@
 
 - (void)addButtonAction{
     NSLog(@"do action");
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue: [_dataSource.issues objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:issueDetailViewController animated:YES];
 }
 
 - (void)loadView {

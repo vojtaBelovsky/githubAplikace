@@ -38,8 +38,7 @@
             newIssue.state = GHIssueStateOpen;
         }
     }
-    
-    
+    return newIssue;
 }
 
 + (NSDateFormatter *)dateFormatter {

@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BCIssueDataSource : NSObject<UITableViewDataSource>{
-@private
-    NSArray *_issues;
-}
+@interface BCIssueDataSource : NSObject<UITableViewDataSource>
+
+@property (copy) NSArray *issues;
 
 -(id) initWithIssues:(NSArray *)issues;
 

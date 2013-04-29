@@ -12,10 +12,9 @@
 @interface BCIssueDetailView : UIView
 
 @property UIImageView *avatar;
-@property UILabel *assignee;
+@property UIButton *assignee;
 @property UITextView *title;
 @property UITextField *body;
-@property BCIssue *issue;
 
 -(id) initWithIssue:(BCIssue *) issue;
 
