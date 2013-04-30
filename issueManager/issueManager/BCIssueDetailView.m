@@ -22,7 +22,11 @@
         [_avatar setImageWithURL:issue.assignee.avatarUrl placeholderImage:[UIImage imageNamed:@"gravatar-user-420.png"]];
         
         _assignee = [[UIButton alloc] init];
-        [_assignee setTitle:issue.assignee.userLogin forState:UIControlStateNormal];
+        if(controller.isSetedAssignee){
+            [_assignee setTitle:issue.assignee.userLogin forState:UIControlStateNormal];
+        }else{
+            [_assignee setTitle:@"nobody is assigned" forState:UIControlStateNormal];
+        }
         [_assignee addTarget:controller action:@selector(selectAssignee) forControlEvents:UIControlEventTouchDown];
         [_assignee setEnabled:NO];
         //setSelecable !!!

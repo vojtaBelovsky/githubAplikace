@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class BCIssue;
 @class BCIssueDetailView;
+@class BCUser;
 
 @interface BCIssueDetailViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate>{
 @private
@@ -18,11 +19,14 @@
 @property BCIssue *issue;
 @property (copy) BCIssue *editedIssue;
 //@property BOOL isEditing;
-@property NSArray *buttons;
+@property NSMutableArray *buttons;
 @property UIBarButtonItem *cancelButton;
 @property UIBarButtonItem *editButton;
+@property BOOL isSetedAssignee;
 
 - (id)initWithIssue:(BCIssue *)issue;
 -(void) selectAssignee;
+-(void) setNewAssignee:(BCUser *)assignee;
+-(BCUser*)getAssignee;
 
 @end

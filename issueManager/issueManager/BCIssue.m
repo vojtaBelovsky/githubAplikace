@@ -20,17 +20,17 @@
     BCIssue *newIssue = [[BCIssue alloc] init];
     
     if(newIssue){
-        [newIssue.htmlUrl copyWithZone:zone];
-        [newIssue.idOfIssue copyWithZone:zone];
-        [newIssue.number copyWithZone:zone];
-        [newIssue.title copyWithZone:zone];
-        [newIssue.body copyWithZone:zone];
-        [newIssue.updatedAt copyWithZone:zone];
-        [newIssue.labels copyWithZone:zone];
-        [newIssue.assignee copyWithZone:zone];
-        [newIssue.user copyWithZone:zone];
-        [newIssue.milestone copyWithZone:zone];
-        [newIssue.repository copyWithZone:zone];
+        newIssue.htmlUrl = [_htmlUrl copyWithZone:zone];
+        newIssue.idOfIssue = [_idOfIssue copyWithZone:zone];
+        newIssue.number = [_number copyWithZone:zone];
+        newIssue.title = [_title copyWithZone:zone];
+        newIssue.body = [_body copyWithZone:zone];
+        newIssue.updatedAt = [_updatedAt copyWithZone:zone];
+        newIssue.labels = [_labels copyWithZone:zone];
+        newIssue.assignee = [_assignee copyWithZone:zone];
+        newIssue.user = [_user copyWithZone:zone];
+        newIssue.milestone = [_milestone copyWithZone:zone];
+        newIssue.repository = [_repository copyWithZone:zone];
         
         if(_state == GHIssueStateClosed){
             newIssue.state = GHIssueStateClosed;

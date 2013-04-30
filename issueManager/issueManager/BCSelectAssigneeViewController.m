@@ -10,6 +10,7 @@
 #import "BCRepository.h"
 #import "BCSelectAssigneeDataSource.h"
 #import "BCSelectAssigneeView.h"
+#import "BCIssueDetailViewController.h"
 
 @interface BCSelectAssigneeViewController ()
 
@@ -17,10 +18,11 @@
 
 @implementation BCSelectAssigneeViewController
 
-- (id)initWithRepository:(BCRepository *)repository{
+- (id)initWithRepository:(BCRepository *)repository andController:(BCIssueDetailViewController *)controller{
     self = [super init];
     if (self) {
         _repository = repository;
+        _controller = controller;
     }
     return self;
 }
@@ -31,6 +33,7 @@
     _tableView = [[BCSelectAssigneeView alloc] init];
     [_tableView.tableView setDelegate:self];
     [self setView:_tableView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"select" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonAction)];
     [self createModel];
     
 	// Do any additional setup after loading the view.
@@ -44,9 +47,27 @@
         _dataSource = [[BCSelectAssigneeDataSource alloc] initWithCollaborators:allCollaborators];
         [_tableView.tableView setDataSource:_dataSource];
         [_tableView.tableView reloadData];
+        if(_controller.isSetedAssignee){
+            [_tableView.tableView selectRowAtIndexPath:[self getIndexPathOfSelectedRow] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+        }
     } failure:^(NSError *error) {
         NSLog(@"fail");
     }];
+}
+
+-(NSIndexPath*)getIndexPathOfSelectedRow{
+    NSUInteger row = [_dataSource.collaborators indexOfObject:[_controller getAssignee]];
+    return [NSIndexPath indexPathForRow:row inSection:0];
+}
+
+#pragma mark -
+#pragma mark buttonActions
+
+-(void) doneButtonAction{
+    NSInteger selectedRow = [_tableView.tableView indexPathForSelectedRow].row;
+    [_controller setNewAssignee:[_dataSource.collaborators objectAtIndex:selectedRow]];
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 @end
