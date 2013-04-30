@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[BCIssueDetailViewController createParameters]:BCIssueDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "parameters1">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BCSelectAssigneeViewController getIndexPathOfSelectedRow]:BCSelectAssigneeViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[BCIssueDetailViewController initWithIssue:]:BCIssueDetailViewController.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

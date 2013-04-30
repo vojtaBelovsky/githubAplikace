@@ -10,6 +10,10 @@
 #import "BCIssueDetailView.h"
 #import "BCIssue.h"
 #import "BCSelectAssigneeViewController.h"
+#import "BCHTTPClient.h"
+#import "BCRepository.h"
+#import "BCUser.h"
+#import "BCMilestone.h"
 
 @interface BCIssueDetailViewController ()
 
@@ -62,7 +66,15 @@
 -(void) editButtionAction{
     if([self isEditing]){
         [self setEditing:NO];
-        //poslat zmeny na server
+        NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%d", _issue.repository.owner.userLogin, _issue.repository.name, [_issue.number intValue]];
+        [[BCHTTPClient sharedInstance] patchPath:path parameters:[self createParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Issue was updated");
+            [self.navigationController popViewControllerAnimated:YES];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Fail");
+            //NSError
+        }];
+        
     }else{
         [self setEditing:YES];
         [self setItemsEditable:YES];
@@ -105,6 +117,18 @@
     [_issueDetailview.body setEditable:isEditable];
     [_issueDetailview.title setEnabled:isEditable];
     [_issueDetailview.assignee setEnabled:isEditable];
+}
+
+-(NSDictionary *) createParameters{    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                _editedIssue.title ?: [NSNull null], @"title",
+                                _editedIssue.body ?: [NSNull null], @"body",
+                                _editedIssue.assignee.userLogin ?: [NSNull null], @"assignee",
+                                (_editedIssue.state == GHIssueStateOpen) ? @"open" : @"closed", @"state",
+                                _editedIssue.milestone.number ?: [NSNull null], @"milestone",
+                                ([_issue getLabelsAsStrings]) ?: [NSNull null], @"labels",
+                                nil];
+    return parameters;
 }
 
 #pragma mark -

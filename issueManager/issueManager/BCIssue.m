@@ -57,11 +57,12 @@
              @"assignee": @"assignee",
              @"user": @"user",
              @"milestone": @"milestone",
-             @"repository": @"repository"
+             @"repository": @"repository",
+             @"labels" : @"labels"
              };
 }
 
-+ (NSValueTransformer *)labesJSONTransformer {
++ (NSValueTransformer *)labelsJSONTransformer {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *labels) {
         NSMutableArray *labelObjects = [NSMutableArray arrayWithCapacity:[labels count]];
         for(NSDictionary *object in labels){
@@ -134,4 +135,20 @@
     }];
 }
 
+-(NSArray *)getLabelsAsStrings{
+    NSMutableArray *labels = [[NSMutableArray alloc] init];
+    for(BCLabel *object in _labels){
+        [labels addObject:object.name];
+    }
+    return labels;
+}
+
 @end
+
+
+
+
+
+
+
+

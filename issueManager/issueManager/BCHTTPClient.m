@@ -21,7 +21,19 @@
     return self;
 }
 
++ (void)patchPath:(NSString *)path
+      parameters:(NSDictionary *)parameters
+         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    [[self sharedInstance] patchPath:path parameters:parameters success:success failure:failure];
+}
 
++ (void)postPath:(NSString *)path
+      parameters:(NSDictionary *)parameters
+         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    [[self sharedInstance] postPath:path parameters:parameters success:success failure:failure];
+}
 
 + (void)getPath:(NSString *)path
      parameters:(NSDictionary *)parameters

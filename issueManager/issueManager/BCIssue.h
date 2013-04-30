@@ -34,4 +34,6 @@ typedef enum : NSUInteger {
 
 +(void)getAllIssuesFromRepository:(BCRepository *)repository WithSuccess:(void(^)(NSArray* issues))success failure:(void(^)(NSError * error))failrue;
 
+-(NSArray *)getLabelsAsStrings;
+
 @end

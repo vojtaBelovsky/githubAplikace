@@ -18,6 +18,8 @@
 		102B8B4D172E9350003BA22F /* BCSelectAssigneeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B4C172E9350003BA22F /* BCSelectAssigneeView.m */; };
 		102B8B51172E9385003BA22F /* BCSelectAssigneeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B50172E9385003BA22F /* BCSelectAssigneeCell.m */; };
 		102B8B55172E93B0003BA22F /* BCSelectAssigneeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B54172E93B0003BA22F /* BCSelectAssigneeDataSource.m */; };
+		102B8B5A172FE2E2003BA22F /* BCAddIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B59172FE2E2003BA22F /* BCAddIssueViewController.m */; };
+		102B8B5D172FE2FB003BA22F /* BCAddIssueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
 		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
@@ -43,7 +45,6 @@
 		10F32EA0172525E7005E80F8 /* BCMilestone.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E98172525E7005E80F8 /* BCMilestone.m */; };
 		10F32EA1172525E7005E80F8 /* BCRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E9A172525E7005E80F8 /* BCRepository.m */; };
 		10F32EA2172525E7005E80F8 /* BCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E9C172525E7005E80F8 /* BCUser.m */; };
-		10F32EA6172526C4005E80F8 /* BCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EA5172526C4005E80F8 /* BCViewController.m */; };
 		10F32EBA17252D50005E80F8 /* BCRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EB917252D50005E80F8 /* BCRepositoryViewController.m */; };
 		10F32EBE17252D8B005E80F8 /* BCRepositoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EBD17252D8B005E80F8 /* BCRepositoryView.m */; };
 		10F32EC317253465005E80F8 /* BCRepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EC217253465005E80F8 /* BCRepositoryCell.m */; };
@@ -110,6 +111,10 @@
 		102B8B50172E9385003BA22F /* BCSelectAssigneeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectAssigneeCell.m; sourceTree = "<group>"; };
 		102B8B53172E93B0003BA22F /* BCSelectAssigneeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectAssigneeDataSource.h; sourceTree = "<group>"; };
 		102B8B54172E93B0003BA22F /* BCSelectAssigneeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectAssigneeDataSource.m; sourceTree = "<group>"; };
+		102B8B58172FE2E2003BA22F /* BCAddIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueViewController.h; sourceTree = "<group>"; };
+		102B8B59172FE2E2003BA22F /* BCAddIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueViewController.m; sourceTree = "<group>"; };
+		102B8B5B172FE2FB003BA22F /* BCAddIssueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueView.h; sourceTree = "<group>"; };
+		102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueView.m; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -155,8 +160,6 @@
 		10F32E9A172525E7005E80F8 /* BCRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCRepository.m; path = issueManager/BCRepository.m; sourceTree = "<group>"; };
 		10F32E9B172525E7005E80F8 /* BCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCUser.h; path = issueManager/BCUser.h; sourceTree = "<group>"; };
 		10F32E9C172525E7005E80F8 /* BCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCUser.m; path = issueManager/BCUser.m; sourceTree = "<group>"; };
-		10F32EA4172526C4005E80F8 /* BCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCViewController.h; sourceTree = "<group>"; };
-		10F32EA5172526C4005E80F8 /* BCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCViewController.m; sourceTree = "<group>"; };
 		10F32EB817252D50005E80F8 /* BCRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCRepositoryViewController.h; sourceTree = "<group>"; };
 		10F32EB917252D50005E80F8 /* BCRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRepositoryViewController.m; sourceTree = "<group>"; };
 		10F32EBC17252D8B005E80F8 /* BCRepositoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCRepositoryView.h; sourceTree = "<group>"; };
@@ -277,6 +280,25 @@
 				102B8B54172E93B0003BA22F /* BCSelectAssigneeDataSource.m */,
 			);
 			name = dataSource;
+			sourceTree = "<group>";
+		};
+		102B8B56172FE2AD003BA22F /* addIssue */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B57172FE2C2003BA22F /* view */,
+				102B8B58172FE2E2003BA22F /* BCAddIssueViewController.h */,
+				102B8B59172FE2E2003BA22F /* BCAddIssueViewController.m */,
+			);
+			name = addIssue;
+			sourceTree = "<group>";
+		};
+		102B8B57172FE2C2003BA22F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B5B172FE2FB003BA22F /* BCAddIssueView.h */,
+				102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 		10E300481721A6AA00607EBA /* 3rd */ = {
@@ -412,8 +434,7 @@
 		10F32EA3172526B2005E80F8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				10F32EA4172526C4005E80F8 /* BCViewController.h */,
-				10F32EA5172526C4005E80F8 /* BCViewController.m */,
+				102B8B56172FE2AD003BA22F /* addIssue */,
 				102B8B45172E92FD003BA22F /* selectAssignee */,
 				102B8B2C172A61E3003BA22F /* issueDetail */,
 				102B8B1617268B86003BA22F /* issue */,
@@ -583,7 +604,6 @@
 				10F32EA0172525E7005E80F8 /* BCMilestone.m in Sources */,
 				10F32EA1172525E7005E80F8 /* BCRepository.m in Sources */,
 				10F32EA2172525E7005E80F8 /* BCUser.m in Sources */,
-				10F32EA6172526C4005E80F8 /* BCViewController.m in Sources */,
 				10F32EBA17252D50005E80F8 /* BCRepositoryViewController.m in Sources */,
 				10F32EBE17252D8B005E80F8 /* BCRepositoryView.m in Sources */,
 				10F32EC317253465005E80F8 /* BCRepositoryCell.m in Sources */,
@@ -598,6 +618,8 @@
 				102B8B4D172E9350003BA22F /* BCSelectAssigneeView.m in Sources */,
 				102B8B51172E9385003BA22F /* BCSelectAssigneeCell.m in Sources */,
 				102B8B55172E93B0003BA22F /* BCSelectAssigneeDataSource.m in Sources */,
+				102B8B5A172FE2E2003BA22F /* BCAddIssueViewController.m in Sources */,
+				102B8B5D172FE2FB003BA22F /* BCAddIssueView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
