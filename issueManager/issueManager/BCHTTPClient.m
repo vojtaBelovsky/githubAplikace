@@ -17,6 +17,7 @@
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
         [self setAuthorizationHeaderWithUsername:@"vojtaBelovsky" password:@"tr1n1t1"];
+        [self setParameterEncoding:AFJSONParameterEncoding];
     }
     return self;
 }

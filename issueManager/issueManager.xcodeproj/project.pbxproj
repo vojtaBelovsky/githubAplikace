@@ -20,6 +20,7 @@
 		102B8B55172E93B0003BA22F /* BCSelectAssigneeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B54172E93B0003BA22F /* BCSelectAssigneeDataSource.m */; };
 		102B8B5A172FE2E2003BA22F /* BCAddIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B59172FE2E2003BA22F /* BCAddIssueViewController.m */; };
 		102B8B5D172FE2FB003BA22F /* BCAddIssueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */; };
+		102B8B69172FF795003BA22F /* UIAlertView+errorAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
 		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
@@ -115,6 +116,8 @@
 		102B8B59172FE2E2003BA22F /* BCAddIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueViewController.m; sourceTree = "<group>"; };
 		102B8B5B172FE2FB003BA22F /* BCAddIssueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueView.h; sourceTree = "<group>"; };
 		102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueView.m; sourceTree = "<group>"; };
+		102B8B67172FF787003BA22F /* UIAlertView+errorAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+errorAlert.h"; sourceTree = "<group>"; };
+		102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+errorAlert.m"; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -400,6 +403,8 @@
 				10E3005E1721A70300607EBA /* models */,
 				10E3FC621721A66B00607EBA /* BCAppDelegate.h */,
 				10E3FC631721A66B00607EBA /* BCAppDelegate.m */,
+				102B8B67172FF787003BA22F /* UIAlertView+errorAlert.h */,
+				102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */,
 				10E3FC5A1721A66B00607EBA /* Supporting Files */,
 			);
 			path = issueManager;
@@ -620,6 +625,7 @@
 				102B8B55172E93B0003BA22F /* BCSelectAssigneeDataSource.m in Sources */,
 				102B8B5A172FE2E2003BA22F /* BCAddIssueViewController.m in Sources */,
 				102B8B5D172FE2FB003BA22F /* BCAddIssueView.m in Sources */,
+				102B8B69172FF795003BA22F /* UIAlertView+errorAlert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

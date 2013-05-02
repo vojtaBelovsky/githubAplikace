@@ -14,6 +14,7 @@
 #import "BCRepository.h"
 #import "BCUser.h"
 #import "BCMilestone.h"
+#import "UIAlertView+errorAlert.h"
 
 @interface BCIssueDetailViewController ()
 
@@ -71,8 +72,7 @@
             NSLog(@"Issue was updated");
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Fail");
-            //NSError
+            [UIAlertView showWithError:error];
         }];
         
     }else{
