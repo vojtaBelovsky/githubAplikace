@@ -27,7 +27,7 @@
     self = [super init];
     if (self) {
         _issue = issue;
-        _editedIssue = [issue copy]; //ZKUSIT JETLI POTREBUJU HLUBOKOU KOPII!!!
+        _editedIssue = [issue copy];
         _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
         _editButton = [self editButtonItem];
         [_editButton setTarget:self];
@@ -135,12 +135,14 @@
 #pragma mark public
 
 -(void) setNewAssignee:(BCUser *)assignee{
+    if(assignee != NULL){
+        [self setIsSetedAssignee:YES];
+    }
     [_editedIssue setAssignee:assignee];
 }
 
 -(BCUser*)getAssignee{
-    return _issue.assignee;
+    return _editedIssue.assignee;
 }
-
 
 @end

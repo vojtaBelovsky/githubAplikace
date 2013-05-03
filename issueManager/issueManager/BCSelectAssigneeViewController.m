@@ -11,6 +11,7 @@
 #import "BCSelectAssigneeDataSource.h"
 #import "BCSelectAssigneeView.h"
 #import "BCIssueDetailViewController.h"
+#import "BCManageIssue.h"
 
 @interface BCSelectAssigneeViewController ()
 
@@ -18,7 +19,8 @@
 
 @implementation BCSelectAssigneeViewController
 
-- (id)initWithRepository:(BCRepository *)repository andController:(BCIssueDetailViewController *)controller{
+- (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCManageIssue> *)controller
+{
     self = [super init];
     if (self) {
         _repository = repository;
@@ -47,7 +49,7 @@
         _dataSource = [[BCSelectAssigneeDataSource alloc] initWithCollaborators:allCollaborators];
         [_tableView.tableView setDataSource:_dataSource];
         [_tableView.tableView reloadData];
-        if(_controller.isSetedAssignee){
+        if([_controller isSetedAssignee]){
             [_tableView.tableView selectRowAtIndexPath:[self getIndexPathOfSelectedRow] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         }
     } failure:^(NSError *error) {

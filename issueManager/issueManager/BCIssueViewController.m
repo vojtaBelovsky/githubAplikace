@@ -12,6 +12,7 @@
 #import "BCIssueView.h"
 #import "BCIssueDataSource.h"
 #import "BCIssueDetailViewController.h"
+#import "BCAddIssueViewController.h"
 
 
 @interface BCIssueViewController ()
@@ -31,7 +32,7 @@
 }
 
 - (void)addButtonAction{
-    NSLog(@"do action");
+    [self createAndPushAddIssueVC];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -49,6 +50,11 @@
 
 #pragma mark -
 #pragma mark private
+
+-(void)createAndPushAddIssueVC{
+    BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:_repository];
+    [self.navigationController pushViewController:addIssueVC animated:YES];
+}
 
 -(void)createModel{
     [BCIssue getAllIssuesFromRepository:_repository WithSuccess:^(NSArray *issues) {

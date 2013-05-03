@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BCAddIssueViewController;
+@class BCUser;
 
 @interface BCAddIssueView : UIView
+
+@property UIImageView *avatar;
+@property UIButton *assignee;
+@property UITextField *title;
+@property UITextView *body;
+
+-(id) initWithController:(BCAddIssueViewController *)controller;
+-(void) rewriteContentWithAssignee:(BCUser *)assignee;
 
 @end

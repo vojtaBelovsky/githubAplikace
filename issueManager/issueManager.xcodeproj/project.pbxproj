@@ -118,6 +118,7 @@
 		102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueView.m; sourceTree = "<group>"; };
 		102B8B67172FF787003BA22F /* UIAlertView+errorAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+errorAlert.h"; sourceTree = "<group>"; };
 		102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+errorAlert.m"; sourceTree = "<group>"; };
+		102B8B6B17339EAA003BA22F /* BCManageIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCManageIssue.h; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -288,6 +289,7 @@
 		102B8B56172FE2AD003BA22F /* addIssue */ = {
 			isa = PBXGroup;
 			children = (
+				102B8B6A17339E34003BA22F /* manageIssue */,
 				102B8B57172FE2C2003BA22F /* view */,
 				102B8B58172FE2E2003BA22F /* BCAddIssueViewController.h */,
 				102B8B59172FE2E2003BA22F /* BCAddIssueViewController.m */,
@@ -302,6 +304,14 @@
 				102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		102B8B6A17339E34003BA22F /* manageIssue */ = {
+			isa = PBXGroup;
+			children = (
+				102B8B6B17339EAA003BA22F /* BCManageIssue.h */,
+			);
+			name = manageIssue;
 			sourceTree = "<group>";
 		};
 		10E300481721A6AA00607EBA /* 3rd */ = {

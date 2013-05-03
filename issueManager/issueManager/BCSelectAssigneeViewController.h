@@ -12,13 +12,14 @@
 @class BCSelectAssigneeView;
 @class BCIssueDetailViewController;
 @class BCUser;
+@protocol BCManageIssue;
 
 @interface BCSelectAssigneeViewController : UIViewController<UITableViewDelegate>{
 @private
     BCRepository *_repository;
     BCSelectAssigneeView *_tableView;
     BCSelectAssigneeDataSource *_dataSource;
-    BCIssueDetailViewController *_controller;
+    UIViewController<BCManageIssue> *_controller;
 }
 
 - (id)initWithRepository:(BCRepository *)repository andController:(BCIssueDetailViewController *)controller;
