@@ -9,6 +9,7 @@
 #import "BCRepository.h"
 #import "BCHTTPClient.h"
 #import "BCUser.h"
+#import "BCMilestone.h"
 
 @implementation BCRepository
 
@@ -30,6 +31,21 @@
         return [newStr substringFromIndex:[@"https://api.github.com/" length]];
     } reverseBlock:^(NSString *str) {
         return [[NSString alloc] initWithFormat:@"%@%@%@",@"https://api.github.com/", str, @"{/number}"];
+    }];
+}
+
++(void)getAllMilestonesOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allCollaborators))success failure:(void(^) (NSError * error))failure{
+    NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/milestones",repository.owner.userLogin,repository.name];
+    [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSMutableArray *milestonesInDictionaries = [[NSMutableArray alloc] initWithArray:responseObject];
+        NSMutableArray *milestones = [[NSMutableArray alloc] init];
+        for(NSDictionary *object in milestonesInDictionaries){
+            [milestones addObject:[MTLJSONAdapter modelOfClass:[BCMilestone class] fromJSONDictionary:object error:nil]];
+        }
+        success ( milestones );
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail");
     }];
 }
 

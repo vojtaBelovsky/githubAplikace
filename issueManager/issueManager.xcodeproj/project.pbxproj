@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		102ACED61733BA84000250F9 /* BCSelectMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACED51733BA84000250F9 /* BCSelectMilestoneViewController.m */; };
+		102ACEDB1733BAB0000250F9 /* BCSelectMilestoneDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACEDA1733BAB0000250F9 /* BCSelectMilestoneDataSource.m */; };
+		102ACEDF1733BAEF000250F9 /* BCSelectMilestoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACEDE1733BAEF000250F9 /* BCSelectMilestoneView.m */; };
+		102ACEE21733BB07000250F9 /* BCSelectMilestoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACEE11733BB07000250F9 /* BCSelectMilestoneCell.m */; };
 		102B8B1C17268BBD003BA22F /* BCIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B1B17268BBD003BA22F /* BCIssueViewController.m */; };
 		102B8B2217268C90003BA22F /* BCIssueDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B2117268C90003BA22F /* BCIssueDataSource.m */; };
 		102B8B2517268CCC003BA22F /* BCIssueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B2417268CCC003BA22F /* BCIssueView.m */; };
@@ -91,6 +95,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		102ACED41733BA84000250F9 /* BCSelectMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectMilestoneViewController.h; sourceTree = "<group>"; };
+		102ACED51733BA84000250F9 /* BCSelectMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectMilestoneViewController.m; sourceTree = "<group>"; };
+		102ACED91733BAB0000250F9 /* BCSelectMilestoneDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectMilestoneDataSource.h; sourceTree = "<group>"; };
+		102ACEDA1733BAB0000250F9 /* BCSelectMilestoneDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectMilestoneDataSource.m; sourceTree = "<group>"; };
+		102ACEDD1733BAEF000250F9 /* BCSelectMilestoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectMilestoneView.h; sourceTree = "<group>"; };
+		102ACEDE1733BAEF000250F9 /* BCSelectMilestoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectMilestoneView.m; sourceTree = "<group>"; };
+		102ACEE01733BB07000250F9 /* BCSelectMilestoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectMilestoneCell.h; sourceTree = "<group>"; };
+		102ACEE11733BB07000250F9 /* BCSelectMilestoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectMilestoneCell.m; sourceTree = "<group>"; };
 		102B8B1A17268BBD003BA22F /* BCIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueViewController.h; sourceTree = "<group>"; };
 		102B8B1B17268BBD003BA22F /* BCIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueViewController.m; sourceTree = "<group>"; };
 		102B8B2017268C90003BA22F /* BCIssueDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueDataSource.h; sourceTree = "<group>"; };
@@ -118,7 +130,7 @@
 		102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueView.m; sourceTree = "<group>"; };
 		102B8B67172FF787003BA22F /* UIAlertView+errorAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+errorAlert.h"; sourceTree = "<group>"; };
 		102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+errorAlert.m"; sourceTree = "<group>"; };
-		102B8B6B17339EAA003BA22F /* BCManageIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCManageIssue.h; sourceTree = "<group>"; };
+		102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectDataManager.h; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -189,6 +201,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		102ACED01733BA65000250F9 /* selectMilestone */ = {
+			isa = PBXGroup;
+			children = (
+				102ACED81733BA96000250F9 /* dataSource */,
+				102ACED71733BA8E000250F9 /* view */,
+				102ACED41733BA84000250F9 /* BCSelectMilestoneViewController.h */,
+				102ACED51733BA84000250F9 /* BCSelectMilestoneViewController.m */,
+			);
+			name = selectMilestone;
+			sourceTree = "<group>";
+		};
+		102ACED71733BA8E000250F9 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				102ACEDD1733BAEF000250F9 /* BCSelectMilestoneView.h */,
+				102ACEDE1733BAEF000250F9 /* BCSelectMilestoneView.m */,
+				102ACEDC1733BAB6000250F9 /* cell */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		102ACED81733BA96000250F9 /* dataSource */ = {
+			isa = PBXGroup;
+			children = (
+				102ACED91733BAB0000250F9 /* BCSelectMilestoneDataSource.h */,
+				102ACEDA1733BAB0000250F9 /* BCSelectMilestoneDataSource.m */,
+			);
+			name = dataSource;
+			sourceTree = "<group>";
+		};
+		102ACEDC1733BAB6000250F9 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				102ACEE01733BB07000250F9 /* BCSelectMilestoneCell.h */,
+				102ACEE11733BB07000250F9 /* BCSelectMilestoneCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		102B8B1617268B86003BA22F /* issue */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,7 +340,6 @@
 		102B8B56172FE2AD003BA22F /* addIssue */ = {
 			isa = PBXGroup;
 			children = (
-				102B8B6A17339E34003BA22F /* manageIssue */,
 				102B8B57172FE2C2003BA22F /* view */,
 				102B8B58172FE2E2003BA22F /* BCAddIssueViewController.h */,
 				102B8B59172FE2E2003BA22F /* BCAddIssueViewController.m */,
@@ -304,14 +354,6 @@
 				102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */,
 			);
 			name = view;
-			sourceTree = "<group>";
-		};
-		102B8B6A17339E34003BA22F /* manageIssue */ = {
-			isa = PBXGroup;
-			children = (
-				102B8B6B17339EAA003BA22F /* BCManageIssue.h */,
-			);
-			name = manageIssue;
 			sourceTree = "<group>";
 		};
 		10E300481721A6AA00607EBA /* 3rd */ = {
@@ -449,8 +491,10 @@
 		10F32EA3172526B2005E80F8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				102B8B56172FE2AD003BA22F /* addIssue */,
+				102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */,
+				102ACED01733BA65000250F9 /* selectMilestone */,
 				102B8B45172E92FD003BA22F /* selectAssignee */,
+				102B8B56172FE2AD003BA22F /* addIssue */,
 				102B8B2C172A61E3003BA22F /* issueDetail */,
 				102B8B1617268B86003BA22F /* issue */,
 				10F32EB717252D12005E80F8 /* repository */,
@@ -636,6 +680,10 @@
 				102B8B5A172FE2E2003BA22F /* BCAddIssueViewController.m in Sources */,
 				102B8B5D172FE2FB003BA22F /* BCAddIssueView.m in Sources */,
 				102B8B69172FF795003BA22F /* UIAlertView+errorAlert.m in Sources */,
+				102ACED61733BA84000250F9 /* BCSelectMilestoneViewController.m in Sources */,
+				102ACEDB1733BAB0000250F9 /* BCSelectMilestoneDataSource.m in Sources */,
+				102ACEDF1733BAEF000250F9 /* BCSelectMilestoneView.m in Sources */,
+				102ACEE21733BB07000250F9 /* BCSelectMilestoneCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

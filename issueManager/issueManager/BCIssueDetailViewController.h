@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BCManageIssue.h"
+#import "BCSelectDataManager.h"
 @class BCIssue;
 @class BCIssueDetailView;
 @class BCUser;
 
-@interface BCIssueDetailViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate,BCManageIssue>{
+@interface BCIssueDetailViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate, BCSelectDataManager>{
 @private
     BCIssueDetailView *_issueDetailview;
 }
@@ -23,9 +23,9 @@
 @property UIBarButtonItem *cancelButton;
 @property UIBarButtonItem *editButton;
 @property BOOL isSetedAssignee;
+@property BOOL isSetedMilestone;
+@property BOOL isSetedLabel;
 
 - (id)initWithIssue:(BCIssue *)issue;
--(void) setNewAssignee:(BCUser *)assignee;
--(BCUser*)getAssignee;
 
 @end

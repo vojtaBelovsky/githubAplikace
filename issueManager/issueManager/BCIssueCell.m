@@ -18,6 +18,7 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
     if (self) {
         [self.textLabel setText:issue.title];
+        [self.textLabel setFont:[UIFont fontWithName:@"arial" size:15]];
     }
     return self;
 }

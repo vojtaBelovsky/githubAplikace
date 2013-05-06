@@ -1,14 +1,14 @@
 //
-//  BCSelectAssigneeView.m
+//  BCSelectMilestoneView.m
 //  issueManager
 //
-//  Created by Vojtech Belovsky on 4/29/13.
+//  Created by Vojtech Belovsky on 5/3/13.
 //  Copyright (c) 2013 vojta. All rights reserved.
 //
 
-#import "BCSelectAssigneeView.h"
+#import "BCSelectMilestoneView.h"
 
-@implementation BCSelectAssigneeView
+@implementation BCSelectMilestoneView
 
 - (id)init
 {

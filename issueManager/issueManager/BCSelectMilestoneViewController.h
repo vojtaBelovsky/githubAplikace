@@ -1,27 +1,28 @@
 //
-//  BCSelectAssigneeViewController.h
+//  BCSelectMilestoneViewController.h
 //  issueManager
 //
-//  Created by Vojtech Belovsky on 4/29/13.
+//  Created by Vojtech Belovsky on 5/3/13.
 //  Copyright (c) 2013 vojta. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 @class BCRepository;
-@class BCSelectAssigneeDataSource;
-@class BCSelectAssigneeView;
+@class BCSelectMilestoneDataSource;
+@class BCSelectMilestoneView;
 @class BCIssueDetailViewController;
 @class BCUser;
 @protocol BCSelectDataManager;
 
-@interface BCSelectAssigneeViewController : UIViewController<UITableViewDelegate>{
+@interface BCSelectMilestoneViewController : UIViewController<UITableViewDelegate>{
 @private
     BCRepository *_repository;
-    BCSelectAssigneeView *_tableView;
-    BCSelectAssigneeDataSource *_dataSource;
+    BCSelectMilestoneView *_tableView;
+    BCSelectMilestoneDataSource *_dataSource;
     UIViewController<BCSelectDataManager> *_controller;
 }
 
 - (id)initWithRepository:(BCRepository *)repository andController:(BCIssueDetailViewController *)controller;
+
 
 @end

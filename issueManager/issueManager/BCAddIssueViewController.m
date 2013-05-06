@@ -13,6 +13,7 @@
 #import "BCUser.h"
 #import "UIAlertView+errorAlert.h"
 #import "BCHTTPClient.h"
+#import "BCSelectMilestoneViewController.h"
 
 @interface BCAddIssueViewController ()
 
@@ -25,8 +26,12 @@
     self = [super init];
     if (self) {
         _assignee = NULL;
+        _milestone = NULL;
+        _labels = NULL;
         _repository = repository;
         _isSetedAssignee = NO;
+        _isSetedMilestone = NO;
+        _isSetedLabel = NO;
     }
     return self;
 }
@@ -42,11 +47,15 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    [_issueDetailview rewriteContentWithAssignee:_assignee];
+    [_issueDetailview rewriteContentWithAssignee:_assignee milestone:_milestone andLabels:_labels];
 }
 
 #pragma mark -
 #pragma mark ButtonActions
+
+-(void) selectLabel{
+    [self createAndPushSelectMilestoneVC];
+}
 
 -(void) selectAssignee{
     [self createAndPushSelectAssigneVC];
@@ -79,13 +88,19 @@
     [self.navigationController pushViewController:selectAssigneeVC animated:YES];
 }
 
+-(void)createAndPushSelectMilestoneVC{
+    BCSelectMilestoneViewController *selectMilestoneVC = [[BCSelectMilestoneViewController alloc] initWithRepository:_repository andController:self];
+    [self.navigationController pushViewController:selectMilestoneVC animated:YES];
+}
+
 -(void)setItemsEditable:(BOOL)isEditable{
     [_issueDetailview.body setEditable:isEditable];
     [_issueDetailview.title setEnabled:isEditable];
     [_issueDetailview.assignee setEnabled:isEditable];
+    [_issueDetailview.milestone setEnabled:isEditable];
 }
 
--(NSDictionary *) createParameters{
+-(NSDictionary *)createParameters{
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:
                                 _issueDetailview.title.text ?: [NSNull null], @"title",
                                 _issueDetailview.body.text ?: [NSNull null], @"body",
@@ -97,15 +112,45 @@
 #pragma mark -
 #pragma mark public
 
--(void) setNewAssignee:(BCUser *)assignee{
+-(void)setNewAssignee:(BCUser *)assignee{
     if(assignee != NULL){
         [self setIsSetedAssignee:YES];
+    }else{
+        [self setIsSetedAssignee:NO];
     }
     _assignee = assignee;
 }
 
--(BCUser*)getAssignee{
+-(BCUser *)getAssignee{
     return _assignee;
 }
+
+-(void)setNewMilestone:(BCMilestone *)milestone{
+    if(milestone != NULL){
+        [self setIsSetedAssignee:YES];
+    }else{
+        [self setIsSetedAssignee:NO];
+    }
+    _milestone = milestone;
+}
+
+-(BCMilestone *)getMilestone{
+    return _milestone;
+}
+
+-(void)setNewLables:(NSArray *)labels{
+    if(labels != NULL){
+        [self setIsSetedLabel:YES];
+    }else{
+        [self setIsSetedLabel:NO];
+    }
+    _labels = labels;
+}
+
+-(NSArray *)getLabels{
+    return _labels;
+}
+
+
 
 @end

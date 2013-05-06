@@ -7,23 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BCManageIssue.h"
+#import "BCSelectDataManager.h"
 @class BCRepository;
 @class BCUser;
 @class BCAddIssueView;
+@class BCMilestone;
 
-
-@interface BCAddIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, BCManageIssue>{
+@interface BCAddIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, BCSelectDataManager>{
 @private
     BCRepository *_repository;
     BCUser *_assignee;
     BCAddIssueView *_issueDetailview;
+    BCMilestone *_milestone;
+    NSArray *_labels;
 }
 
 @property BOOL isSetedAssignee;
+@property BOOL isSetedMilestone;
+@property BOOL isSetedLabel;
 
 - (id)initWithRepository:(BCRepository *)repository;
--(void) setNewAssignee:(BCUser *)assignee;
--(BCUser*)getAssignee;
 
 @end

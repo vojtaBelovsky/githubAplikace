@@ -29,9 +29,6 @@
         }
         [_assignee addTarget:controller action:@selector(selectAssignee) forControlEvents:UIControlEventTouchDown];
         [_assignee setEnabled:NO];
-        //setSelecable !!!
-        //[_assignee setText:issue.assignee.userLogin];
-        //[_assignee setFont:[UIFont fontWithName:@"arial" size:15]];
         
         _title = [[UITextField alloc] init];
         [_title setEnabled:NO];
@@ -39,8 +36,10 @@
         [_title setFont:[UIFont fontWithName:@"arial" size:15]];
         [_title setReturnKeyType:UIReturnKeyNext];
         [_title setBackgroundColor:[UIColor whiteColor]];
+        [_title setTextAlignment:NSTextAlignmentCenter];
+        [_title setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
 
-        _body = [[UITextView alloc] init];//povolit at muze byt viceradkovy
+        _body = [[UITextView alloc] init];
         [_body setEditable:NO];
         [_body setText:issue.body];
         [_body setFont:[UIFont fontWithName:@"arial" size:15]];

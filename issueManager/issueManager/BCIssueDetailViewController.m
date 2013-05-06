@@ -145,4 +145,30 @@
     return _editedIssue.assignee;
 }
 
+-(void)setNewMilestone:(BCMilestone *)milestone{
+    if(milestone != NULL){
+        [self setIsSetedAssignee:YES];
+    }else{
+        [self setIsSetedAssignee:NO];
+    }
+    [_editedIssue setMilestone:milestone];
+}
+
+-(BCMilestone *)getMilestone{
+    return [_editedIssue milestone];
+}
+
+-(void)setNewLables:(NSArray *)labels{
+    if(labels != NULL){
+        [self setIsSetedLabel:YES];
+    }else{
+        [self setIsSetedLabel:NO];
+    }
+    [_editedIssue setLabels:labels];
+}
+
+-(NSArray *)getLabels{
+    return [_editedIssue labels];
+}
+
 @end
