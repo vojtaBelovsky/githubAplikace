@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BCSelectAssigneeDataSource : NSObject<UITableViewDataSource>
+@interface BCSelectAssigneeDataSource : NSObject<UITableViewDataSource> 
 
-@property NSArray *collaborators;
+@property NSMutableArray *collaborators;
 
 - (id)initWithCollaborators:(NSArray *)collaborators;
 

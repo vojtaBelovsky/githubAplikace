@@ -11,7 +11,7 @@
 @class BCUser;
 @class BCMilestone;
 
-@interface BCAddIssueView : UIView
+@interface BCAddIssueView : UIScrollView
 
 @property UIImageView *avatar;
 @property UIButton *assignee;

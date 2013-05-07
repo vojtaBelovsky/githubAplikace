@@ -22,6 +22,6 @@
     UIViewController<BCSelectDataManager> *_controller;
 }
 
-- (id)initWithRepository:(BCRepository *)repository andController:(BCIssueDetailViewController *)controller;
+- (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller;
 
 @end

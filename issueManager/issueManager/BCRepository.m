@@ -10,6 +10,7 @@
 #import "BCHTTPClient.h"
 #import "BCUser.h"
 #import "BCMilestone.h"
+#import "BCLabel.h"
 
 @implementation BCRepository
 
@@ -31,6 +32,21 @@
         return [newStr substringFromIndex:[@"https://api.github.com/" length]];
     } reverseBlock:^(NSString *str) {
         return [[NSString alloc] initWithFormat:@"%@%@%@",@"https://api.github.com/", str, @"{/number}"];
+    }];
+}
+
++(void)getAllLabelsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allLables))success failure:(void(^) (NSError * error))failure{
+    NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/labels",repository.owner.userLogin,repository.name];
+    [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSMutableArray *labelsInDictionaries = [[NSMutableArray alloc] initWithArray:responseObject];
+        NSMutableArray *labels = [[NSMutableArray alloc] init];
+        for(NSDictionary *object in labelsInDictionaries){
+            [labels addObject:[MTLJSONAdapter modelOfClass:[BCLabel class] fromJSONDictionary:object error:nil]];
+        }
+        success ( labels );
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail");
     }];
 }
 

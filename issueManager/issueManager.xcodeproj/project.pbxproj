@@ -43,6 +43,10 @@
 		10E3FC661721A66B00607EBA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E3FC651721A66B00607EBA /* Default.png */; };
 		10E3FC681721A66B00607EBA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E3FC671721A66B00607EBA /* Default@2x.png */; };
 		10E3FC6A1721A66B00607EBA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E3FC691721A66B00607EBA /* Default-568h@2x.png */; };
+		10EF01DE17379F7400346E9F /* BCSelectLabelsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EF01DD17379F7400346E9F /* BCSelectLabelsDataSource.m */; };
+		10EF01E117379F9500346E9F /* BCSelectLabelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EF01E017379F9500346E9F /* BCSelectLabelsViewController.m */; };
+		10EF01E417379FBE00346E9F /* BCSelectLabelsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EF01E317379FBE00346E9F /* BCSelectLabelsView.m */; };
+		10EF01E817379FD600346E9F /* BCSelectLabelsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EF01E717379FD600346E9F /* BCSelectLabelsCell.m */; };
 		10F32E4D17252360005E80F8 /* libMantle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F32E4A17252347005E80F8 /* libMantle.a */; };
 		10F32E9D172525E7005E80F8 /* BCHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E92172525E7005E80F8 /* BCHTTPClient.m */; };
 		10F32E9E172525E7005E80F8 /* BCIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E94172525E7005E80F8 /* BCIssue.m */; };
@@ -163,6 +167,14 @@
 		10E3FC651721A66B00607EBA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		10E3FC671721A66B00607EBA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		10E3FC691721A66B00607EBA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		10EF01DC17379F7400346E9F /* BCSelectLabelsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectLabelsDataSource.h; sourceTree = "<group>"; };
+		10EF01DD17379F7400346E9F /* BCSelectLabelsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectLabelsDataSource.m; sourceTree = "<group>"; };
+		10EF01DF17379F9500346E9F /* BCSelectLabelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectLabelsViewController.h; sourceTree = "<group>"; };
+		10EF01E017379F9500346E9F /* BCSelectLabelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectLabelsViewController.m; sourceTree = "<group>"; };
+		10EF01E217379FBE00346E9F /* BCSelectLabelsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectLabelsView.h; sourceTree = "<group>"; };
+		10EF01E317379FBE00346E9F /* BCSelectLabelsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectLabelsView.m; sourceTree = "<group>"; };
+		10EF01E617379FD600346E9F /* BCSelectLabelsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectLabelsCell.h; sourceTree = "<group>"; };
+		10EF01E717379FD600346E9F /* BCSelectLabelsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectLabelsCell.m; sourceTree = "<group>"; };
 		10F32E3C17252346005E80F8 /* Mantle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mantle.xcodeproj; path = ../../../frameworks/Mantle/Mantle.xcodeproj; sourceTree = "<group>"; };
 		10F32E91172525E7005E80F8 /* BCHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCHTTPClient.h; sourceTree = "<group>"; };
 		10F32E92172525E7005E80F8 /* BCHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCHTTPClient.m; sourceTree = "<group>"; };
@@ -477,6 +489,45 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		10EF01D917379F2200346E9F /* selectLables */ = {
+			isa = PBXGroup;
+			children = (
+				10EF01DA17379F4000346E9F /* dataSource */,
+				10EF01DB17379F4800346E9F /* view */,
+				10EF01DF17379F9500346E9F /* BCSelectLabelsViewController.h */,
+				10EF01E017379F9500346E9F /* BCSelectLabelsViewController.m */,
+			);
+			name = selectLables;
+			sourceTree = "<group>";
+		};
+		10EF01DA17379F4000346E9F /* dataSource */ = {
+			isa = PBXGroup;
+			children = (
+				10EF01DC17379F7400346E9F /* BCSelectLabelsDataSource.h */,
+				10EF01DD17379F7400346E9F /* BCSelectLabelsDataSource.m */,
+			);
+			name = dataSource;
+			sourceTree = "<group>";
+		};
+		10EF01DB17379F4800346E9F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				10EF01E217379FBE00346E9F /* BCSelectLabelsView.h */,
+				10EF01E317379FBE00346E9F /* BCSelectLabelsView.m */,
+				10EF01E517379FC200346E9F /* cell */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		10EF01E517379FC200346E9F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				10EF01E617379FD600346E9F /* BCSelectLabelsCell.h */,
+				10EF01E717379FD600346E9F /* BCSelectLabelsCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		10F32E3D17252346005E80F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */,
+				10EF01D917379F2200346E9F /* selectLables */,
 				102ACED01733BA65000250F9 /* selectMilestone */,
 				102B8B45172E92FD003BA22F /* selectAssignee */,
 				102B8B56172FE2AD003BA22F /* addIssue */,
@@ -684,6 +736,10 @@
 				102ACEDB1733BAB0000250F9 /* BCSelectMilestoneDataSource.m in Sources */,
 				102ACEDF1733BAEF000250F9 /* BCSelectMilestoneView.m in Sources */,
 				102ACEE21733BB07000250F9 /* BCSelectMilestoneCell.m in Sources */,
+				10EF01DE17379F7400346E9F /* BCSelectLabelsDataSource.m in Sources */,
+				10EF01E117379F9500346E9F /* BCSelectLabelsViewController.m in Sources */,
+				10EF01E417379FBE00346E9F /* BCSelectLabelsView.m in Sources */,
+				10EF01E817379FD600346E9F /* BCSelectLabelsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

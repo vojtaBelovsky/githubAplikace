@@ -11,6 +11,7 @@
 #import "BCUser.h"
 #import "UIImageView+AFNetworking.h"
 #import "BCMilestone.h"
+#import "BCLabel.h"
 
 @implementation BCAddIssueView
 
@@ -25,8 +26,8 @@
         [_assignee setTitle:@"nobody is assigned" forState:UIControlStateNormal];
         [_assignee addTarget:controller action:@selector(selectAssignee) forControlEvents:UIControlEventTouchDown];
         [_assignee setEnabled:NO];
-        [_assignee setBackgroundColor:[UIColor whiteColor]];
-        [_assignee setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_assignee setBackgroundColor:[UIColor blackColor]];
+        [_assignee setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         _milestone = [[UIButton alloc] init];
         [_milestone setTitle:@"no milestone is assigned" forState:UIControlStateNormal];
@@ -59,7 +60,7 @@
         
         _labelsButton = [[UIButton alloc] init];
         [_labelsButton setEnabled:NO];
-        [_labelsButton addTarget:controller action:@selector(selectAssignee) forControlEvents:UIControlEventTouchDown];
+        [_labelsButton addTarget:controller action:@selector(selectLabels) forControlEvents:UIControlEventTouchDown];
         
         
         [self addSubview:_avatar];
@@ -74,22 +75,33 @@
 }
 
 -(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSArray *)labels{
-    if(assignee != NULL){
+    if(assignee != [NSNull null]){
         [_avatar setImageWithURL:assignee.avatarUrl placeholderImage:[UIImage imageNamed:@"gravatar-user-420.png"]];
         [_assignee setTitle:assignee.userLogin forState:UIControlStateNormal];
+        [_assignee setBackgroundColor:[UIColor whiteColor]];
+        [_assignee setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }else{
+        [_avatar setImage:[UIImage imageNamed:@"gravatar-user-420.png"]];
+        [_assignee setTitle:@"nobody is assigned" forState:UIControlStateNormal];
+        [_assignee setBackgroundColor:[UIColor blackColor]];
+        [_assignee setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
-    if(milestone != NULL){
+    
+    if(milestone != [NSNull null]){
         [_milestone setTitle:milestone.title forState:UIControlStateNormal];
+    }else{
+        [_milestone setTitle:@"no milestone is assigned" forState:UIControlStateNormal];
     }
-    if(labels != NULL){
+    if(labels != [NSNull null]){
         NSMutableString *labelsInString = [[NSMutableString alloc] init];
-        for(NSString *object in labels){
-            [labelsInString insertString:object atIndex:[labelsInString length]];
+        for(BCLabel *object in labels){
+            [labelsInString insertString:object.name atIndex:[labelsInString length]];
             [labelsInString insertString:@" " atIndex:[labelsInString length]];
         }
         [_labels setText:labelsInString];
+    }else{
+        [_labels setText:@"no label is assigned"];
     }
-    
 }
 
 -(void) layoutSubviews{

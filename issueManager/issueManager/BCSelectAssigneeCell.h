@@ -11,6 +11,6 @@
 
 @interface BCSelectAssigneeCell : UITableViewCell
 
-- (id)initWithAssignee:(BCUser *)assignee;
-
++ (BCSelectAssigneeCell *)createDeleteCellWithTableView:(UITableView *)tableView;
++ (BCSelectAssigneeCell *)createAssigneCellWithTableView:(UITableView *)tableView;
 @end

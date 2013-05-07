@@ -10,23 +10,27 @@
 #import "BCUser.h"
 
 #define SelectAssigneeCellReuseIdentifier @"SelectAssigneeCellReuseIdentifier"
+#define DeleteAssigneeCellReuseIdentifier @"DeleteAssigneeCellReuseIdentifier"
 
 @implementation BCSelectAssigneeCell
 
-- (id)initWithAssignee:(BCUser *)assignee
-{
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SelectAssigneeCellReuseIdentifier];
-    if (self) {
-        [self.textLabel setText:assignee.userLogin];
++ (BCSelectAssigneeCell *)createAssigneCellWithTableView:(UITableView *)tableView {
+    BCSelectAssigneeCell *cell = [tableView dequeueReusableCellWithIdentifier:SelectAssigneeCellReuseIdentifier];
+    if ( !cell ) {
+        cell = [[BCSelectAssigneeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SelectAssigneeCellReuseIdentifier];
     }
-    return self;
+    
+    return cell;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
++ (BCSelectAssigneeCell *)createDeleteCellWithTableView:(UITableView *)tableView {
+    BCSelectAssigneeCell *cell = [tableView dequeueReusableCellWithIdentifier:DeleteAssigneeCellReuseIdentifier];
+    if ( !cell ) {
+        cell = [[BCSelectAssigneeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DeleteAssigneeCellReuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
+    
+    return cell;
 }
 
 @end

@@ -16,12 +16,13 @@
 @interface BCAddIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, BCSelectDataManager>{
 @private
     BCRepository *_repository;
-    BCUser *_assignee;
-    BCAddIssueView *_issueDetailview;
+    
+    BCAddIssueView *_addIssueView;
     BCMilestone *_milestone;
     NSArray *_labels;
 }
 
+@property BCUser *assignee;
 @property BOOL isSetedAssignee;
 @property BOOL isSetedMilestone;
 @property BOOL isSetedLabel;

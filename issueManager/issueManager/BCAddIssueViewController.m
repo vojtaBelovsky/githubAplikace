@@ -14,6 +14,9 @@
 #import "UIAlertView+errorAlert.h"
 #import "BCHTTPClient.h"
 #import "BCSelectMilestoneViewController.h"
+#import "BCSelectLabelsViewController.h"
+#import "BCMilestone.h"
+#import "BCLabel.h"
 
 @interface BCAddIssueViewController ()
 
@@ -25,29 +28,31 @@
 {
     self = [super init];
     if (self) {
-        _assignee = NULL;
-        _milestone = NULL;
-        _labels = NULL;
+        _assignee = [NSNull null];
+        _milestone = [NSNull null];
+        _labels = [NSNull null];
         _repository = repository;
         _isSetedAssignee = NO;
         _isSetedMilestone = NO;
         _isSetedLabel = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     }
     return self;
 }
 
 -(void) loadView{
     [super loadView];
-    _issueDetailview = [[BCAddIssueView alloc] initWithController:self];
-    [_issueDetailview.title setDelegate:self];
-    [_issueDetailview.body setDelegate:self];
-    self.view = _issueDetailview;
+    _addIssueView = [[BCAddIssueView alloc] initWithController:self];
+    [_addIssueView.title setDelegate:self];
+    [_addIssueView.body setDelegate:self];
+    self.view = _addIssueView;
     [self setItemsEditable:YES];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStylePlain target:self action:@selector(addNewIssueButtonAction)];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    [_issueDetailview rewriteContentWithAssignee:_assignee milestone:_milestone andLabels:_labels];
+    [_addIssueView rewriteContentWithAssignee:_assignee milestone:_milestone andLabels:_labels];
 }
 
 #pragma mark -
@@ -59,6 +64,10 @@
 
 -(void) selectAssignee{
     [self createAndPushSelectAssigneVC];
+}
+
+-(void) selectLabels{
+    [self createAndPushSelectLabelsVC];
 }
 
 -(void)addNewIssueButtonAction{
@@ -74,6 +83,14 @@
 #pragma mark -
 #pragma mark delegateMethods
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    //[_addIssueView setTransform:CGAffineTransformMakeTranslation(0, -keyboardSize.height)];
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+    //[_addIssueView setTransform:CGAffineTransformMakeTranslation(0, -keyboardSize.height)];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self createAndPushSelectAssigneVC];
     return YES;
@@ -83,28 +100,61 @@
 #pragma mark -
 #pragma mark private
 
+- (void) keyboardDidHide:(NSNotification*)notification{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    CGSize scrollContentSize = CGSizeMake(CGRectGetWidth(_addIssueView.frame), CGRectGetHeight(_addIssueView.frame)-keyboardFrameBeginRect.size.height);
+    _addIssueView.contentSize = scrollContentSize;
+}
+
+- (void) keyboardDidShow:(NSNotification*)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    CGSize scrollContentSize = CGSizeMake(CGRectGetWidth(_addIssueView.frame), CGRectGetHeight(_addIssueView.frame)+keyboardFrameBeginRect.size.height);
+    _addIssueView.contentSize = scrollContentSize;
+}
+
 -(void)createAndPushSelectAssigneVC{
     BCSelectAssigneeViewController *selectAssigneeVC = [[BCSelectAssigneeViewController alloc] initWithRepository:_repository andController:self];
+    [self.view endEditing:YES];
     [self.navigationController pushViewController:selectAssigneeVC animated:YES];
 }
 
 -(void)createAndPushSelectMilestoneVC{
     BCSelectMilestoneViewController *selectMilestoneVC = [[BCSelectMilestoneViewController alloc] initWithRepository:_repository andController:self];
+    [self.view endEditing:YES];
     [self.navigationController pushViewController:selectMilestoneVC animated:YES];
 }
 
+-(void)createAndPushSelectLabelsVC{
+    BCSelectLabelsViewController *selectLabelsVC = [[BCSelectLabelsViewController alloc] initWithRepository:_repository andController:self];
+    [self.view endEditing:YES];
+    [self.navigationController pushViewController:selectLabelsVC animated:YES];
+}
+
 -(void)setItemsEditable:(BOOL)isEditable{
-    [_issueDetailview.body setEditable:isEditable];
-    [_issueDetailview.title setEnabled:isEditable];
-    [_issueDetailview.assignee setEnabled:isEditable];
-    [_issueDetailview.milestone setEnabled:isEditable];
+    [_addIssueView.body setEditable:isEditable];
+    [_addIssueView.title setEnabled:isEditable];
+    [_addIssueView.assignee setEnabled:isEditable];
+    [_addIssueView.milestone setEnabled:isEditable];
+    [_addIssueView.labelsButton setEnabled:isEditable];
 }
 
 -(NSDictionary *)createParameters{
+    NSMutableArray *labelsNames = [[NSMutableArray alloc] init];
+    for(BCLabel *object in _labels){
+        [labelsNames addObject:object.name];
+    }
+    
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                _issueDetailview.title.text ?: [NSNull null], @"title",
-                                _issueDetailview.body.text ?: [NSNull null], @"body",
+                                _addIssueView.title.text ?: [NSNull null], @"title",
+                                _addIssueView.body.text ?: [NSNull null], @"body",
                                 _assignee.userLogin ?: [NSNull null], @"assignee",
+                                _milestone.number ?: [NSNull null], @"milestone",
+                                labelsNames ?: [NSNull null], @"labels",
                                 nil];
     return parameters;
 }
@@ -113,7 +163,7 @@
 #pragma mark public
 
 -(void)setNewAssignee:(BCUser *)assignee{
-    if(assignee != NULL){
+    if(assignee != [NSNull null]){
         [self setIsSetedAssignee:YES];
     }else{
         [self setIsSetedAssignee:NO];
@@ -126,10 +176,10 @@
 }
 
 -(void)setNewMilestone:(BCMilestone *)milestone{
-    if(milestone != NULL){
-        [self setIsSetedAssignee:YES];
+    if(milestone != [NSNull null]){
+        [self setIsSetedMilestone:YES];
     }else{
-        [self setIsSetedAssignee:NO];
+        [self setIsSetedMilestone:NO];
     }
     _milestone = milestone;
 }
@@ -139,7 +189,7 @@
 }
 
 -(void)setNewLables:(NSArray *)labels{
-    if(labels != NULL){
+    if(labels != [NSNull null]){
         [self setIsSetedLabel:YES];
     }else{
         [self setIsSetedLabel:NO];

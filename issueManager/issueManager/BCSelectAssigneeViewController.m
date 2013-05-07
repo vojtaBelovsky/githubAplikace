@@ -35,7 +35,7 @@
     _tableView = [[BCSelectAssigneeView alloc] init];
     [_tableView.tableView setDelegate:self];
     [self setView:_tableView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"select" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonAction)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"select" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonAction)];
     [self createModel];
     
 	// Do any additional setup after loading the view.
@@ -49,7 +49,7 @@
         _dataSource = [[BCSelectAssigneeDataSource alloc] initWithCollaborators:allCollaborators];
         [_tableView.tableView setDataSource:_dataSource];
         [_tableView.tableView reloadData];
-        if([_controller isSetedAssignee]){
+        if([_controller  getAssignee] != [NSNull null]){
             [_tableView.tableView selectRowAtIndexPath:[self getIndexPathOfSelectedRow] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         }
     } failure:^(NSError *error) {
@@ -65,7 +65,7 @@
 #pragma mark -
 #pragma mark buttonActions
 
--(void) doneButtonAction{
+-(void) selectButtonAction{
     NSInteger selectedRow = [_tableView.tableView indexPathForSelectedRow].row;
     [_controller setNewAssignee:[_dataSource.collaborators objectAtIndex:selectedRow]];
     [self.navigationController popViewControllerAnimated:YES];
