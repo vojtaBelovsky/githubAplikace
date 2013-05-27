@@ -10,7 +10,8 @@
 
 @interface BCSelectMilestoneDataSource : NSObject<UITableViewDataSource>
 
-@property NSArray *milestones;
+@property BOOL isSelectedMilestone;
+@property NSMutableArray *milestones;
 
 - (id)initWithMilestones:(NSArray *)milestones;
 

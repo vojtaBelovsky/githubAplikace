@@ -19,7 +19,6 @@
     if ( !cell ) {
         cell = [[BCSelectAssigneeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SelectAssigneeCellReuseIdentifier];
     }
-    
     return cell;
 }
 

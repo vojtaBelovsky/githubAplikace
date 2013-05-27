@@ -66,15 +66,6 @@
     return [NSIndexPath indexPathForRow:row inSection:0];
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if(indexPath.row == [_tableView.tableView numberOfRowsInSection:0]-1)
-//        if([_controller getAssignee].userId == 0){
-//            [_dataSource.collaborators removeLastObject];
-//            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-//            [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationBottom];
-//        }
-//}
-
 #pragma mark -
 #pragma mark buttonActions
 

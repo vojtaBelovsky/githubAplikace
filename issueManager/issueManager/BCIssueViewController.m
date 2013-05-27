@@ -36,8 +36,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue: [_dataSource.issues objectAtIndex:indexPath.row]];
+    BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue:[_dataSource.issues objectAtIndex:indexPath.row] andController:self];
     [self.navigationController pushViewController:issueDetailViewController animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [_tableView.tableView reloadData];
 }
 
 - (void)loadView {
@@ -49,6 +53,17 @@
 }
 
 #pragma mark -
+#pragma mark public
+
+-(void)addNewIssue:(BCIssue *)newIssue{
+    [_dataSource addNewIssue:newIssue];
+}
+
+-(void)changeIssue:(BCIssue *)issue{
+    [_dataSource changeIssue:issue atIndex:[_tableView.tableView indexPathForSelectedRow].row];
+}
+
+#pragma mark -
 #pragma mark private
 
 -(void)createAndPushAddIssueVC{
@@ -57,7 +72,7 @@
 }
 
 -(void)createModel{
-    [BCIssue getAllIssuesFromRepository:_repository WithSuccess:^(NSArray *issues) {
+    [BCIssue getAllIssuesFromRepository:_repository WithSuccess:^(NSMutableArray *issues) {
         _dataSource = [[BCIssueDataSource alloc] initWithIssues:issues];
         [_tableView.tableView setDataSource:_dataSource];
         [_tableView.tableView reloadData];

@@ -11,12 +11,14 @@
 @class BCIssue;
 @class BCIssueDetailView;
 @class BCUser;
+@class BCIssueViewController;
 
 @interface BCIssueDetailViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate, BCSelectDataManager>{
 @private
     BCIssueDetailView *_issueDetailview;
 }
 
+@property BCIssueViewController *myParentViewController;
 @property BCIssue *issue;
 @property (copy) BCIssue *editedIssue;
 @property NSMutableArray *buttons;
@@ -26,6 +28,6 @@
 @property BOOL isSetedMilestone;
 @property BOOL isSetedLabel;
 
-- (id)initWithIssue:(BCIssue *)issue;
+- (id)initWithIssue:(BCIssue *)issue andController:(BCIssueViewController *)controller;
 
 @end

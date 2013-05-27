@@ -21,4 +21,7 @@
 
 - (id) initWithRepository:(BCRepository *)repository;
 
+-(void)addNewIssue:(BCIssue *)newIssue;
+-(void)changeIssue:(BCIssue *)issue;
+
 @end

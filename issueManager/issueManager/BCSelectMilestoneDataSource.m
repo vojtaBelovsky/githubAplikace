@@ -8,6 +8,7 @@
 
 #import "BCSelectMilestoneDataSource.h"
 #import "BCSelectMilestoneCell.h"
+#import "BCMilestone.h"
 
 @implementation BCSelectMilestoneDataSource
 
@@ -15,17 +16,31 @@
 {
     self = [super init];
     if (self) {
-        _milestones = milestones;
+        _milestones = [[NSMutableArray alloc] initWithArray:milestones];
+        [_milestones addObject:[[BCMilestone alloc] init]];
     }
     return self;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [[BCSelectMilestoneCell alloc] initWithMilestone:[_milestones objectAtIndex:indexPath.row]];
+    BCSelectMilestoneCell *cell;
+    if([indexPath row] == ([_milestones count]-1) ){
+        cell = [BCSelectMilestoneCell createDeleteCellWithTableView:tableView];
+        cell.textLabel.text = NSLocalizedString(@"unselect milestone", @"");
+    }else{
+        cell = [BCSelectMilestoneCell createMilestoneCellWithTableView:tableView];
+        BCMilestone *myMilestone = [_milestones objectAtIndex:indexPath.row];
+        cell.textLabel.text = NSLocalizedString(myMilestone.title , @"");
+    }
+    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_milestones count];
+    if(_isSelectedMilestone){
+        return [_milestones count];
+    }else{
+        return [_milestones count]-1;
+    }
 }
 
 @end

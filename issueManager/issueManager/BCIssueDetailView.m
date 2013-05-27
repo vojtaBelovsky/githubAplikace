@@ -21,28 +21,19 @@
     if(self){
         [self setBackgroundColor:[UIColor blackColor]];
         _avatar = [[UIImageView alloc] init];
-        [_avatar setImageWithURL:issue.assignee.avatarUrl placeholderImage:[UIImage imageNamed:@"gravatar-user-420.png"]];
         
         _assignee = [[UIButton alloc] init];
-        if(controller.isSetedAssignee){
-            [_assignee setTitle:issue.assignee.userLogin forState:UIControlStateNormal];
-        }else{
-            [_assignee setTitle:@"nobody is assigned" forState:UIControlStateNormal];
-        }
         [_assignee addTarget:controller action:@selector(selectAssignee) forControlEvents:UIControlEventTouchDown];
         [_assignee setEnabled:NO];
         
         _milestone = [[UIButton alloc] init];
-        [_milestone setTitle:@"no milestone is assigned" forState:UIControlStateNormal];
         [_milestone addTarget:controller action:@selector(selectLabel) forControlEvents:UIControlEventTouchDown];
-        [_milestone setBackgroundColor:[UIColor whiteColor]];
-        [_milestone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_milestone setEnabled:NO];
         
         _title = [[UITextField alloc] init];
         [_title setEnabled:NO];
         [_title setText:issue.title];
-        [_title setFont:[UIFont fontWithName:@"arial" size:15]];
+        [_title setFont:[UIFont fontWithName:@"arial" size:20]];
         [_title setReturnKeyType:UIReturnKeyNext];
         [_title setBackgroundColor:[UIColor whiteColor]];
         [_title setTextAlignment:NSTextAlignmentCenter];

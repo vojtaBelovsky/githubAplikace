@@ -18,6 +18,7 @@
 #import "BCLabel.h"
 #import "BCSelectMilestoneViewController.h"
 #import "BCSelectLabelsViewController.h"
+#import "BCIssueViewController.h"
 
 @interface BCIssueDetailViewController ()
 
@@ -25,10 +26,11 @@
 
 @implementation BCIssueDetailViewController
 
-- (id)initWithIssue:(BCIssue *)issue
+- (id)initWithIssue:(BCIssue *)issue andController:(BCIssueViewController *)controller
 {
     self = [super init];
     if (self) {
+        _myParentViewController = controller;
         _issue = issue;
         _editedIssue = [issue copy];
         _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
@@ -88,15 +90,20 @@
 
 -(void) editButtionAction{
     if([self isEditing]){
-        [self setEditing:NO];
         [_editedIssue setTitle:_issueDetailview.title.text];
         [_editedIssue setBody:_issueDetailview.body.text];
         NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%d", _issue.repository.owner.userLogin, _issue.repository.name, [_issue.number intValue]];
         [[BCHTTPClient sharedInstance] patchPath:path parameters:[self createParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Issue was updated");
+            [_myParentViewController changeIssue:_editedIssue];
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [UIAlertView showWithError:error];
+            if([[_editedIssue title] isEqualToString:@""]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty title" message:@"Title can't be empty" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+                [alert show];
+            }else{
+                [UIAlertView showWithError:error];
+            }
         }];
         
     }else{
@@ -112,12 +119,22 @@
     [self setItemsEditable:NO];
     [self setEditing:NO];
     [_buttons removeObject:_cancelButton];
+    _editedIssue = [_issue copy];
     self.navigationItem.rightBarButtonItems = _buttons;
+    
     [_issueDetailview rewriteContentWithIssue:_issue];
 }
 
 #pragma mark -
 #pragma mark delegateMethods
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    [_editedIssue setBody:_issueDetailview.body.text];
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    [_editedIssue setTitle:_issueDetailview.title.text];
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self createAndPushSelectAssigneVC];
@@ -169,7 +186,6 @@
 }
 
 -(NSDictionary *) createParameters{
-    NSArray *labels = [_editedIssue getLabelsAsStrings];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:
                                 _editedIssue.title ?: [NSNull null], @"title",
                                 _editedIssue.body ?: [NSNull null], @"body",

@@ -10,23 +10,25 @@
 #import "BCMilestone.h"
 
 #define SelectMilestoneCellReuseIdentifier @"SelectMilestoneCellReuseIdentifier"
+#define DeleteMilestoneCellReuseIdentifier @"DeleteMilestoneCellReuseIdentifier"
 
 @implementation BCSelectMilestoneCell
 
-- (id)initWithMilestone:(BCMilestone *)milestone
-{
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SelectMilestoneCellReuseIdentifier];
-    if (self) {
-        [self.textLabel setText:milestone.title];
++ (BCSelectMilestoneCell *)createMilestoneCellWithTableView:(UITableView *)tableView {
+    BCSelectMilestoneCell *cell = [tableView dequeueReusableCellWithIdentifier:SelectMilestoneCellReuseIdentifier];
+    if ( !cell ) {
+        cell = [[BCSelectMilestoneCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SelectMilestoneCellReuseIdentifier];
     }
-    return self;
+    return cell;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
++ (BCSelectMilestoneCell *)createDeleteCellWithTableView:(UITableView *)tableView {
+    BCSelectMilestoneCell *cell = [tableView dequeueReusableCellWithIdentifier:DeleteMilestoneCellReuseIdentifier];
+    if ( !cell ) {
+        cell = [[BCSelectMilestoneCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DeleteMilestoneCellReuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
+    return cell;
 }
 
 @end

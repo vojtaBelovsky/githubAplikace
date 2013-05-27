@@ -46,7 +46,7 @@
         _dataSource = [[BCSelectLabelsDataSource alloc] initWithLables:allLabels];
         [_tableView.tableView setDataSource:_dataSource];
         [_tableView.tableView reloadData];
-        if([_controller getLabels] != [NSNull null]){
+        if([[_controller getLabels] count]!= 0){
             for(BCLabel *object in [_controller getLabels]){
                 [_tableView.tableView selectRowAtIndexPath:[self getIndexPathOfLabel:object] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
             }

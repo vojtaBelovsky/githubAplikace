@@ -11,6 +11,7 @@
 
 @interface BCSelectMilestoneCell : UITableViewCell
 
-- (id)initWithMilestone:(BCMilestone *)milestone;
++ (BCSelectMilestoneCell *)createMilestoneCellWithTableView:(UITableView *)tableView;
++ (BCSelectMilestoneCell *)createDeleteCellWithTableView:(UITableView *)tableView;
 
 @end

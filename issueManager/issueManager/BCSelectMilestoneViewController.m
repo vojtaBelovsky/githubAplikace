@@ -11,6 +11,7 @@
 #import "BCSelectMilestoneDataSource.h"
 #import "BCSelectMilestoneView.h"
 #import "BCSelectDataManager.h"
+#import "BCMilestone.h"
 
 @interface BCSelectMilestoneViewController ()
 
@@ -45,10 +46,13 @@
     [BCRepository getAllMilestonesOfRepository:_repository withSuccess:^(NSArray *allMilestones) {
         _dataSource = [[BCSelectMilestoneDataSource alloc] initWithMilestones:allMilestones];
         [_tableView.tableView setDataSource:_dataSource];
-        [_tableView.tableView reloadData];
-        if([_controller getMilestone] != [NSNull null]){
+        if([_controller getMilestone].number != 0){
+            [_dataSource setIsSelectedMilestone:YES];
             [_tableView.tableView selectRowAtIndexPath:[self getIndexPathOfSelectedRow] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+        }else{
+            [_dataSource setIsSelectedMilestone:NO];
         }
+        [_tableView.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"fail");
     }];

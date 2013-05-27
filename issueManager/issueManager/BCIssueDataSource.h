@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+@class BCIssue;
 
 @interface BCIssueDataSource : NSObject<UITableViewDataSource>
 
-@property (copy) NSArray *issues;
+@property (copy) NSMutableArray *issues;
 
--(id) initWithIssues:(NSArray *)issues;
+-(id) initWithIssues:(NSMutableArray *)issues;
+
+-(void)addNewIssue:(BCIssue *)newIssue;
+-(void)changeIssue:(BCIssue *)issue atIndex:(NSUInteger)index;
+
 
 @end

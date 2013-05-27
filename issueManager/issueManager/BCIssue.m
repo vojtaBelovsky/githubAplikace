@@ -119,7 +119,7 @@
     }];
 }
 
-+(void)getAllIssuesFromRepository:(BCRepository *)repository WithSuccess:(void(^)(NSArray* issues))success failure:(void(^)(NSError * error))failrue{
++(void)getAllIssuesFromRepository:(BCRepository *)repository WithSuccess:(void(^)(NSMutableArray* issues))success failure:(void(^)(NSError * error))failrue{
     [[BCHTTPClient sharedInstance] getPath:repository.issuesUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *responseIssues = [[NSArray alloc] initWithArray:responseObject];
         NSMutableArray *issues = [[NSMutableArray alloc] initWithCapacity:[responseIssues count]];

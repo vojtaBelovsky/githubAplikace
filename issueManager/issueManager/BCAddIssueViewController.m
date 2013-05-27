@@ -154,7 +154,7 @@
 #pragma mark public
 
 -(void)setNewAssignee:(BCUser *)assignee{
-    if(assignee != [NSNull null]){
+    if(assignee.userId != 0){
         [self setIsSetedAssignee:YES];
     }else{
         [self setIsSetedAssignee:NO];
@@ -167,7 +167,7 @@
 }
 
 -(void)setNewMilestone:(BCMilestone *)milestone{
-    if(milestone != [NSNull null]){
+    if(milestone.number != 0){
         [self setIsSetedMilestone:YES];
     }else{
         [self setIsSetedMilestone:NO];
@@ -180,7 +180,7 @@
 }
 
 -(void)setNewLables:(NSArray *)labels{
-    if(labels != [NSNull null]){
+    if([labels count] != 0){
         [self setIsSetedLabel:YES];
     }else{
         [self setIsSetedLabel:NO];
