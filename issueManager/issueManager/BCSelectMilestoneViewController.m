@@ -66,7 +66,6 @@
     NSInteger selectedRow = [_tableView.tableView indexPathForSelectedRow].row;
     [_controller setNewMilestone:[_dataSource.milestones objectAtIndex:selectedRow]];
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 @end

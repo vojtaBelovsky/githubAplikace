@@ -12,6 +12,7 @@
 #import "BCSelectAssigneeView.h"
 #import "BCIssueDetailViewController.h"
 #import "BCSelectDataManager.h"
+#import "BCUser.h"
 
 @interface BCSelectAssigneeViewController ()
 
@@ -48,10 +49,13 @@
     [BCRepository getAllCollaboratorsOfRepository:_repository withSuccess:^(NSArray *allCollaborators) {
         _dataSource = [[BCSelectAssigneeDataSource alloc] initWithCollaborators:allCollaborators];
         [_tableView.tableView setDataSource:_dataSource];
-        [_tableView.tableView reloadData];
-        if([_controller  getAssignee] != [NSNull null]){
+        if([_controller getAssignee].userId != 0){
+            [_dataSource setIsSelectedAssignee:YES];
             [_tableView.tableView selectRowAtIndexPath:[self getIndexPathOfSelectedRow] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+        }else{
+            [_dataSource setIsSelectedAssignee:NO];
         }
+        [_tableView.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"fail");
     }];
@@ -62,6 +66,15 @@
     return [NSIndexPath indexPathForRow:row inSection:0];
 }
 
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if(indexPath.row == [_tableView.tableView numberOfRowsInSection:0]-1)
+//        if([_controller getAssignee].userId == 0){
+//            [_dataSource.collaborators removeLastObject];
+//            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+//            [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationBottom];
+//        }
+//}
+
 #pragma mark -
 #pragma mark buttonActions
 
@@ -69,7 +82,6 @@
     NSInteger selectedRow = [_tableView.tableView indexPathForSelectedRow].row;
     [_controller setNewAssignee:[_dataSource.collaborators objectAtIndex:selectedRow]];
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 @end

@@ -17,7 +17,7 @@
     self = [super init];
     if (self) {
         _collaborators = [[NSMutableArray alloc] initWithArray:collaborators];
-        [_collaborators addObject:[NSNull null]];
+        [_collaborators addObject:[[BCUser alloc] init]];
     }
     return self;
 }
@@ -27,7 +27,7 @@
     BCSelectAssigneeCell *cell;    
     if ( indexPath.row == ( _collaborators.count - 1 ) ) {
         cell = [BCSelectAssigneeCell createDeleteCellWithTableView:tableView];
-        cell.textLabel.text = NSLocalizedString( @"Unselect assagnee", @"" );
+        cell.textLabel.text = NSLocalizedString( @"Unselect assignee", @"" );
     } else {
         BCUser *user = [_collaborators objectAtIndex:indexPath.row];
         cell = [BCSelectAssigneeCell createAssigneCellWithTableView:tableView];
@@ -38,7 +38,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _collaborators.count;
+    if(_isSelectedAssignee){
+        return _collaborators.count;
+    }else{
+        return _collaborators.count-1;
+    }
 }
 
 @end

@@ -140,7 +140,8 @@
     for(BCLabel *object in _labels){
         [labels addObject:object.name];
     }
-    return labels;
+    NSArray * unmutableLabels = [[NSArray alloc] initWithArray:labels];
+    return unmutableLabels;
 }
 
 @end

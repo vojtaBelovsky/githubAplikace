@@ -75,7 +75,7 @@
 }
 
 -(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSArray *)labels{
-    if(assignee != [NSNull null]){
+    if(assignee.userId != 0){
         [_avatar setImageWithURL:assignee.avatarUrl placeholderImage:[UIImage imageNamed:@"gravatar-user-420.png"]];
         [_assignee setTitle:assignee.userLogin forState:UIControlStateNormal];
         [_assignee setBackgroundColor:[UIColor whiteColor]];
@@ -83,24 +83,33 @@
     }else{
         [_avatar setImage:[UIImage imageNamed:@"gravatar-user-420.png"]];
         [_assignee setTitle:@"nobody is assigned" forState:UIControlStateNormal];
-        [_assignee setBackgroundColor:[UIColor blackColor]];
+        [_assignee setBackgroundColor:[UIColor grayColor]];
         [_assignee setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     
-    if(milestone != [NSNull null]){
+    if(milestone.number != 0){
         [_milestone setTitle:milestone.title forState:UIControlStateNormal];
+        [_milestone setBackgroundColor:[UIColor whiteColor]];
+        [_milestone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }else{
         [_milestone setTitle:@"no milestone is assigned" forState:UIControlStateNormal];
+        [_milestone setBackgroundColor:[UIColor grayColor]];
+        [_milestone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
-    if(labels != [NSNull null]){
+    
+    if(labels.count != 0){
         NSMutableString *labelsInString = [[NSMutableString alloc] init];
         for(BCLabel *object in labels){
             [labelsInString insertString:object.name atIndex:[labelsInString length]];
             [labelsInString insertString:@" " atIndex:[labelsInString length]];
         }
         [_labels setText:labelsInString];
+        [_labels setBackgroundColor:[UIColor whiteColor]];
+        [_labels setTextColor:[UIColor blackColor]];
     }else{
         [_labels setText:@"no label is assigned"];
+        [_labels setBackgroundColor:[UIColor grayColor]];
+        [_labels setTextColor:[UIColor whiteColor]];
     }
 }
 

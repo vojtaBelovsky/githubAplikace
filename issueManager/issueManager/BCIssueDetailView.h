@@ -10,12 +10,15 @@
 @class BCIssue;
 @class BCIssueDetailViewController;
 
-@interface BCIssueDetailView : UIView
+@interface BCIssueDetailView : UIScrollView
 
 @property UIImageView *avatar;
 @property UIButton *assignee;
+@property UIButton *milestone;
+@property UITextView *labels;
 @property UITextField *title;
 @property UITextView *body;
+@property UIButton *labelsButton;
 
 -(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
 

@@ -28,9 +28,9 @@
 {
     self = [super init];
     if (self) {
-        _assignee = [NSNull null];
-        _milestone = [NSNull null];
-        _labels = [NSNull null];
+        _assignee = [[BCUser alloc] init];
+        _milestone = [[BCMilestone alloc] init];
+        _labels = [[NSArray alloc] init];
         _repository = repository;
         _isSetedAssignee = NO;
         _isSetedMilestone = NO;
@@ -83,14 +83,6 @@
 #pragma mark -
 #pragma mark delegateMethods
 
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-    //[_addIssueView setTransform:CGAffineTransformMakeTranslation(0, -keyboardSize.height)];
-}
-
--(void)textViewDidBeginEditing:(UITextView *)textView{
-    //[_addIssueView setTransform:CGAffineTransformMakeTranslation(0, -keyboardSize.height)];
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self createAndPushSelectAssigneVC];
     return YES;
@@ -100,7 +92,7 @@
 #pragma mark -
 #pragma mark private
 
-- (void) keyboardDidHide:(NSNotification*)notification{
+- (void) keyboardDidHide:(NSNotification*)notification{//zmensi velikost skrolovatelneho obsahu
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
     CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
@@ -108,8 +100,7 @@
     _addIssueView.contentSize = scrollContentSize;
 }
 
-- (void) keyboardDidShow:(NSNotification*)notification
-{
+- (void) keyboardDidShow:(NSNotification*)notification{//zvetsi velikost skrolovatelneho obsahu
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
     CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
