@@ -12,6 +12,7 @@
 @class BCUser;
 @class BCAddIssueView;
 @class BCMilestone;
+@class BCIssueViewController;
 
 @interface BCAddIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, BCSelectDataManager>{
 @private
@@ -22,6 +23,7 @@
     NSArray *_labels;
 }
 
+@property BCIssueViewController *myParentViewController;
 @property BCUser *assignee;
 @property BOOL isSetedAssignee;
 @property BOOL isSetedMilestone;

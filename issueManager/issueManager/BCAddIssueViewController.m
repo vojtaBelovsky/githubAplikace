@@ -17,6 +17,8 @@
 #import "BCSelectLabelsViewController.h"
 #import "BCMilestone.h"
 #import "BCLabel.h"
+#import "BCIssueViewController.h"
+#import "BCIssue.h"
 
 @interface BCAddIssueViewController ()
 
@@ -24,8 +26,7 @@
 
 @implementation BCAddIssueViewController
 
-- (id)initWithRepository:(BCRepository *)repository
-{
+- (id)initWithRepository:(BCRepository *)repository{
     self = [super init];
     if (self) {
         _assignee = [[BCUser alloc] init];
@@ -74,6 +75,8 @@
     NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues", _repository.owner.userLogin, _repository.name];
     [[BCHTTPClient sharedInstance] postPath:path parameters:[self createParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Issue was created");
+        BCIssue *newIssue = (BCIssue *)[[MTLJSONAdapter alloc] initWithJSONDictionary:responseObject modelClass:[BCIssue class] error:nil];
+        [_myParentViewController addNewIssue:newIssue];
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [UIAlertView showWithError:error];

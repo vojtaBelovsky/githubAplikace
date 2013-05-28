@@ -41,14 +41,15 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    [_tableView.tableView reloadData];
+    [super viewWillAppear:animated];
+    [self createModel];
 }
 
 - (void)loadView {
     [super loadView];
     _tableView = [[BCIssueView alloc] init];
     self.view = _tableView;
-    [self createModel];
+    //[self createModel];
     [_tableView.tableView setDelegate:self];
 }
 
@@ -76,6 +77,7 @@
         _dataSource = [[BCIssueDataSource alloc] initWithIssues:issues];
         [_tableView.tableView setDataSource:_dataSource];
         [_tableView.tableView reloadData];
+        NSLog(@"data was reloaded");
     } failure:^(NSError *error) {
         NSLog(@"fail");
     }];
