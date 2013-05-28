@@ -42,14 +42,14 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self createModel];
+    [_tableView.tableView reloadData];
 }
 
 - (void)loadView {
     [super loadView];
     _tableView = [[BCIssueView alloc] init];
     self.view = _tableView;
-    //[self createModel];
+    [self createModel];
     [_tableView.tableView setDelegate:self];
 }
 
@@ -58,6 +58,7 @@
 
 -(void)addNewIssue:(BCIssue *)newIssue{
     [_dataSource addNewIssue:newIssue];
+    [_tableView.tableView setDataSource:_dataSource];
 }
 
 -(void)changeIssue:(BCIssue *)issue{
@@ -68,7 +69,7 @@
 #pragma mark private
 
 -(void)createAndPushAddIssueVC{
-    BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:_repository];
+    BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:_repository andController:self];
     [self.navigationController pushViewController:addIssueVC animated:YES];
 }
 

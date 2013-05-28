@@ -26,13 +26,14 @@
 
 @implementation BCAddIssueViewController
 
-- (id)initWithRepository:(BCRepository *)repository{
+- (id)initWithRepository:(BCRepository *)repository andController:(BCIssueViewController *)controller{
     self = [super init];
     if (self) {
         _assignee = [[BCUser alloc] init];
         _milestone = [[BCMilestone alloc] init];
         _labels = [[NSArray alloc] init];
         _repository = repository;
+        _myParentViewController = controller;
         _isSetedAssignee = NO;
         _isSetedMilestone = NO;
         _isSetedLabel = NO;
@@ -75,7 +76,7 @@
     NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues", _repository.owner.userLogin, _repository.name];
     [[BCHTTPClient sharedInstance] postPath:path parameters:[self createParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Issue was created");
-        BCIssue *newIssue = (BCIssue *)[[MTLJSONAdapter alloc] initWithJSONDictionary:responseObject modelClass:[BCIssue class] error:nil];
+        BCIssue *newIssue = [MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:responseObject error:nil];
         [_myParentViewController addNewIssue:newIssue];
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

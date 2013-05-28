@@ -12,5 +12,6 @@
 @interface BCIssueCell : UITableViewCell
 
 - (id)initWithIssue:(BCIssue *)issue;
++ (BCIssueCell *)createIssueCellWithTableView:(UITableView *)tableView;
 
 @end

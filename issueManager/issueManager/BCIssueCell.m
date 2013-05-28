@@ -13,21 +13,12 @@
 
 @implementation BCIssueCell
 
-- (id)initWithIssue:(BCIssue *)issue
-{
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
-    if (self) {
-        [self.textLabel setText:issue.title];
-        [self.textLabel setFont:[UIFont fontWithName:@"arial" size:15]];
++ (BCIssueCell *)createIssueCellWithTableView:(UITableView *)tableView {
+    BCIssueCell *cell = [tableView dequeueReusableCellWithIdentifier:IssueCellReuseIdentifier];
+    if ( !cell ) {
+        cell = [[BCIssueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
     }
-    return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    return cell;
 }
 
 @end

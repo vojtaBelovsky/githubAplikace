@@ -26,8 +26,6 @@
         [_assignee setTitle:@"nobody is assigned" forState:UIControlStateNormal];
         [_assignee addTarget:controller action:@selector(selectAssignee) forControlEvents:UIControlEventTouchDown];
         [_assignee setEnabled:NO];
-        [_assignee setBackgroundColor:[UIColor blackColor]];
-        [_assignee setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         _milestone = [[UIButton alloc] init];
         [_milestone setTitle:@"no milestone is assigned" forState:UIControlStateNormal];

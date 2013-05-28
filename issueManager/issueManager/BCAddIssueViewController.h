@@ -29,6 +29,6 @@
 @property BOOL isSetedMilestone;
 @property BOOL isSetedLabel;
 
-- (id)initWithRepository:(BCRepository *)repository;
+- (id)initWithRepository:(BCRepository *)repository andController:(BCIssueViewController *)controller;
 
 @end

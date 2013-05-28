@@ -23,6 +23,7 @@
         _avatar = [[UIImageView alloc] init];
         
         _assignee = [[UIButton alloc] init];
+        [_assignee setTitle:@"nobody is assigned" forState:UIControlStateNormal];
         [_assignee addTarget:controller action:@selector(selectAssignee) forControlEvents:UIControlEventTouchDown];
         [_assignee setEnabled:NO];
         

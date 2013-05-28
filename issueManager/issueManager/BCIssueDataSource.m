@@ -25,7 +25,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [[BCIssueCell alloc] initWithIssue:[_issues objectAtIndex:indexPath.row]];
+    BCIssueCell *cell;
+    cell = [BCIssueCell createIssueCellWithTableView:tableView];
+    BCIssue *issueForRow = [_issues objectAtIndex:indexPath.row];
+    cell.textLabel.text = issueForRow.title;
+    [cell.textLabel setFont:[UIFont fontWithName:@"arial" size:15]];
+    return cell;
 }
 
 #pragma mark -
