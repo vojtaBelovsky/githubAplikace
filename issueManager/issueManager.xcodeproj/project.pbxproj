@@ -25,6 +25,8 @@
 		102B8B5A172FE2E2003BA22F /* BCAddIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B59172FE2E2003BA22F /* BCAddIssueViewController.m */; };
 		102B8B5D172FE2FB003BA22F /* BCAddIssueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */; };
 		102B8B69172FF795003BA22F /* UIAlertView+errorAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */; };
+		104105D81757709C003B0B9F /* BCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105D71757709C003B0B9F /* BCLoginViewController.m */; };
+		104105DF175770DE003B0B9F /* BCLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105DE175770DE003B0B9F /* BCLoginView.m */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
 		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
@@ -135,6 +137,10 @@
 		102B8B67172FF787003BA22F /* UIAlertView+errorAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+errorAlert.h"; sourceTree = "<group>"; };
 		102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+errorAlert.m"; sourceTree = "<group>"; };
 		102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectDataManager.h; sourceTree = "<group>"; };
+		104105D61757709C003B0B9F /* BCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLoginViewController.h; sourceTree = "<group>"; };
+		104105D71757709C003B0B9F /* BCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginViewController.m; sourceTree = "<group>"; };
+		104105DD175770DE003B0B9F /* BCLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLoginView.h; sourceTree = "<group>"; };
+		104105DE175770DE003B0B9F /* BCLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginView.m; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -368,6 +374,25 @@
 			name = view;
 			sourceTree = "<group>";
 		};
+		104105D21757706D003B0B9F /* login */ = {
+			isa = PBXGroup;
+			children = (
+				104105D9175770AF003B0B9F /* view */,
+				104105D61757709C003B0B9F /* BCLoginViewController.h */,
+				104105D71757709C003B0B9F /* BCLoginViewController.m */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		104105D9175770AF003B0B9F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				104105DD175770DE003B0B9F /* BCLoginView.h */,
+				104105DE175770DE003B0B9F /* BCLoginView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 		10E300481721A6AA00607EBA /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */,
+				104105D21757706D003B0B9F /* login */,
 				10EF01D917379F2200346E9F /* selectLables */,
 				102ACED01733BA65000250F9 /* selectMilestone */,
 				102B8B45172E92FD003BA22F /* selectAssignee */,
@@ -740,6 +766,8 @@
 				10EF01E117379F9500346E9F /* BCSelectLabelsViewController.m in Sources */,
 				10EF01E417379FBE00346E9F /* BCSelectLabelsView.m in Sources */,
 				10EF01E817379FD600346E9F /* BCSelectLabelsCell.m in Sources */,
+				104105D81757709C003B0B9F /* BCLoginViewController.m in Sources */,
+				104105DF175770DE003B0B9F /* BCLoginView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

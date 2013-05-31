@@ -11,12 +11,12 @@
 
 @implementation BCHTTPClient
 
-- (id)initWithBaseURL:(NSURL *)url {
+- (id)initWithBaseURL:(NSURL *)url UserName:(NSString *)userName andPassword:(NSString *)password {
     self = [super initWithBaseURL:url];
     if ( self ) {
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
-        [self setAuthorizationHeaderWithUsername:@"vojtaBelovsky" password:@"tr1n1t1"];
+        [self setAuthorizationHeaderWithUsername:userName password:password];
         [self setParameterEncoding:AFJSONParameterEncoding];
     }
     return self;
@@ -43,11 +43,20 @@
     [[self sharedInstance] getPath:path parameters:parameters success:success failure:failure];
 }
 
-+ (BCHTTPClient *)sharedInstance {
++ (BCHTTPClient *)sharedInstance{//NSUserDefaults - puzit pro ukladani hesla a uziv. jmena
     static BCHTTPClient *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BCHTTPCLIENT_BASE_URL]];
+    });
+    return instance;
+}
+
++ (BCHTTPClient *)sharedInstanceWithUserName:(NSString *)userName andPassword:(NSString *)password {
+    static BCHTTPClient *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BCHTTPCLIENT_BASE_URL] UserName:userName andPassword:password];
     });
     return instance;
 }
