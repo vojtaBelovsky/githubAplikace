@@ -8,11 +8,14 @@
 
 @class BCRepositoryView;
 @class BCRepositoryDataSource;
+@class BCUser;
 
 @interface BCRepositoryViewController : UIViewController<UITableViewDelegate> {
 @private
     BCRepositoryView *_repoView;
     BCRepositoryDataSource *_dataSource;
 }
+
+@property BCUser *loggedUser;
 
 @end

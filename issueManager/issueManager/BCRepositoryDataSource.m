@@ -8,6 +8,9 @@
 
 #import "BCRepositoryDataSource.h"
 #import "BCRepositoryCell.h"
+#import "BCUser.h"
+#import "BCOrg.h"
+#import "BCRepository.h"
 
 @implementation BCRepositoryDataSource
 
@@ -20,11 +23,28 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_repositories count];
+    return [_repositories[section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [[BCRepositoryCell alloc] initWithRepository:[_repositories objectAtIndex:indexPath.row]];
+    BCRepositoryCell *cell = nil;
+    
+    if(indexPath.row == 0)//kdyz je radek 0, mame usera nebo org
+    {
+        cell = [BCRepositoryCell createOrgOrMyRepositoryCellWithTableView:tableView];
+        if([_repositories[indexPath.section][indexPath.row] isKindOfClass:[BCUser class]]){
+            BCUser *user = _repositories[indexPath.section][indexPath.row];
+            cell.textLabel.text = user.userLogin;
+        }else{
+            BCOrg *org = _repositories[indexPath.section][indexPath.row];
+            cell.textLabel.text = org.orgLogin;
+        } 
+    }else{
+        cell = [BCRepositoryCell createRepositoryCellWithTableView:tableView];
+        BCRepository *repo = _repositories[indexPath.section][indexPath.row];
+        cell.textLabel.text = repo.name;
+    }
+    return cell;
 }
 
 -(BCRepository *)getRepositoryAtIndex:(NSUInteger)row{

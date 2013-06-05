@@ -11,6 +11,7 @@
 #import "BCUser.h"
 #import "BCMilestone.h"
 #import "BCLabel.h"
+#import "BCOrg.h"
 
 @implementation BCRepository
 
@@ -80,11 +81,28 @@
     }];
 }
 
-+ (void)getAllRepositoriesWithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error)) failure{
++ (void)getAllRepositoriesFromUser:(BCUser *)user WithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error)) failure{
     [[BCHTTPClient sharedInstance] getPath:@"user/repos" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
         
         NSArray *response = [NSArray arrayWithArray:responseObject];
-        NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:[response count]];
+        NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:([response count]+1)];
+        [repositories addObject:user];
+        for (NSDictionary *object in response) {
+            [repositories addObject:[MTLJSONAdapter modelOfClass:[BCRepository class] fromJSONDictionary:object error:nil]];
+        }
+        success ( repositories );
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"fail");
+    }];
+}
+
++ (void)getAllRepositoriesFromOrg:(BCOrg *)org WithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error)) failure{
+    NSString *path = [[NSString alloc] initWithFormat:@"orgs/%@/repos", org.orgLogin];
+    [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        NSArray *response = [NSArray arrayWithArray:responseObject];
+        NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:([response count]+1)];
+        [repositories addObject:org];
         for (NSDictionary *object in response) {
             [repositories addObject:[MTLJSONAdapter modelOfClass:[BCRepository class] fromJSONDictionary:object error:nil]];
         }

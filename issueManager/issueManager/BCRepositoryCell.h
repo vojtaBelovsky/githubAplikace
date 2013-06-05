@@ -11,6 +11,7 @@
 
 @interface BCRepositoryCell : UITableViewCell
 
-- (id)initWithRepository:(BCRepository *)repository;
++ (BCRepositoryCell *)createOrgOrMyRepositoryCellWithTableView:(UITableView *)tableView;
++ (BCRepositoryCell *)createRepositoryCellWithTableView:(UITableView *)tableView;
 
 @end

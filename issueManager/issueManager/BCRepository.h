@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Mantle/Mantle.h>
 @class BCUser;
+@class BCOrg;
 
 @interface BCRepository : MTLModel <MTLJSONSerializing>
 
@@ -18,12 +19,11 @@
 @property (nonatomic, copy, readonly)
 BCUser *owner;
 
-+ (void)getAllRepositoriesWithSuccess:(void (^)(NSArray *repositories))success failure:(void(^) (NSError *error)) failure;
-
 +(void)getAllCollaboratorsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allCollaborators))success failure:(void(^) (NSError * error))failure;
 
 +(void)getAllMilestonesOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allCollaborators))success failure:(void(^) (NSError * error))failure;
 
 +(void)getAllLabelsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allLables))success failure:(void(^) (NSError * error))failure;
-
++ (void)getAllRepositoriesFromUser:(BCUser *)user WithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error)) failure;
++ (void)getAllRepositoriesFromOrg:(BCOrg *)org WithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error)) failure;
 @end

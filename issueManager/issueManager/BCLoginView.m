@@ -8,21 +8,30 @@
 
 #import "BCLoginView.h"
 
+#define RGB_COLOR(r, g, b, a) [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:a / 255.0f]
+
 @implementation BCLoginView
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor redColor];
-        _button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [_button setTitle:@"Banan" forState:UIControlStateNormal];
+        _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login.png"]];
+        [self addSubview:_background];
+        
+        self.backgroundColor = RGB_COLOR(232, 232, 232, 91);
+        _button = [UIButton buttonWithType:UIButtonTypeCustom];
+        //_button setImage:<#(UIImage *)#> forState:<#(UIControlState)#>
+        //NASTAVENI ZMACKUNETHO A NEZMACKNUTEHO TLACITKA
         [self addSubview:_button];
         
         _login = [[UITextField alloc] init];
+        _login.backgroundColor = [UIColor whiteColor];
         [self addSubview:_login];
         
         _password = [[UITextField alloc] init];
+        _password.backgroundColor = [UIColor whiteColor];
+        _password.secureTextEntry = YES;
         [self addSubview:_password];
     }
     return self;
@@ -31,17 +40,22 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     
-    CGRect loginFrame = CGRectMake(0, 0, 200, 20);
+    CGRect backgroundFrame = self.frame;
+    if(!CGRectEqualToRect(backgroundFrame, _background.frame)){
+        _background.frame = backgroundFrame;
+    }
+    
+    CGRect loginFrame = CGRectMake(80, 292, 200, 24);
     if(!CGRectEqualToRect(loginFrame, _login.frame)){
         _login.frame = loginFrame;
     }
     
-    CGRect passwordFrame = CGRectMake(200, 300, 200, 20);
+    CGRect passwordFrame = CGRectMake(80, 319, 200, 24);
     if(!CGRectEqualToRect(passwordFrame, _password.frame)){
         _password.frame = passwordFrame;
     }
     
-    CGRect buttonFrame = CGRectMake(50, 150, 50, 20);
+    CGRect buttonFrame = CGRectMake(32, 358, 258, 32);
     if(!CGRectEqualToRect(buttonFrame, _button.frame)){
         _button.frame = buttonFrame;
     }

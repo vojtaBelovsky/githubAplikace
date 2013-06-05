@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BCLoginView : UIView
+@interface BCLoginView : UIScrollView
 
+@property UIImageView *background;
 @property UITextField *login;
 @property UITextField *password;
 @property UIButton *button;

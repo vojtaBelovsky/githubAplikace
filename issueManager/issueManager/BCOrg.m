@@ -1,20 +1,19 @@
 //
-//  BCUser.m
-//  Bakalarka1
+//  BCOrg.m
+//  issueManager
 //
-//  Created by Vojtech Belovsky on 3/22/13.
+//  Created by Vojtech Belovsky on 6/4/13.
 //  Copyright (c) 2013 vojta. All rights reserved.
 //
 
-#import "BCUser.h"
-#import "BCHTTPClient.h"
+#import "BCOrg.h"
 
-@implementation BCUser
+@implementation BCOrg
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"userLogin": @"login",
-             @"userId": @"id",
+             @"orgLogin": @"login",
+             @"orgId": @"id",
              @"avatarUrl" : @"avatar_url",
              @"htmlUrl": @"html_url"
              };

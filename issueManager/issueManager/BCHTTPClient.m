@@ -7,6 +7,9 @@
 //
 
 #import "BCHTTPClient.h"
+#import "BCUser.h"
+#import "UIAlertView+errorAlert.h"
+
 #define BCHTTPCLIENT_BASE_URL @"https://api.github.com/"
 
 @implementation BCHTTPClient
@@ -47,16 +50,9 @@
     static BCHTTPClient *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BCHTTPCLIENT_BASE_URL]];
-    });
-    return instance;
-}
-
-+ (BCHTTPClient *)sharedInstanceWithUserName:(NSString *)userName andPassword:(NSString *)password {
-    static BCHTTPClient *instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BCHTTPCLIENT_BASE_URL] UserName:userName andPassword:password];
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary *credentials = [userDefaults objectForKey:@"credentials"];
+        instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BCHTTPCLIENT_BASE_URL] UserName:[credentials valueForKey:@"login"] andPassword:[credentials valueForKey:@"password"]];
     });
     return instance;
 }

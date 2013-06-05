@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10200107175E18E9005DD92F /* BCOrg.m in Sources */ = {isa = PBXBuildFile; fileRef = 10200106175E18E9005DD92F /* BCOrg.m */; };
+		10200114175F0629005DD92F /* issue-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 1020010C175F0629005DD92F /* issue-list.png */; };
+		10200115175F0629005DD92F /* issue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1020010D175F0629005DD92F /* issue.png */; };
+		10200117175F0629005DD92F /* new-issue-name.png in Resources */ = {isa = PBXBuildFile; fileRef = 1020010F175F0629005DD92F /* new-issue-name.png */; };
+		10200118175F0629005DD92F /* new-issue-select-user.png in Resources */ = {isa = PBXBuildFile; fileRef = 10200110175F0629005DD92F /* new-issue-select-user.png */; };
+		10200119175F0629005DD92F /* new-issue.png in Resources */ = {isa = PBXBuildFile; fileRef = 10200111175F0629005DD92F /* new-issue.png */; };
+		1020011A175F0629005DD92F /* repos.png in Resources */ = {isa = PBXBuildFile; fileRef = 10200112175F0629005DD92F /* repos.png */; };
+		1020011B175F0629005DD92F /* tapmates.png in Resources */ = {isa = PBXBuildFile; fileRef = 10200113175F0629005DD92F /* tapmates.png */; };
 		102ACED61733BA84000250F9 /* BCSelectMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACED51733BA84000250F9 /* BCSelectMilestoneViewController.m */; };
 		102ACEDB1733BAB0000250F9 /* BCSelectMilestoneDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACEDA1733BAB0000250F9 /* BCSelectMilestoneDataSource.m */; };
 		102ACEDF1733BAEF000250F9 /* BCSelectMilestoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACEDE1733BAEF000250F9 /* BCSelectMilestoneView.m */; };
@@ -27,6 +35,7 @@
 		102B8B69172FF795003BA22F /* UIAlertView+errorAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */; };
 		104105D81757709C003B0B9F /* BCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105D71757709C003B0B9F /* BCLoginViewController.m */; };
 		104105DF175770DE003B0B9F /* BCLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105DE175770DE003B0B9F /* BCLoginView.m */; };
+		10BE364C175F0A840026DA45 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE364B175F0A840026DA45 /* login.png */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
 		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
@@ -101,6 +110,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10200105175E18E9005DD92F /* BCOrg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCOrg.h; path = issueManager/BCOrg.h; sourceTree = "<group>"; };
+		10200106175E18E9005DD92F /* BCOrg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCOrg.m; path = issueManager/BCOrg.m; sourceTree = "<group>"; };
+		1020010C175F0629005DD92F /* issue-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issue-list.png"; path = "issueManager/grafika/issue-list.png"; sourceTree = "<group>"; };
+		1020010D175F0629005DD92F /* issue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = issue.png; path = issueManager/grafika/issue.png; sourceTree = "<group>"; };
+		1020010F175F0629005DD92F /* new-issue-name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "new-issue-name.png"; path = "issueManager/grafika/new-issue-name.png"; sourceTree = "<group>"; };
+		10200110175F0629005DD92F /* new-issue-select-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "new-issue-select-user.png"; path = "issueManager/grafika/new-issue-select-user.png"; sourceTree = "<group>"; };
+		10200111175F0629005DD92F /* new-issue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "new-issue.png"; path = "issueManager/grafika/new-issue.png"; sourceTree = "<group>"; };
+		10200112175F0629005DD92F /* repos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = repos.png; path = issueManager/grafika/repos.png; sourceTree = "<group>"; };
+		10200113175F0629005DD92F /* tapmates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tapmates.png; path = issueManager/grafika/tapmates.png; sourceTree = "<group>"; };
 		102ACED41733BA84000250F9 /* BCSelectMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectMilestoneViewController.h; sourceTree = "<group>"; };
 		102ACED51733BA84000250F9 /* BCSelectMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectMilestoneViewController.m; sourceTree = "<group>"; };
 		102ACED91733BAB0000250F9 /* BCSelectMilestoneDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectMilestoneDataSource.h; sourceTree = "<group>"; };
@@ -141,6 +159,7 @@
 		104105D71757709C003B0B9F /* BCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginViewController.m; sourceTree = "<group>"; };
 		104105DD175770DE003B0B9F /* BCLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLoginView.h; sourceTree = "<group>"; };
 		104105DE175770DE003B0B9F /* BCLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginView.m; sourceTree = "<group>"; };
+		10BE364B175F0A840026DA45 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = issueManager/grafika/login.png; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -219,6 +238,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1020010B175F060E005DD92F /* grafika */ = {
+			isa = PBXGroup;
+			children = (
+				10BE364B175F0A840026DA45 /* login.png */,
+				1020010C175F0629005DD92F /* issue-list.png */,
+				1020010D175F0629005DD92F /* issue.png */,
+				1020010F175F0629005DD92F /* new-issue-name.png */,
+				10200110175F0629005DD92F /* new-issue-select-user.png */,
+				10200111175F0629005DD92F /* new-issue.png */,
+				10200112175F0629005DD92F /* repos.png */,
+				10200113175F0629005DD92F /* tapmates.png */,
+			);
+			name = grafika;
+			sourceTree = "<group>";
+		};
 		102ACED01733BA65000250F9 /* selectMilestone */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +449,8 @@
 				10F32E9A172525E7005E80F8 /* BCRepository.m */,
 				10F32E9B172525E7005E80F8 /* BCUser.h */,
 				10F32E9C172525E7005E80F8 /* BCUser.m */,
+				10200105175E18E9005DD92F /* BCOrg.h */,
+				10200106175E18E9005DD92F /* BCOrg.m */,
 			);
 			name = models;
 			path = ..;
@@ -459,6 +495,7 @@
 		10E3FC471721A66B00607EBA = {
 			isa = PBXGroup;
 			children = (
+				1020010B175F060E005DD92F /* grafika */,
 				10E300481721A6AA00607EBA /* 3rd */,
 				10E3FC591721A66B00607EBA /* issueManager */,
 				10E3FC521721A66B00607EBA /* Frameworks */,
@@ -714,6 +751,14 @@
 				10E3FC681721A66B00607EBA /* Default@2x.png in Resources */,
 				10E3FC6A1721A66B00607EBA /* Default-568h@2x.png in Resources */,
 				102B8B40172A6646003BA22F /* gravatar-user-420.png in Resources */,
+				10200114175F0629005DD92F /* issue-list.png in Resources */,
+				10200115175F0629005DD92F /* issue.png in Resources */,
+				10200117175F0629005DD92F /* new-issue-name.png in Resources */,
+				10200118175F0629005DD92F /* new-issue-select-user.png in Resources */,
+				10200119175F0629005DD92F /* new-issue.png in Resources */,
+				1020011A175F0629005DD92F /* repos.png in Resources */,
+				1020011B175F0629005DD92F /* tapmates.png in Resources */,
+				10BE364C175F0A840026DA45 /* login.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,6 +813,7 @@
 				10EF01E817379FD600346E9F /* BCSelectLabelsCell.m in Sources */,
 				104105D81757709C003B0B9F /* BCLoginViewController.m in Sources */,
 				104105DF175770DE003B0B9F /* BCLoginView.m in Sources */,
+				10200107175E18E9005DD92F /* BCOrg.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,28 +9,31 @@
 #import "BCRepositoryCell.h"
 #import "BCRepository.h"
 
-#define BCRepositoryCellIdentifier @"BCRepositoryCellIdentifier"
+#define createOrgOrMyRepositoryCellIdnetifier @"createOrgOrMyRepositoryCellIdnetifier"
+#define createRepositoryCell @"createRepositoryCell"
+
 
 @implementation BCRepositoryCell
 
-- (id)initWithRepository:(BCRepository *)repository
-{
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BCRepositoryCellIdentifier];
-    if (self) {
-        [self.textLabel setText:repository.name];
-        [self.textLabel setTextAlignment:NSTextAlignmentCenter];
-        
-        
-        // Initialization code
++ (BCRepositoryCell *)createOrgOrMyRepositoryCellWithTableView:(UITableView *)tableView {
+    BCRepositoryCell *cell = [tableView dequeueReusableCellWithIdentifier:createOrgOrMyRepositoryCellIdnetifier];
+    if (! cell ) {
+        cell = [[BCRepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createOrgOrMyRepositoryCellIdnetifier];
+        cell.backgroundColor = [UIColor blackColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
     }
-    return self;
+    return cell;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
++ (BCRepositoryCell *)createRepositoryCellWithTableView:(UITableView *)tableView {
+    BCRepositoryCell *cell = [tableView dequeueReusableCellWithIdentifier:createRepositoryCell];
+    if (! cell ) {
+        cell = [[BCRepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createRepositoryCell];
+        cell.backgroundColor = [UIColor blackColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+    }
+    return cell;
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "BCAppDelegate.h"
+#import "BCUser.h"
 
 int main(int argc, char *argv[])
 {

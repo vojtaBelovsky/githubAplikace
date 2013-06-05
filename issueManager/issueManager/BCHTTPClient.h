@@ -9,6 +9,8 @@
 #import "AFJSONRequestOperation.h"
 #import "AFHTTPClient.h"
 
+@class BCUser;
+
 @interface BCHTTPClient : AFHTTPClient
 
 + (void)getPath:(NSString *)path
@@ -27,5 +29,6 @@
          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 + (BCHTTPClient *)sharedInstance;
+//+ (BCHTTPClient *)sharedInstanceWithUserName:(NSString *)userName andPassword:(NSString *)password;
 
 @end

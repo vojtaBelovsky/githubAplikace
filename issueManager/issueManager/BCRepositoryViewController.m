@@ -21,17 +21,19 @@
 #pragma mark -
 #pragma mark LifeCycles
 
-- (id)init {
+- (id)initWithUser:(BCUser *)loggedUser {
     self = [super init];
     if ( self ) {
         [self setTitle:NSLocalizedString(@"Repositories", @"")];
+        _loggedUser = loggedUser;
     }
-    
     return self;
 }
 
 - (void)loadView {
     [super loadView];
+    self.navigationController.navigationBarHidden = NO;
+    
     _repoView = [[BCRepositoryView alloc] init];
     self.view = _repoView;
     [self createModel];
@@ -48,7 +50,8 @@
 #pragma mark Private
 
 -(void)createModel{
-    [BCRepository getAllRepositoriesWithSuccess:^(NSArray *repositories) {
+    NSMutableArray *dataSource = [[NSMutableArray alloc] init];
+    [BCRepository getAllRepositoriesFromUser:_loggedUser WithSuccess:^(NSArray *repositories) {
         _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:repositories];
         [_repoView.tableView setDataSource:_dataSource];
         [_repoView.tableView reloadData];

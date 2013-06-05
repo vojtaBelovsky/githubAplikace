@@ -9,6 +9,7 @@
 #import "BCAppDelegate.h"
 #import "BCRepositoryViewController.h"
 #import "BCLoginViewController.h"
+#import "BCUser.h"
 
 @implementation BCAppDelegate
 
