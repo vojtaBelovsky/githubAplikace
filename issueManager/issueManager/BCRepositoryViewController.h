@@ -16,6 +16,4 @@
     BCRepositoryDataSource *_dataSource;
 }
 
-@property BCUser *loggedUser;
-
 @end

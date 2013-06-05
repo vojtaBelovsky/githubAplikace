@@ -241,6 +241,7 @@
 		1020010B175F060E005DD92F /* grafika */ = {
 			isa = PBXGroup;
 			children = (
+				1095E9CC175F69C2009CCEDB /* narezana */,
 				10BE364B175F0A840026DA45 /* login.png */,
 				1020010C175F0629005DD92F /* issue-list.png */,
 				1020010D175F0629005DD92F /* issue.png */,
@@ -425,6 +426,13 @@
 				104105DE175770DE003B0B9F /* BCLoginView.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		1095E9CC175F69C2009CCEDB /* narezana */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = narezana;
 			sourceTree = "<group>";
 		};
 		10E300481721A6AA00607EBA /* 3rd */ = {

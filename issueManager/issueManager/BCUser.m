@@ -8,6 +8,7 @@
 
 #import "BCUser.h"
 #import "BCHTTPClient.h"
+#import "UIAlertView+errorAlert.h"
 
 @implementation BCUser
 
@@ -26,6 +27,25 @@
 
 + (NSValueTransformer *)htmlUrlJSONTransformer {
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+}
+
++ (BCUser *)sharedInstanceChangeableWithInstance:(BCUser *)changeUser{
+    static BCUser *instance = nil;
+    if(changeUser == nil){
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [[BCHTTPClient sharedInstance] getPath:@"user" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *userInDict = responseObject;
+                instance = [MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:userInDict error:nil];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [UIAlertView showWithError:error];
+            }];
+        });
+    }else{
+        instance = changeUser;
+    }
+
+    return instance;
 }
 
 @end

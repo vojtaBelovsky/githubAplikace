@@ -7,6 +7,7 @@
 //
 
 #import <Mantle/Mantle.h>
+@class BCUser;
 
 @interface BCOrg : MTLModel
 
@@ -14,5 +15,6 @@
 @property (nonatomic, copy, readonly) NSNumber *orgId;
 @property (nonatomic, copy, readonly) NSURL *avatarUrl;
 @property (nonatomic, copy, readonly) NSURL *htmlUrl;
++ (void)getAllOrgsFromUser:(BCUser *)user WithSuccess:(void (^)(NSArray *allOrgs))success failure:(void(^) (NSError *error)) failure;
 
 @end

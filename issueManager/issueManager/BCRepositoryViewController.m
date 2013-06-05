@@ -11,6 +11,9 @@
 #import "BCRepository.h"
 #import "BCRepositoryDataSource.h"
 #import "BCIssueViewController.h"
+#import "BCUser.h"
+#import "BCOrg.h"
+#import "UIAlertView+errorAlert.h"
 
 @interface BCRepositoryViewController ()
 - (void)createModel;
@@ -21,11 +24,10 @@
 #pragma mark -
 #pragma mark LifeCycles
 
-- (id)initWithUser:(BCUser *)loggedUser {
+- (id)init{
     self = [super init];
     if ( self ) {
         [self setTitle:NSLocalizedString(@"Repositories", @"")];
-        _loggedUser = loggedUser;
     }
     return self;
 }
@@ -50,14 +52,29 @@
 #pragma mark Private
 
 -(void)createModel{
+    BCUser *chosenUser = [BCUser sharedInstanceChangeableWithInstance:nil];
     NSMutableArray *dataSource = [[NSMutableArray alloc] init];
-    [BCRepository getAllRepositoriesFromUser:_loggedUser WithSuccess:^(NSArray *repositories) {
-        _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:repositories];
-        [_repoView.tableView setDataSource:_dataSource];
-        [_repoView.tableView reloadData];
+    [BCRepository getAllRepositoriesFromUser:chosenUser WithSuccess:^(NSArray *repositories) {
+        [dataSource addObject:repositories];
     } failure:^(NSError *error) {
-        NSLog(@"fail");
+        [UIAlertView showWithError:error];
     }];
+    
+    __block NSArray *userOrgs = nil;
+    [BCOrg getAllOrgsFromUser:chosenUser WithSuccess:^(NSArray *allOrgs) {
+        userOrgs = allOrgs;
+    } failure:^(NSError *error) {
+        [UIAlertView showWithError:error];
+    }];
+    for(BCOrg *object in userOrgs){
+        [BCRepository getAllRepositoriesFromOrg:<#(BCOrg *)#> WithSuccess:<#^(NSArray *allRepositories)success#> failure:<#^(NSError *error)failure#>]
+    }
+    [BCRepository getAllRepositoriesFromOrg:<#(BCOrg *)#> WithSuccess:<#^(NSArray *allRepositories)success#> failure:<#^(NSError *error)failure#>
+    
+    //to bude na konci
+    _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource];
+    [_repoView.tableView setDataSource:_dataSource];
+    [_repoView.tableView reloadData];
 }
 
 

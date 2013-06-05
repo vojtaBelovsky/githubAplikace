@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Mantle/Mantle.h>
+@class BCUser;
 
 @interface BCUser : MTLModel <MTLJSONSerializing>
 
@@ -15,5 +16,7 @@
 @property (nonatomic, copy, readonly) NSNumber *userId;
 @property (nonatomic, copy, readonly) NSURL *avatarUrl;
 @property (nonatomic, copy, readonly) NSURL *htmlUrl;
+
++ (BCUser *)sharedInstanceChangeableWithInstance:(BCUser *)changeUser;
 
 @end
