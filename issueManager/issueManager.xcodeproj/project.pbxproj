@@ -35,6 +35,39 @@
 		102B8B69172FF795003BA22F /* UIAlertView+errorAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */; };
 		104105D81757709C003B0B9F /* BCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105D71757709C003B0B9F /* BCLoginViewController.m */; };
 		104105DF175770DE003B0B9F /* BCLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105DE175770DE003B0B9F /* BCLoginView.m */; };
+		1095E9F1175F6A62009CCEDB /* appBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D0175F6A62009CCEDB /* appBackground@2x.png */; };
+		1095E9F2175F6A62009CCEDB /* issueCommentBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D1175F6A62009CCEDB /* issueCommentBackground@2x.png */; };
+		1095E9F3175F6A62009CCEDB /* issueCommentButtonOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D2175F6A62009CCEDB /* issueCommentButtonOff@2x.png */; };
+		1095E9F4175F6A62009CCEDB /* issueCommentButtonOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D3175F6A62009CCEDB /* issueCommentButtonOn@2x.png */; };
+		1095E9F5175F6A62009CCEDB /* issueNavbarCheckOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D4175F6A62009CCEDB /* issueNavbarCheckOff@2x.png */; };
+		1095E9F6175F6A62009CCEDB /* issueNavbarCheckOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D5175F6A62009CCEDB /* issueNavbarCheckOn@2x.png */; };
+		1095E9F7175F6A62009CCEDB /* issueNavbarXOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D6175F6A62009CCEDB /* issueNavbarXOff@2x.png */; };
+		1095E9F8175F6A62009CCEDB /* issueNavbarXOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D7175F6A62009CCEDB /* issueNavbarXOn@2x.png */; };
+		1095E9F9175F6A62009CCEDB /* loginAccountIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D8175F6A62009CCEDB /* loginAccountIcon@2x.png */; };
+		1095E9FA175F6A62009CCEDB /* loginButtonOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D9175F6A62009CCEDB /* loginButtonOff@2x.png */; };
+		1095E9FB175F6A62009CCEDB /* loginButtonOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9DA175F6A62009CCEDB /* loginButtonOn@2x.png */; };
+		1095E9FC175F6A62009CCEDB /* loginLockerIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9DB175F6A62009CCEDB /* loginLockerIcon@2x.png */; };
+		1095E9FD175F6A62009CCEDB /* loginTextFieldBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9DC175F6A62009CCEDB /* loginTextFieldBottom@2x.png */; };
+		1095E9FE175F6A62009CCEDB /* loginTextFieldTop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9DD175F6A62009CCEDB /* loginTextFieldTop@2x.png */; };
+		1095E9FF175F6A62009CCEDB /* newIssueCheckOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9DE175F6A62009CCEDB /* newIssueCheckOff@2x.png */; };
+		1095EA00175F6A62009CCEDB /* newIssueCheckOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9DF175F6A62009CCEDB /* newIssueCheckOn@2x.png */; };
+		1095EA01175F6A62009CCEDB /* newIssuePlusOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E0175F6A62009CCEDB /* newIssuePlusOff@2x.png */; };
+		1095EA02175F6A62009CCEDB /* newIssuePlusOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E1175F6A62009CCEDB /* newIssuePlusOn@2x.png */; };
+		1095EA03175F6A62009CCEDB /* newIssueSelectedObject@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E2175F6A62009CCEDB /* newIssueSelectedObject@2x.png */; };
+		1095EA04175F6A62009CCEDB /* newIssueSeparator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E3175F6A62009CCEDB /* newIssueSeparator@2x.png */; };
+		1095EA05175F6A62009CCEDB /* profileHashBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E4175F6A62009CCEDB /* profileHashBorder@2x.png */; };
+		1095EA06175F6A62009CCEDB /* profileIssueBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E5175F6A62009CCEDB /* profileIssueBackground@2x.png */; };
+		1095EA07175F6A62009CCEDB /* profileNavbarPlusOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E6175F6A62009CCEDB /* profileNavbarPlusOff@2x.png */; };
+		1095EA08175F6A62009CCEDB /* profileNavbarPlusOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E7175F6A62009CCEDB /* profileNavbarPlusOn@2x.png */; };
+		1095EA09175F6A62009CCEDB /* profileNavbarPplOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E8175F6A62009CCEDB /* profileNavbarPplOff@2x.png */; };
+		1095EA0A175F6A62009CCEDB /* profileNavbarPplOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9E9175F6A62009CCEDB /* profileNavbarPplOn@2x.png */; };
+		1095EA0B175F6A62009CCEDB /* selectMemberArrowOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EA175F6A62009CCEDB /* selectMemberArrowOff@2x.png */; };
+		1095EA0C175F6A62009CCEDB /* selectMemberArrowOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EB175F6A62009CCEDB /* selectMemberArrowOn@2x.png */; };
+		1095EA0D175F6A62009CCEDB /* selectMemberBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EC175F6A62009CCEDB /* selectMemberBackground@2x.png */; };
+		1095EA0E175F6A62009CCEDB /* selectMemberSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9ED175F6A62009CCEDB /* selectMemberSelected@2x.png */; };
+		1095EA0F175F6A62009CCEDB /* selectMemberSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EE175F6A62009CCEDB /* selectMemberSettings@2x.png */; };
+		1095EA10175F6A62009CCEDB /* selectMemberXOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */; };
+		1095EA11175F6A62009CCEDB /* selectMemberXOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */; };
 		10BE364C175F0A840026DA45 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE364B175F0A840026DA45 /* login.png */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
@@ -159,6 +192,39 @@
 		104105D71757709C003B0B9F /* BCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginViewController.m; sourceTree = "<group>"; };
 		104105DD175770DE003B0B9F /* BCLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLoginView.h; sourceTree = "<group>"; };
 		104105DE175770DE003B0B9F /* BCLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginView.m; sourceTree = "<group>"; };
+		1095E9D0175F6A62009CCEDB /* appBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appBackground@2x.png"; path = "issueManager/grafika/github cutted/appBackground@2x.png"; sourceTree = "<group>"; };
+		1095E9D1175F6A62009CCEDB /* issueCommentBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueCommentBackground@2x.png"; path = "issueManager/grafika/github cutted/issueCommentBackground@2x.png"; sourceTree = "<group>"; };
+		1095E9D2175F6A62009CCEDB /* issueCommentButtonOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueCommentButtonOff@2x.png"; path = "issueManager/grafika/github cutted/issueCommentButtonOff@2x.png"; sourceTree = "<group>"; };
+		1095E9D3175F6A62009CCEDB /* issueCommentButtonOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueCommentButtonOn@2x.png"; path = "issueManager/grafika/github cutted/issueCommentButtonOn@2x.png"; sourceTree = "<group>"; };
+		1095E9D4175F6A62009CCEDB /* issueNavbarCheckOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueNavbarCheckOff@2x.png"; path = "issueManager/grafika/github cutted/issueNavbarCheckOff@2x.png"; sourceTree = "<group>"; };
+		1095E9D5175F6A62009CCEDB /* issueNavbarCheckOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueNavbarCheckOn@2x.png"; path = "issueManager/grafika/github cutted/issueNavbarCheckOn@2x.png"; sourceTree = "<group>"; };
+		1095E9D6175F6A62009CCEDB /* issueNavbarXOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueNavbarXOff@2x.png"; path = "issueManager/grafika/github cutted/issueNavbarXOff@2x.png"; sourceTree = "<group>"; };
+		1095E9D7175F6A62009CCEDB /* issueNavbarXOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueNavbarXOn@2x.png"; path = "issueManager/grafika/github cutted/issueNavbarXOn@2x.png"; sourceTree = "<group>"; };
+		1095E9D8175F6A62009CCEDB /* loginAccountIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginAccountIcon@2x.png"; path = "issueManager/grafika/github cutted/loginAccountIcon@2x.png"; sourceTree = "<group>"; };
+		1095E9D9175F6A62009CCEDB /* loginButtonOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginButtonOff@2x.png"; path = "issueManager/grafika/github cutted/loginButtonOff@2x.png"; sourceTree = "<group>"; };
+		1095E9DA175F6A62009CCEDB /* loginButtonOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginButtonOn@2x.png"; path = "issueManager/grafika/github cutted/loginButtonOn@2x.png"; sourceTree = "<group>"; };
+		1095E9DB175F6A62009CCEDB /* loginLockerIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginLockerIcon@2x.png"; path = "issueManager/grafika/github cutted/loginLockerIcon@2x.png"; sourceTree = "<group>"; };
+		1095E9DC175F6A62009CCEDB /* loginTextFieldBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginTextFieldBottom@2x.png"; path = "issueManager/grafika/github cutted/loginTextFieldBottom@2x.png"; sourceTree = "<group>"; };
+		1095E9DD175F6A62009CCEDB /* loginTextFieldTop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginTextFieldTop@2x.png"; path = "issueManager/grafika/github cutted/loginTextFieldTop@2x.png"; sourceTree = "<group>"; };
+		1095E9DE175F6A62009CCEDB /* newIssueCheckOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newIssueCheckOff@2x.png"; path = "issueManager/grafika/github cutted/newIssueCheckOff@2x.png"; sourceTree = "<group>"; };
+		1095E9DF175F6A62009CCEDB /* newIssueCheckOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newIssueCheckOn@2x.png"; path = "issueManager/grafika/github cutted/newIssueCheckOn@2x.png"; sourceTree = "<group>"; };
+		1095E9E0175F6A62009CCEDB /* newIssuePlusOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newIssuePlusOff@2x.png"; path = "issueManager/grafika/github cutted/newIssuePlusOff@2x.png"; sourceTree = "<group>"; };
+		1095E9E1175F6A62009CCEDB /* newIssuePlusOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newIssuePlusOn@2x.png"; path = "issueManager/grafika/github cutted/newIssuePlusOn@2x.png"; sourceTree = "<group>"; };
+		1095E9E2175F6A62009CCEDB /* newIssueSelectedObject@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newIssueSelectedObject@2x.png"; path = "issueManager/grafika/github cutted/newIssueSelectedObject@2x.png"; sourceTree = "<group>"; };
+		1095E9E3175F6A62009CCEDB /* newIssueSeparator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newIssueSeparator@2x.png"; path = "issueManager/grafika/github cutted/newIssueSeparator@2x.png"; sourceTree = "<group>"; };
+		1095E9E4175F6A62009CCEDB /* profileHashBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "profileHashBorder@2x.png"; path = "issueManager/grafika/github cutted/profileHashBorder@2x.png"; sourceTree = "<group>"; };
+		1095E9E5175F6A62009CCEDB /* profileIssueBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "profileIssueBackground@2x.png"; path = "issueManager/grafika/github cutted/profileIssueBackground@2x.png"; sourceTree = "<group>"; };
+		1095E9E6175F6A62009CCEDB /* profileNavbarPlusOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "profileNavbarPlusOff@2x.png"; path = "issueManager/grafika/github cutted/profileNavbarPlusOff@2x.png"; sourceTree = "<group>"; };
+		1095E9E7175F6A62009CCEDB /* profileNavbarPlusOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "profileNavbarPlusOn@2x.png"; path = "issueManager/grafika/github cutted/profileNavbarPlusOn@2x.png"; sourceTree = "<group>"; };
+		1095E9E8175F6A62009CCEDB /* profileNavbarPplOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "profileNavbarPplOff@2x.png"; path = "issueManager/grafika/github cutted/profileNavbarPplOff@2x.png"; sourceTree = "<group>"; };
+		1095E9E9175F6A62009CCEDB /* profileNavbarPplOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "profileNavbarPplOn@2x.png"; path = "issueManager/grafika/github cutted/profileNavbarPplOn@2x.png"; sourceTree = "<group>"; };
+		1095E9EA175F6A62009CCEDB /* selectMemberArrowOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberArrowOff@2x.png"; path = "issueManager/grafika/github cutted/selectMemberArrowOff@2x.png"; sourceTree = "<group>"; };
+		1095E9EB175F6A62009CCEDB /* selectMemberArrowOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberArrowOn@2x.png"; path = "issueManager/grafika/github cutted/selectMemberArrowOn@2x.png"; sourceTree = "<group>"; };
+		1095E9EC175F6A62009CCEDB /* selectMemberBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberBackground@2x.png"; path = "issueManager/grafika/github cutted/selectMemberBackground@2x.png"; sourceTree = "<group>"; };
+		1095E9ED175F6A62009CCEDB /* selectMemberSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberSelected@2x.png"; path = "issueManager/grafika/github cutted/selectMemberSelected@2x.png"; sourceTree = "<group>"; };
+		1095E9EE175F6A62009CCEDB /* selectMemberSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberSettings@2x.png"; path = "issueManager/grafika/github cutted/selectMemberSettings@2x.png"; sourceTree = "<group>"; };
+		1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberXOff@2x.png"; path = "issueManager/grafika/github cutted/selectMemberXOff@2x.png"; sourceTree = "<group>"; };
+		1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberXOn@2x.png"; path = "issueManager/grafika/github cutted/selectMemberXOn@2x.png"; sourceTree = "<group>"; };
 		10BE364B175F0A840026DA45 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = issueManager/grafika/login.png; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
@@ -241,7 +307,7 @@
 		1020010B175F060E005DD92F /* grafika */ = {
 			isa = PBXGroup;
 			children = (
-				1095E9CC175F69C2009CCEDB /* narezana */,
+				1095E9CC175F69C2009CCEDB /* github cutted */,
 				10BE364B175F0A840026DA45 /* login.png */,
 				1020010C175F0629005DD92F /* issue-list.png */,
 				1020010D175F0629005DD92F /* issue.png */,
@@ -428,11 +494,44 @@
 			name = view;
 			sourceTree = "<group>";
 		};
-		1095E9CC175F69C2009CCEDB /* narezana */ = {
+		1095E9CC175F69C2009CCEDB /* github cutted */ = {
 			isa = PBXGroup;
 			children = (
+				1095E9D0175F6A62009CCEDB /* appBackground@2x.png */,
+				1095E9D1175F6A62009CCEDB /* issueCommentBackground@2x.png */,
+				1095E9D2175F6A62009CCEDB /* issueCommentButtonOff@2x.png */,
+				1095E9D3175F6A62009CCEDB /* issueCommentButtonOn@2x.png */,
+				1095E9D4175F6A62009CCEDB /* issueNavbarCheckOff@2x.png */,
+				1095E9D5175F6A62009CCEDB /* issueNavbarCheckOn@2x.png */,
+				1095E9D6175F6A62009CCEDB /* issueNavbarXOff@2x.png */,
+				1095E9D7175F6A62009CCEDB /* issueNavbarXOn@2x.png */,
+				1095E9D8175F6A62009CCEDB /* loginAccountIcon@2x.png */,
+				1095E9D9175F6A62009CCEDB /* loginButtonOff@2x.png */,
+				1095E9DA175F6A62009CCEDB /* loginButtonOn@2x.png */,
+				1095E9DB175F6A62009CCEDB /* loginLockerIcon@2x.png */,
+				1095E9DC175F6A62009CCEDB /* loginTextFieldBottom@2x.png */,
+				1095E9DD175F6A62009CCEDB /* loginTextFieldTop@2x.png */,
+				1095E9DE175F6A62009CCEDB /* newIssueCheckOff@2x.png */,
+				1095E9DF175F6A62009CCEDB /* newIssueCheckOn@2x.png */,
+				1095E9E0175F6A62009CCEDB /* newIssuePlusOff@2x.png */,
+				1095E9E1175F6A62009CCEDB /* newIssuePlusOn@2x.png */,
+				1095E9E2175F6A62009CCEDB /* newIssueSelectedObject@2x.png */,
+				1095E9E3175F6A62009CCEDB /* newIssueSeparator@2x.png */,
+				1095E9E4175F6A62009CCEDB /* profileHashBorder@2x.png */,
+				1095E9E5175F6A62009CCEDB /* profileIssueBackground@2x.png */,
+				1095E9E6175F6A62009CCEDB /* profileNavbarPlusOff@2x.png */,
+				1095E9E7175F6A62009CCEDB /* profileNavbarPlusOn@2x.png */,
+				1095E9E8175F6A62009CCEDB /* profileNavbarPplOff@2x.png */,
+				1095E9E9175F6A62009CCEDB /* profileNavbarPplOn@2x.png */,
+				1095E9EA175F6A62009CCEDB /* selectMemberArrowOff@2x.png */,
+				1095E9EB175F6A62009CCEDB /* selectMemberArrowOn@2x.png */,
+				1095E9EC175F6A62009CCEDB /* selectMemberBackground@2x.png */,
+				1095E9ED175F6A62009CCEDB /* selectMemberSelected@2x.png */,
+				1095E9EE175F6A62009CCEDB /* selectMemberSettings@2x.png */,
+				1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */,
+				1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */,
 			);
-			name = narezana;
+			name = "github cutted";
 			sourceTree = "<group>";
 		};
 		10E300481721A6AA00607EBA /* 3rd */ = {
@@ -767,6 +866,39 @@
 				1020011A175F0629005DD92F /* repos.png in Resources */,
 				1020011B175F0629005DD92F /* tapmates.png in Resources */,
 				10BE364C175F0A840026DA45 /* login.png in Resources */,
+				1095E9F1175F6A62009CCEDB /* appBackground@2x.png in Resources */,
+				1095E9F2175F6A62009CCEDB /* issueCommentBackground@2x.png in Resources */,
+				1095E9F3175F6A62009CCEDB /* issueCommentButtonOff@2x.png in Resources */,
+				1095E9F4175F6A62009CCEDB /* issueCommentButtonOn@2x.png in Resources */,
+				1095E9F5175F6A62009CCEDB /* issueNavbarCheckOff@2x.png in Resources */,
+				1095E9F6175F6A62009CCEDB /* issueNavbarCheckOn@2x.png in Resources */,
+				1095E9F7175F6A62009CCEDB /* issueNavbarXOff@2x.png in Resources */,
+				1095E9F8175F6A62009CCEDB /* issueNavbarXOn@2x.png in Resources */,
+				1095E9F9175F6A62009CCEDB /* loginAccountIcon@2x.png in Resources */,
+				1095E9FA175F6A62009CCEDB /* loginButtonOff@2x.png in Resources */,
+				1095E9FB175F6A62009CCEDB /* loginButtonOn@2x.png in Resources */,
+				1095E9FC175F6A62009CCEDB /* loginLockerIcon@2x.png in Resources */,
+				1095E9FD175F6A62009CCEDB /* loginTextFieldBottom@2x.png in Resources */,
+				1095E9FE175F6A62009CCEDB /* loginTextFieldTop@2x.png in Resources */,
+				1095E9FF175F6A62009CCEDB /* newIssueCheckOff@2x.png in Resources */,
+				1095EA00175F6A62009CCEDB /* newIssueCheckOn@2x.png in Resources */,
+				1095EA01175F6A62009CCEDB /* newIssuePlusOff@2x.png in Resources */,
+				1095EA02175F6A62009CCEDB /* newIssuePlusOn@2x.png in Resources */,
+				1095EA03175F6A62009CCEDB /* newIssueSelectedObject@2x.png in Resources */,
+				1095EA04175F6A62009CCEDB /* newIssueSeparator@2x.png in Resources */,
+				1095EA05175F6A62009CCEDB /* profileHashBorder@2x.png in Resources */,
+				1095EA06175F6A62009CCEDB /* profileIssueBackground@2x.png in Resources */,
+				1095EA07175F6A62009CCEDB /* profileNavbarPlusOff@2x.png in Resources */,
+				1095EA08175F6A62009CCEDB /* profileNavbarPlusOn@2x.png in Resources */,
+				1095EA09175F6A62009CCEDB /* profileNavbarPplOff@2x.png in Resources */,
+				1095EA0A175F6A62009CCEDB /* profileNavbarPplOn@2x.png in Resources */,
+				1095EA0B175F6A62009CCEDB /* selectMemberArrowOff@2x.png in Resources */,
+				1095EA0C175F6A62009CCEDB /* selectMemberArrowOn@2x.png in Resources */,
+				1095EA0D175F6A62009CCEDB /* selectMemberBackground@2x.png in Resources */,
+				1095EA0E175F6A62009CCEDB /* selectMemberSelected@2x.png in Resources */,
+				1095EA0F175F6A62009CCEDB /* selectMemberSettings@2x.png in Resources */,
+				1095EA10175F6A62009CCEDB /* selectMemberXOff@2x.png in Resources */,
+				1095EA11175F6A62009CCEDB /* selectMemberXOn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
