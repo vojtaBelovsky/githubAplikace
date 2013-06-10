@@ -14,6 +14,12 @@
 @private
     BCRepositoryView *_repoView;
     BCRepositoryDataSource *_dataSource;
+    BCUser *_chosenUser;
 }
+
+- (id)initWithUser:(BCUser *)user;
+
+-(UITableViewCell*)getCellAtIndex:(NSIndexPath *)indexPath;
+-(BOOL)isSelectedCellAtIndex:(NSIndexPath *)indexPath;
 
 @end

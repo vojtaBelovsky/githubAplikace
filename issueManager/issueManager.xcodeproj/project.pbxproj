@@ -35,6 +35,10 @@
 		102B8B69172FF795003BA22F /* UIAlertView+errorAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */; };
 		104105D81757709C003B0B9F /* BCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105D71757709C003B0B9F /* BCLoginViewController.m */; };
 		104105DF175770DE003B0B9F /* BCLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105DE175770DE003B0B9F /* BCLoginView.m */; };
+		104D2C061761DF7600501C74 /* octocat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 104D2C051761DF7600501C74 /* octocat@2x.png */; };
+		104D2C0B176492AC00501C74 /* login_origo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 104D2C0A176492AB00501C74 /* login_origo@2x.png */; };
+		105460DA1761D6AB00F36716 /* login_origo.png in Resources */ = {isa = PBXBuildFile; fileRef = 105460D81761D6A700F36716 /* login_origo.png */; };
+		105460DB1761D6AB00F36716 /* login_zmensene.png in Resources */ = {isa = PBXBuildFile; fileRef = 105460D91761D6A900F36716 /* login_zmensene.png */; };
 		1095E9F1175F6A62009CCEDB /* appBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D0175F6A62009CCEDB /* appBackground@2x.png */; };
 		1095E9F2175F6A62009CCEDB /* issueCommentBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D1175F6A62009CCEDB /* issueCommentBackground@2x.png */; };
 		1095E9F3175F6A62009CCEDB /* issueCommentButtonOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D2175F6A62009CCEDB /* issueCommentButtonOff@2x.png */; };
@@ -69,6 +73,7 @@
 		1095EA10175F6A62009CCEDB /* selectMemberXOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */; };
 		1095EA11175F6A62009CCEDB /* selectMemberXOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */; };
 		10BE364C175F0A840026DA45 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE364B175F0A840026DA45 /* login.png */; };
+		10CD6B1B1765BC4500F64DC1 /* BCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CD6B1A1765BC4500F64DC1 /* BCTextField.m */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
 		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
@@ -192,6 +197,10 @@
 		104105D71757709C003B0B9F /* BCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginViewController.m; sourceTree = "<group>"; };
 		104105DD175770DE003B0B9F /* BCLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLoginView.h; sourceTree = "<group>"; };
 		104105DE175770DE003B0B9F /* BCLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginView.m; sourceTree = "<group>"; };
+		104D2C051761DF7600501C74 /* octocat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "octocat@2x.png"; path = "issueManager/grafika/octocat@2x.png"; sourceTree = "<group>"; };
+		104D2C0A176492AB00501C74 /* login_origo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login_origo@2x.png"; path = "issueManager/grafika/login_origo@2x.png"; sourceTree = "<group>"; };
+		105460D81761D6A700F36716 /* login_origo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_origo.png; path = issueManager/grafika/login_origo.png; sourceTree = "<group>"; };
+		105460D91761D6A900F36716 /* login_zmensene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_zmensene.png; path = issueManager/grafika/login_zmensene.png; sourceTree = "<group>"; };
 		1095E9D0175F6A62009CCEDB /* appBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appBackground@2x.png"; path = "issueManager/grafika/github cutted/appBackground@2x.png"; sourceTree = "<group>"; };
 		1095E9D1175F6A62009CCEDB /* issueCommentBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueCommentBackground@2x.png"; path = "issueManager/grafika/github cutted/issueCommentBackground@2x.png"; sourceTree = "<group>"; };
 		1095E9D2175F6A62009CCEDB /* issueCommentButtonOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueCommentButtonOff@2x.png"; path = "issueManager/grafika/github cutted/issueCommentButtonOff@2x.png"; sourceTree = "<group>"; };
@@ -226,6 +235,8 @@
 		1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberXOff@2x.png"; path = "issueManager/grafika/github cutted/selectMemberXOff@2x.png"; sourceTree = "<group>"; };
 		1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberXOn@2x.png"; path = "issueManager/grafika/github cutted/selectMemberXOn@2x.png"; sourceTree = "<group>"; };
 		10BE364B175F0A840026DA45 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = issueManager/grafika/login.png; sourceTree = "<group>"; };
+		10CD6B191765BC4500F64DC1 /* BCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCTextField.h; sourceTree = "<group>"; };
+		10CD6B1A1765BC4500F64DC1 /* BCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCTextField.m; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -307,7 +318,11 @@
 		1020010B175F060E005DD92F /* grafika */ = {
 			isa = PBXGroup;
 			children = (
+				104D2C0A176492AB00501C74 /* login_origo@2x.png */,
+				104D2C051761DF7600501C74 /* octocat@2x.png */,
 				1095E9CC175F69C2009CCEDB /* github cutted */,
+				105460D81761D6A700F36716 /* login_origo.png */,
+				105460D91761D6A900F36716 /* login_zmensene.png */,
 				10BE364B175F0A840026DA45 /* login.png */,
 				1020010C175F0629005DD92F /* issue-list.png */,
 				1020010D175F0629005DD92F /* issue.png */,
@@ -488,6 +503,7 @@
 		104105D9175770AF003B0B9F /* view */ = {
 			isa = PBXGroup;
 			children = (
+				10CD6B151765BC2F00F64DC1 /* TextField */,
 				104105DD175770DE003B0B9F /* BCLoginView.h */,
 				104105DE175770DE003B0B9F /* BCLoginView.m */,
 			);
@@ -532,6 +548,22 @@
 				1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */,
 			);
 			name = "github cutted";
+			sourceTree = "<group>";
+		};
+		10CD6B151765BC2F00F64DC1 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				10CD6B191765BC4500F64DC1 /* BCTextField.h */,
+				10CD6B1A1765BC4500F64DC1 /* BCTextField.m */,
+			);
+			name = TextField;
+			sourceTree = "<group>";
+		};
+		10CD6B1C1765CF4E00F64DC1 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Font;
 			sourceTree = "<group>";
 		};
 		10E300481721A6AA00607EBA /* 3rd */ = {
@@ -646,6 +678,7 @@
 		10E3FC5A1721A66B00607EBA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				10CD6B1C1765CF4E00F64DC1 /* Font */,
 				102B8B3F172A6646003BA22F /* gravatar-user-420.png */,
 				10E3FC5B1721A66B00607EBA /* issueManager-Info.plist */,
 				10E3FC5C1721A66B00607EBA /* InfoPlist.strings */,
@@ -899,6 +932,10 @@
 				1095EA0F175F6A62009CCEDB /* selectMemberSettings@2x.png in Resources */,
 				1095EA10175F6A62009CCEDB /* selectMemberXOff@2x.png in Resources */,
 				1095EA11175F6A62009CCEDB /* selectMemberXOn@2x.png in Resources */,
+				105460DA1761D6AB00F36716 /* login_origo.png in Resources */,
+				105460DB1761D6AB00F36716 /* login_zmensene.png in Resources */,
+				104D2C061761DF7600501C74 /* octocat@2x.png in Resources */,
+				104D2C0B176492AC00501C74 /* login_origo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,6 +991,7 @@
 				104105D81757709C003B0B9F /* BCLoginViewController.m in Sources */,
 				104105DF175770DE003B0B9F /* BCLoginView.m in Sources */,
 				10200107175E18E9005DD92F /* BCOrg.m in Sources */,
+				10CD6B1B1765BC4500F64DC1 /* BCTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

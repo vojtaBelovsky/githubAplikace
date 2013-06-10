@@ -24,10 +24,11 @@
 #pragma mark -
 #pragma mark LifeCycles
 
-- (id)init{
+- (id)initWithUser:(BCUser *)user {
     self = [super init];
     if ( self ) {
-        [self setTitle:NSLocalizedString(@"Repositories", @"")];
+      [self setTitle:NSLocalizedString(@"Repositories", @"")];
+      _chosenUser = user;
     }
     return self;
 }
@@ -35,6 +36,7 @@
 - (void)loadView {
     [super loadView];
     self.navigationController.navigationBarHidden = NO;
+  [_repoView.tableView setMultipleTouchEnabled:YES];
     
     _repoView = [[BCRepositoryView alloc] init];
     self.view = _repoView;
@@ -42,9 +44,33 @@
     [_repoView.tableView setDelegate:self];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    BCIssueViewController *issueViewController = [[BCIssueViewController alloc] initWithRepository:[_dataSource getRepositoryAtIndex:indexPath.row]];
-    [self.navigationController pushViewController:issueViewController animated:YES];
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+  if([indexPath section]%2 == 0){
+    [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:NO]];
+    NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]+1];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
+    for (int i = 0; i < rowsNumber; i++) {
+      [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:[indexPath section]+1]];
+    }
+    [_repoView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+  }else{
+    //tady bude co se stane po ODoznaceni na repositare
+
+  }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if([indexPath section]%2 == 0){
+    [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:YES]];
+    NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]+1];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
+    for (int i = 0; i < rowsNumber; i++) {
+      [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:[indexPath section]+1]];
+    }
+    [_repoView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+  }else{
+    //tady bude co se stane po oznaceni na repositare
+  }
 }
 
 
@@ -52,30 +78,41 @@
 #pragma mark Private
 
 -(void)createModel{
-    BCUser *chosenUser = [BCUser sharedInstanceChangeableWithInstance:nil];
-    NSMutableArray *dataSource = [[NSMutableArray alloc] init];
-    [BCRepository getAllRepositoriesFromUser:chosenUser WithSuccess:^(NSArray *repositories) {
-        [dataSource addObject:repositories];
-    } failure:^(NSError *error) {
-        [UIAlertView showWithError:error];
-    }];
-    
-    __block NSArray *userOrgs = nil;
-    [BCOrg getAllOrgsFromUser:chosenUser WithSuccess:^(NSArray *allOrgs) {
-        userOrgs = allOrgs;
-    } failure:^(NSError *error) {
-        [UIAlertView showWithError:error];
-    }];
-    for(BCOrg *object in userOrgs){
-        [BCRepository getAllRepositoriesFromOrg:<#(BCOrg *)#> WithSuccess:<#^(NSArray *allRepositories)success#> failure:<#^(NSError *error)failure#>]
+  __block NSMutableArray *dataSource = [[NSMutableArray alloc] init];
+  
+  [BCRepository getAllRepositoriesWithSuccess:^(NSArray *allRepositories) {
+    [dataSource addObject:[[NSArray alloc] initWithObjects:allRepositories[0], nil ]];
+    //POZOR, overit jestli nebouchne kdyz ma uzivatel 0 repozitaru!!
+    if ([allRepositories count] == 1) {
+      [dataSource addObject:[[NSArray alloc] init]];
+    }else{
+      NSMutableArray *repos = [[NSMutableArray alloc] initWithArray:allRepositories];
+      [repos removeObjectAtIndex:0];
+      [dataSource addObject:[[NSArray alloc] initWithArray:repos]];
     }
-    [BCRepository getAllRepositoriesFromOrg:<#(BCOrg *)#> WithSuccess:<#^(NSArray *allRepositories)success#> failure:<#^(NSError *error)failure#>
-    
-    //to bude na konci
-    _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource];
-    [_repoView.tableView setDataSource:_dataSource];
-    [_repoView.tableView reloadData];
+    [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
+      __block int i = 1;
+      // ------ prepsat na rekurzi ----- !!!
+      for(BCOrg *object in allOrgs){
+        [BCRepository getAllRepositoriesFromOrg:object WithSuccess:^(NSArray *allRepositories) {
+          [dataSource addObject:[[NSArray alloc] initWithObjects:object, nil]];
+          [dataSource addObject:allRepositories];
+          if([allOrgs count] == i){
+            _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
+            [_repoView.tableView setDataSource:_dataSource];
+            [_repoView.tableView reloadData];
+          }
+          i++;
+        } failure:^(NSError *error) {
+          [UIAlertView showWithError:error];
+        }];
+      }
+    } failure:^(NSError *error) {
+      [UIAlertView showWithError:error];
+    }];
+  } failure:^(NSError *error) {
+    [UIAlertView showWithError:error];
+  }];
 }
-
 
 @end

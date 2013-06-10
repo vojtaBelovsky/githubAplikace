@@ -16,8 +16,9 @@
 - (id)init {
     self = [super init];
     if ( self ) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
-        [self addSubview:_tableView];
+      _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+      [_tableView setAllowsMultipleSelection:YES];
+      [self addSubview:_tableView];
     }
     
     return self;

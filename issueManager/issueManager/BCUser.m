@@ -12,6 +12,18 @@
 
 @implementation BCUser
 
+- (id)initWithUser:(BCUser *)user
+{
+    self = [super init];
+    if (self) {
+        _userId = user.userId;
+        _userLogin = user.userLogin;
+        _avatarUrl = user.avatarUrl;
+        _htmlUrl = user.htmlUrl;
+    }
+    return self;
+}
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"userLogin": @"login",
@@ -29,14 +41,21 @@
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 
-+ (BCUser *)sharedInstanceChangeableWithInstance:(BCUser *)changeUser{
++ (BCUser *)sharedInstanceChangeableWithUser:(BCUser *)changeUser completion:(void(^)(BCUser *user))completion{
     static BCUser *instance = nil;
     if(changeUser == nil){
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             [[BCHTTPClient sharedInstance] getPath:@"user" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *userInDict = responseObject;
-                instance = [MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:userInDict error:nil];
+                BCUser *chosenUser = [MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:userInDict error:nil];
+                //instance = [[BCUser alloc] initWithUser:chosenUser];
+                instance = chosenUser;
+                
+                if ( completion ) {
+                    completion(chosenUser);
+                }
+                
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [UIAlertView showWithError:error];
             }];

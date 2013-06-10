@@ -18,9 +18,9 @@
 + (BCRepositoryCell *)createOrgOrMyRepositoryCellWithTableView:(UITableView *)tableView {
     BCRepositoryCell *cell = [tableView dequeueReusableCellWithIdentifier:createOrgOrMyRepositoryCellIdnetifier];
     if (! cell ) {
-        cell = [[BCRepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createOrgOrMyRepositoryCellIdnetifier];
-        cell.backgroundColor = [UIColor blackColor];
-        cell.textLabel.textColor = [UIColor whiteColor];
+      cell = [[BCRepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createOrgOrMyRepositoryCellIdnetifier];
+      cell.backgroundView.backgroundColor = [UIColor blackColor];
+      cell.textLabel.textColor = [UIColor blackColor];
     }
     return cell;
 }
@@ -28,10 +28,11 @@
 + (BCRepositoryCell *)createRepositoryCellWithTableView:(UITableView *)tableView {
     BCRepositoryCell *cell = [tableView dequeueReusableCellWithIdentifier:createRepositoryCell];
     if (! cell ) {
-        cell = [[BCRepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createRepositoryCell];
-        cell.backgroundColor = [UIColor blackColor];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+      cell = [[BCRepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createRepositoryCell];
+      cell.backgroundColor = [UIColor blackColor];
+      cell.textLabel.textColor = [UIColor grayColor];
+      [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+      [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     }
     return cell;
 }

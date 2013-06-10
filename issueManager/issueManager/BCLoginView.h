@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BCTextField;
 
-@interface BCLoginView : UIScrollView
+@interface BCLoginView : UIView
 
 @property UIImageView *background;
-@property UITextField *login;
-@property UITextField *password;
+@property UIImageView *octocat;
+@property BCTextField *login;
+@property BCTextField *password;
 @property UIButton *button;
+@property UILabel *forgotPasswordLabel;
 
 @end

@@ -9,12 +9,12 @@
 #import <Mantle/Mantle.h>
 @class BCUser;
 
-@interface BCOrg : MTLModel
+@interface BCOrg : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy, readonly) NSString *orgLogin;
 @property (nonatomic, copy, readonly) NSNumber *orgId;
 @property (nonatomic, copy, readonly) NSURL *avatarUrl;
-@property (nonatomic, copy, readonly) NSURL *htmlUrl;
-+ (void)getAllOrgsFromUser:(BCUser *)user WithSuccess:(void (^)(NSArray *allOrgs))success failure:(void(^) (NSError *error)) failure;
+
++ (void)getAllOrgsWithSuccess:(void (^)(NSArray *allOrgs))success failure:(void(^) (NSError *error)) failure;
 
 @end
