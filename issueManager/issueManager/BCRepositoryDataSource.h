@@ -18,7 +18,7 @@
 
 - (id)initWithRepositories:(NSArray *)repositories andNavigationController:(BCRepositoryViewController *)repoViewController;
 
--(BCRepository *)getRepositoryAtIndex:(NSUInteger)row;
+-(BCRepository *)getRepositoryAtIndex:(NSIndexPath *)indexPath;
 -(NSInteger)getNumberOfRowsToAddToSection:(NSUInteger)section;
 
 @property (strong) NSMutableArray *actualSelected;

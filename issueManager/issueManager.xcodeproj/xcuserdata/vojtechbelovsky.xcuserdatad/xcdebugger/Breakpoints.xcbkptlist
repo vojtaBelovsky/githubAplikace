@@ -8,24 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "issueManager/BCRepositoryViewController.m"
-         timestampString = "392731891.015023"
+         timestampString = "392737951.34742"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
-         landmarkName = "-createModel"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "issueManager/BCRepositoryViewController.m"
-         timestampString = "392731892.374305"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "117"
-         endingLineNumber = "117"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "-createModel"
          landmarkType = "5">
       </FileBreakpoint>

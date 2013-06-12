@@ -80,8 +80,8 @@
   return [_repositories[section] count];
 }
 
--(BCRepository *)getRepositoryAtIndex:(NSUInteger)row{
-  return [_repositories objectAtIndex:row];
+-(BCRepository *)getRepositoryAtIndex:(NSIndexPath *)indexPath{
+  return [[_repositories objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 }
 
 @end

@@ -27,7 +27,7 @@
 - (id)initWithUser:(BCUser *)user {
     self = [super init];
     if ( self ) {
-      [self setTitle:NSLocalizedString(@"Repositories", @"")];
+      [self setTitle:NSLocalizedString(@"Choose repositories", @"")];
       _chosenUser = user;
     }
     return self;
@@ -36,8 +36,9 @@
 - (void)loadView {
   [super loadView];
   self.navigationController.navigationBarHidden = NO;
-  
+  [self.navigationItem setHidesBackButton:YES];
   [_repoView.tableView setMultipleTouchEnabled:YES];
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"select" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonDidPress)];
   
   _repoView = [[BCRepositoryView alloc] init];
   self.view = _repoView;
@@ -55,6 +56,7 @@
     }
     [_repoView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
   }else{
+    [_chosenRepositories removeObject:[_dataSource getRepositoryAtIndex:indexPath]];
     //tady bude co se stane po ODoznaceni na repositare
 
   }
@@ -62,6 +64,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if([indexPath section]%2 == 0){
+    
+    
     [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:YES]];
     NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]+1];
     NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
@@ -70,8 +74,17 @@
     }
     [_repoView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
   }else{
+    [_chosenRepositories addObject:[_dataSource getRepositoryAtIndex:indexPath]];
     //tady bude co se stane po oznaceni na repositare
+    
   }
+}
+
+#pragma mark -
+#pragma mark buttons
+
+-(void)selectButtonDidPress{
+  [BCIssueViewController alloc] initWithRepository:<#(BCRepository *)#>
 }
 
 

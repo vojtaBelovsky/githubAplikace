@@ -14,7 +14,8 @@
 @private
     BCRepositoryView *_repoView;
     BCRepositoryDataSource *_dataSource;
-    BCUser *_chosenUser;
+  BCUser *_chosenUser;
+    NSMutableArray *_chosenRepositories;
 }
 
 - (id)initWithUser:(BCUser *)user;
