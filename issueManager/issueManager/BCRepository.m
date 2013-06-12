@@ -123,7 +123,7 @@
         }
         success ( repositories );
     }failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        [UIAlertView showWithError:error];
+      failure (error);
     }];
 }
 

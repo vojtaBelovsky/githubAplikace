@@ -44,28 +44,31 @@
 - (void)loadView {
   [super loadView];
     
-    //
-    // ------------ uncomment - will log in last user automaticly ------------
-    //
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    NSDictionary *credentials = [userDefaults objectForKey:@"credentials"];
-//    if(credentials != NULL){
-//      [BCUser sharedInstanceChangeableWithUser:nil completion:^(BCUser *user){
-//        BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] initWithUser:user];
-//        [self.navigationController pushViewController:repoViewCtrl animated:YES];
-//      }];
-//    }else{
-  _loginView = [[BCLoginView alloc] init];
-  [_loginView.loginTextField.textField setDelegate:self];
-  [_loginView.passwordTextField.textField setDelegate:self];
-  
-  self.view = _loginView;
-  self.navigationController.navigationBarHidden = YES;
-  
-  UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPasswordDidPress)];
-  [_loginView.forgotPasswordLabel addGestureRecognizer:tgr];
-  
-  [_loginView.loginButton addTarget:self action:@selector(loginButtonDidPress) forControlEvents:UIControlEventTouchDown];
+  //
+  // ------------ uncomment - will log in last user automaticly ------------
+  //
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  NSDictionary *credentials = [userDefaults objectForKey:@"credentials"];
+  if(credentials != NULL){
+    [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user) {
+      BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] initWithUser:user];
+      [self.navigationController pushViewController:repoViewCtrl animated:YES];
+    } failure:^(NSError *error) {
+      [UIAlertView showWithError:error];
+    }];
+  }else{
+    _loginView = [[BCLoginView alloc] init];
+    [_loginView.loginTextField.textField setDelegate:self];
+    [_loginView.passwordTextField.textField setDelegate:self];
+    
+    self.view = _loginView;
+    self.navigationController.navigationBarHidden = YES;
+    
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPasswordDidPress)];
+    [_loginView.forgotPasswordLabel addGestureRecognizer:tgr];
+    
+    [_loginView.loginButton addTarget:self action:@selector(loginButtonDidPress) forControlEvents:UIControlEventTouchDown];
+  }
 }
 
 #pragma mark -

@@ -34,14 +34,15 @@
 }
 
 - (void)loadView {
-    [super loadView];
-    self.navigationController.navigationBarHidden = NO;
+  [super loadView];
+  self.navigationController.navigationBarHidden = NO;
+  
   [_repoView.tableView setMultipleTouchEnabled:YES];
-    
-    _repoView = [[BCRepositoryView alloc] init];
-    self.view = _repoView;
-    [self createModel];
-    [_repoView.tableView setDelegate:self];
+  
+  _repoView = [[BCRepositoryView alloc] init];
+  self.view = _repoView;
+  [self createModel];
+  [_repoView.tableView setDelegate:self];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -80,16 +81,18 @@
 -(void)createModel{
   __block NSMutableArray *dataSource = [[NSMutableArray alloc] init];
   
-  BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user) {
-    [dataSource addObject:user];
-    [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
-      //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!
-      if ([allRepositories count] == 0) {
-        [dataSource addObject:[[NSArray alloc] init]];
-      }else{
-        [dataSource addObject:allRepositories];
-      }
-      [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
+  BCUser *loggedInUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+  [dataSource addObject:[[NSArray alloc] initWithObjects:loggedInUser, nil]];
+  
+  [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
+    //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!
+    if ([allRepositories count] == 0) {
+      [dataSource addObject:[[NSArray alloc] init]];
+    }else{
+      [dataSource addObject:allRepositories];
+    }
+    [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
+      if([allOrgs count] > 0){
         __block NSArray *allOrgsCopy = allOrgs;
         __block int i = 0;
         //// COPY!!!!!!!!!
@@ -103,7 +106,7 @@
           [dataSource addObject:[[NSArray alloc] initWithObjects:allOrgsCopy[i], nil]];
           [dataSource addObject:allRepositories];
           i++;
-          if([allOrgs count] == (i)){
+          if([allOrgsCopy count] == (i)){
             _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
             [_repoView.tableView setDataSource:_dataSource];
             [_repoView.tableView reloadData];
@@ -111,37 +114,19 @@
             [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
           }
         } copy];
-        
-        [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:<#^(NSArray *allRepositories)success#> failure:<#^(NSError *error)failure#>]
-        
-        
-        for (; i < [allOrgs count]; i++) {
-          BCOrg *object = [allOrgs objectAtIndex:i];
-          [BCRepository getAllRepositoriesFromOrg:object WithSuccess:^(NSArray *allRepositories) {
-            [dataSource addObject:[[NSArray alloc] initWithObjects:object, nil]];
-            [dataSource addObject:allRepositories];
-            if([allOrgs count] == (i+1)){
-              _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
-              [_repoView.tableView setDataSource:_dataSource];
-              [_repoView.tableView reloadData];
-            }else{
-              //goto <#label#>
-            }
-          } failure:^(NSError *error) {
-            [UIAlertView showWithError:error];
-          }];
-        }
-      } failure:^(NSError *error) {
-        [UIAlertView showWithError:error];
-      }];
+        [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
+      }else{//set data source in case of user don't have Orgs
+        _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
+        [_repoView.tableView setDataSource:_dataSource];
+        [_repoView.tableView reloadData];
+      }
     } failure:^(NSError *error) {
       [UIAlertView showWithError:error];
     }];
-
   } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
-  }
-  
-  }
+  }];
+
+}
 
 @end
