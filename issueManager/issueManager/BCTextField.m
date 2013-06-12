@@ -11,7 +11,7 @@
 #define ICON_PADDING        15.0f
 #define TEXT_FIELD_PADDING  25.0f
 
-#define TEXT_FIELD_FONT   [UIFont fontWithName:@"Proxima Nova Regular" size:28.0f]
+#define TEXT_FIELD_FONT           [UIFont fontWithName:@"ProximaNova-Regular" size:16]
 
 #define TEXT_FIELD_BACKGROUND [UIColor clearColor]
 

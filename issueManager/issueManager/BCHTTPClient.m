@@ -46,15 +46,27 @@
     [[self sharedInstance] getPath:path parameters:parameters success:success failure:failure];
 }
 
-+ (BCHTTPClient *)sharedInstance{//NSUserDefaults - puzit pro ukladani hesla a uziv. jmena
-    static BCHTTPClient *instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSDictionary *credentials = [userDefaults objectForKey:@"credentials"];
-        instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BCHTTPCLIENT_BASE_URL] UserName:[credentials valueForKey:@"login"] andPassword:[credentials valueForKey:@"password"]];
-    });
-    return instance;
++ (BCHTTPClient *)sharedInstance{
+  static BCHTTPClient *instance = nil;
+  static BOOL isLoggedIn = NO;//if sets to YES I stop checking if user is successfully logged in
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *credentials = [userDefaults objectForKey:@"credentials"];
+    instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BCHTTPCLIENT_BASE_URL] UserName:[credentials valueForKey:@"login"] andPassword:[credentials valueForKey:@"password"]];
+  });
+  
+  if(isLoggedIn == NO){
+    [instance getPath:@"user" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      if ( responseObject ) {
+        isLoggedIn = YES;
+      }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      onceToken++;
+    }];
+  }
+  
+  return instance;
 }
 
 @end

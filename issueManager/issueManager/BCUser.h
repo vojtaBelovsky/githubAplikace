@@ -17,6 +17,5 @@
 @property (nonatomic, copy, readonly) NSURL *avatarUrl;
 @property (nonatomic, copy, readonly) NSURL *htmlUrl;
 
-+ (BCUser *)sharedInstanceChangeableWithUser:(BCUser *)changeUser completion:(void(^)(BCUser *user))completion;
-
++ (BCUser *)sharedInstanceChangeableWithUser:(BCUser *)changeUser succes:(void(^)(BCUser *user))succes failure:(void(^)(NSError *error))failure;
 @end

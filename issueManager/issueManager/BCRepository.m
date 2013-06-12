@@ -82,18 +82,12 @@
     }];
 }
 
-+ (void)getAllRepositoriesWithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error))failure{
++ (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error))failure{
     [[BCHTTPClient sharedInstance] getPath:@"user/repos" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
-        
         NSArray *response = [NSArray arrayWithArray:responseObject];
-        NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:([response count]+1)];
-        int i = 1;
+        NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:[response count]];
         for (NSDictionary *object in response) {
             BCRepository *repo = [MTLJSONAdapter modelOfClass:[BCRepository class] fromJSONDictionary:object error:nil];
-            if(i == 1){//at begining of the array I add owner of repositories
-                [repositories addObject:repo.owner];
-                i++;
-            }
             [repositories addObject:repo];
         }
         success ( repositories );
@@ -123,7 +117,7 @@
     [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
         
         NSArray *response = [NSArray arrayWithArray:responseObject];
-        NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:([response count]+1)];
+        NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:[response count]];
         for (NSDictionary *object in response) {
             [repositories addObject:[MTLJSONAdapter modelOfClass:[BCRepository class] fromJSONDictionary:object error:nil]];
         }

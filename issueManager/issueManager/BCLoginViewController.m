@@ -12,9 +12,12 @@
 #import "BCRepositoryViewController.h"
 #import "BCUser.h"
 #import "BCTextField.h"
+#import "UIAlertView+errorAlert.h"
 
 #define VIEW_OFFSET         ( - 150.0f )
 #define ANIMATION_DURATION  0.2f
+
+#define FILLED_TEXT_FIELD_FONT_COLOR     [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
 
 @interface BCLoginViewController ()
 - (void)animateViewWithFrame:(CGRect)frame;
@@ -31,6 +34,7 @@
 - (id)init {
   self = [super init];
   if (self) {
+    
   }
   return self;
 }
@@ -52,8 +56,8 @@
 //      }];
 //    }else{
   _loginView = [[BCLoginView alloc] init];
-  [_loginView.login.textField setDelegate:self];
-  [_loginView.password.textField setDelegate:self];
+  [_loginView.loginTextField.textField setDelegate:self];
+  [_loginView.passwordTextField.textField setDelegate:self];
   
   self.view = _loginView;
   self.navigationController.navigationBarHidden = YES;
@@ -61,8 +65,7 @@
   UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPasswordDidPress)];
   [_loginView.forgotPasswordLabel addGestureRecognizer:tgr];
   
-  [_loginView.button addTarget:self action:@selector(loginButtonDidPress) forControlEvents:UIControlEventTouchDown];
-//    }
+  [_loginView.loginButton addTarget:self action:@selector(loginButtonDidPress) forControlEvents:UIControlEventTouchDown];
 }
 
 #pragma mark -
@@ -76,15 +79,16 @@
 }
 
 - (void)loginButtonDidPress {
-  [BCUser sharedInstanceChangeableWithUser:nil completion:^(BCUser *user){
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  NSDictionary *credentials = [[NSDictionary alloc] initWithObjectsAndKeys:_loginView.loginTextField.textField.text, @"login",_loginView.passwordTextField.textField.text, @"password", nil];
+  [userDefaults setObject:credentials forKey:@"credentials"];
+  [userDefaults synchronize];
+  
+  [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user){
     BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] initWithUser:user];
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *credentials = [[NSDictionary alloc] initWithObjectsAndKeys:_loginView.login.textField.text, @"login",_loginView.password.textField.text, @"password", nil];
-    [userDefaults setObject:credentials forKey:@"credentials"];
-    [userDefaults synchronize];
-    
     [self.navigationController pushViewController:repoViewCtrl animated:YES];
+  } failure:^(NSError *error){
+    [UIAlertView showWithError:error];
   }];
 }
 
@@ -95,8 +99,8 @@
 }
 
 - (void)hideKeyboard {
-  [_loginView.login.textField resignFirstResponder];
-  [_loginView.password.textField resignFirstResponder];
+  [_loginView.loginTextField.textField resignFirstResponder];
+  [_loginView.passwordTextField.textField resignFirstResponder];
   
   CGRect frame = self.view.frame;
   frame.origin.y = 0.0f;
@@ -109,14 +113,33 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
   [self hideKeyboard];
-  
 }
 
 #pragma mark
-#pragma mark textFieldHandling
+#pragma mark textFieldDelegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+  if ([textField isEqual:_loginView.loginTextField.textField]) {
+    [_loginView.passwordTextField.textField becomeFirstResponder];
+  }
+  if ([textField isEqual:_loginView.passwordTextField.textField]) {
+    [self loginButtonDidPress];
+  }
+  return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {//changing text colours and setting offset
+  
+  if ([textField isEqual:_loginView.loginTextField.textField]){
+    _loginView.loginTextField.textField.textColor = FILLED_TEXT_FIELD_FONT_COLOR;
+  }
+  
+  if ([textField isEqual:_loginView.passwordTextField.textField]){
+    _loginView.passwordTextField.textField.textColor = FILLED_TEXT_FIELD_FONT_COLOR;
+  }
+  
   CGRect frame = self.view.frame;
+  
   if ( CGRectGetMinY( frame ) == VIEW_OFFSET ) {
     return;
   }

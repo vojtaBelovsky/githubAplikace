@@ -11,11 +11,10 @@
 
 @interface BCLoginView : UIView
 
-@property UIImageView *background;
-@property UIImageView *octocat;
-@property BCTextField *login;
-@property BCTextField *password;
-@property UIButton *button;
+@property UIImageView *backgroundImageView;
+@property BCTextField *loginTextField;
+@property BCTextField *passwordTextField;
+@property UIButton *loginButton;
 @property UILabel *forgotPasswordLabel;
 
 @end

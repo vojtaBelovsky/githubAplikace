@@ -41,23 +41,20 @@
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 
-+ (BCUser *)sharedInstanceChangeableWithUser:(BCUser *)changeUser completion:(void(^)(BCUser *user))completion{
++ (BCUser *)sharedInstanceChangeableWithUser:(BCUser *)changeUser succes:(void(^)(BCUser *user))succes failure:(void(^)(NSError *error))failure{
     static BCUser *instance = nil;
     if(changeUser == nil){
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             [[BCHTTPClient sharedInstance] getPath:@"user" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSDictionary *userInDict = responseObject;
-                BCUser *chosenUser = [MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:userInDict error:nil];
-                //instance = [[BCUser alloc] initWithUser:chosenUser];
-                instance = chosenUser;
-                
-                if ( completion ) {
-                    completion(chosenUser);
-                }
-                
+              NSDictionary *userInDict = responseObject;
+              BCUser *chosenUser = [MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:userInDict error:nil];
+              instance = chosenUser;
+              succes ( chosenUser );
+              
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                [UIAlertView showWithError:error];
+              onceToken++;
+              failure ( error );
             }];
         });
     }else{
