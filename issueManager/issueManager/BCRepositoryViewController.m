@@ -80,68 +80,68 @@
 -(void)createModel{
   __block NSMutableArray *dataSource = [[NSMutableArray alloc] init];
   
-  BCUser 
-  
-  [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
-    [dataSource addObject:[[NSArray alloc] initWithObjects:allRepositories[0], nil ]];
-    //POZOR, overit jestli nebouchne kdyz ma uzivatel 0 repozitaru!!
-    if ([allRepositories count] == 1) {
-      [dataSource addObject:[[NSArray alloc] init]];
-    }else{
-      NSMutableArray *repos = [[NSMutableArray alloc] initWithArray:allRepositories];
-      [repos removeObjectAtIndex:0];
-      [dataSource addObject:[[NSArray alloc] initWithArray:repos]];
-    }
-    [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
-      __block NSArray *allOrgsCopy = allOrgs;
-      __block int i = 0;
-      
-      // COPY!!!!!!!!!
-      __block void (^myFailureBlock) (NSError *error);
-      myFailureBlock = [^ (NSError *error) {
-        [UIAlertView showWithError:error];
-      } copy];
-      
-      //// COPY!!!!!!!!!!!
-      __block void (^mySuccessBlock) (NSArray *allRepositories);
-      mySuccessBlock = [^ (NSArray *allRepositories){
-        [dataSource addObject:[[NSArray alloc] initWithObjects:allOrgsCopy[i], nil]];
+  BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user) {
+    [dataSource addObject:user];
+    [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
+      //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!
+      if ([allRepositories count] == 0) {
+        [dataSource addObject:[[NSArray alloc] init]];
+      }else{
         [dataSource addObject:allRepositories];
-        i++;
-        if([allOrgs count] == (i)){
-          _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
-          [_repoView.tableView setDataSource:_dataSource];
-          [_repoView.tableView reloadData];
-        }else{
-          [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
-        }
-      } copy];
-      
-      [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:<#^(NSArray *allRepositories)success#> failure:<#^(NSError *error)failure#>]
-      
-      
-      for (; i < [allOrgs count]; i++) {
-        BCOrg *object = [allOrgs objectAtIndex:i];
-        [BCRepository getAllRepositoriesFromOrg:object WithSuccess:^(NSArray *allRepositories) {
-          [dataSource addObject:[[NSArray alloc] initWithObjects:object, nil]];
+      }
+      [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
+        __block NSArray *allOrgsCopy = allOrgs;
+        __block int i = 0;
+        //// COPY!!!!!!!!!
+        __block void (^myFailureBlock) (NSError *error);
+        myFailureBlock = [^ (NSError *error) {
+          [UIAlertView showWithError:error];
+        } copy];
+        //// COPY!!!!!!!!!!!
+        __block void (^mySuccessBlock) (NSArray *allRepositories);
+        mySuccessBlock = [^ (NSArray *allRepositories){
+          [dataSource addObject:[[NSArray alloc] initWithObjects:allOrgsCopy[i], nil]];
           [dataSource addObject:allRepositories];
-          if([allOrgs count] == (i+1)){
+          i++;
+          if([allOrgs count] == (i)){
             _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
             [_repoView.tableView setDataSource:_dataSource];
             [_repoView.tableView reloadData];
           }else{
-            //goto <#label#>
+            [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
           }
-        } failure:^(NSError *error) {
-          [UIAlertView showWithError:error];
-        }];
-      }
+        } copy];
+        
+        [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:<#^(NSArray *allRepositories)success#> failure:<#^(NSError *error)failure#>]
+        
+        
+        for (; i < [allOrgs count]; i++) {
+          BCOrg *object = [allOrgs objectAtIndex:i];
+          [BCRepository getAllRepositoriesFromOrg:object WithSuccess:^(NSArray *allRepositories) {
+            [dataSource addObject:[[NSArray alloc] initWithObjects:object, nil]];
+            [dataSource addObject:allRepositories];
+            if([allOrgs count] == (i+1)){
+              _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
+              [_repoView.tableView setDataSource:_dataSource];
+              [_repoView.tableView reloadData];
+            }else{
+              //goto <#label#>
+            }
+          } failure:^(NSError *error) {
+            [UIAlertView showWithError:error];
+          }];
+        }
+      } failure:^(NSError *error) {
+        [UIAlertView showWithError:error];
+      }];
     } failure:^(NSError *error) {
       [UIAlertView showWithError:error];
     }];
+
   } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
-  }];
-}
+  }
+  
+  }
 
 @end
