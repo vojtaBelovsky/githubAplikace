@@ -14,9 +14,9 @@
 
 @interface BCIssueViewController : UIViewController<UITableViewDelegate>{
 @private
-    NSArray *_repositories;
-    BCIssueView *_tableView;
-    BCIssueDataSource *_dataSource;
+  NSArray *_repositories;
+  BCIssueView *_tableView;
+  BCIssueDataSource *_dataSource;
   NSNumber *_nthRepository;
 }
 

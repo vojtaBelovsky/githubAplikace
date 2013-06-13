@@ -13,6 +13,7 @@
 #import "BCIssueDataSource.h"
 #import "BCIssueDetailViewController.h"
 #import "BCAddIssueViewController.h"
+#import "UIAlertView+errorAlert.h"
 
 
 @interface BCIssueViewController ()
@@ -78,14 +79,18 @@
 }
 
 -(void)createModelFromRepository:(BCRepository *)repository{
-  [BCIssue getAllIssuesFromRepository:repository WithSuccess:^(NSMutableArray *issues) {
-    _dataSource = [[BCIssueDataSource alloc] initWithIssues:issues];
-    [_tableView.tableView setDataSource:_dataSource];
-    [_tableView.tableView reloadData];
-    NSLog(@"data was reloaded");
+  [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:[_nthRepository integerValue]] withSuccess:^(NSMutableArray *allMilestones) {
+    [BCIssue getAllIssuesFromRepository:repository WithSuccess:^(NSMutableArray *issues) {
+      _dataSource = [[BCIssueDataSource alloc] initWithIssues:issues andMilestones:allMilestones];
+      [_tableView.tableView setDataSource:_dataSource];
+      [_tableView.tableView reloadData];
+    } failure:^(NSError *error) {
+      [UIAlertView showWithError:error];
+    }];
   } failure:^(NSError *error) {
-    NSLog(@"fail");
+    [UIAlertView showWithError:error];
   }];
+  
 }
 
 @end

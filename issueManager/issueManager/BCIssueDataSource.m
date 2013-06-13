@@ -12,12 +12,13 @@
 
 @implementation BCIssueDataSource
 
--(id) initWithIssues:(NSMutableArray *)issues{
-    self = [super init];
-    if(self){
-        _issues = issues;
-    }
-    return self;
+-(id) initWithIssues:(NSMutableArray *)issues andMilestones:(NSMutableArray *)milestones{
+  self = [super init];
+  if(self){
+    _issues = issues;
+    _milestones = milestones;
+  }
+  return self;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
