@@ -14,12 +14,13 @@
 
 @interface BCIssueViewController : UIViewController<UITableViewDelegate>{
 @private
-    BCRepository *_repository;
+    NSArray *_repositories;
     BCIssueView *_tableView;
     BCIssueDataSource *_dataSource;
+  NSNumber *_nthRepository;
 }
 
-- (id) initWithRepository:(BCRepository *)repository;
+- (id) initWithRepositories:(NSArray *)repositories;
 
 -(void)addNewIssue:(BCIssue *)newIssue;
 -(void)changeIssue:(BCIssue *)issue;

@@ -24,11 +24,11 @@
 #pragma mark -
 #pragma mark LifeCycles
 
-- (id)initWithUser:(BCUser *)user {
+- (id)init{
     self = [super init];
     if ( self ) {
       [self setTitle:NSLocalizedString(@"Choose repositories", @"")];
-      _chosenUser = user;
+      _chosenRepositories = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -54,7 +54,7 @@
     for (int i = 0; i < rowsNumber; i++) {
       [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:[indexPath section]+1]];
     }
-    [_repoView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+    [_repoView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
   }else{
     [_chosenRepositories removeObject:[_dataSource getRepositoryAtIndex:indexPath]];
     //tady bude co se stane po ODoznaceni na repositare
@@ -84,7 +84,8 @@
 #pragma mark buttons
 
 -(void)selectButtonDidPress{
-  [BCIssueViewController alloc] initWithRepository:<#(BCRepository *)#>
+  BCIssueViewController *issueVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories];
+  [self.navigationController pushViewController:issueVC animated:YES];
 }
 
 

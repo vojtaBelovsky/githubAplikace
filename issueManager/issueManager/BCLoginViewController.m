@@ -51,7 +51,7 @@
   NSDictionary *credentials = [userDefaults objectForKey:@"credentials"];
   if(credentials != NULL){
     [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user) {
-      BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] initWithUser:user];
+      BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
       [self.navigationController pushViewController:repoViewCtrl animated:YES];
     } failure:^(NSError *error) {
       [UIAlertView showWithError:error];
@@ -88,7 +88,7 @@
   [userDefaults synchronize];
   
   [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user){
-    BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] initWithUser:user];
+    BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
     [self.navigationController pushViewController:repoViewCtrl animated:YES];
   } failure:^(NSError *error){
     [UIAlertView showWithError:error];

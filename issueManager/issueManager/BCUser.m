@@ -51,7 +51,6 @@
               BCUser *chosenUser = [MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:userInDict error:nil];
               instance = chosenUser;
               succes ( chosenUser );
-              
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               onceToken++;
               failure ( error );
