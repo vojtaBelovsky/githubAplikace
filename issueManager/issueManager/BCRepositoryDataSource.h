@@ -12,11 +12,12 @@
 
 @interface BCRepositoryDataSource : NSObject<UITableViewDataSource>{
 @private
-    NSArray *_repositories;
+  NSDictionary *_repositories;
+  NSArray *_keyNames;
   BCRepositoryViewController *_repoViewController;
 }
 
-- (id)initWithRepositories:(NSArray *)repositories andNavigationController:(BCRepositoryViewController *)repoViewController;
+- (id)initWithRepositories:(NSDictionary *)repositories repositoryNames:(NSArray *) repoNames andNavigationController:(BCRepositoryViewController *)repoViewController;
 
 -(BCRepository *)getRepositoryAtIndex:(NSIndexPath *)indexPath;
 -(NSInteger)getNumberOfRowsToAddToSection:(NSUInteger)section;

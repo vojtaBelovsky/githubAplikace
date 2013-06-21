@@ -15,7 +15,7 @@
 
 @implementation BCRepositoryCell
 
-+ (BCRepositoryCell *)createOrgOrMyRepositoryCellWithTableView:(UITableView *)tableView {
++ (BCRepositoryCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView {
     BCRepositoryCell *cell = [tableView dequeueReusableCellWithIdentifier:createOrgOrMyRepositoryCellIdnetifier];
     if (! cell ) {
       cell = [[BCRepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createOrgOrMyRepositoryCellIdnetifier];

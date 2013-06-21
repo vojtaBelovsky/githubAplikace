@@ -3,15 +3,29 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[BCRepositoryViewController tableView:didSelectRowAtIndexPath:]:BCRepositoryViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[BCSelectAssigneeViewController getIndexPathOfSelectedRow]:BCSelectAssigneeViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[BCRepositoryViewController tableView:didDeselectRowAtIndexPath:]:BCRepositoryViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__41-[BCRepositoryViewController createModel]_block_invoke_2119:BCRepositoryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[dataSource objectForKey:@&quot;vojtaBelovsky.repositories&quot;];">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[BCIssueDetailViewController createParameters]:BCIssueDetailViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "parameters1">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[BCSelectAssigneeViewController getIndexPathOfSelectedRow]:BCSelectAssigneeViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[BCIssueDetailViewController initWithIssue:]:BCIssueDetailViewController.m">

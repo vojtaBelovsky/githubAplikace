@@ -8,6 +8,8 @@
 
 #import "BCRepositoryView.h"
 
+#define REPOSITORY_BG_COLOR [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
+
 @implementation BCRepositoryView
 
 #pragma mark -
@@ -19,6 +21,8 @@
       _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
       [_tableView setAllowsMultipleSelection:YES];
       [self addSubview:_tableView];
+      _tableView.backgroundColor = REPOSITORY_BG_COLOR;
+      _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     
     return self;

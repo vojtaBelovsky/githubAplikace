@@ -14,6 +14,11 @@
 #import "BCUser.h"
 #import "BCOrg.h"
 #import "UIAlertView+errorAlert.h"
+#import "UIImageView+AFNetworking.h"
+
+#define KEY_OBJECT @"object"
+#define KEY_REPOSITORIES @"repositories"
+#define KEY_IMAGE @"image"
 
 @interface BCRepositoryViewController ()
 - (void)createModel;
@@ -37,13 +42,19 @@
   [super loadView];
   self.navigationController.navigationBarHidden = NO;
   [self.navigationItem setHidesBackButton:YES];
-  [_repoView.tableView setMultipleTouchEnabled:YES];
+  [_tableView.tableView setMultipleTouchEnabled:YES];
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"select" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonDidPress)];
   
-  _repoView = [[BCRepositoryView alloc] init];
-  self.view = _repoView;
+  _tableView = [[BCRepositoryView alloc] init];
+  self.view = _tableView;
   [self createModel];
-  [_repoView.tableView setDelegate:self];
+  [_tableView.tableView setDelegate:self];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+  if([_chosenRepositories containsObject:[_dataSource getRepositoryAtIndex:indexPath]]){
+    //[_tableView.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+  }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -54,7 +65,7 @@
     for (int i = 0; i < rowsNumber; i++) {
       [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:[indexPath section]+1]];
     }
-    [_repoView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
+    [_tableView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
   }else{
     [_chosenRepositories removeObject:[_dataSource getRepositoryAtIndex:indexPath]];
     //tady bude co se stane po ODoznaceni na repositare
@@ -72,7 +83,7 @@
     for (int i = 0; i < rowsNumber; i++) {
       [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:[indexPath section]+1]];
     }
-    [_repoView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+    [_tableView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
   }else{
     [_chosenRepositories addObject:[_dataSource getRepositoryAtIndex:indexPath]];
     //tady bude co se stane po oznaceni na repositare
@@ -93,6 +104,65 @@
 #pragma mark Private
 
 -(void)createModel{
+//
+//  ------- menim strukturu z NSArray[NSArray] na [NSDictionary - klice jsou hodnoty v NSArray obsahujici jmena usera a organizaci [NSDictionary - object, repositories, image]]+[NSArray - klice k dictionaries v podobe userLoginu, a jmen organizaci]
+//
+  
+  __block NSMutableDictionary *dataSource = [[NSMutableDictionary alloc] init];
+  __block NSDictionary *dataSourcePairs;
+  __block UIImageView *dataAvatar = [[UIImageView alloc] init];
+  __block UIImage *placeholderImage = [UIImage imageNamed:@"gravatar-user-420.png"];
+  __block NSMutableArray *dataSourceKeyNames = [[NSMutableArray alloc] init];
+  
+  BCUser *loggedInUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+  [dataSourceKeyNames addObject:loggedInUser.userLogin];
+  
+  [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
+    //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!(array inicializuju, melo by tam byt 0 prvku)
+    [dataAvatar setImageWithURL:loggedInUser.avatarUrl placeholderImage:placeholderImage];
+    dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys:KEY_OBJECT, loggedInUser, KEY_REPOSITORIES,allRepositories, KEY_IMAGE, dataAvatar.image, nil];
+    [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[0]];
+    [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
+      if([allOrgs count] > 0){
+        __block int i = 0;
+        //// COPY!!!!!!!!!
+        __block void (^myFailureBlock) (NSError *error);
+        myFailureBlock = [^ (NSError *error) {
+          [UIAlertView showWithError:error];
+        } copy];
+        //// COPY!!!!!!!!!!!
+        __block void (^mySuccessBlock) (NSArray *allRepositories);
+        mySuccessBlock = [^ (NSArray *allRepositories){
+          BCOrg *myOrg = (BCOrg *)allOrgs[i];
+          i++;
+          [dataAvatar setImageWithURL:[myOrg avatarUrl] placeholderImage:placeholderImage];
+          [dataSourceKeyNames addObject:[myOrg orgLogin]];
+          dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys:KEY_OBJECT, myOrg, KEY_REPOSITORIES, allRepositories, KEY_IMAGE, dataAvatar.image, nil];
+          [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[i]];
+          if([allOrgs count] == (i)){
+            _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
+            [_tableView.tableView setDataSource:_dataSource];
+            [_tableView.tableView reloadData];
+          }else{
+            [BCRepository getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
+          }
+        } copy];
+        [BCRepository getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
+      }else{//set data source in case of user don't have Orgs
+        _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
+        [_tableView.tableView setDataSource:_dataSource];
+        [_tableView.tableView reloadData];
+      }
+    } failure:^(NSError *error) {
+      [UIAlertView showWithError:error];
+    }];
+  } failure:^(NSError *error) {
+    [UIAlertView showWithError:error];
+  }];
+
+  
+  ////////////////////
+  /*
   __block NSMutableArray *dataSource = [[NSMutableArray alloc] init];
   
   BCUser *loggedInUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
@@ -122,8 +192,8 @@
           i++;
           if([allOrgsCopy count] == (i)){
             _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
-            [_repoView.tableView setDataSource:_dataSource];
-            [_repoView.tableView reloadData];
+            [_tableView.tableView setDataSource:_dataSource];
+            [_tableView.tableView reloadData];
           }else{
             [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
           }
@@ -131,8 +201,8 @@
         [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
       }else{//set data source in case of user don't have Orgs
         _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
-        [_repoView.tableView setDataSource:_dataSource];
-        [_repoView.tableView reloadData];
+        [_tableView.tableView setDataSource:_dataSource];
+        [_tableView.tableView reloadData];
       }
     } failure:^(NSError *error) {
       [UIAlertView showWithError:error];
@@ -140,6 +210,7 @@
   } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
   }];
+   */
 
 }
 

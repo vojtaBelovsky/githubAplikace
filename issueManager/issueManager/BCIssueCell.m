@@ -10,23 +10,29 @@
 #import "BCIssue.h"
 
 #define IssueCellReuseIdentifier @"IssueCellReuseIdentifier"
+#define MilestoneCellReuseIdentifier @"MilestoneCellReuseIdentifier"
 
 @implementation BCIssueCell
 
 + (BCIssueCell *)createIssueCellWithTableView:(UITableView *)tableView {
-  BCIssueCell *cell = nil;
+  BCIssueCell *cell = [tableView dequeueReusableCellWithIdentifier:IssueCellReuseIdentifier];
+  
   if ( !cell ) {
     cell = [[BCIssueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
+  
   return cell;
 }
 
-+ (BCIssueCell *)createIssueCellWithTableView:(UITableView *)tableView {
-    BCIssueCell *cell = [tableView dequeueReusableCellWithIdentifier:IssueCellReuseIdentifier];
-    if ( !cell ) {
-        cell = [[BCIssueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
-    }
-    return cell;
++ (BCIssueCell *)createMilestoneCellWithTableView:(UITableView *)tableView {
+  BCIssueCell *cell = [tableView dequeueReusableCellWithIdentifier:MilestoneCellReuseIdentifier];
+  
+  if ( !cell ) {
+    cell = [[BCIssueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MilestoneCellReuseIdentifier];
+  }
+  
+  return cell;
 }
 
 @end

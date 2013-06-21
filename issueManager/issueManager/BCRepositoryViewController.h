@@ -12,7 +12,7 @@
 
 @interface BCRepositoryViewController : UIViewController<UITableViewDelegate> {
 @private
-    BCRepositoryView *_repoView;
+    BCRepositoryView *_tableView;
     BCRepositoryDataSource *_dataSource;
     NSMutableArray *_chosenRepositories;
 }
