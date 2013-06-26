@@ -50,18 +50,20 @@
     id object = [_repositories valueForKeyPath:keyPath];
     if ([object isKindOfClass:[BCUser class]]) {
       cell.textLabel.text = [(BCUser *)object userLogin];
+      keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"image" ];
+      cell.imageView.image = (UIImage *)[_repositories valueForKeyPath:keyPath];
     }else{
       cell.textLabel.text = [(BCOrg *)object orgLogin];
+      keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"image" ];
+      cell.imageView.image = (UIImage *)[_repositories valueForKeyPath:keyPath];
     }
   }else{
     cell = [BCRepositoryCell createRepositoryCellWithTableView:tableView];
     NSString *keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"repositories" ];
-    BCRepository *repo = [(NSArray *)[_repositories valueForKeyPath:keyPath] objectAtIndex:(indexPath.row-2)];
+    BCRepository *repo = [(NSArray *)[_repositories valueForKeyPath:keyPath] objectAtIndex:(indexPath.row-1)];
     cell.textLabel.text = repo.name;
-    
-    keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"image" ];
-    cell.imageView.image = (UIImage *)[_repositories valueForKeyPath:keyPath];
   }
+  
   return cell;
 }
 
@@ -75,7 +77,7 @@
 
 -(BCRepository *)getRepositoryAtIndex:(NSIndexPath *)indexPath{
   NSString *keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"repositories" ];
-  BCRepository *repo = [(NSArray *)[_repositories valueForKeyPath:keyPath] objectAtIndex:(indexPath.row-2)];
+  BCRepository *repo = [(NSArray *)[_repositories valueForKeyPath:keyPath] objectAtIndex:(indexPath.row-1)];
   return repo;
 }
 

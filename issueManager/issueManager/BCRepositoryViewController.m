@@ -40,10 +40,10 @@
 
 - (void)loadView {
   [super loadView];
-  self.navigationController.navigationBarHidden = NO;
+  //self.navigationController.navigationBarHidden = NO;
   [self.navigationItem setHidesBackButton:YES];
   [_tableView.tableView setMultipleTouchEnabled:YES];
-  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"select" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonDidPress)];
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonDidPress)];
   
   _tableView = [[BCRepositoryView alloc] init];
   self.view = _tableView;
@@ -51,43 +51,77 @@
   [_tableView.tableView setDelegate:self];
 }
 
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//  
+//    if(indexPath.row == 0){
+//      [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:YES]];
+//      NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]];
+//      NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
+//      for (int i = 0; i < rowsNumber; i++) {
+//        [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
+//      }
+//      [_tableView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+//    }else{
+//      if ([_chosenRepositories indexOfObject:[_dataSource getRepositoryAtIndex:indexPath]] != NSNotFound) {
+//        [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
+//      }else{
+//        [_chosenRepositories addObject:[_dataSource getRepositoryAtIndex:indexPath]];
+//    }
+//  }
+//}
+//
+//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+//  if(indexPath.row == 0){
+//      [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:NO]];
+//      NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]];
+//      NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
+//      for (int i = 0; i < rowsNumber; i++) {
+//        [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
+//      }
+//      [_tableView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
+//  }else{
+//      [_chosenRepositories removeObject:[_dataSource getRepositoryAtIndex:indexPath]];
+//  }
+//}
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-  if([_chosenRepositories containsObject:[_dataSource getRepositoryAtIndex:indexPath]]){
-    //[_tableView.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-  }
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-  if([indexPath section]%2 == 0){
-    [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:NO]];
-    NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]+1];
-    NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
-    for (int i = 0; i < rowsNumber; i++) {
-      [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:[indexPath section]+1]];
+  if (indexPath.row != 0) {
+    if([_chosenRepositories containsObject:[_dataSource getRepositoryAtIndex:indexPath]]){
+      [cell setHighlighted:YES];
     }
-    [_tableView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
-  }else{
-    [_chosenRepositories removeObject:[_dataSource getRepositoryAtIndex:indexPath]];
-    //tady bude co se stane po ODoznaceni na repositare
-
   }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if([indexPath section]%2 == 0){
-    
-    
-    [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:YES]];
-    NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]+1];
-    NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
-    for (int i = 0; i < rowsNumber; i++) {
-      [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:[indexPath section]+1]];
+  [_tableView.tableView deselectRowAtIndexPath:indexPath animated:NO];
+  
+  if(indexPath.row == 0){
+    if ( [[_dataSource.actualSelected objectAtIndex:indexPath.section] isEqual: [NSNumber numberWithBool:NO]] ) {
+      [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:YES]];
+      NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]];
+      NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
+      for (int i = 0; i < rowsNumber; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
+      }
+      [_tableView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+    }else{
+      [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:NO]];
+      NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]];
+      NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
+      for (int i = 0; i < rowsNumber; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
+      }
+      [_tableView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
     }
-    [_tableView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
   }else{
-    [_chosenRepositories addObject:[_dataSource getRepositoryAtIndex:indexPath]];
-    //tady bude co se stane po oznaceni na repositare
-    
+    BCRepository *repo = [_dataSource getRepositoryAtIndex:indexPath];
+    if( [_chosenRepositories indexOfObject:repo] == NSNotFound){
+      [_chosenRepositories addObject:repo];
+      [[_tableView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:YES];
+    }else{
+      [_chosenRepositories removeObject:repo];
+      [[_tableView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:NO];
+    }
   }
 }
 
@@ -120,7 +154,7 @@
   [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
     //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!(array inicializuju, melo by tam byt 0 prvku)
     [dataAvatar setImageWithURL:loggedInUser.avatarUrl placeholderImage:placeholderImage];
-    dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys:KEY_OBJECT, loggedInUser, KEY_REPOSITORIES,allRepositories, KEY_IMAGE, dataAvatar.image, nil];
+    dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: loggedInUser, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, dataAvatar.image, KEY_IMAGE, nil];
     [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[0]];
     [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
       if([allOrgs count] > 0){
@@ -137,7 +171,7 @@
           i++;
           [dataAvatar setImageWithURL:[myOrg avatarUrl] placeholderImage:placeholderImage];
           [dataSourceKeyNames addObject:[myOrg orgLogin]];
-          dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys:KEY_OBJECT, myOrg, KEY_REPOSITORIES, allRepositories, KEY_IMAGE, dataAvatar.image, nil];
+          dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: myOrg, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, dataAvatar.image, KEY_IMAGE, nil];
           [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[i]];
           if([allOrgs count] == (i)){
             _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
@@ -159,58 +193,6 @@
   } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
   }];
-
-  
-  ////////////////////
-  /*
-  __block NSMutableArray *dataSource = [[NSMutableArray alloc] init];
-  
-  BCUser *loggedInUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
-  [dataSource addObject:[[NSArray alloc] initWithObjects:loggedInUser, nil]];
-  
-  [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
-    //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!
-    if ([allRepositories count] == 0) {
-      [dataSource addObject:[[NSArray alloc] init]];
-    }else{
-      [dataSource addObject:allRepositories];
-    }
-    [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
-      if([allOrgs count] > 0){
-        __block NSArray *allOrgsCopy = allOrgs;
-        __block int i = 0;
-        //// COPY!!!!!!!!!
-        __block void (^myFailureBlock) (NSError *error);
-        myFailureBlock = [^ (NSError *error) {
-          [UIAlertView showWithError:error];
-        } copy];
-        //// COPY!!!!!!!!!!!
-        __block void (^mySuccessBlock) (NSArray *allRepositories);
-        mySuccessBlock = [^ (NSArray *allRepositories){
-          [dataSource addObject:[[NSArray alloc] initWithObjects:allOrgsCopy[i], nil]];
-          [dataSource addObject:allRepositories];
-          i++;
-          if([allOrgsCopy count] == (i)){
-            _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
-            [_tableView.tableView setDataSource:_dataSource];
-            [_tableView.tableView reloadData];
-          }else{
-            [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
-          }
-        } copy];
-        [BCRepository getAllRepositoriesFromOrg:allOrgsCopy[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
-      }else{//set data source in case of user don't have Orgs
-        _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource andNavigationController:self];
-        [_tableView.tableView setDataSource:_dataSource];
-        [_tableView.tableView reloadData];
-      }
-    } failure:^(NSError *error) {
-      [UIAlertView showWithError:error];
-    }];
-  } failure:^(NSError *error) {
-    [UIAlertView showWithError:error];
-  }];
-   */
 
 }
 

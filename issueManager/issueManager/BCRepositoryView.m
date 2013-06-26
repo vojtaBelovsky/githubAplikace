@@ -8,7 +8,10 @@
 
 #import "BCRepositoryView.h"
 
-#define REPOSITORY_BG_COLOR [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
+#define REPOSITORY_BG_COLOR  [UIColor colorWithRed:.11 green:.11 blue:.11 alpha:1.00]
+#define BACKGROUND_IMAGE        [UIImage imageNamed:@"repositories_gradient.png"]
+
+#define TABLE_VIEW_OFFSET         ( 50.0f )
 
 @implementation BCRepositoryView
 
@@ -22,6 +25,7 @@
       [_tableView setAllowsMultipleSelection:YES];
       [self addSubview:_tableView];
       _tableView.backgroundColor = REPOSITORY_BG_COLOR;
+      [self setBackgroundColor:REPOSITORY_BG_COLOR];
       _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     
@@ -29,13 +33,14 @@
 }
 
 - (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    CGRect frame = CGRectZero;
-    frame.size = self.bounds.size;
-    if ( !CGRectEqualToRect( _tableView.frame, frame ) ) {
-        _tableView.frame = frame;
-    }
+  [super layoutSubviews];
+  
+  CGRect frame = CGRectZero;
+  frame.origin.y = TABLE_VIEW_OFFSET;
+  frame.size = self.bounds.size;
+  if ( !CGRectEqualToRect( _tableView.frame, frame ) ) {
+    _tableView.frame = frame;
+  }
 }
 
 @end
