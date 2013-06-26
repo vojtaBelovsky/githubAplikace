@@ -45,23 +45,31 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   BCRepositoryCell *cell = nil;
   if (indexPath.row == 0) {
-    cell = [BCRepositoryCell createOrgOrUserRepositoryCellWithTableView:tableView];
+    
+    //cell = [BCRepositoryCell createOrgOrUserRepositoryCellWithTableView:tableView];
     NSString * keyPath = [NSString stringWithFormat:@"%@.object", (NSString *)[_keyNames objectAtIndex:(indexPath.section)]];
     id object = [_repositories valueForKeyPath:keyPath];
     if ([object isKindOfClass:[BCUser class]]) {
-      cell.textLabel.text = [(BCUser *)object userLogin];
       keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"image" ];
-      cell.imageView.image = (UIImage *)[_repositories valueForKeyPath:keyPath];
+      cell = [BCRepositoryCell createOrgOrUserRepositoryCellWithTableView:tableView WithImg:(UIImage *)[_repositories valueForKeyPath:keyPath]];
+      cell.myTextLabel.text = [(BCUser *)object userLogin];
+
+//      UIImageView *userAvatarImgView = [[UIImageView alloc] initWithImage:(UIImage *)[_repositories valueForKeyPath:keyPath]];
+//      [userAvatarImgView setFrame:CGRectMake(15, 5, 30, 30)];
+//      [cell addSubview:userAvatarImgView]; 
     }else{
-      cell.textLabel.text = [(BCOrg *)object orgLogin];
       keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"image" ];
-      cell.imageView.image = (UIImage *)[_repositories valueForKeyPath:keyPath];
+      cell = [BCRepositoryCell createOrgOrUserRepositoryCellWithTableView:tableView WithImg:(UIImage *)[_repositories valueForKeyPath:keyPath]];
+      cell.myTextLabel.text = [(BCOrg *)object orgLogin];
+//      UIImageView *orgAvatarImgView = [[UIImageView alloc] initWithImage:(UIImage *)[_repositories valueForKeyPath:keyPath]];
+//      [orgAvatarImgView setFrame:CGRectMake(15, 5, 30, 30)];
+//      [cell addSubview:orgAvatarImgView];
     }
   }else{
     cell = [BCRepositoryCell createRepositoryCellWithTableView:tableView];
     NSString *keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"repositories" ];
     BCRepository *repo = [(NSArray *)[_repositories valueForKeyPath:keyPath] objectAtIndex:(indexPath.row-1)];
-    cell.textLabel.text = repo.name;
+    cell.myTextLabel.text = repo.name;
   }
   
   return cell;

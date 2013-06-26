@@ -4,6 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ProximaNovaCond-Light.otf</string>
+		<string>ProximaNova-Light.otf</string>
 		<string>ProximaNova-Regular.otf</string>
 		<string>ProximaNova-Semibold.otf</string>
 		<string>ProximaNovaCond-Semibold.otf</string>

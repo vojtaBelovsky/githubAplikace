@@ -11,7 +11,11 @@
 
 @interface BCRepositoryCell : UITableViewCell
 
-+ (BCRepositoryCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView;
+@property UIImageView *myImageView;
+@property UILabel *myTextLabel;
+
++ (BCRepositoryCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView WithImg:(UIImage *)img;
 + (BCRepositoryCell *)createRepositoryCellWithTableView:(UITableView *)tableView;
+
 
 @end

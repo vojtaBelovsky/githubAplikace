@@ -40,7 +40,7 @@
 
 - (void)loadView {
   [super loadView];
-  //self.navigationController.navigationBarHidden = NO;
+  self.navigationController.navigationBarHidden = YES;
   [self.navigationItem setHidesBackButton:YES];
   [_tableView.tableView setMultipleTouchEnabled:YES];
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonDidPress)];
@@ -90,6 +90,10 @@
       [cell setHighlighted:YES];
     }
   }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 54;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

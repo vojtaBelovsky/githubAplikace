@@ -13,5 +13,8 @@
 }
 
 @property (readonly) UITableView *tableView;
+@property UIImageView *backgroundImageView;
+@property UILabel *repositoryLabel;
+@property UILabel *doneLabel;
 
 @end
