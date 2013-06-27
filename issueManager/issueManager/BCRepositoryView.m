@@ -15,6 +15,7 @@
 
 #define REPOSITORIES_FONT            [UIFont fontWithName:@"ProximaNova-Light" size:24]
 #define REPOSITORIES_FONT_COLOR      [UIColor colorWithRed:.44 green:.44 blue:.44 alpha:1.00]
+#define REPOSITORIES_SHADOW_FONT_COLOR      [UIColor blackColor]
 
 #define DONE_FONT            [UIFont fontWithName:@"ProximaNova-Light" size:13]
 #define DONE_FONT_COLOR      [UIColor whiteColor]
@@ -31,6 +32,14 @@
       _backgroundImageView = [[UIImageView alloc] initWithImage:resizeableImage];
       [self addSubview:_backgroundImageView];
       
+      _repositoryLabelShadow = [[UILabel alloc] init];
+      _repositoryLabelShadow.numberOfLines = 0;
+      _repositoryLabelShadow.font = REPOSITORIES_FONT;
+      _repositoryLabelShadow.textColor = REPOSITORIES_SHADOW_FONT_COLOR;
+      _repositoryLabelShadow.backgroundColor = [UIColor clearColor];
+      [_repositoryLabelShadow setText:@"Repositories"];
+      [self addSubview:_repositoryLabelShadow];
+      
       _repositoryLabel = [[UILabel alloc] init];
       _repositoryLabel.numberOfLines = 0;
       _repositoryLabel.font = REPOSITORIES_FONT;
@@ -39,13 +48,14 @@
       [_repositoryLabel setText:@"Repositories"];
       [self addSubview:_repositoryLabel];
       
-      _doneLabel = [[UILabel alloc] init];
-      _doneLabel.numberOfLines = 0;
-      _doneLabel.font = DONE_FONT;
-      _doneLabel.textColor = DONE_FONT_COLOR;
-      _doneLabel.backgroundColor = [UIColor clearColor];
-      [_doneLabel setText:@"DONE"];
-      [self addSubview:_doneLabel];
+      _doneButton = [[UIButton alloc] init];
+      _doneButton.titleLabel.numberOfLines = 0;
+      _doneButton.titleLabel.font = DONE_FONT;
+      _doneButton.titleLabel.textColor = DONE_FONT_COLOR;
+      _doneButton.titleLabel.backgroundColor = [UIColor clearColor];
+      [_doneButton setTitle:@"DONE" forState:UIControlStateNormal];
+      [_doneButton setEnabled:YES];
+      [self addSubview:_doneButton];
       
       _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
       [_tableView setAllowsMultipleSelection:YES];
@@ -72,16 +82,22 @@
     _tableView.frame = frame;
   }
   
+  frame.size = [_repositoryLabelShadow sizeThatFits:_backgroundImageView.frame.size];
+  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2)+1, ((self.backgroundImageView.frame.size.height-frame.size.height)/2)+1);
+  if( !CGRectEqualToRect(_repositoryLabelShadow.frame, frame)){
+    _repositoryLabelShadow.frame = frame;
+  }
+  
   frame.size = [_repositoryLabel sizeThatFits:_backgroundImageView.frame.size];
   frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, (self.backgroundImageView.frame.size.height-frame.size.height)/2);
   if( !CGRectEqualToRect(_repositoryLabel.frame, frame)){
     _repositoryLabel.frame = frame;
   }
   
-  frame.size = [_doneLabel sizeThatFits:_backgroundImageView.frame.size];
-  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)-10, (self.backgroundImageView.frame.size.height-frame.size.height)/2);
-  if(! CGRectEqualToRect(_doneLabel.frame, frame)){
-    _doneLabel.frame = frame;
+  frame.size = [_doneButton sizeThatFits:_backgroundImageView.frame.size];
+  frame.origin = CGPointMake((self.backgroundImageView.frame.size.width-frame.size.width)-10, (self.backgroundImageView.frame.size.height-frame.size.height)/2);
+  if(! CGRectEqualToRect(_doneButton.frame, frame)){
+    _doneButton.frame = frame;
   }
 }
 

@@ -11,6 +11,9 @@
 
 #define REPOSITORY_CHECKBOX_IMAGE     [UIImage imageNamed:@"checkbox.png"]
 #define REPOSITORY_HL_CHECKBOX_IMAGE     [UIImage imageNamed:@"checkbox_checked.png"]
+#define USR_OR_ORG_SELECTION_IMAGE     [UIImage imageNamed:@"selectMemberArrowOff.png"]
+#define USR_OR_ORG_SELECTION_HL_IMAGE     [UIImage imageNamed:@"selectMemberXOff.png"]
+#define USR_OR_ORG_IMG_WIDTH_AND_HEIGHT 18
 
 
 #define CELL_FONT_COLOR [UIColor whiteColor]
@@ -39,6 +42,10 @@
       [cell setMyImageView:[[UIImageView alloc] initWithImage:img]];
       [[cell myImageView] setFrame:CGRectMake(15, 5, 30, 30)];
       [cell addSubview:cell.myImageView];
+      
+      [cell setSelectUsrOrOrgImgView:[[UIImageView alloc] initWithImage:USR_OR_ORG_SELECTION_IMAGE highlightedImage:USR_OR_ORG_SELECTION_HL_IMAGE]];
+      [[cell selectUsrOrOrgImgView] setFrame:CGRectMake((cell.frame.size.width-USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)-15, (cell.frame.size.height-USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)/2, USR_OR_ORG_IMG_WIDTH_AND_HEIGHT, USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)];
+      [cell addSubview:cell.selectUsrOrOrgImgView];
       
       [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
       cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];

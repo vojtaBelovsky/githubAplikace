@@ -13,6 +13,7 @@
 
 @property UIImageView *myImageView;
 @property UILabel *myTextLabel;
+@property UIImageView *selectUsrOrOrgImgView;
 
 + (BCRepositoryCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView WithImg:(UIImage *)img;
 + (BCRepositoryCell *)createRepositoryCellWithTableView:(UITableView *)tableView;

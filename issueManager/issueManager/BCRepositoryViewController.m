@@ -42,47 +42,15 @@
   [super loadView];
   self.navigationController.navigationBarHidden = YES;
   [self.navigationItem setHidesBackButton:YES];
-  [_tableView.tableView setMultipleTouchEnabled:YES];
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonDidPress)];
   
   _tableView = [[BCRepositoryView alloc] init];
+  [_tableView.tableView setMultipleTouchEnabled:YES];
+  [_tableView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchDown];
   self.view = _tableView;
   [self createModel];
   [_tableView.tableView setDelegate:self];
 }
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//  
-//    if(indexPath.row == 0){
-//      [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:YES]];
-//      NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]];
-//      NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
-//      for (int i = 0; i < rowsNumber; i++) {
-//        [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
-//      }
-//      [_tableView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
-//    }else{
-//      if ([_chosenRepositories indexOfObject:[_dataSource getRepositoryAtIndex:indexPath]] != NSNotFound) {
-//        [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
-//      }else{
-//        [_chosenRepositories addObject:[_dataSource getRepositoryAtIndex:indexPath]];
-//    }
-//  }
-//}
-//
-//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-//  if(indexPath.row == 0){
-//      [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:NO]];
-//      NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]];
-//      NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:rowsNumber];
-//      for (int i = 0; i < rowsNumber; i++) {
-//        [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
-//      }
-//      [_tableView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
-//  }else{
-//      [_chosenRepositories removeObject:[_dataSource getRepositoryAtIndex:indexPath]];
-//  }
-//}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
   if (indexPath.row != 0) {
@@ -107,6 +75,7 @@
       for (int i = 0; i < rowsNumber; i++) {
         [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
       }
+      [[_tableView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:YES];
       [_tableView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
     }else{
       [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:NO]];
@@ -115,6 +84,7 @@
       for (int i = 0; i < rowsNumber; i++) {
         [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
       }
+      [[_tableView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:NO];
       [_tableView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
     }
   }else{
@@ -132,7 +102,7 @@
 #pragma mark -
 #pragma mark buttons
 
--(void)selectButtonDidPress{
+-(void)doneButtonDidPress{
   BCIssueViewController *issueVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories];
   [self.navigationController pushViewController:issueVC animated:YES];
 }
