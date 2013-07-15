@@ -14,6 +14,7 @@
 #import "BCIssueDetailViewController.h"
 #import "BCAddIssueViewController.h"
 #import "UIAlertView+errorAlert.h"
+#import "BCUser.h"
 
 
 @interface BCIssueViewController ()
@@ -22,6 +23,9 @@
 
 @implementation BCIssueViewController
 
+#pragma mark -
+#pragma mark lifecycles
+
 - (id) initWithRepositories:(NSArray *)repositories{
     self = [super init];
     if(self){
@@ -29,6 +33,7 @@
       _repositories = repositories;
       _nthRepository = [[NSNumber alloc] initWithInt:0];
       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonAction)];
+      
     }
     return self;
 }
@@ -45,8 +50,11 @@
 
 - (void)loadView {
   [super loadView];
-  _tableView = [[BCIssueView alloc] init];
+  BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+  _tableView = [[BCIssueView alloc] initWithUserName:currentUser.userLogin];
+  [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchDown];
   self.view = _tableView;
+  
   [self createModelFromRepository:[_repositories objectAtIndex:[_nthRepository integerValue]]];
   [_tableView.tableView setDelegate:self];
 }
@@ -54,7 +62,7 @@
 #pragma mark -
 #pragma mark buttonActions
 
-- (void)addButtonAction{
+- (void)addButtonDidPress{
   [self createAndPushAddIssueVC];
 }
 

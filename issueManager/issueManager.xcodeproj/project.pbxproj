@@ -76,6 +76,8 @@
 		1095EA10175F6A62009CCEDB /* selectMemberXOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */; };
 		1095EA11175F6A62009CCEDB /* selectMemberXOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */; };
 		10BE364C175F0A840026DA45 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE364B175F0A840026DA45 /* login.png */; };
+		10CA880B178D723E00DF1B43 /* BCAddIssueTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */; };
+		10CA880F178DB54F00DF1B43 /* BCaddIssueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880E178DB54F00DF1B43 /* BCaddIssueButton.m */; };
 		10CD6B1B1765BC4500F64DC1 /* BCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CD6B1A1765BC4500F64DC1 /* BCTextField.m */; };
 		10CD6B30176600EE00F64DC1 /* Proxima Nova Fonts Collection.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 10CD6B1E176600EE00F64DC1 /* Proxima Nova Fonts Collection.jpg */; };
 		10CD6B31176600EE00F64DC1 /* ProximaNova-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 10CD6B1F176600EE00F64DC1 /* ProximaNova-Black.otf */; };
@@ -259,6 +261,10 @@
 		1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberXOff@2x.png"; path = "issueManager/grafika/github cutted/selectMemberXOff@2x.png"; sourceTree = "<group>"; };
 		1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberXOn@2x.png"; path = "issueManager/grafika/github cutted/selectMemberXOn@2x.png"; sourceTree = "<group>"; };
 		10BE364B175F0A840026DA45 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = issueManager/grafika/login.png; sourceTree = "<group>"; };
+		10CA8809178D723E00DF1B43 /* BCAddIssueTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueTextField.h; sourceTree = "<group>"; };
+		10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueTextField.m; sourceTree = "<group>"; };
+		10CA880D178DB54F00DF1B43 /* BCaddIssueButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCaddIssueButton.h; sourceTree = "<group>"; };
+		10CA880E178DB54F00DF1B43 /* BCaddIssueButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCaddIssueButton.m; sourceTree = "<group>"; };
 		10CD6B191765BC4500F64DC1 /* BCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCTextField.h; sourceTree = "<group>"; };
 		10CD6B1A1765BC4500F64DC1 /* BCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCTextField.m; sourceTree = "<group>"; };
 		10CD6B1E176600EE00F64DC1 /* Proxima Nova Fonts Collection.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Proxima Nova Fonts Collection.jpg"; sourceTree = "<group>"; };
@@ -526,6 +532,8 @@
 		102B8B57172FE2C2003BA22F /* view */ = {
 			isa = PBXGroup;
 			children = (
+				10CA880C178DB50F00DF1B43 /* button */,
+				10CA8805178D721F00DF1B43 /* TextField */,
 				102B8B5B172FE2FB003BA22F /* BCAddIssueView.h */,
 				102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */,
 			);
@@ -593,6 +601,24 @@
 				1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */,
 			);
 			name = "github cutted";
+			sourceTree = "<group>";
+		};
+		10CA8805178D721F00DF1B43 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				10CA8809178D723E00DF1B43 /* BCAddIssueTextField.h */,
+				10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */,
+			);
+			name = TextField;
+			sourceTree = "<group>";
+		};
+		10CA880C178DB50F00DF1B43 /* button */ = {
+			isa = PBXGroup;
+			children = (
+				10CA880D178DB54F00DF1B43 /* BCaddIssueButton.h */,
+				10CA880E178DB54F00DF1B43 /* BCaddIssueButton.m */,
+			);
+			name = button;
 			sourceTree = "<group>";
 		};
 		10CD6B151765BC2F00F64DC1 /* TextField */ = {
@@ -1084,6 +1110,8 @@
 				104105DF175770DE003B0B9F /* BCLoginView.m in Sources */,
 				10200107175E18E9005DD92F /* BCOrg.m in Sources */,
 				10CD6B1B1765BC4500F64DC1 /* BCTextField.m in Sources */,
+				10CA880B178D723E00DF1B43 /* BCAddIssueTextField.m in Sources */,
+				10CA880F178DB54F00DF1B43 /* BCaddIssueButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -144,6 +144,13 @@
     return unmutableLabels;
 }
 
+- (CGFloat)countCellHeight {
+  CGFloat height = 0;
+#warning _title size
+  
+  return height;
+}
+
 @end
 
 

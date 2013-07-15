@@ -8,14 +8,14 @@
 
 #import "BCRepositoryView.h"
 
-#define REPOSITORY_BG_COLOR  [UIColor colorWithRed:.11 green:.11 blue:.11 alpha:1.00]
-#define BACKGROUND_IMAGE        [UIImage imageNamed:@"repositories_gradient.png"]
+#define REPOSITORY_BG_COLOR             [UIColor colorWithRed:.11 green:.11 blue:.11 alpha:1.00]
+#define BACKGROUND_IMAGE                [UIImage imageNamed:@"repositories_gradient.png"]
 
-#define TABLE_VIEW_OFFSET         ( 50.0f )
+#define TABLE_VIEW_OFFSET               ( 50.0f )
 
-#define REPOSITORIES_FONT            [UIFont fontWithName:@"ProximaNova-Light" size:24]
-#define REPOSITORIES_FONT_COLOR      [UIColor colorWithRed:.44 green:.44 blue:.44 alpha:1.00]
-#define REPOSITORIES_SHADOW_FONT_COLOR      [UIColor blackColor]
+#define REPOSITORIES_FONT               [UIFont fontWithName:@"ProximaNova-Light" size:24]
+#define REPOSITORIES_FONT_COLOR         [UIColor colorWithRed:.44 green:.44 blue:.44 alpha:1.00]
+#define REPOSITORIES_SHADOW_FONT_COLOR  [UIColor blackColor]
 
 #define DONE_FONT            [UIFont fontWithName:@"ProximaNova-Light" size:13]
 #define DONE_FONT_COLOR      [UIColor whiteColor]

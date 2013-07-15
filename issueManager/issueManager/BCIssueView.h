@@ -10,6 +10,14 @@
 
 @interface BCIssueView : UIView
 
+@property UIImageView *backgroundImageView;
 @property UITableView *tableView;
+@property UIView *navigationBarView;
+@property UIButton *chooseCollaboratorButton;
+@property UIButton *addNewIssueButton;
+@property UILabel *userNameLabel;
+@property UILabel *userNameShadowLabel;
+
+-(id)initWithUserName:(NSString *)userName;
 
 @end

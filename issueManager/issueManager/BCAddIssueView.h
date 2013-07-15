@@ -10,16 +10,19 @@
 @class BCAddIssueViewController;
 @class BCUser;
 @class BCMilestone;
+@class BCaddIssueButton;
+@class BCAddIssueTextField;
 
 @interface BCAddIssueView : UIScrollView
 
-@property UIImageView *avatar;
-@property UIButton *assignee;
-@property UIButton *milestone;
-@property UITextView *labels;
-@property UITextField *title;
-@property UITextView *body;
-@property UIButton *labelsButton;
+@property UIImageView *backgroundImageView;
+@property UIView *navigationBarView;
+@property UIButton *cancelButton;
+@property UIButton *postButton;
+@property UILabel *theNewIssueLabel;
+@property UILabel *theNewIssueShadowLabel;
+@property UIImageView *issueForm;
+@property BCAddIssueTextField *issueTitle;
 
 -(id) initWithController:(BCAddIssueViewController *)controller;
 -(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSArray *)labels;

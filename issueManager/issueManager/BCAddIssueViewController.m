@@ -27,30 +27,33 @@
 @implementation BCAddIssueViewController
 
 - (id)initWithRepository:(BCRepository *)repository andController:(BCIssueViewController *)controller{
-    self = [super init];
-    if (self) {
-        _assignee = [[BCUser alloc] init];
-        _milestone = [[BCMilestone alloc] init];
-        _labels = [[NSArray alloc] init];
-        _repository = repository;
-        _myParentViewController = controller;
-        _isSetedAssignee = NO;
-        _isSetedMilestone = NO;
-        _isSetedLabel = NO;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    _assignee = [[BCUser alloc] init];
+    _milestone = [[BCMilestone alloc] init];
+    _labels = [[NSArray alloc] init];
+    _repository = repository;
+    _myParentViewController = controller;
+    _isSetedAssignee = NO;
+    _isSetedMilestone = NO;
+    _isSetedLabel = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+  }
+  return self;
 }
 
 -(void) loadView{
-    [super loadView];
-    _addIssueView = [[BCAddIssueView alloc] initWithController:self];
-    [_addIssueView.title setDelegate:self];
-    [_addIssueView.body setDelegate:self];
-    self.view = _addIssueView;
-    [self setItemsEditable:YES];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStylePlain target:self action:@selector(addNewIssueButtonAction)];
+  [super loadView];
+  _addIssueView = [[BCAddIssueView alloc] initWithController:self];
+//  [_addIssueView.title setDelegate:self];
+//  [_addIssueView.body setDelegate:self];
+  [_addIssueView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  self.view = _addIssueView;
+  [self setItemsEditable:YES];
+  
+  
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStylePlain target:self action:@selector(addNewIssueButtonAction)];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -59,6 +62,10 @@
 
 #pragma mark -
 #pragma mark ButtonActions
+
+-(void) cancelButtonDidPress{
+  [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void) selectLabel{
     [self createAndPushSelectMilestoneVC];
@@ -131,11 +138,11 @@
 }
 
 -(void)setItemsEditable:(BOOL)isEditable{
-    [_addIssueView.body setEditable:isEditable];
-    [_addIssueView.title setEnabled:isEditable];
-    [_addIssueView.assignee setEnabled:isEditable];
-    [_addIssueView.milestone setEnabled:isEditable];
-    [_addIssueView.labelsButton setEnabled:isEditable];
+//    [_addIssueView.body setEditable:isEditable];
+//    [_addIssueView.title setEnabled:isEditable];
+//    [_addIssueView.assignee setEnabled:isEditable];
+//    [_addIssueView.milestone setEnabled:isEditable];
+//    [_addIssueView.labelsButton setEnabled:isEditable];
 }
 
 -(NSDictionary *)createParameters{
@@ -143,14 +150,15 @@
     for(BCLabel *object in _labels){
         [labelsNames addObject:object.name];
     }
-    
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                _addIssueView.title.text ?: [NSNull null], @"title",
-                                _addIssueView.body.text ?: [NSNull null], @"body",
-                                _assignee.userLogin ?: [NSNull null], @"assignee",
-                                _milestone.number ?: [NSNull null], @"milestone",
-                                labelsNames ?: [NSNull null], @"labels",
-                                nil];
+  
+  NSDictionary *parameters = nil;
+//    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                                _addIssueView.title.text ?: [NSNull null], @"title",
+//                                _addIssueView.body.text ?: [NSNull null], @"body",
+//                                _assignee.userLogin ?: [NSNull null], @"assignee",
+//                                _milestone.number ?: [NSNull null], @"milestone",
+//                                labelsNames ?: [NSNull null], @"labels",
+//                                nil];
     return parameters;
 }
 
