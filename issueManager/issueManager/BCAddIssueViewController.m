@@ -19,6 +19,8 @@
 #import "BCLabel.h"
 #import "BCIssueViewController.h"
 #import "BCIssue.h"
+#import "BCAddIssueTextField.h"
+#import "BCaddIssueButton.h"
 
 @interface BCAddIssueViewController ()
 
@@ -29,14 +31,12 @@
 - (id)initWithRepository:(BCRepository *)repository andController:(BCIssueViewController *)controller{
   self = [super init];
   if (self) {
-    _assignee = [[BCUser alloc] init];
+    BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+    _assignee = currentUser;
     _milestone = [[BCMilestone alloc] init];
     _labels = [[NSArray alloc] init];
     _repository = repository;
     _myParentViewController = controller;
-    _isSetedAssignee = NO;
-    _isSetedMilestone = NO;
-    _isSetedLabel = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
   }
@@ -46,7 +46,9 @@
 -(void) loadView{
   [super loadView];
   _addIssueView = [[BCAddIssueView alloc] initWithController:self];
-//  [_addIssueView.title setDelegate:self];
+  [_addIssueView.issueTitle.textField setDelegate:self];
+  [_addIssueView.addMilestone addTarget:self action:@selector(createAndPushSelectMilestoneVC) forControlEvents:UIControlEventTouchUpInside];
+  [_addIssueView.addMilestone.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectMilestoneVC) forControlEvents:UIControlEventTouchUpInside];
 //  [_addIssueView.body setDelegate:self];
   [_addIssueView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   self.view = _addIssueView;
@@ -65,10 +67,6 @@
 
 -(void) cancelButtonDidPress{
   [self.navigationController popViewControllerAnimated:YES];
-}
-
--(void) selectLabel{
-    [self createAndPushSelectMilestoneVC];
 }
 
 -(void) selectAssignee{
@@ -163,14 +161,9 @@
 }
 
 #pragma mark -
-#pragma mark public
+#pragma mark BCSelectDataManagerProtocolMethods
 
 -(void)setNewAssignee:(BCUser *)assignee{
-    if(assignee.userId != 0){
-        [self setIsSetedAssignee:YES];
-    }else{
-        [self setIsSetedAssignee:NO];
-    }
     _assignee = assignee;
 }
 
@@ -179,11 +172,6 @@
 }
 
 -(void)setNewMilestone:(BCMilestone *)milestone{
-    if(milestone.number != 0){
-        [self setIsSetedMilestone:YES];
-    }else{
-        [self setIsSetedMilestone:NO];
-    }
     _milestone = milestone;
 }
 
@@ -192,11 +180,6 @@
 }
 
 -(void)setNewLables:(NSArray *)labels{
-    if([labels count] != 0){
-        [self setIsSetedLabel:YES];
-    }else{
-        [self setIsSetedLabel:NO];
-    }
     _labels = labels;
 }
 

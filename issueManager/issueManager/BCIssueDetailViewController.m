@@ -213,9 +213,9 @@
 
 -(void)setNewMilestone:(BCMilestone *)milestone{
     if(milestone != NULL){
-        [self setIsSetedAssignee:YES];
+        [self setIsSetedMilestone:YES];
     }else{
-        [self setIsSetedAssignee:NO];
+        [self setIsSetedMilestone:NO];
     }
     [_editedIssue setMilestone:milestone];
 }

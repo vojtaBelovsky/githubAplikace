@@ -10,6 +10,8 @@
 @class BCMilestone;
 
 @interface BCSelectMilestoneCell : UITableViewCell
+@property UIImageView *separatorImgView;
+@property UILabel *myTextLabel;
 
 + (BCSelectMilestoneCell *)createMilestoneCellWithTableView:(UITableView *)tableView;
 + (BCSelectMilestoneCell *)createDeleteCellWithTableView:(UITableView *)tableView;

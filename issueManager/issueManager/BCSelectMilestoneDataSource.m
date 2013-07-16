@@ -26,11 +26,11 @@
     BCSelectMilestoneCell *cell;
     if([indexPath row] == ([_milestones count]-1) ){
         cell = [BCSelectMilestoneCell createDeleteCellWithTableView:tableView];
-        cell.textLabel.text = NSLocalizedString(@"unselect milestone", @"");
+        cell.myTextLabel.text = NSLocalizedString(@"unselect milestone", @"");
     }else{
         cell = [BCSelectMilestoneCell createMilestoneCellWithTableView:tableView];
         BCMilestone *myMilestone = [_milestones objectAtIndex:indexPath.row];
-        cell.textLabel.text = NSLocalizedString(myMilestone.title , @"");
+        cell.myTextLabel.text = NSLocalizedString(myMilestone.title , @"");
     }
     return cell;
 }

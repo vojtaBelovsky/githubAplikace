@@ -23,6 +23,7 @@
 @property UILabel *theNewIssueShadowLabel;
 @property UIImageView *issueForm;
 @property BCAddIssueTextField *issueTitle;
+@property BCaddIssueButton *addMilestone;
 
 -(id) initWithController:(BCAddIssueViewController *)controller;
 -(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSArray *)labels;

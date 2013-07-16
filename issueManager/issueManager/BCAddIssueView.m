@@ -19,8 +19,10 @@
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
 #define NEW_ISSUE_SEPARATOR           [UIImage imageNamed:@"newIssueSeparator.png"]
 
+#define NEW_ISSUE_FORM_WIDTH          ( 300.0f )
+#define NEW_ISSUE_FORM_HEIGHT         ( 300.0f )
 #define NEW_ISSUE_FORM_OFFSET         ( 50.0f )
-#define NEW_ISSUE_FORM_LINE_WIDTH     ( 290.0f )
+#define NEW_ISSUE_FORM_LINE_WIDTH     ( 292.0f )
 #define NEW_ISSUE_FORM_LINE_HEIGHT    ( 40.0f )
 
 #define NEW_ISSUE_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
@@ -87,6 +89,9 @@
       _issueTitle = [[BCAddIssueTextField alloc] initWithSize:lineSize Title:@"Title:"];
       [self addSubview:_issueTitle];
       
+      _addMilestone = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Milestone:"];
+      [self addSubview:_addMilestone];
+      
     }
     return self;
 }
@@ -104,16 +109,13 @@
 //        [_assignee setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //    }
 //    
-//    if(milestone.number != 0){
-//        [_milestone setTitle:milestone.title forState:UIControlStateNormal];
-//        [_milestone setBackgroundColor:[UIColor whiteColor]];
-//        [_milestone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    }else{
-//        [_milestone setTitle:@"no milestone is assigned" forState:UIControlStateNormal];
-//        [_milestone setBackgroundColor:[UIColor grayColor]];
-//        [_milestone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    }
-//    
+    if(milestone.number != 0){
+      [_addMilestone setMilestoneLabelWithMilestone:milestone];
+      //musi zmizet plusko
+    }else{
+      //musi ze zobrazit plusko
+    }
+//
 //    if(labels.count != 0){
 //        NSMutableString *labelsInString = [[NSMutableString alloc] init];
 //        for(BCLabel *object in labels){
@@ -169,16 +171,21 @@
     _postButton.frame = frame;
   }
   
-  frame.size = CGSizeMake(300, 400);
+  frame.size = CGSizeMake(NEW_ISSUE_FORM_WIDTH, NEW_ISSUE_FORM_HEIGHT);
   frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, NEW_ISSUE_FORM_OFFSET);
   if(! CGRectEqualToRect(_issueForm.frame, frame)){
     _issueForm.frame = frame;
   }
   
   frame.size = CGSizeMake(NEW_ISSUE_FORM_LINE_WIDTH, NEW_ISSUE_FORM_LINE_HEIGHT);
-  //frame.origin = CGPointMake((self.frame.size.width-NEW_ISSUE_FORM_LINE_WIDTH)/2, frame)
+  frame.origin = CGPointMake((self.frame.size.width-NEW_ISSUE_FORM_LINE_WIDTH)/2, frame.origin.y+4);
   if(! CGRectEqualToRect(_issueTitle.frame, frame)){
     _issueTitle.frame = frame;
+  }
+  
+  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+NEW_ISSUE_FORM_LINE_HEIGHT);
+  if(! CGRectEqualToRect(_addMilestone.frame, frame)){
+    _addMilestone.frame = frame;
   }
 }
 

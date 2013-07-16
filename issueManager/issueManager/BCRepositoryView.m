@@ -26,46 +26,47 @@
 #pragma mark LifeCycles
 
 - (id)init {
-    self = [super init];
-    if ( self ) {      
-      UIImage *resizeableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:8 topCapHeight:44];
-      _backgroundImageView = [[UIImageView alloc] initWithImage:resizeableImage];
-      [self addSubview:_backgroundImageView];
-      
-      _repositoryLabelShadow = [[UILabel alloc] init];
-      _repositoryLabelShadow.numberOfLines = 0;
-      _repositoryLabelShadow.font = REPOSITORIES_FONT;
-      _repositoryLabelShadow.textColor = REPOSITORIES_SHADOW_FONT_COLOR;
-      _repositoryLabelShadow.backgroundColor = [UIColor clearColor];
-      [_repositoryLabelShadow setText:@"Repositories"];
-      [self addSubview:_repositoryLabelShadow];
-      
-      _repositoryLabel = [[UILabel alloc] init];
-      _repositoryLabel.numberOfLines = 0;
-      _repositoryLabel.font = REPOSITORIES_FONT;
-      _repositoryLabel.textColor = REPOSITORIES_FONT_COLOR;
-      _repositoryLabel.backgroundColor = [UIColor clearColor];
-      [_repositoryLabel setText:@"Repositories"];
-      [self addSubview:_repositoryLabel];
-      
-      _doneButton = [[UIButton alloc] init];
-      _doneButton.titleLabel.numberOfLines = 0;
-      _doneButton.titleLabel.font = DONE_FONT;
-      _doneButton.titleLabel.textColor = DONE_FONT_COLOR;
-      _doneButton.titleLabel.backgroundColor = [UIColor clearColor];
-      [_doneButton setTitle:@"DONE" forState:UIControlStateNormal];
-      [_doneButton setEnabled:YES];
-      [self addSubview:_doneButton];
-      
-      _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
-      [_tableView setAllowsMultipleSelection:YES];
-      [self addSubview:_tableView];
-      _tableView.backgroundColor = REPOSITORY_BG_COLOR;
-      [self setBackgroundColor:REPOSITORY_BG_COLOR];
-      _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
+  self = [super init];
+  if ( self ) {
+    UIImage *resizeableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:8 topCapHeight:44];
+    _backgroundImageView = [[UIImageView alloc] initWithImage:resizeableImage];
+    [self addSubview:_backgroundImageView];
     
-    return self;
+    _repositoryLabelShadow = [[UILabel alloc] init];
+    _repositoryLabelShadow.numberOfLines = 0;
+    _repositoryLabelShadow.font = REPOSITORIES_FONT;
+    _repositoryLabelShadow.textColor = REPOSITORIES_SHADOW_FONT_COLOR;
+    _repositoryLabelShadow.backgroundColor = [UIColor clearColor];
+    [_repositoryLabelShadow setText:@"Repositories"];
+    [self addSubview:_repositoryLabelShadow];
+    
+    _repositoryLabel = [[UILabel alloc] init];
+    _repositoryLabel.numberOfLines = 0;
+    _repositoryLabel.font = REPOSITORIES_FONT;
+    _repositoryLabel.textColor = REPOSITORIES_FONT_COLOR;
+    _repositoryLabel.backgroundColor = [UIColor clearColor];
+    [_repositoryLabel setText:@"Repositories"];
+    [self addSubview:_repositoryLabel];
+    
+    _doneButton = [[UIButton alloc] init];
+    _doneButton.titleLabel.numberOfLines = 0;
+    _doneButton.titleLabel.font = DONE_FONT;
+    _doneButton.titleLabel.textColor = DONE_FONT_COLOR;
+    _doneButton.titleLabel.backgroundColor = [UIColor clearColor];
+    [_doneButton setTitle:@"DONE" forState:UIControlStateNormal];
+    [_doneButton setEnabled:YES];
+    [self addSubview:_doneButton];
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+    [_tableView setAllowsMultipleSelection:YES];
+    _tableView.backgroundColor = REPOSITORY_BG_COLOR;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self addSubview:_tableView];
+    
+    [self setBackgroundColor:REPOSITORY_BG_COLOR];
+  }
+  
+  return self;
 }
 
 - (void)layoutSubviews {

@@ -25,9 +25,6 @@
 
 @property BCIssueViewController *myParentViewController;
 @property BCUser *assignee;
-@property BOOL isSetedAssignee;
-@property BOOL isSetedMilestone;
-@property BOOL isSetedLabel;
 
 - (id)initWithRepository:(BCRepository *)repository andController:(BCIssueViewController *)controller;
 
