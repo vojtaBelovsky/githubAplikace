@@ -20,6 +20,7 @@
     BCSelectMilestoneView *_tableView;
     BCSelectMilestoneDataSource *_dataSource;
     UIViewController<BCSelectDataManager> *_controller;
+    NSIndexPath *_checkedMilestone;
 }
 
 - (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller;

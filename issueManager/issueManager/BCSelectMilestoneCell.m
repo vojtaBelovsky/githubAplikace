@@ -30,18 +30,17 @@
       cell = [[BCSelectMilestoneCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SelectMilestoneCellReuseIdentifier];
       CGRect frame;
       
-      UIImageView *imageView;
-      imageView = [[UIImageView alloc] initWithImage:NEW_ISSUE_CHECK_OFF highlightedImage:NEW_ISSUE_CHECK_ON];
-      frame.origin = CGPointMake(cell.frame.size.width - (CHECKBOX_OFFSET+imageView.frame.size.width), (cell.frame.size.height-imageView.frame.size.height)/2);
-      frame.size = imageView.frame.size;
-      imageView.frame = frame;
-      [cell addSubview:imageView];
+      cell.checkboxImgView = [[UIImageView alloc] initWithImage:NEW_ISSUE_CHECK_OFF highlightedImage:NEW_ISSUE_CHECK_ON];
+      frame.origin = CGPointMake(cell.frame.size.width - (CHECKBOX_OFFSET+cell.checkboxImgView.frame.size.width), (cell.frame.size.height-cell.checkboxImgView.frame.size.height)/2);
+      frame.size = cell.checkboxImgView.frame.size;
+      cell.checkboxImgView.frame = frame;
+      [cell addSubview:cell.checkboxImgView];
       
       cell.myTextLabel = [[UILabel alloc] init];
       cell.myTextLabel.font = CELL_FONT;
       cell.myTextLabel.textColor = FONT_COLOR;
       frame.size = cell.frame.size;
-      frame.size.width = frame.size.width - ((2*CHECKBOX_OFFSET)+imageView.frame.size.width);
+      frame.size.width = frame.size.width - ((2*CHECKBOX_OFFSET)+cell.checkboxImgView.frame.size.width);
       frame.origin = CGPointMake(15, (cell.frame.size.height-frame.size.height)/2);
       [cell.myTextLabel setFrame:frame];
       [cell.myTextLabel setBackgroundColor:[UIColor clearColor]];
@@ -57,15 +56,6 @@
       [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
       cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
       [cell.selectedBackgroundView setBackgroundColor:[UIColor clearColor]];
-    }
-    return cell;
-}
-
-+ (BCSelectMilestoneCell *)createDeleteCellWithTableView:(UITableView *)tableView {
-    BCSelectMilestoneCell *cell = [tableView dequeueReusableCellWithIdentifier:DeleteMilestoneCellReuseIdentifier];
-    if ( !cell ) {
-        cell = [[BCSelectMilestoneCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DeleteMilestoneCellReuseIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     return cell;
 }

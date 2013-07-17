@@ -17,15 +17,15 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "issueManager/BCSelectMilestoneViewController.m"
-         timestampString = "395676771.426111"
+         timestampString = "395758666.720247"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "80"
-         endingLineNumber = "80"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,12 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "issueManager/BCSelectMilestoneViewController.m"
-         timestampString = "395676772.448049"
+         timestampString = "395757997.431236"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "83"
-         endingLineNumber = "83"
-         landmarkName = "-tableView:didDeselectRowAtIndexPath:"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
+         landmarkName = "-createModel"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -12,6 +12,9 @@
 #import "BCSelectMilestoneView.h"
 #import "BCSelectDataManager.h"
 #import "BCMilestone.h"
+#import "BCSelectMilestoneCell.h"
+
+#define NEW_ISSUE_CHECK_ON            [UIImage imageNamed:@"newIssueCheckOn.png"]
 
 @interface BCSelectMilestoneViewController ()
 
@@ -47,11 +50,14 @@
   [BCRepository getAllMilestonesOfRepository:_repository withSuccess:^(NSArray *allMilestones) {
     _dataSource = [[BCSelectMilestoneDataSource alloc] initWithMilestones:allMilestones];
     [_tableView.tableView setDataSource:_dataSource];
-    if([_controller getMilestone].number != 0){
-      [_dataSource setIsSelectedMilestone:YES];
-      [_tableView.tableView selectRowAtIndexPath:[self getIndexPathOfSelectedRow] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    [_tableView.tableView reloadData];
+    if([_controller getMilestone] == nil){
+      _checkedMilestone = nil;
     }else{
-      [_dataSource setIsSelectedMilestone:NO];
+      _checkedMilestone = [self getIndexPathOfSelectedRow];
+      BCSelectMilestoneCell *myCell= (BCSelectMilestoneCell*)[_tableView.tableView cellForRowAtIndexPath:_checkedMilestone];
+      [myCell.checkboxImgView setHighlightedImage:NEW_ISSUE_CHECK_ON];
+      [myCell.checkboxImgView setHighlighted:YES];
     }
     [_tableView.tableView reloadData];
   } failure:^(NSError *error) {
@@ -72,16 +78,25 @@
 }
 
 -(void) doneButtonDidPress{
-  NSInteger selectedRow = [_tableView.tableView indexPathForSelectedRow].row;
-  [_controller setNewMilestone:[_dataSource.milestones objectAtIndex:selectedRow]];
+  if (_checkedMilestone == nil) {
+    [_controller setNewMilestone:nil];
+  }else{
+    [_controller setNewMilestone:[_dataSource.milestones objectAtIndex:_checkedMilestone.row]];
+  }
   [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  
-}
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-  
+  if (_checkedMilestone == nil) {
+    _checkedMilestone = indexPath;
+  }else{
+    if (_checkedMilestone.row == indexPath.row) {
+      [tableView deselectRowAtIndexPath:indexPath animated:YES];
+      _checkedMilestone = nil;
+    }else{
+      _checkedMilestone = indexPath;
+    }
+  }
 }
 
 @end

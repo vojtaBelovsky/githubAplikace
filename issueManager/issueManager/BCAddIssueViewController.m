@@ -33,7 +33,7 @@
   if (self) {
     BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
     _assignee = currentUser;
-    _milestone = [[BCMilestone alloc] init];
+    _milestone = nil;
     _labels = [[NSArray alloc] init];
     _repository = repository;
     _myParentViewController = controller;

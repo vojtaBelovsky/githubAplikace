@@ -12,6 +12,7 @@
 @interface BCSelectMilestoneCell : UITableViewCell
 @property UIImageView *separatorImgView;
 @property UILabel *myTextLabel;
+@property UIImageView *checkboxImgView;
 
 + (BCSelectMilestoneCell *)createMilestoneCellWithTableView:(UITableView *)tableView;
 + (BCSelectMilestoneCell *)createDeleteCellWithTableView:(UITableView *)tableView;
