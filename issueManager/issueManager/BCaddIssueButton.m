@@ -15,6 +15,7 @@
 #define TITLE_FONT            [UIFont fontWithName:@"ProximaNova-Regular" size:14]
 
 #define TITLE_OFFSET              ( 15.0f )
+#define NEW_PLUS_OFFSET           ( 30.0f )
 #define MAXIMUM_MILESTONE_WIDTH   ( 150.0f )
 #define TEXT_HEIGHT               ( 15.0f )
 
@@ -42,6 +43,16 @@
     _milestoneLabel = [[UILabel alloc] init];
     [_milestoneLabel setNumberOfLines:1];
     _milestoneLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    [_milestoneLabel setTextColor:CONTENT_FONT_COLOR];
+    [_milestoneLabel setFont:TITLE_FONT];
+    [_milestoneLabel setTextAlignment:NSTextAlignmentCenter];
+    frame.size = CGSizeMake(MAXIMUM_MILESTONE_WIDTH, TEXT_HEIGHT);
+    frame.origin = CGPointMake((_myTitleLabel.frame.size.width+(2*TITLE_OFFSET)), (size.height-frame.size.height)/2);
+    _milestoneLabel.frame = frame;
+    _rectOfMilestoneLabelWithPlus = frame;
+    _rectOfMilestoneLabelWithoutPlus = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width+(NEW_PLUS_OFFSET), frame.size.height);
+    [_milestoneLabel setBackgroundColor:[UIColor clearColor]];
+    [self addSubview:_milestoneLabel];
     
     _theNewIssuePlus = [[UIButton alloc] init];
     [_theNewIssuePlus setImage:NEW_ISSUE_PLUS_OFF forState:UIControlStateNormal];
@@ -49,6 +60,7 @@
     frame.size = [_theNewIssuePlus sizeThatFits:size];
     frame.origin = CGPointMake((size.width-frame.size.width)-TITLE_OFFSET, (size.height-frame.size.height)/2);
     _theNewIssuePlus.frame = frame;
+    _rectOfNewIssuePlus = frame;
     [self addSubview:_theNewIssuePlus];
     
     UIImage *image = [NEW_ISSUE_SEPARATOR stretchableImageWithLeftCapWidth:0 topCapHeight:1];
@@ -61,16 +73,14 @@
 }
 
 -(void) setMilestoneLabelWithMilestone:(BCMilestone *)milestone{
+  if ([milestone.title length] != 0) {
+    [_theNewIssuePlus setFrame:CGRectZero];
+    [_milestoneLabel setFrame:_rectOfMilestoneLabelWithoutPlus];
+  }else{
+    [_theNewIssuePlus setFrame:_rectOfNewIssuePlus];
+    [_milestoneLabel setFrame:_rectOfMilestoneLabelWithPlus];
+  }
   [_milestoneLabel setText:milestone.title];
-  [_milestoneLabel setTextColor:CONTENT_FONT_COLOR];
-  [_milestoneLabel setFont:TITLE_FONT];
-  [_milestoneLabel setTextAlignment:NSTextAlignmentCenter];
-
-  CGRect frame;
-  frame.size = CGSizeMake(self.frame.size.width-(self.myTitleLabel.frame.size.width+self.theNewIssuePlus.frame.size.width+(4*TITLE_OFFSET)), TEXT_HEIGHT);
-  frame.origin = CGPointMake(self.myTitleLabel.frame.size.width+(2*TITLE_OFFSET), (self.frame.size.height-frame.size.height)/2);
-  _milestoneLabel.frame = frame;
-  [self addSubview:_milestoneLabel];
 }
 
 @end

@@ -39,7 +39,7 @@
 }
 
 - (void)loadView {
-  [super loadView];
+//  [super loadView];
   self.navigationController.navigationBarHidden = YES;
   [self.navigationItem setHidesBackButton:YES];
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonDidPress)];

@@ -92,6 +92,8 @@
       _addMilestone = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Milestone:"];
       [self addSubview:_addMilestone];
       
+      _selectAssignee = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Assigned:"];
+      
     }
     return self;
 }
@@ -109,12 +111,7 @@
 //        [_assignee setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //    }
 //    
-    if(milestone.number != 0){
-      [_addMilestone setMilestoneLabelWithMilestone:milestone];
-      //musi zmizet plusko
-    }else{
-      //musi ze zobrazit plusko
-    }
+  [_addMilestone setMilestoneLabelWithMilestone:milestone];
 //
 //    if(labels.count != 0){
 //        NSMutableString *labelsInString = [[NSMutableString alloc] init];

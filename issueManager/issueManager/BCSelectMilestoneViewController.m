@@ -15,6 +15,7 @@
 #import "BCSelectMilestoneCell.h"
 
 #define NEW_ISSUE_CHECK_ON            [UIImage imageNamed:@"newIssueCheckOn.png"]
+#define NEW_ISSUE_CHECK_OFF           [UIImage imageNamed:@"newIssueCheckOff.png"]
 
 @interface BCSelectMilestoneViewController ()
 
@@ -32,15 +33,26 @@
   return self;
 }
 
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
+-(void)loadView{
   _tableView = [[BCSelectMilestoneView alloc] init];
   [_tableView.tableView setDelegate:self];
   [self setView:_tableView];
   [_tableView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_tableView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [self createModel];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+  BCSelectMilestoneCell *myCell= (BCSelectMilestoneCell*)[_tableView.tableView cellForRowAtIndexPath:_checkedMilestone];
+  [myCell setSelected:YES];
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+  if( _checkedMilestone != nil){
+    if (indexPath.row == _checkedMilestone.row) {
+      [cell setSelected:YES];
+    }
+  }
 }
 
 #pragma mark -
@@ -55,15 +67,17 @@
       _checkedMilestone = nil;
     }else{
       _checkedMilestone = [self getIndexPathOfSelectedRow];
-      BCSelectMilestoneCell *myCell= (BCSelectMilestoneCell*)[_tableView.tableView cellForRowAtIndexPath:_checkedMilestone];
-      [myCell.checkboxImgView setHighlightedImage:NEW_ISSUE_CHECK_ON];
-      [myCell.checkboxImgView setHighlighted:YES];
+//      BCSelectMilestoneCell *myCell= (BCSelectMilestoneCell*)[_tableView.tableView cellForRowAtIndexPath:_checkedMilestone];
+//      [myCell.checkboxImgView setImage:NEW_ISSUE_CHECK_ON];
+      _isSelectedFromBegining = YES;
     }
     [_tableView.tableView reloadData];
   } failure:^(NSError *error) {
     NSLog(@"fail");
   }];
 }
+
+
 
 -(NSIndexPath*)getIndexPathOfSelectedRow{
   NSUInteger row = [_dataSource.milestones indexOfObject:[_controller getMilestone]];
@@ -94,6 +108,7 @@
       [tableView deselectRowAtIndexPath:indexPath animated:YES];
       _checkedMilestone = nil;
     }else{
+      [[tableView cellForRowAtIndexPath:_checkedMilestone] setSelected:NO];
       _checkedMilestone = indexPath;
     }
   }

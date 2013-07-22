@@ -49,7 +49,7 @@
 }
 
 - (void)loadView {
-  [super loadView];
+//  [super loadView];
   BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
   _tableView = [[BCIssueView alloc] initWithUserName:currentUser.userLogin];
   [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchDown];

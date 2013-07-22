@@ -61,7 +61,7 @@
 }
 
 -(void) loadView{
-    [super loadView];
+//    [super loadView];
     _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue andController:self];
     [_issueDetailview.title setDelegate:self];
     [_issueDetailview.body setDelegate:self];

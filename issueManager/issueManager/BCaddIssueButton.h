@@ -13,8 +13,11 @@
 
 @property UILabel *myTitleLabel;
 @property UIButton *theNewIssuePlus;
+@property CGRect rectOfNewIssuePlus;
 @property UIImageView *separatorImgView;
 @property UILabel *milestoneLabel;
+@property CGRect rectOfMilestoneLabelWithPlus;
+@property CGRect rectOfMilestoneLabelWithoutPlus;
 @property (getter = havePlus) BOOL showPlus;
 
 - (id)initWithSize:(CGSize)size andTitle:(NSString *)title;

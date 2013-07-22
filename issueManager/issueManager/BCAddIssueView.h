@@ -25,6 +25,8 @@
 @property BCAddIssueTextField *issueTitle;
 @property BCaddIssueButton *addMilestone;
 
+@property BCaddIssueButton *selectAssignee;
+
 -(id) initWithController:(BCAddIssueViewController *)controller;
 -(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSArray *)labels;
 

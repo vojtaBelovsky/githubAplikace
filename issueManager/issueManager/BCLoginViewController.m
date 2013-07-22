@@ -42,8 +42,8 @@
 
 
 - (void)loadView {
-  [super loadView];
-    
+//  [super loadView];
+  
   //
   // ------------ uncomment - will log in last user automaticly ------------
   //

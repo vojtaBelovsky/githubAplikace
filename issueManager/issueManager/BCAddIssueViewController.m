@@ -44,7 +44,7 @@
 }
 
 -(void) loadView{
-  [super loadView];
+//  [super loadView];
   _addIssueView = [[BCAddIssueView alloc] initWithController:self];
   [_addIssueView.issueTitle.textField setDelegate:self];
   [_addIssueView.addMilestone addTarget:self action:@selector(createAndPushSelectMilestoneVC) forControlEvents:UIControlEventTouchUpInside];
