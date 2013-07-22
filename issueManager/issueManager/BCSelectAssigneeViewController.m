@@ -30,16 +30,13 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    _tableView = [[BCSelectAssigneeView alloc] init];
-    [_tableView.tableView setDelegate:self];
-    [self setView:_tableView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"select" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonAction)];
-    [self createModel];
-    
-	// Do any additional setup after loading the view.
+-(void)loadView{  
+  _BCSelectAssigneView = [[BCSelectAssigneeView alloc] init];
+  [_BCSelectAssigneView.tableView setDelegate:self];
+  [self setView:_BCSelectAssigneView];
+  [_BCSelectAssigneView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  [_BCSelectAssigneView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  [self createModel];
 }
 
 #pragma mark -
@@ -48,14 +45,14 @@
 -(void)createModel{
     [BCRepository getAllCollaboratorsOfRepository:_repository withSuccess:^(NSArray *allCollaborators) {
         _dataSource = [[BCSelectAssigneeDataSource alloc] initWithCollaborators:allCollaborators];
-        [_tableView.tableView setDataSource:_dataSource];
+        [_BCSelectAssigneView.tableView setDataSource:_dataSource];
         if([_controller getAssignee].userId != 0){
             [_dataSource setIsSelectedAssignee:YES];
-            [_tableView.tableView selectRowAtIndexPath:[self getIndexPathOfSelectedRow] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            [_BCSelectAssigneView.tableView selectRowAtIndexPath:[self getIndexPathOfSelectedRow] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         }else{
             [_dataSource setIsSelectedAssignee:NO];
         }
-        [_tableView.tableView reloadData];
+        [_BCSelectAssigneView.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"fail");
     }];
@@ -69,10 +66,28 @@
 #pragma mark -
 #pragma mark buttonActions
 
--(void) selectButtonAction{
-    NSInteger selectedRow = [_tableView.tableView indexPathForSelectedRow].row;
+-(void) cancelButtonDidPress{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void) doneButtonDidPress{
+    NSInteger selectedRow = [_BCSelectAssigneView.tableView indexPathForSelectedRow].row;
     [_controller setNewAssignee:[_dataSource.collaborators objectAtIndex:selectedRow]];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  if (_checkedAssignee == nil) {
+    _checkedAssignee = indexPath;
+  }else{
+    if (_checkedAssignee.row == indexPath.row) {
+      [tableView deselectRowAtIndexPath:indexPath animated:YES];
+      _checkedAssignee = nil;
+    }else{
+      [[tableView cellForRowAtIndexPath:_checkedAssignee] setSelected:NO];
+      _checkedAssignee = indexPath;
+    }
+  }
 }
 
 @end

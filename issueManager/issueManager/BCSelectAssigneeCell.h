@@ -11,6 +11,12 @@
 
 @interface BCSelectAssigneeCell : UITableViewCell
 
-+ (BCSelectAssigneeCell *)createDeleteCellWithTableView:(UITableView *)tableView;
+@property UIImageView *separatorImgView;
+@property UIImageView *avatarImgView;
+@property UILabel *myTextLabel;
+@property UIImageView *checkboxImgView;
+
+
+
 + (BCSelectAssigneeCell *)createAssigneCellWithTableView:(UITableView *)tableView;
 @end

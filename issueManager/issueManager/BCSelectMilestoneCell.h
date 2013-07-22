@@ -15,6 +15,5 @@
 @property UIImageView *checkboxImgView;
 
 + (BCSelectMilestoneCell *)createMilestoneCellWithTableView:(UITableView *)tableView;
-+ (BCSelectMilestoneCell *)createDeleteCellWithTableView:(UITableView *)tableView;
 
 @end

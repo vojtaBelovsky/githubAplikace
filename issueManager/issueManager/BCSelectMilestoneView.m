@@ -8,8 +8,6 @@
 
 #import "BCSelectMilestoneView.h"
 
-@implementation BCSelectMilestoneView
-
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
 #define NEW_ISSUE_SEPARATOR           [UIImage imageNamed:@"newIssueSeparator.png"]
@@ -28,6 +26,8 @@
 
 #define DONE_AND_CANCEL_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:14]
 #define DONE_AND_CANCEL_FONT_COLOR    [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
+
+@implementation BCSelectMilestoneView
 
 - (id)init
 {

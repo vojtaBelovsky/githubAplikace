@@ -34,17 +34,12 @@
 }
 
 -(void)loadView{
-  _tableView = [[BCSelectMilestoneView alloc] init];
-  [_tableView.tableView setDelegate:self];
-  [self setView:_tableView];
-  [_tableView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-  [_tableView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  _selectMilestoneView = [[BCSelectMilestoneView alloc] init];
+  [_selectMilestoneView.tableView setDelegate:self];
+  [self setView:_selectMilestoneView];
+  [_selectMilestoneView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  [_selectMilestoneView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [self createModel];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-  BCSelectMilestoneCell *myCell= (BCSelectMilestoneCell*)[_tableView.tableView cellForRowAtIndexPath:_checkedMilestone];
-  [myCell setSelected:YES];
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -61,17 +56,14 @@
 -(void)createModel{
   [BCRepository getAllMilestonesOfRepository:_repository withSuccess:^(NSArray *allMilestones) {
     _dataSource = [[BCSelectMilestoneDataSource alloc] initWithMilestones:allMilestones];
-    [_tableView.tableView setDataSource:_dataSource];
-    [_tableView.tableView reloadData];
+    [_selectMilestoneView.tableView setDataSource:_dataSource];
+    [_selectMilestoneView.tableView reloadData];
     if([_controller getMilestone] == nil){
       _checkedMilestone = nil;
     }else{
       _checkedMilestone = [self getIndexPathOfSelectedRow];
-//      BCSelectMilestoneCell *myCell= (BCSelectMilestoneCell*)[_tableView.tableView cellForRowAtIndexPath:_checkedMilestone];
-//      [myCell.checkboxImgView setImage:NEW_ISSUE_CHECK_ON];
-      _isSelectedFromBegining = YES;
     }
-    [_tableView.tableView reloadData];
+    [_selectMilestoneView.tableView reloadData];
   } failure:^(NSError *error) {
     NSLog(@"fail");
   }];

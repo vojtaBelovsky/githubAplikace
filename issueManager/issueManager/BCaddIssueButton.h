@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @class BCMilestone;
+@class BCAddIssueContentImgView;
+@class BCUser;
 
 @interface BCaddIssueButton : UIButton
 
@@ -18,8 +20,16 @@
 @property UILabel *milestoneLabel;
 @property CGRect rectOfMilestoneLabelWithPlus;
 @property CGRect rectOfMilestoneLabelWithoutPlus;
-@property (getter = havePlus) BOOL showPlus;
+
+@property BCAddIssueContentImgView *assigneImgView;
+
+@property BCAddIssueContentImgView *contentImgView;
+
+-(void) setContentWithAssignee:(BCUser*)assignee;
+-(void) setContentWithMilestone:(BCMilestone *)milestone;
 
 - (id)initWithSize:(CGSize)size andTitle:(NSString *)title;
 -(void) setMilestoneLabelWithMilestone:(BCMilestone *)milestone;
+-(void) setAssigneeLabelWithAssignee:(BCUser*)assignee;
+
 @end

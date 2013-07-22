@@ -9,40 +9,35 @@
 #import "BCSelectAssigneeDataSource.h"
 #import "BCSelectAssigneeCell.h"
 #import "BCUser.h"
+#import "UIImageView+AFNetworking.h"
+
+#define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
 
 @implementation BCSelectAssigneeDataSource
 
 - (id)initWithCollaborators:(NSArray *)collaborators
 {
-    self = [super init];
-    if (self) {
-        _collaborators = [[NSMutableArray alloc] initWithArray:collaborators];
-        [_collaborators addObject:[[BCUser alloc] init]];
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    _collaborators = [[NSMutableArray alloc] initWithArray:collaborators];
+    [_collaborators addObject:[[BCUser alloc] init]];
+  }
+  return self;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    BCSelectAssigneeCell *cell;    
-    if ( indexPath.row == ( _collaborators.count - 1 ) ) {
-        cell = [BCSelectAssigneeCell createDeleteCellWithTableView:tableView];
-        cell.textLabel.text = NSLocalizedString( @"Unselect assignee", @"" );
-    } else {
-        BCUser *user = [_collaborators objectAtIndex:indexPath.row];
-        cell = [BCSelectAssigneeCell createAssigneCellWithTableView:tableView];
-        cell.textLabel.text = user.userLogin;
-    }
-    
-    return cell;
+  
+  BCSelectAssigneeCell *cell;
+  BCUser *user = [_collaborators objectAtIndex:indexPath.row];
+  cell = [BCSelectAssigneeCell createAssigneCellWithTableView:tableView];
+  [cell.avatarImgView setImageWithURL:user.avatarUrl placeholderImage:PLACEHOLDER_IMG];
+  cell.myTextLabel.text = user.userLogin;
+  
+  return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(_isSelectedAssignee){
-        return _collaborators.count;
-    }else{
-        return _collaborators.count-1;
-    }
+  return _collaborators.count;
 }
 
 @end

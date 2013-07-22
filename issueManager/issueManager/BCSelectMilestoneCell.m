@@ -10,7 +10,6 @@
 #import "BCMilestone.h"
 
 #define SelectMilestoneCellReuseIdentifier @"SelectMilestoneCellReuseIdentifier"
-#define DeleteMilestoneCellReuseIdentifier @"DeleteMilestoneCellReuseIdentifier"
 
 
 #define FONT_COLOR        [UIColor colorWithRed:.56 green:.56 blue:.56 alpha:1.00]

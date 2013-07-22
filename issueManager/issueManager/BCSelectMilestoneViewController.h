@@ -17,11 +17,10 @@
 @interface BCSelectMilestoneViewController : UIViewController<UITableViewDelegate>{
 @private
     BCRepository *_repository;
-    BCSelectMilestoneView *_tableView;
+    BCSelectMilestoneView *_selectMilestoneView;
     BCSelectMilestoneDataSource *_dataSource;
     UIViewController<BCSelectDataManager> *_controller;
     NSIndexPath *_checkedMilestone;
-  BOOL _isSelectedFromBegining;
 }
 
 - (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller;

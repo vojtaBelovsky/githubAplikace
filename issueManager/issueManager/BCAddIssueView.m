@@ -93,6 +93,7 @@
       [self addSubview:_addMilestone];
       
       _selectAssignee = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Assigned:"];
+      [self addSubview:_selectAssignee];
       
     }
     return self;
@@ -111,7 +112,11 @@
 //        [_assignee setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //    }
 //    
-  [_addMilestone setMilestoneLabelWithMilestone:milestone];
+  [_addMilestone setContentWithMilestone:milestone];
+  
+  [_selectAssignee setContentWithAssignee:assignee];
+  
+  
 //
 //    if(labels.count != 0){
 //        NSMutableString *labelsInString = [[NSMutableString alloc] init];
@@ -183,6 +188,11 @@
   frame.origin = CGPointMake(frame.origin.x, frame.origin.y+NEW_ISSUE_FORM_LINE_HEIGHT);
   if(! CGRectEqualToRect(_addMilestone.frame, frame)){
     _addMilestone.frame = frame;
+  }
+  
+  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+NEW_ISSUE_FORM_LINE_HEIGHT);
+  if (! CGRectEqualToRect(_selectAssignee.frame, frame)) {
+    _selectAssignee.frame = frame;
   }
 }
 

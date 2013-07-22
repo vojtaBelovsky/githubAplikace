@@ -17,9 +17,10 @@
 @interface BCSelectAssigneeViewController : UIViewController<UITableViewDelegate>{
 @private
     BCRepository *_repository;
-    BCSelectAssigneeView *_tableView;
+    BCSelectAssigneeView *_BCSelectAssigneView;
     BCSelectAssigneeDataSource *_dataSource;
     UIViewController<BCSelectDataManager> *_controller;
+  NSIndexPath *_checkedAssignee;
 }
 
 - (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller;
