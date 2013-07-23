@@ -39,23 +39,30 @@
   [self createModel];
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+  if( _checkedAssignee != nil){
+    if (indexPath.row == _checkedAssignee.row) {
+      [cell setSelected:YES];
+    }
+  }
+}
+
 #pragma mark -
 #pragma mark private
 
 -(void)createModel{
-    [BCRepository getAllCollaboratorsOfRepository:_repository withSuccess:^(NSArray *allCollaborators) {
-        _dataSource = [[BCSelectAssigneeDataSource alloc] initWithCollaborators:allCollaborators];
-        [_BCSelectAssigneView.tableView setDataSource:_dataSource];
-        if([_controller getAssignee].userId != 0){
-            [_dataSource setIsSelectedAssignee:YES];
-            [_BCSelectAssigneView.tableView selectRowAtIndexPath:[self getIndexPathOfSelectedRow] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-        }else{
-            [_dataSource setIsSelectedAssignee:NO];
-        }
-        [_BCSelectAssigneView.tableView reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"fail");
-    }];
+  [BCRepository getAllCollaboratorsOfRepository:_repository withSuccess:^(NSArray *allCollaborators) {
+    _dataSource = [[BCSelectAssigneeDataSource alloc] initWithCollaborators:allCollaborators];
+    [_BCSelectAssigneView.tableView setDataSource:_dataSource];
+    if([_controller getAssignee] == nil){
+      _checkedAssignee = nil;
+    }else{
+      _checkedAssignee = [self getIndexPathOfSelectedRow];
+    }
+    [_BCSelectAssigneView.tableView reloadData];
+  } failure:^(NSError *error) {
+    NSLog(@"fail");
+  }];
 }
 
 -(NSIndexPath*)getIndexPathOfSelectedRow{
@@ -71,9 +78,12 @@
 }
 
 -(void) doneButtonDidPress{
-    NSInteger selectedRow = [_BCSelectAssigneView.tableView indexPathForSelectedRow].row;
-    [_controller setNewAssignee:[_dataSource.collaborators objectAtIndex:selectedRow]];
-    [self.navigationController popViewControllerAnimated:YES];
+  if (_checkedAssignee == nil) {
+    [_controller setNewAssignee:nil];
+  }else{
+    [_controller setNewAssignee:[_dataSource.collaborators objectAtIndex:_checkedAssignee.row]];
+  }
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

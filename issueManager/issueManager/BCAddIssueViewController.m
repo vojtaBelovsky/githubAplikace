@@ -47,9 +47,16 @@
 //  [super loadView];
   _addIssueView = [[BCAddIssueView alloc] initWithController:self];
   [_addIssueView.issueTitle.textField setDelegate:self];
+  
   [_addIssueView.addMilestone addTarget:self action:@selector(createAndPushSelectMilestoneVC) forControlEvents:UIControlEventTouchUpInside];
-  [_addIssueView.selectAssignee addTarget:self action:@selector(createAndPushSelectAssigneVC) forControlEvents:UIControlEventTouchUpInside];
   [_addIssueView.addMilestone.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectMilestoneVC) forControlEvents:UIControlEventTouchUpInside];
+  
+  [_addIssueView.selectAssignee addTarget:self action:@selector(createAndPushSelectAssigneVC) forControlEvents:UIControlEventTouchUpInside];
+  [_addIssueView.selectAssignee.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectAssigneVC) forControlEvents:UIControlEventTouchUpInside];
+  
+  [_addIssueView.selectLabels addTarget:self action:@selector(createAndPushSelectLabelsVC) forControlEvents:UIControlEventTouchUpInside];
+    [_addIssueView.selectLabels.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectLabelsVC) forControlEvents:UIControlEventTouchUpInside];
+  
 //  [_addIssueView.body setDelegate:self];
   [_addIssueView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   self.view = _addIssueView;

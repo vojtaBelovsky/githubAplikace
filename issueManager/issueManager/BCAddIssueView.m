@@ -95,6 +95,8 @@
       _selectAssignee = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Assigned:"];
       [self addSubview:_selectAssignee];
       
+      _selectLabels = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Labels:"];
+      [self addSubview:_selectLabels];
     }
     return self;
 }
@@ -112,9 +114,9 @@
 //        [_assignee setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //    }
 //    
-  [_addMilestone setContentWithMilestone:milestone];
+  [_addMilestone setContentWithString:milestone.title];
   
-  [_selectAssignee setContentWithAssignee:assignee];
+  [_selectAssignee setContentWithString:assignee.userLogin];
   
   
 //
@@ -193,6 +195,11 @@
   frame.origin = CGPointMake(frame.origin.x, frame.origin.y+NEW_ISSUE_FORM_LINE_HEIGHT);
   if (! CGRectEqualToRect(_selectAssignee.frame, frame)) {
     _selectAssignee.frame = frame;
+  }
+  
+  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+NEW_ISSUE_FORM_LINE_HEIGHT);
+  if (! CGRectEqualToRect(_selectLabels.frame, frame)) {
+    _selectLabels.frame = frame;
   }
 }
 

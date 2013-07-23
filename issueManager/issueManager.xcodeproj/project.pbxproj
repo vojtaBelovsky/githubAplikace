@@ -627,9 +627,9 @@
 		10CA880C178DB50F00DF1B43 /* button */ = {
 			isa = PBXGroup;
 			children = (
-				10AFAA97179D305C0083511E /* contentImgView */,
 				10CA880D178DB54F00DF1B43 /* BCaddIssueButton.h */,
 				10CA880E178DB54F00DF1B43 /* BCaddIssueButton.m */,
+				10AFAA97179D305C0083511E /* contentImgView */,
 			);
 			name = button;
 			sourceTree = "<group>";

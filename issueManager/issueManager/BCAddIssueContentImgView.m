@@ -62,6 +62,7 @@
   [_backgroundImgView setImage:image];
   [_backgroundImgView setFrame:frame];
   [self addSubview:_backgroundImgView];
+  [self setFrame:frame];
   
   [_myTextLabel setText:content];
   frame.size = [content sizeWithFont:CONTENT_FONT];
@@ -73,13 +74,11 @@
   frame = CGRectMake(frame.origin.x+1, frame.origin.y+1, frame.size.width, frame.size.height);
   [_myTextShadowLabel setFrame:frame];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+
+-(void) setHidden:(BOOL)hidden{
+  [_myTextLabel setHidden:hidden];
+  [_myTextShadowLabel setHidden:hidden];
+  [_backgroundImgView setHidden:hidden];
 }
-*/
 
 @end

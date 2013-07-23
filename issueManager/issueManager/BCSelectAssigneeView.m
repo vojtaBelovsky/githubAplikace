@@ -54,7 +54,7 @@
       _theNewIssueLabel.font = NEW_ISSUE_FONT;
       _theNewIssueLabel.textColor = NEW_ISSUE_FONT_COLOR;
       _theNewIssueLabel.backgroundColor = [UIColor clearColor];
-      [_theNewIssueLabel setText:@"Select Milestone"];
+      [_theNewIssueLabel setText:@"Select Assignee"];
       [self addSubview:_theNewIssueLabel];
       
       

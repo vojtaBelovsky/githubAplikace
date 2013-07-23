@@ -57,7 +57,6 @@
   [BCRepository getAllMilestonesOfRepository:_repository withSuccess:^(NSArray *allMilestones) {
     _dataSource = [[BCSelectMilestoneDataSource alloc] initWithMilestones:allMilestones];
     [_selectMilestoneView.tableView setDataSource:_dataSource];
-    [_selectMilestoneView.tableView reloadData];
     if([_controller getMilestone] == nil){
       _checkedMilestone = nil;
     }else{

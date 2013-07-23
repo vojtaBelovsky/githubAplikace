@@ -20,7 +20,6 @@
   self = [super init];
   if (self) {
     _collaborators = [[NSMutableArray alloc] initWithArray:collaborators];
-    [_collaborators addObject:[[BCUser alloc] init]];
   }
   return self;
 }

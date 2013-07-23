@@ -24,6 +24,7 @@
 @property UIImageView *issueForm;
 @property BCAddIssueTextField *issueTitle;
 @property BCaddIssueButton *addMilestone;
+@property BCaddIssueButton *selectLabels;
 
 @property BCaddIssueButton *selectAssignee;
 
