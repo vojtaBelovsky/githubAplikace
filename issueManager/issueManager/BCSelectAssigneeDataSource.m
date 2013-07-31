@@ -10,6 +10,7 @@
 #import "BCSelectAssigneeCell.h"
 #import "BCUser.h"
 #import "UIImageView+AFNetworking.h"
+#import "BCAvatarImgView.h"
 
 #define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
 
@@ -26,10 +27,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-  BCSelectAssigneeCell *cell;
+  BCSelectAssigneeCell *cell = [BCSelectAssigneeCell createAssigneCellWithTableView:tableView];
   BCUser *user = [_collaborators objectAtIndex:indexPath.row];
-  cell = [BCSelectAssigneeCell createAssigneCellWithTableView:tableView];
+  
   [cell.avatarImgView setImageWithURL:user.avatarUrl placeholderImage:PLACEHOLDER_IMG];
+  
   cell.myTextLabel.text = user.userLogin;
   
   return cell;

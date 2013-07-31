@@ -16,9 +16,10 @@
 @interface BCSelectLabelsViewController : UIViewController<UITableViewDelegate>{
 @private
     BCRepository *_repository;
-    BCSelectLabelsView *_tableView;
+    BCSelectLabelsView *_BCSelectLabelsView;
     BCSelectLabelsDataSource *_dataSource;
     UIViewController<BCSelectDataManager> *_controller;
+  NSMutableArray *_checkedLabels; //array of NSIndexPath of selected labels
 }
 
 - (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller;

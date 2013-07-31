@@ -10,6 +10,13 @@
 
 @interface BCSelectLabelsView : UIView
 
-@property UITableView *tableView;
+@property (strong) UITableView *tableView;
+@property UIImageView *backgroundImageView;
+@property UIView *navigationBarView;
+@property UIButton *cancelButton;
+@property UIButton *doneButton;
+@property UILabel *theNewIssueLabel;
+@property UILabel *theNewIssueShadowLabel;
+@property UIImageView *issueForm;
 
 @end

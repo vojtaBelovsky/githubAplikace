@@ -12,6 +12,7 @@
 @interface BCRepositoryCell : UITableViewCell
 
 @property UIImageView *myImageView;
+@property UIImageView *corpMask;
 @property UILabel *myTextLabel;
 @property UIImageView *selectUsrOrOrgImgView;
 

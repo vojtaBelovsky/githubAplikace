@@ -8,6 +8,7 @@
 
 #import "BCSelectAssigneeCell.h"
 #import "BCUser.h"
+#import "BCAvatarImgView.h"
 
 #define SelectAssigneeCellReuseIdentifier @"SelectAssigneeCellReuseIdentifier"
 
@@ -15,8 +16,8 @@
 #define CELL_FONT              [UIFont fontWithName:@"ProximaNova-Regular" size:16]
 
 #define CHECKBOX_OFFSET ( 40.0f )
-#define AVATAR_WIDTH    ( 24.0f )
-#define AVATAR_HEIGHT   ( 24.0f )
+#define AVATAR_WIDTH    cell.avatarImgView.frame.size.width
+#define AVATAR_HEIGHT   cell.avatarImgView.frame.size.height
 #define AVATAR_OFFSET   ( 10.0f )
 
 #define NEW_ISSUE_SEPARATOR           [UIImage imageNamed:@"newIssueSeparator.png"]
@@ -35,12 +36,10 @@
     frame.origin = CGPointMake(cell.frame.size.width - (CHECKBOX_OFFSET+cell.checkboxImgView.frame.size.width), (cell.frame.size.height-cell.checkboxImgView.frame.size.height)/2);
     frame.size = cell.checkboxImgView.frame.size;
     cell.checkboxImgView.frame = frame;
-    [cell addSubview:cell.checkboxImgView];
+    [cell addSubview:cell.checkboxImgView];    
     
-    cell.avatarImgView = [[UIImageView alloc] init];
-    frame.size = CGSizeMake(AVATAR_WIDTH, AVATAR_HEIGHT);
-    frame.origin = CGPointMake(AVATAR_OFFSET, (cell.frame.size.height-frame.size.height)/2);
-    cell.avatarImgView.frame = frame;
+    cell.avatarImgView = [[BCAvatarImgView alloc] init];
+    [cell.avatarImgView setOrigin:CGPointMake(AVATAR_OFFSET, (cell.frame.size.height-AVATAR_HEIGHT)/2)];
     [cell addSubview:cell.avatarImgView];
     
     cell.myTextLabel = [[UILabel alloc] init];

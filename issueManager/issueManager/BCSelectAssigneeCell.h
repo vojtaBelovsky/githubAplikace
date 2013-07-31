@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 @class BCUser;
+@class BCAvatarImgView;
 
 @interface BCSelectAssigneeCell : UITableViewCell
 
 @property UIImageView *separatorImgView;
-@property UIImageView *avatarImgView;
+@property BCAvatarImgView *avatarImgView;
 @property UILabel *myTextLabel;
 @property UIImageView *checkboxImgView;
 

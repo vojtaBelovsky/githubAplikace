@@ -76,6 +76,13 @@
 		1095EA10175F6A62009CCEDB /* selectMemberXOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */; };
 		1095EA11175F6A62009CCEDB /* selectMemberXOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */; };
 		10AFAA9D179D30810083511E /* BCAddIssueContentImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAA9C179D30810083511E /* BCAddIssueContentImgView.m */; };
+		10AFAAA1179EA4A80083511E /* BCAvatarImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAAA0179EA4A80083511E /* BCAvatarImgView.m */; };
+		10AFAAAA179FC6140083511E /* BCLabelColorImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAAA9179FC6140083511E /* BCLabelColorImgView.m */; };
+		10AFAAAD17A002AD0083511E /* corp-mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AFAAAB17A002AD0083511E /* corp-mask.png */; };
+		10AFAAAE17A002AD0083511E /* user-mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AFAAAC17A002AD0083511E /* user-mask.png */; };
+		10AFAAB117A008930083511E /* 40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AFAAAF17A008930083511E /* 40x40.png */; };
+		10AFAAB217A008930083511E /* 60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AFAAB017A008930083511E /* 60x60.png */; };
+		10AFAAB617A10CA70083511E /* BCAddIssueButtonMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAAB517A10CA70083511E /* BCAddIssueButtonMC.m */; };
 		10BE364C175F0A840026DA45 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE364B175F0A840026DA45 /* login.png */; };
 		10CA880B178D723E00DF1B43 /* BCAddIssueTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */; };
 		10CA880F178DB54F00DF1B43 /* BCaddIssueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880E178DB54F00DF1B43 /* BCaddIssueButton.m */; };
@@ -263,6 +270,16 @@
 		1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberXOn@2x.png"; path = "issueManager/grafika/github cutted/selectMemberXOn@2x.png"; sourceTree = "<group>"; };
 		10AFAA9B179D30810083511E /* BCAddIssueContentImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueContentImgView.h; sourceTree = "<group>"; };
 		10AFAA9C179D30810083511E /* BCAddIssueContentImgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueContentImgView.m; sourceTree = "<group>"; };
+		10AFAA9F179EA4A80083511E /* BCAvatarImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAvatarImgView.h; sourceTree = "<group>"; };
+		10AFAAA0179EA4A80083511E /* BCAvatarImgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAvatarImgView.m; sourceTree = "<group>"; };
+		10AFAAA8179FC6140083511E /* BCLabelColorImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLabelColorImgView.h; sourceTree = "<group>"; };
+		10AFAAA9179FC6140083511E /* BCLabelColorImgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLabelColorImgView.m; sourceTree = "<group>"; };
+		10AFAAAB17A002AD0083511E /* corp-mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "corp-mask.png"; path = "issueManager/grafika/github cutted/corp-mask.png"; sourceTree = "<group>"; };
+		10AFAAAC17A002AD0083511E /* user-mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user-mask.png"; path = "issueManager/grafika/github cutted/user-mask.png"; sourceTree = "<group>"; };
+		10AFAAAF17A008930083511E /* 40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 40x40.png; path = "issueManager/grafika/github cutted/40x40.png"; sourceTree = "<group>"; };
+		10AFAAB017A008930083511E /* 60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 60x60.png; path = "issueManager/grafika/github cutted/60x60.png"; sourceTree = "<group>"; };
+		10AFAAB417A10CA70083511E /* BCAddIssueButtonMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueButtonMC.h; sourceTree = "<group>"; };
+		10AFAAB517A10CA70083511E /* BCAddIssueButtonMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueButtonMC.m; sourceTree = "<group>"; };
 		10BE364B175F0A840026DA45 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = issueManager/grafika/login.png; sourceTree = "<group>"; };
 		10CA8809178D723E00DF1B43 /* BCAddIssueTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueTextField.h; sourceTree = "<group>"; };
 		10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueTextField.m; sourceTree = "<group>"; };
@@ -535,6 +552,7 @@
 		102B8B57172FE2C2003BA22F /* view */ = {
 			isa = PBXGroup;
 			children = (
+				10AFAAB317A10C750083511E /* buttonWithMultipleContent */,
 				10CA880C178DB50F00DF1B43 /* button */,
 				10CA8805178D721F00DF1B43 /* TextField */,
 				102B8B5B172FE2FB003BA22F /* BCAddIssueView.h */,
@@ -566,6 +584,10 @@
 		1095E9CC175F69C2009CCEDB /* github cutted */ = {
 			isa = PBXGroup;
 			children = (
+				10AFAAAF17A008930083511E /* 40x40.png */,
+				10AFAAB017A008930083511E /* 60x60.png */,
+				10AFAAAB17A002AD0083511E /* corp-mask.png */,
+				10AFAAAC17A002AD0083511E /* user-mask.png */,
 				1073C73117799687008EC0CD /* checkbox_checked@2x.png */,
 				1073C73217799687008EC0CD /* checkbox@2x.png */,
 				1073C73317799687008EC0CD /* repositories_gradient@2x.png */,
@@ -613,6 +635,42 @@
 				10AFAA9C179D30810083511E /* BCAddIssueContentImgView.m */,
 			);
 			name = contentImgView;
+			sourceTree = "<group>";
+		};
+		10AFAA9E179EA4920083511E /* avatarImgView */ = {
+			isa = PBXGroup;
+			children = (
+				10AFAA9F179EA4A80083511E /* BCAvatarImgView.h */,
+				10AFAAA0179EA4A80083511E /* BCAvatarImgView.m */,
+			);
+			name = avatarImgView;
+			sourceTree = "<group>";
+		};
+		10AFAAA2179EA5B70083511E /* maskImgView */ = {
+			isa = PBXGroup;
+			children = (
+				10AFAAA7179FC5EA0083511E /* labelColorImgView */,
+				10AFAA9E179EA4920083511E /* avatarImgView */,
+			);
+			name = maskImgView;
+			sourceTree = "<group>";
+		};
+		10AFAAA7179FC5EA0083511E /* labelColorImgView */ = {
+			isa = PBXGroup;
+			children = (
+				10AFAAA8179FC6140083511E /* BCLabelColorImgView.h */,
+				10AFAAA9179FC6140083511E /* BCLabelColorImgView.m */,
+			);
+			name = labelColorImgView;
+			sourceTree = "<group>";
+		};
+		10AFAAB317A10C750083511E /* buttonWithMultipleContent */ = {
+			isa = PBXGroup;
+			children = (
+				10AFAAB417A10CA70083511E /* BCAddIssueButtonMC.h */,
+				10AFAAB517A10CA70083511E /* BCAddIssueButtonMC.m */,
+			);
+			name = buttonWithMultipleContent;
 			sourceTree = "<group>";
 		};
 		10CA8805178D721F00DF1B43 /* TextField */ = {
@@ -855,6 +913,7 @@
 			isa = PBXGroup;
 			children = (
 				102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */,
+				10AFAAA2179EA5B70083511E /* maskImgView */,
 				104105D21757706D003B0B9F /* login */,
 				10EF01D917379F2200346E9F /* selectLables */,
 				102ACED01733BA65000250F9 /* selectMilestone */,
@@ -1067,6 +1126,10 @@
 				1073C73417799687008EC0CD /* checkbox_checked@2x.png in Resources */,
 				1073C73517799687008EC0CD /* checkbox@2x.png in Resources */,
 				1073C73617799687008EC0CD /* repositories_gradient@2x.png in Resources */,
+				10AFAAAD17A002AD0083511E /* corp-mask.png in Resources */,
+				10AFAAAE17A002AD0083511E /* user-mask.png in Resources */,
+				10AFAAB117A008930083511E /* 40x40.png in Resources */,
+				10AFAAB217A008930083511E /* 60x60.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1126,6 +1189,9 @@
 				10CA880B178D723E00DF1B43 /* BCAddIssueTextField.m in Sources */,
 				10CA880F178DB54F00DF1B43 /* BCaddIssueButton.m in Sources */,
 				10AFAA9D179D30810083511E /* BCAddIssueContentImgView.m in Sources */,
+				10AFAAA1179EA4A80083511E /* BCAvatarImgView.m in Sources */,
+				10AFAAAA179FC6140083511E /* BCLabelColorImgView.m in Sources */,
+				10AFAAB617A10CA70083511E /* BCAddIssueButtonMC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

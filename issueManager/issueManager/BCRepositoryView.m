@@ -51,7 +51,7 @@
     _doneButton = [[UIButton alloc] init];
     _doneButton.titleLabel.numberOfLines = 0;
     _doneButton.titleLabel.font = DONE_FONT;
-    _doneButton.titleLabel.textColor = DONE_FONT_COLOR;
+    [_doneButton setTitleColor:DONE_FONT_COLOR forState:UIControlStateNormal];
     _doneButton.titleLabel.backgroundColor = [UIColor clearColor];
     [_doneButton setTitle:@"DONE" forState:UIControlStateNormal];
     [_doneButton setEnabled:YES];

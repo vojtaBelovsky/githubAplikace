@@ -12,6 +12,7 @@
 @class BCMilestone;
 @class BCaddIssueButton;
 @class BCAddIssueTextField;
+@class BCaddIssueButtonMC;
 
 @interface BCAddIssueView : UIScrollView
 
@@ -24,9 +25,9 @@
 @property UIImageView *issueForm;
 @property BCAddIssueTextField *issueTitle;
 @property BCaddIssueButton *addMilestone;
-@property BCaddIssueButton *selectLabels;
-
 @property BCaddIssueButton *selectAssignee;
+@property BCaddIssueButtonMC *selectLabels;
+@property 
 
 -(id) initWithController:(BCAddIssueViewController *)controller;
 -(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSArray *)labels;

@@ -21,6 +21,7 @@
 #import "BCIssue.h"
 #import "BCAddIssueTextField.h"
 #import "BCaddIssueButton.h"
+#import "BCAddIssueButtonMC.h"
 
 @interface BCAddIssueViewController ()
 
@@ -54,8 +55,8 @@
   [_addIssueView.selectAssignee addTarget:self action:@selector(createAndPushSelectAssigneVC) forControlEvents:UIControlEventTouchUpInside];
   [_addIssueView.selectAssignee.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectAssigneVC) forControlEvents:UIControlEventTouchUpInside];
   
-  [_addIssueView.selectLabels addTarget:self action:@selector(createAndPushSelectLabelsVC) forControlEvents:UIControlEventTouchUpInside];
-    [_addIssueView.selectLabels.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectLabelsVC) forControlEvents:UIControlEventTouchUpInside];
+  UITapGestureRecognizer *selectLabelsTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectLabelsVC)];
+  [_addIssueView.selectLabels addGestureRecognizer:selectLabelsTapRecognizer];
   
 //  [_addIssueView.body setDelegate:self];
   [_addIssueView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
@@ -75,14 +76,6 @@
 
 -(void) cancelButtonDidPress{
   [self.navigationController popViewControllerAnimated:YES];
-}
-
--(void) selectAssignee{
-    [self createAndPushSelectAssigneVC];
-}
-
--(void) selectLabels{
-    [self createAndPushSelectLabelsVC];
 }
 
 -(void)addNewIssueButtonAction{

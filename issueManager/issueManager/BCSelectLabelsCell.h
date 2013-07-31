@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 @class BCLabel;
+@class BCLabelColorImgView;
 
 @interface BCSelectLabelsCell : UITableViewCell
 
-- (id)initWithLabel:(BCLabel *)label;
+@property UIImageView *separatorImgView;
+@property BCLabelColorImgView *BCLabelColorImgView;
+@property UILabel *myTextLabel;
+@property UIImageView *checkboxImgView;
+
++(BCSelectLabelsCell *)createLabelCellWithTableView:(UITableView *)tableView;
 
 @end

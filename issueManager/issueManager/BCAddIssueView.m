@@ -14,6 +14,7 @@
 #import "BCLabel.h"
 #import "BCaddIssueButton.h"
 #import "BCAddIssueTextField.h"
+#import "BCAddIssueButtonMC.h"
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
@@ -26,11 +27,11 @@
 #define NEW_ISSUE_FORM_LINE_HEIGHT    ( 40.0f )
 
 #define NEW_ISSUE_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
-#define NEW_ISSUE_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
+#define NEW_ISSUE_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 #define NEW_ISSUE_SHADOW_FONT_COLOR   [UIColor whiteColor]
 
 #define DONE_AND_CANCEL_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:14]
-#define DONE_AND_CANCEL_FONT_COLOR    [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
+#define DONE_AND_CANCEL_FONT_COLOR    [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 
 
 @implementation BCAddIssueView
@@ -66,7 +67,7 @@
       _cancelButton = [[UIButton alloc] init];
       _cancelButton.titleLabel.numberOfLines = 0;
       _cancelButton.titleLabel.font = DONE_AND_CANCEL_FONT;
-      _cancelButton.titleLabel.textColor = [UIColor blackColor];
+      [_cancelButton setTitleColor:DONE_AND_CANCEL_FONT_COLOR forState:UIControlStateNormal];
       _cancelButton.titleLabel.backgroundColor = [UIColor clearColor];
       [_cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
       [_cancelButton setEnabled:YES];
@@ -75,7 +76,7 @@
       _postButton = [[UIButton alloc] init];
       _postButton.titleLabel.numberOfLines = 0;
       _postButton.titleLabel.font = DONE_AND_CANCEL_FONT;
-      _postButton.titleLabel.textColor = DONE_AND_CANCEL_FONT_COLOR;
+      [_postButton setTitleColor:DONE_AND_CANCEL_FONT_COLOR forState:UIControlStateNormal];
       _postButton.titleLabel.backgroundColor = [UIColor clearColor];
       [_postButton setTitle:@"POST" forState:UIControlStateNormal];
       [_postButton setEnabled:YES];
@@ -95,8 +96,10 @@
       _selectAssignee = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Assigned:"];
       [self addSubview:_selectAssignee];
       
-      _selectLabels = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Labels:"];
+      _selectLabels = [[BCaddIssueButtonMC alloc] initWithSize:lineSize andTitle:@"Labels:"];
       [self addSubview:_selectLabels];
+      
+      
     }
     return self;
 }
@@ -117,6 +120,8 @@
   [_addMilestone setContentWithString:milestone.title];
   
   [_selectAssignee setContentWithString:assignee.userLogin];
+  
+  [_selectLabels  setContentWithLabels:labels];
   
   
 //
