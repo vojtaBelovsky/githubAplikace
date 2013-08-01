@@ -9,7 +9,6 @@
 #import "BCAddIssueTextField.h"
 
 #define TITLE_FONT_COLOR        [UIColor colorWithRed:.56 green:.56 blue:.56 alpha:1.00]
-#define COMMENT_FONT_COLOR      [UIColor colorWithRed:.83 green:.83 blue:.83 alpha:1.00]
 #define TITLE_TEXT_FONT_COLOR   [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 #define TITLE_FONT              [UIFont fontWithName:@"ProximaNova-Regular" size:16]
 #define TITLE_TEXT_FONT         [UIFont fontWithName:@"ProximaNova-Regular" size:16]

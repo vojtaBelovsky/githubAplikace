@@ -14,13 +14,13 @@
 @class BCMilestone;
 @class BCIssueViewController;
 
-@interface BCAddIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, BCSelectDataManager>{
+@interface
+  BCAddIssueViewController : UIViewController <UITextFieldDelegate,UITextViewDelegate, BCSelectDataManager>{
 @private
-    BCRepository *_repository;
-    
-    BCAddIssueView *_addIssueView;
-    BCMilestone *_milestone;
-    NSArray *_labels;
+  BCRepository *_repository;
+  BCAddIssueView *_addIssueView;
+  BCMilestone *_milestone;
+  NSArray *_labels;
 }
 
 @property BCIssueViewController *myParentViewController;

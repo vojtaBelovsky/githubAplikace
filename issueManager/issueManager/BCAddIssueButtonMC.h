@@ -14,12 +14,12 @@
 
 @interface BCaddIssueButtonMC : UIView
 
-@property CGSize originalButtonSize;
+@property int originalHeight;
+@property int actualHeight;
 @property UILabel *myTitleLabel;
 @property UIButton *theNewIssuePlus;
 @property UIImageView *separatorImgView;
 @property UIView *contentView;
-@property CGRect originalContentViewFrame;
 @property NSMutableArray *contentImgViews;
 @property CGPoint contentOrigin;
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BCAddIssueTextField : UITextField
+@interface BCAddIssueTextField : UIView <UITextInputTraits>
 
 @property UILabel *myLabel;
 @property UITextField *textField;

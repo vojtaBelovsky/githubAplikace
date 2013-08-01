@@ -21,14 +21,18 @@
 #define NEW_ISSUE_SEPARATOR           [UIImage imageNamed:@"newIssueSeparator.png"]
 
 #define NEW_ISSUE_FORM_WIDTH          ( 300.0f )
-#define NEW_ISSUE_FORM_HEIGHT         ( 300.0f )
+#define NEW_ISSUE_FORM_HEIGHT         ( 400.0f )
 #define NEW_ISSUE_FORM_OFFSET         ( 50.0f )
 #define NEW_ISSUE_FORM_LINE_WIDTH     ( 292.0f )
 #define NEW_ISSUE_FORM_LINE_HEIGHT    ( 40.0f )
+#define NEW_ISSUE_SHADOW_HEIGHT       ( 4.0f )
 
 #define NEW_ISSUE_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define NEW_ISSUE_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 #define NEW_ISSUE_SHADOW_FONT_COLOR   [UIColor whiteColor]
+
+#define BODY_PLACEHOLDER_FONT_COLOR     [UIColor colorWithRed:.83 green:.83 blue:.83 alpha:1.00]
+#define BODY_FONT_ITALIC       [UIFont fontWithName:@"ProximaNova-Italic" size:16]
 
 #define DONE_AND_CANCEL_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:14]
 #define DONE_AND_CANCEL_FONT_COLOR    [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
@@ -99,7 +103,11 @@
       _selectLabels = [[BCaddIssueButtonMC alloc] initWithSize:lineSize andTitle:@"Labels:"];
       [self addSubview:_selectLabels];
       
-      
+      _issueBody = [[UITextView alloc] init];
+      _issueBody.text = @"What is the problem?";
+      _issueBody.font = BODY_FONT_ITALIC;
+      _issueBody.textColor = BODY_PLACEHOLDER_FONT_COLOR;
+      [self addSubview:_issueBody];
     }
     return self;
 }
@@ -122,6 +130,7 @@
   [_selectAssignee setContentWithString:assignee.userLogin];
   
   [_selectLabels  setContentWithLabels:labels];
+  [self setNeedsLayout];
   
   
 //
@@ -187,7 +196,7 @@
   }
   
   frame.size = CGSizeMake(NEW_ISSUE_FORM_LINE_WIDTH, NEW_ISSUE_FORM_LINE_HEIGHT);
-  frame.origin = CGPointMake((self.frame.size.width-NEW_ISSUE_FORM_LINE_WIDTH)/2, frame.origin.y+4);
+  frame.origin = CGPointMake((self.frame.size.width-NEW_ISSUE_FORM_LINE_WIDTH)/2, frame.origin.y+NEW_ISSUE_SHADOW_HEIGHT);
   if(! CGRectEqualToRect(_issueTitle.frame, frame)){
     _issueTitle.frame = frame;
   }
@@ -202,9 +211,19 @@
     _selectAssignee.frame = frame;
   }
   
-  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+NEW_ISSUE_FORM_LINE_HEIGHT);
+  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+_selectLabels.originalHeight);
+  frame.size.height = _selectLabels.actualHeight;
   if (! CGRectEqualToRect(_selectLabels.frame, frame)) {
     _selectLabels.frame = frame;
+    CGRect frame2 = _selectLabels.contentView.frame;
+    frame2.size.height = _selectLabels.actualHeight;
+    [_selectLabels.contentView setFrame:frame2];
+  }
+  
+  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+frame.size.height);
+  frame.size = CGSizeMake(frame.size.width, self.issueForm.frame.size.height-(frame.origin.y-self.navigationBarView.frame.size.height)-(2*NEW_ISSUE_SHADOW_HEIGHT));
+  if (! CGRectEqualToRect(_issueBody.frame, frame)) {
+    _issueBody.frame = frame;
   }
 }
 

@@ -554,7 +554,7 @@
 			children = (
 				10AFAAB317A10C750083511E /* buttonWithMultipleContent */,
 				10CA880C178DB50F00DF1B43 /* button */,
-				10CA8805178D721F00DF1B43 /* TextField */,
+				10CA8805178D721F00DF1B43 /* textField */,
 				102B8B5B172FE2FB003BA22F /* BCAddIssueView.h */,
 				102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */,
 			);
@@ -673,13 +673,13 @@
 			name = buttonWithMultipleContent;
 			sourceTree = "<group>";
 		};
-		10CA8805178D721F00DF1B43 /* TextField */ = {
+		10CA8805178D721F00DF1B43 /* textField */ = {
 			isa = PBXGroup;
 			children = (
 				10CA8809178D723E00DF1B43 /* BCAddIssueTextField.h */,
 				10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */,
 			);
-			name = TextField;
+			name = textField;
 			sourceTree = "<group>";
 		};
 		10CA880C178DB50F00DF1B43 /* button */ = {

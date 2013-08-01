@@ -39,8 +39,8 @@
     frame = CGRectZero;
     frame.size = size;
     [self setFrame:frame];
-    [self setBackgroundColor:[UIColor greenColor]];
-    _originalButtonSize = size;
+    _originalHeight = size.height;
+    _actualHeight = size.height;
     _contentImgViews = [[NSMutableArray alloc] init];
     
     _myTitleLabel = [[UILabel alloc] init];
@@ -66,10 +66,8 @@
     frame.origin = CGPointMake(((2*TITLE_OFFSET)+_myTitleLabel.frame.size.width), 0);
     _contentOrigin = frame.origin;
     _contentView = [[UIView alloc] initWithFrame:frame];
-    [_contentView setBackgroundColor:[UIColor redColor]];
     [_contentView setHidden:YES];
     [self addSubview:_contentView];
-    _originalContentViewFrame = frame;
     
     UIImage *image = [NEW_ISSUE_SEPARATOR stretchableImageWithLeftCapWidth:0 topCapHeight:1];
     _separatorImgView = [[UIImageView alloc] initWithImage:image];
@@ -80,11 +78,7 @@
 }
 
 -(void) setContentWithLabels:(NSArray*)labels{
-  CGRect frame = [self frame];
-  frame.size = _originalButtonSize;
-  [self setFrame:frame];
-  frame = _originalContentViewFrame;
-  [self.contentView setFrame:frame];
+  _actualHeight = _originalHeight;
   for (BCAddIssueContentImgView *object in _contentImgViews) {
     [object removeFromSuperview];
   }
@@ -96,20 +90,13 @@
       contentImgView = [[BCAddIssueContentImgView alloc] init];
       [contentImgView setContentWithString:object.name];
       if (!isSetedY) {//potrebuju horizontalne vycentrovat bubliny, ale jen jednou
-        origin.y = (self.frame.size.height-contentImgView.frame.size.height)/2;
+        origin.y = (_originalHeight-contentImgView.frame.size.height)/2;
         isSetedY = YES;
       }
       if ((origin.x+LABELS_OFFSET+contentImgView.frame.size.width) > _contentView.frame.size.width) {
-        //zvetsi velikost contentView o jeden radek a posune origin podle ktereho vkladam bubliny o jeden radek
-        frame.size.height = frame.size.height+_originalButtonSize.height;
-        [self.contentView setFrame:frame];
+        _actualHeight = _actualHeight+_originalHeight;        
         origin.x = 0;
-        origin.y = origin.y+_originalButtonSize.height;
-        //zvetsi velikost buttonu ve kterem jsou labely
-        frame.size = self.frame.size;
-        frame.size.height = frame.size.height+_originalButtonSize.height;
-        [self setFrame:frame];       
-        [self setBackgroundColor:[UIColor blueColor]];
+        origin.y = origin.y+_originalHeight;
         [self setSeparatorImgViewPosition];
       }
       [contentImgView setFrame:CGRectMake(origin.x, origin.y, contentImgView.frame.size.width, contentImgView.frame.size.height)];
@@ -133,7 +120,7 @@
 }
 
 -(void)setSeparatorImgViewPosition{
-  [_separatorImgView setFrame:CGRectMake(0, self.frame.size.height-1, self.frame.size.width, 1)];
+  [_separatorImgView setFrame:CGRectMake(0, _actualHeight-1, self.frame.size.width, 1)];
 }
 
 @end

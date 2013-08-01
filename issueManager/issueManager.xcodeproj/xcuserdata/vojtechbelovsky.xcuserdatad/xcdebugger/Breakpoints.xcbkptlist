@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "issueManager/BCSelectLabelsViewController.m"
-         timestampString = "396955287.433801"
+         timestampString = "397033750.086994"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
          landmarkName = "-doneButtonDidPress"
          landmarkType = "5">
       </FileBreakpoint>
@@ -40,32 +40,6 @@
          startingLineNumber = "73"
          endingLineNumber = "73"
          landmarkName = "-setSelected:animated:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "issueManager/BCAddIssueButtonMC.m"
-         timestampString = "396971460.618467"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "113"
-         endingLineNumber = "113"
-         landmarkName = "-setContentWithLabels:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "issueManager/BCAddIssueButtonMC.m"
-         timestampString = "396971609.097418"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "109"
-         endingLineNumber = "109"
-         landmarkName = "-setContentWithLabels:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

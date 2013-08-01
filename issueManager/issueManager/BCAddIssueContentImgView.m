@@ -28,6 +28,8 @@
   if (self) {
     _backgroundImgView = [[UIImageView alloc] init];
     [_backgroundImgView setFrame:CGRectZero];
+    UIImage *image = [NEW_ISSUE_SELECTED_OBJECT stretchableImageWithLeftCapWidth:20 topCapHeight:0];
+    [_backgroundImgView setImage:image];
     [self addSubview:_backgroundImgView];
     
     _myTextShadowLabel = [[UILabel alloc] init];
@@ -56,12 +58,10 @@
   frame.size.width = MIN(frame.size.width, MAXIMUM_WIDTH);
   frame.origin = CONTENT_ORIGIN;
   
-  UIImage *image = [NEW_ISSUE_SELECTED_OBJECT stretchableImageWithLeftCapWidth:20 topCapHeight:0];
+  
   frame.origin = CGPointZero;
   frame.size = CGSizeMake(frame.size.width+(2*WIDTH_CONTENT_OFFSET), frame.size.height+(2*HEIGHT_CONTENT_OFFSET));
-  [_backgroundImgView setImage:image];
   [_backgroundImgView setFrame:frame];
-  [self addSubview:_backgroundImgView];
   [self setFrame:frame];
   
   [_myTextLabel setText:content];

@@ -38,12 +38,6 @@
   [self createModel];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-  for (NSIndexPath *object in _checkedLabels) {
-     [_BCSelectLabelsView.tableView selectRowAtIndexPath:object animated:NO scrollPosition:UITableViewScrollPositionNone];
-  } 
-}
-
 #pragma mark -
 #pragma mark private
 
@@ -57,6 +51,9 @@
       for (BCLabel *object in checkedLabels) {
         [_checkedLabels addObject:[self getIndexPathOfLabel:object]];
       }
+    }
+    for (NSIndexPath *object in _checkedLabels) {
+      [_BCSelectLabelsView.tableView selectRowAtIndexPath:object animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
   } failure:^(NSError *error) {
     NSLog(@"fail");

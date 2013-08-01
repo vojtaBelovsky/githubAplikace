@@ -23,6 +23,15 @@
 #import "BCaddIssueButton.h"
 #import "BCAddIssueButtonMC.h"
 
+
+#define BODY_FONT_COLOR                 [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
+
+#define BODY_FONT              [UIFont fontWithName:@"ProximaNova-Regular" size:16]
+
+
+#define VIEW_OFFSET           ( -200.0f )
+#define ANIMATION_DURATION    ( 0.2f )
+
 @interface BCAddIssueViewController ()
 
 @end
@@ -44,8 +53,12 @@
   return self;
 }
 
+-(void)dealloc{
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+}
+
 -(void) loadView{
-//  [super loadView];
   _addIssueView = [[BCAddIssueView alloc] initWithController:self];
   [_addIssueView.issueTitle.textField setDelegate:self];
   
@@ -58,11 +71,11 @@
   UITapGestureRecognizer *selectLabelsTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectLabelsVC)];
   [_addIssueView.selectLabels addGestureRecognizer:selectLabelsTapRecognizer];
   
-//  [_addIssueView.body setDelegate:self];
   [_addIssueView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   self.view = _addIssueView;
   [self setItemsEditable:YES];
   
+  [_addIssueView.issueBody setDelegate:self];
   
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStylePlain target:self action:@selector(addNewIssueButtonAction)];
 }
@@ -90,17 +103,16 @@
     }];
 }
 
-#pragma mark -
-#pragma mark delegateMethods
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self createAndPushSelectAssigneVC];
-    return YES;
-}
-
 
 #pragma mark -
 #pragma mark private
+
+//- (void)animateViewWithFrame:(CGRect)frame {
+//  __weak BCAddIssueViewController *weakSelf = self;
+//  [UIView animateWithDuration:ANIMATION_DURATION delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
+//    weakSelf.view.frame = frame;
+//  } completion:nil];
+//}
 
 - (void) keyboardDidHide:(NSNotification*)notification{//zmensi velikost skrolovatelneho obsahu
     NSDictionary* keyboardInfo = [notification userInfo];
@@ -159,6 +171,21 @@
 //                                labelsNames ?: [NSNull null], @"labels",
 //                                nil];
     return parameters;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+  [textField resignFirstResponder];
+  return YES;
+}
+
+#pragma mark - placeholder carrying
+
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+  if ([textView.text isEqualToString:@"What is the problem?"]) {
+    textView.text = @"";
+    textView.font = BODY_FONT;
+    textView.textColor = BODY_FONT_COLOR;
+  }
 }
 
 #pragma mark -

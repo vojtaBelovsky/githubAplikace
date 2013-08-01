@@ -27,7 +27,7 @@
 @property BCaddIssueButton *addMilestone;
 @property BCaddIssueButton *selectAssignee;
 @property BCaddIssueButtonMC *selectLabels;
-@property 
+@property UITextView *issueBody;
 
 -(id) initWithController:(BCAddIssueViewController *)controller;
 -(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSArray *)labels;
