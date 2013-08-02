@@ -11,7 +11,7 @@
 @class BCAddIssueContentImgView;
 @class BCUser;
 
-@interface BCaddIssueButton : UIButton
+@interface BCaddIssueButton : UIView
 
 @property UILabel *myTitleLabel;
 @property UIButton *theNewIssuePlus;

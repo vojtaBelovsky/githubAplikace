@@ -16,9 +16,9 @@
 #import "UIAlertView+errorAlert.h"
 #import "UIImageView+AFNetworking.h"
 
-#define KEY_OBJECT @"object"
-#define KEY_REPOSITORIES @"repositories"
-#define KEY_IMAGE @"image"
+#define KEY_OBJECT        @"object"
+#define KEY_REPOSITORIES  @"repositories"
+#define KEY_IMAGE         @"image"
 
 @interface BCRepositoryViewController ()
 - (void)createModel;

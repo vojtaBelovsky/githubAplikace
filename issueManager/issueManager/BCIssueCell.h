@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 @class BCIssue;
+@class BCProfileIssue;
 
 @interface BCIssueCell : UITableViewCell
+
+@property BCProfileIssue* profileIssue;
 
 + (BCIssueCell *)createIssueCellWithTableView:(UITableView *)tableView;
 

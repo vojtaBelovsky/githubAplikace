@@ -12,6 +12,6 @@
 @interface BCLabel : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSString *color;
+@property (nonatomic, copy, readonly) UIColor *color;
 
 @end

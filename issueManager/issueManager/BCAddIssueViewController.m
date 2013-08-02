@@ -23,11 +23,9 @@
 #import "BCaddIssueButton.h"
 #import "BCAddIssueButtonMC.h"
 
-
 #define BODY_FONT_COLOR                 [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 
 #define BODY_FONT              [UIFont fontWithName:@"ProximaNova-Regular" size:16]
-
 
 #define VIEW_OFFSET           ( -200.0f )
 #define ANIMATION_DURATION    ( 0.2f )
@@ -61,23 +59,21 @@
 -(void) loadView{
   _addIssueView = [[BCAddIssueView alloc] initWithController:self];
   [_addIssueView.issueTitle.textField setDelegate:self];
+  self.view = _addIssueView;
   
-  [_addIssueView.addMilestone addTarget:self action:@selector(createAndPushSelectMilestoneVC) forControlEvents:UIControlEventTouchUpInside];
-  [_addIssueView.addMilestone.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectMilestoneVC) forControlEvents:UIControlEventTouchUpInside];
+  UITapGestureRecognizer *addMilestoneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectMilestoneVC)];
+  [_addIssueView.addMilestone addGestureRecognizer:addMilestoneTapRecognizer];
   
-  [_addIssueView.selectAssignee addTarget:self action:@selector(createAndPushSelectAssigneVC) forControlEvents:UIControlEventTouchUpInside];
-  [_addIssueView.selectAssignee.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectAssigneVC) forControlEvents:UIControlEventTouchUpInside];
+  UITapGestureRecognizer *selectAssigneeTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectAssigneVC)];
+  [_addIssueView. selectAssignee addGestureRecognizer:selectAssigneeTapRecognizer];
   
   UITapGestureRecognizer *selectLabelsTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectLabelsVC)];
   [_addIssueView.selectLabels addGestureRecognizer:selectLabelsTapRecognizer];
   
   [_addIssueView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-  self.view = _addIssueView;
-  [self setItemsEditable:YES];
+  [_addIssueView.postButton addTarget:self action:@selector(postButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   
   [_addIssueView.issueBody setDelegate:self];
-  
-  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStylePlain target:self action:@selector(addNewIssueButtonAction)];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -91,28 +87,34 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)addNewIssueButtonAction{
-    NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues", _repository.owner.userLogin, _repository.name];
-    [[BCHTTPClient sharedInstance] postPath:path parameters:[self createParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Issue was created");
-        BCIssue *newIssue = [MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:responseObject error:nil];
-        [_myParentViewController addNewIssue:newIssue];
-        [self.navigationController popViewControllerAnimated:YES];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [UIAlertView showWithError:error];
-    }];
+-(void)postButtonDidPress{
+  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues", _repository.owner.userLogin, _repository.name];
+  NSMutableDictionary *params = [self createParameters];
+  if ([params objectForKey:@"title"] == [NSNull null]) {
+    [UIAlertView showWithError:[[NSError alloc] initWithDomain:@"EMPTY TITLE" code:13 userInfo:nil]];
+    return;
+  }else{
+    if ([(NSString*)[params objectForKey:@"title" ] length] == 0) {
+      [UIAlertView showWithError:[[NSError alloc] initWithDomain:@"EMPTY TITLE" code:13 userInfo:nil]];
+      return;
+    }
+  }
+  
+  if ([(NSString*)[params objectForKey:@"body"] isEqualToString:@"What is the problem?"]) {
+    [params setObject:@"" forKey:@"body"];
+  }
+  [[BCHTTPClient sharedInstance] postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    BCIssue *newIssue = [MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:responseObject error:nil];
+    [_myParentViewController addNewIssue:newIssue];
+    [self.navigationController popViewControllerAnimated:YES];
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [UIAlertView showWithError:error];
+  }];
 }
 
 
 #pragma mark -
 #pragma mark private
-
-//- (void)animateViewWithFrame:(CGRect)frame {
-//  __weak BCAddIssueViewController *weakSelf = self;
-//  [UIView animateWithDuration:ANIMATION_DURATION delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^ {
-//    weakSelf.view.frame = frame;
-//  } completion:nil];
-//}
 
 - (void) keyboardDidHide:(NSNotification*)notification{//zmensi velikost skrolovatelneho obsahu
     NSDictionary* keyboardInfo = [notification userInfo];
@@ -148,29 +150,19 @@
     [self.navigationController pushViewController:selectLabelsVC animated:YES];
 }
 
--(void)setItemsEditable:(BOOL)isEditable{
-//    [_addIssueView.body setEditable:isEditable];
-//    [_addIssueView.title setEnabled:isEditable];
-//    [_addIssueView.assignee setEnabled:isEditable];
-//    [_addIssueView.milestone setEnabled:isEditable];
-//    [_addIssueView.labelsButton setEnabled:isEditable];
-}
-
--(NSDictionary *)createParameters{
-    NSMutableArray *labelsNames = [[NSMutableArray alloc] init];
-    for(BCLabel *object in _labels){
-        [labelsNames addObject:object.name];
-    }
-  
-  NSDictionary *parameters = nil;
-//    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                                _addIssueView.title.text ?: [NSNull null], @"title",
-//                                _addIssueView.body.text ?: [NSNull null], @"body",
-//                                _assignee.userLogin ?: [NSNull null], @"assignee",
-//                                _milestone.number ?: [NSNull null], @"milestone",
-//                                labelsNames ?: [NSNull null], @"labels",
-//                                nil];
-    return parameters;
+-(NSMutableDictionary *)createParameters{
+  NSMutableArray *labelsNames = [[NSMutableArray alloc] init];
+  for(BCLabel *object in _labels){
+    [labelsNames addObject:object.name];
+  }
+  NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                _addIssueView.issueTitle.textField.text ?: [NSNull null], @"title",
+                                _addIssueView.issueBody.text ?: [NSNull null], @"body",
+                                _assignee.userLogin ?: [NSNull null], @"assignee",
+                                _milestone.number ?: [NSNull null], @"milestone",
+                                labelsNames ?: [NSNull null], @"labels",
+                                nil];
+  return parameters;
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{

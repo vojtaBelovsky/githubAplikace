@@ -8,18 +8,20 @@
 
 #import "BCIssueCell.h"
 #import "BCIssue.h"
+#import "BCProfileIssue.h"
 
 #define IssueCellReuseIdentifier @"IssueCellReuseIdentifier"
 #define MilestoneCellReuseIdentifier @"MilestoneCellReuseIdentifier"
+
+#define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
 
 @implementation BCIssueCell
 
 + (BCIssueCell *)createIssueCellWithTableView:(UITableView *)tableView {
   BCIssueCell *cell = [tableView dequeueReusableCellWithIdentifier:IssueCellReuseIdentifier];
-  
   if ( !cell ) {
     cell = [[BCIssueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.profileIssue = [[BCProfileIssue alloc] init];
   }
   
   return cell;

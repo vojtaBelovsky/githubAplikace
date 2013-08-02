@@ -9,6 +9,7 @@
 #import "BCIssueDataSource.h"
 #import "BCIssueCell.h"
 #import "BCIssue.h"
+#import "BCProfileIssue.h"
 
 @implementation BCIssueDataSource
 
@@ -30,12 +31,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    BCIssueCell *cell;
-    cell = [BCIssueCell createIssueCellWithTableView:tableView];
-    BCIssue *issueForRow = [_issues objectAtIndex:indexPath.row];
-    cell.textLabel.text = issueForRow.title;
-    [cell.textLabel setFont:[UIFont fontWithName:@"arial" size:15]];
-    return cell;
+  BCIssueCell *cell;
+  cell = [BCIssueCell createIssueCellWithTableView:tableView];
+  BCIssue *issueForRow = [_issues objectAtIndex:indexPath.row];
+  [cell.profileIssue setWithIssue:issueForRow];
+  
+  return cell;
 }
 
 #pragma mark -

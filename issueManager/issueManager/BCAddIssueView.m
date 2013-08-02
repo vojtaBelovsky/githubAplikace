@@ -32,7 +32,7 @@
 #define NEW_ISSUE_SHADOW_FONT_COLOR   [UIColor whiteColor]
 
 #define BODY_PLACEHOLDER_FONT_COLOR     [UIColor colorWithRed:.83 green:.83 blue:.83 alpha:1.00]
-#define BODY_FONT_ITALIC       [UIFont fontWithName:@"ProximaNova-Italic" size:16]
+#define BODY_FONT_ITALIC       [UIFont fontWithName:@"ProximaNova-RegItalic" size:16]
 
 #define DONE_AND_CANCEL_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:14]
 #define DONE_AND_CANCEL_FONT_COLOR    [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]

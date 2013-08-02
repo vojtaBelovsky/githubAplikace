@@ -35,6 +35,10 @@
 		102B8B69172FF795003BA22F /* UIAlertView+errorAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */; };
 		104105D81757709C003B0B9F /* BCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105D71757709C003B0B9F /* BCLoginViewController.m */; };
 		104105DF175770DE003B0B9F /* BCLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 104105DE175770DE003B0B9F /* BCLoginView.m */; };
+		1045729517ABBF760010BA86 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1045729417ABBF760010BA86 /* QuartzCore.framework */; };
+		1045729C17ABC59C0010BA86 /* BCProfileIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1045729B17ABC59C0010BA86 /* BCProfileIssue.m */; };
+		104572A017ABC71D0010BA86 /* BCIssueNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1045729F17ABC71D0010BA86 /* BCIssueNumberView.m */; };
+		104572A417ABD94B0010BA86 /* BCLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 104572A317ABD94B0010BA86 /* BCLabelView.m */; };
 		104D2C061761DF7600501C74 /* octocat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 104D2C051761DF7600501C74 /* octocat@2x.png */; };
 		104D2C0B176492AC00501C74 /* login_origo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 104D2C0A176492AB00501C74 /* login_origo@2x.png */; };
 		105460DA1761D6AB00F36716 /* login_origo.png in Resources */ = {isa = PBXBuildFile; fileRef = 105460D81761D6A700F36716 /* login_origo.png */; };
@@ -228,6 +232,13 @@
 		104105D71757709C003B0B9F /* BCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginViewController.m; sourceTree = "<group>"; };
 		104105DD175770DE003B0B9F /* BCLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLoginView.h; sourceTree = "<group>"; };
 		104105DE175770DE003B0B9F /* BCLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginView.m; sourceTree = "<group>"; };
+		1045729417ABBF760010BA86 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1045729A17ABC59C0010BA86 /* BCProfileIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCProfileIssue.h; sourceTree = "<group>"; };
+		1045729B17ABC59C0010BA86 /* BCProfileIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCProfileIssue.m; sourceTree = "<group>"; };
+		1045729E17ABC71D0010BA86 /* BCIssueNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueNumberView.h; sourceTree = "<group>"; };
+		1045729F17ABC71D0010BA86 /* BCIssueNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueNumberView.m; sourceTree = "<group>"; };
+		104572A217ABD94B0010BA86 /* BCLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLabelView.h; sourceTree = "<group>"; };
+		104572A317ABD94B0010BA86 /* BCLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLabelView.m; sourceTree = "<group>"; };
 		104D2C051761DF7600501C74 /* octocat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "octocat@2x.png"; path = "issueManager/grafika/octocat@2x.png"; sourceTree = "<group>"; };
 		104D2C0A176492AB00501C74 /* login_origo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login_origo@2x.png"; path = "issueManager/grafika/login_origo@2x.png"; sourceTree = "<group>"; };
 		105460D81761D6A700F36716 /* login_origo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_origo.png; path = issueManager/grafika/login_origo.png; sourceTree = "<group>"; };
@@ -373,6 +384,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1045729517ABBF760010BA86 /* QuartzCore.framework in Frameworks */,
 				10F32E4D17252360005E80F8 /* libMantle.a in Frameworks */,
 				10E3FC541721A66B00607EBA /* UIKit.framework in Frameworks */,
 				10E3FC561721A66B00607EBA /* Foundation.framework in Frameworks */,
@@ -466,6 +478,7 @@
 		102B8B1E17268C72003BA22F /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				1045729917ABC5590010BA86 /* profileIssue */,
 				102B8B2617268D38003BA22F /* BCIssueCell.h */,
 				102B8B2717268D38003BA22F /* BCIssueCell.m */,
 			);
@@ -552,6 +565,7 @@
 		102B8B57172FE2C2003BA22F /* view */ = {
 			isa = PBXGroup;
 			children = (
+				10AFAA97179D305C0083511E /* contentImgView */,
 				10AFAAB317A10C750083511E /* buttonWithMultipleContent */,
 				10CA880C178DB50F00DF1B43 /* button */,
 				10CA8805178D721F00DF1B43 /* textField */,
@@ -579,6 +593,35 @@
 				104105DE175770DE003B0B9F /* BCLoginView.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		1045729917ABC5590010BA86 /* profileIssue */ = {
+			isa = PBXGroup;
+			children = (
+				104572A117ABD9290010BA86 /* labelView */,
+				1045729D17ABC6FD0010BA86 /* IssueNumberView */,
+				1045729A17ABC59C0010BA86 /* BCProfileIssue.h */,
+				1045729B17ABC59C0010BA86 /* BCProfileIssue.m */,
+			);
+			name = profileIssue;
+			sourceTree = "<group>";
+		};
+		1045729D17ABC6FD0010BA86 /* IssueNumberView */ = {
+			isa = PBXGroup;
+			children = (
+				1045729E17ABC71D0010BA86 /* BCIssueNumberView.h */,
+				1045729F17ABC71D0010BA86 /* BCIssueNumberView.m */,
+			);
+			name = IssueNumberView;
+			sourceTree = "<group>";
+		};
+		104572A117ABD9290010BA86 /* labelView */ = {
+			isa = PBXGroup;
+			children = (
+				104572A217ABD94B0010BA86 /* BCLabelView.h */,
+				104572A317ABD94B0010BA86 /* BCLabelView.m */,
+			);
+			name = labelView;
 			sourceTree = "<group>";
 		};
 		1095E9CC175F69C2009CCEDB /* github cutted */ = {
@@ -687,7 +730,6 @@
 			children = (
 				10CA880D178DB54F00DF1B43 /* BCaddIssueButton.h */,
 				10CA880E178DB54F00DF1B43 /* BCaddIssueButton.m */,
-				10AFAA97179D305C0083511E /* contentImgView */,
 			);
 			name = button;
 			sourceTree = "<group>";
@@ -802,6 +844,7 @@
 		10E3FC471721A66B00607EBA = {
 			isa = PBXGroup;
 			children = (
+				1045729417ABBF760010BA86 /* QuartzCore.framework */,
 				1020010B175F060E005DD92F /* grafika */,
 				10E300481721A6AA00607EBA /* 3rd */,
 				10E3FC591721A66B00607EBA /* issueManager */,
@@ -1192,6 +1235,9 @@
 				10AFAAA1179EA4A80083511E /* BCAvatarImgView.m in Sources */,
 				10AFAAAA179FC6140083511E /* BCLabelColorImgView.m in Sources */,
 				10AFAAB617A10CA70083511E /* BCAddIssueButtonMC.m in Sources */,
+				1045729C17ABC59C0010BA86 /* BCProfileIssue.m in Sources */,
+				104572A017ABC71D0010BA86 /* BCIssueNumberView.m in Sources */,
+				104572A417ABD94B0010BA86 /* BCLabelView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

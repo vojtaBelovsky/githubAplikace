@@ -15,7 +15,13 @@
 #import "BCAddIssueViewController.h"
 #import "UIAlertView+errorAlert.h"
 #import "BCUser.h"
+#import <QuartzCore/QuartzCore.h>
 
+#define BOLD_FONT           [UIFont fontWithName:@"ProximaNova-Bold" size:12]
+#define REGULAR_FONT        [UIFont fontWithName:@"ProximaNova-Regular" size:15]
+
+#define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
+#define WHITE_COLOR         [UIColor whiteColor]
 
 @interface BCIssueViewController ()
 
@@ -49,7 +55,6 @@
 }
 
 - (void)loadView {
-//  [super loadView];
   BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
   _tableView = [[BCIssueView alloc] initWithUserName:currentUser.userLogin];
   [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchDown];
@@ -57,6 +62,12 @@
   
   [self createModelFromRepository:[_repositories objectAtIndex:[_nthRepository integerValue]]];
   [_tableView.tableView setDelegate:self];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//  BCIssue *currentIssue = [_dataSource.issues objectAtIndex:[indexPath row]];
+//  currentIssue.title sizeWithFont:<#(UIFont *)#>
+  return 100;
 }
 
 #pragma mark -
