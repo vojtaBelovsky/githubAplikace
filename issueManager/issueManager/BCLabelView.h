@@ -12,6 +12,7 @@
 @interface BCLabelView : UIView
 
 @property UILabel* myLabel;
+@property UIView* whiteRect;
 
 - (id)initWithLabel:(BCLabel*)label;
 

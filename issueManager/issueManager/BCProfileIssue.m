@@ -13,8 +13,7 @@
 #import "BCIssue.h"
 
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
-#define LABEL_HEIGHT  ( 20.0f )
-#define LABEL_WIDTH   ( 50.0f )
+#define LABELS_OFFSET ( 4.0f )
 
 @implementation BCProfileIssue
 
@@ -24,6 +23,7 @@
   if (self) {
     UIImage *image = [BACKGROUND_IMAGE_FOR_FORM stretchableImageWithLeftCapWidth:8 topCapHeight:8];
     _profileIssueBackgroundImgView = [[UIImageView alloc] initWithImage:image];
+    [self addSubview:_profileIssueBackgroundImgView];
     
     _labelViewsArray = [[NSMutableArray alloc] init];
   }
@@ -44,8 +44,8 @@
   CGRect frame;
   frame = CGRectMake(0, 0, 200, 80);
   
-  if (!CGRectEqualToRect(self.frame, frame)) {
-    self.frame = frame;
+  if (!CGRectEqualToRect(_profileIssueBackgroundImgView.frame, frame)) {
+    _profileIssueBackgroundImgView.frame = frame;
   }
   
   CGPoint origin = CGPointMake(10, 50);
@@ -55,7 +55,7 @@
     if (!CGRectEqualToRect(object.frame, frame)) {
       object.frame = frame;
     }
-    origin.x += object.frame.size.width;
+    origin.x += object.frame.size.width+LABELS_OFFSET;
   }
   
 }

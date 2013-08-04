@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BCIssueNumberView : UIImageView
+@interface BCIssueNumberView : UIView
 
 @end

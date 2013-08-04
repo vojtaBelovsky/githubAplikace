@@ -22,6 +22,7 @@
   if ( !cell ) {
     cell = [[BCIssueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
     cell.profileIssue = [[BCProfileIssue alloc] init];
+    [cell addSubview:cell.profileIssue];
   }
   
   return cell;

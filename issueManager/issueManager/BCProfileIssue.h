@@ -11,7 +11,7 @@
 @class BCLabelView;
 @class BCIssue;
 
-@interface BCProfileIssue : UIImageView
+@interface BCProfileIssue : UIView
 
 //rectangle around whole issue
 @property UIImageView *profileIssueBackgroundImgView;

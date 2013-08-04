@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BCLabel.h"
 
-#define REGULAR_FONT_SMALL  [UIFont fontWithName:@"ProximaNova-Regular" size:10]
+#define REGULAR_FONT_SMALL  [UIFont fontWithName:@"ProximaNova-Regular" size:13]
 #define MAXIMUM_WIDTH       ( 150.0f )
 #define LABEL_TEXT_OFFSET   ( 5.0f )
 
@@ -20,15 +20,16 @@
 {
   self = [super init];
   if (self) {
-    [self.layer setBorderWidth:5];
-    [self.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.layer setBorderWidth:1];
+    [self.layer setBorderColor:label.color.CGColor];
     [self.layer setCornerRadius:5];
     [self.layer setBackgroundColor:label.color.CGColor];
-    [self setBackgroundColor:[UIColor greenColor]];
     
     _myLabel = [[UILabel alloc] init];
+    [_myLabel setFont:REGULAR_FONT_SMALL];
     [_myLabel setTextColor:[UIColor whiteColor]];
     [_myLabel setText:label.name];
+    [_myLabel setBackgroundColor:[UIColor clearColor]];
     CGRect frame;
     frame.size = [_myLabel.text sizeWithFont:REGULAR_FONT_SMALL];
     frame.size.width = MIN(frame.size.width, MAXIMUM_WIDTH);
@@ -40,17 +41,26 @@
     frame.size.height += LABEL_TEXT_OFFSET;
     frame.size.width += LABEL_TEXT_OFFSET;
     [self setFrame:frame];
+    
+    frame.origin.x += 1;
+    frame.origin.y += 1;
+    frame.size.width -= 2;
+    frame.size.height -= 2;
+    _whiteRect = [[UIView alloc] initWithFrame:frame];
+    [_whiteRect setBackgroundColor:[UIColor whiteColor]];
+    _whiteRect.alpha = 0.4;
+    [self addSubview:_whiteRect];
   }
   return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+-(void)layoutSubviews{
+  CGRect frame;
+  frame.size = _myLabel.frame.size;
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, (self.frame.size.height-frame.size.height)/2);
+  if (!CGRectEqualToRect(_myLabel.frame, frame)) {
+    _myLabel.frame = frame;
+  }
 }
-*/
 
 @end

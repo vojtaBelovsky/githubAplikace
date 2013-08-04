@@ -46,13 +46,26 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "issueManager/BCAddIssueViewController.m"
-         timestampString = "397139496.539212"
+         filePath = "issueManager/BCIssueDataSource.m"
+         timestampString = "397150224.195198"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "93"
-         endingLineNumber = "93"
-         landmarkName = "-postButtonDidPress"
+         startingLineNumber = "34"
+         endingLineNumber = "34"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "issueManager/BCProfileIssue.m"
+         timestampString = "397150319.453354"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
+         landmarkName = "-setWithIssue:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
