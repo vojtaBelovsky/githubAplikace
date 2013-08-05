@@ -13,7 +13,12 @@
 #import "BCIssue.h"
 
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
-#define LABELS_OFFSET ( 4.0f )
+
+#define LABELS_OFFSET       ( 4.0f )
+#define HASH_WIDTH          ( 30.0f )
+#define HASH_HEIGHT         ( 18.0f )
+#define HASH_TOP_OFFSET     ( 10.0f )
+#define HASH_LEFT_OFFSET    ( 10.0f )
 
 @implementation BCProfileIssue
 
@@ -25,6 +30,9 @@
     _profileIssueBackgroundImgView = [[UIImageView alloc] initWithImage:image];
     [self addSubview:_profileIssueBackgroundImgView];
     
+    _issueNumberView = [[BCIssueNumberView alloc] init];
+    [self addSubview:_issueNumberView];
+    
     _labelViewsArray = [[NSMutableArray alloc] init];
   }
   return self;
@@ -32,6 +40,13 @@
 
 - (void)setWithIssue:(BCIssue*)issue
 {
+  [_issueNumberView.hashNumber setText:[NSString stringWithFormat:@"%@11",issue.number]];
+  [_issueNumberView.hashNumber layoutIfNeeded];
+  
+  for (BCLabelView *object in _labelViewsArray) {
+    [object removeFromSuperview];
+  }
+  [_labelViewsArray removeAllObjects];
   BCLabelView * myLabelView;
   for (BCLabel *object in issue.labels) {
     myLabelView = [[BCLabelView alloc] initWithLabel:object];
@@ -42,10 +57,15 @@
 
 -(void)layoutSubviews{
   CGRect frame;
-  frame = CGRectMake(0, 0, 200, 80);
+  frame = CGRectMake(0, 0, 300, 80);
   
   if (!CGRectEqualToRect(_profileIssueBackgroundImgView.frame, frame)) {
     _profileIssueBackgroundImgView.frame = frame;
+  }
+  
+  frame = CGRectMake(HASH_LEFT_OFFSET, HASH_TOP_OFFSET, HASH_WIDTH, HASH_HEIGHT);
+  if (!CGRectEqualToRect(_issueNumberView.frame, frame)) {
+    _issueNumberView.frame = frame;
   }
   
   CGPoint origin = CGPointMake(10, 50);

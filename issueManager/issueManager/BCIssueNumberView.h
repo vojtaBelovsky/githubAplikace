@@ -10,4 +10,7 @@
 
 @interface BCIssueNumberView : UIView
 
+@property UIImageView *backgroundRectangle;
+@property UILabel *hashNumber;
+
 @end
