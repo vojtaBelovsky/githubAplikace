@@ -109,6 +109,7 @@
 		10CD6B3F176600EE00F64DC1 /* ProximaNovaCond-RegularIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 10CD6B2D176600EE00F64DC1 /* ProximaNovaCond-RegularIt.otf */; };
 		10CD6B40176600EE00F64DC1 /* ProximaNovaCond-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 10CD6B2E176600EE00F64DC1 /* ProximaNovaCond-Semibold.otf */; };
 		10CD6B41176600EE00F64DC1 /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 10CD6B2F176600EE00F64DC1 /* ProximaNovaCond-SemiboldIt.otf */; };
+		10D2D37317AFD64E00E0DAAD /* BCIssueTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D2D37217AFD64E00E0DAAD /* BCIssueTitleLabel.m */; };
 		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
 		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
 		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
@@ -316,6 +317,8 @@
 		10CD6B2D176600EE00F64DC1 /* ProximaNovaCond-RegularIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-RegularIt.otf"; sourceTree = "<group>"; };
 		10CD6B2E176600EE00F64DC1 /* ProximaNovaCond-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-Semibold.otf"; sourceTree = "<group>"; };
 		10CD6B2F176600EE00F64DC1 /* ProximaNovaCond-SemiboldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-SemiboldIt.otf"; sourceTree = "<group>"; };
+		10D2D37117AFD64E00E0DAAD /* BCIssueTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueTitleLabel.h; sourceTree = "<group>"; };
+		10D2D37217AFD64E00E0DAAD /* BCIssueTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueTitleLabel.m; sourceTree = "<group>"; };
 		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -598,21 +601,22 @@
 		1045729917ABC5590010BA86 /* profileIssue */ = {
 			isa = PBXGroup;
 			children = (
+				10D2D36F17AFD62B00E0DAAD /* issueTitleLabel */,
 				104572A117ABD9290010BA86 /* labelView */,
-				1045729D17ABC6FD0010BA86 /* IssueNumberView */,
+				1045729D17ABC6FD0010BA86 /* issueNumberView */,
 				1045729A17ABC59C0010BA86 /* BCProfileIssue.h */,
 				1045729B17ABC59C0010BA86 /* BCProfileIssue.m */,
 			);
 			name = profileIssue;
 			sourceTree = "<group>";
 		};
-		1045729D17ABC6FD0010BA86 /* IssueNumberView */ = {
+		1045729D17ABC6FD0010BA86 /* issueNumberView */ = {
 			isa = PBXGroup;
 			children = (
 				1045729E17ABC71D0010BA86 /* BCIssueNumberView.h */,
 				1045729F17ABC71D0010BA86 /* BCIssueNumberView.m */,
 			);
-			name = IssueNumberView;
+			name = issueNumberView;
 			sourceTree = "<group>";
 		};
 		104572A117ABD9290010BA86 /* labelView */ = {
@@ -774,6 +778,15 @@
 				10CD6B2F176600EE00F64DC1 /* ProximaNovaCond-SemiboldIt.otf */,
 			);
 			path = ProximaNova;
+			sourceTree = "<group>";
+		};
+		10D2D36F17AFD62B00E0DAAD /* issueTitleLabel */ = {
+			isa = PBXGroup;
+			children = (
+				10D2D37117AFD64E00E0DAAD /* BCIssueTitleLabel.h */,
+				10D2D37217AFD64E00E0DAAD /* BCIssueTitleLabel.m */,
+			);
+			name = issueTitleLabel;
 			sourceTree = "<group>";
 		};
 		10E300481721A6AA00607EBA /* 3rd */ = {
@@ -1238,6 +1251,7 @@
 				1045729C17ABC59C0010BA86 /* BCProfileIssue.m in Sources */,
 				104572A017ABC71D0010BA86 /* BCIssueNumberView.m in Sources */,
 				104572A417ABD94B0010BA86 /* BCLabelView.m in Sources */,
+				10D2D37317AFD64E00E0DAAD /* BCIssueTitleLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

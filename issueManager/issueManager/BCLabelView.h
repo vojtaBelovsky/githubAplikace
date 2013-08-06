@@ -16,4 +16,6 @@
 
 - (id)initWithLabel:(BCLabel*)label;
 
++(CGSize)sizeOfLabelWithText:(NSString*)text;
+
 @end

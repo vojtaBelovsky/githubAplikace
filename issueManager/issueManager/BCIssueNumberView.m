@@ -12,7 +12,7 @@
 #define HASH_FONT_COLOR   [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define HASH_FONT         [UIFont fontWithName:@"ProximaNova-Bold" size:12]
 
-#define HASH_NUMBER_OFFSET      ( 2.0f )
+#define HASH_NUMBER_OFFSET      ( 7.0f )
 #define MAX_HASH_NUMBER_WIDTH   ( 24.0f )
 
 @implementation BCIssueNumberView
@@ -44,7 +44,7 @@
   
   frame.size = [_hashNumber sizeThatFits:self.frame.size];
   frame.size.width = MIN(frame.size.width, MAX_HASH_NUMBER_WIDTH);
-  frame.origin = CGPointMake((self.frame.size.width-_hashNumber.frame.size.width)/2, (self.frame.size.height-_hashNumber.frame.size.height)/2);
+  frame.origin = CGPointMake((self.frame.size.width-_hashNumber.frame.size.width)/2, (self.frame.size.height-_hashNumber.frame.size.height)/2+1);
   if (!CGRectEqualToRect(_hashNumber.frame, frame)) {
     _hashNumber.frame = frame;
   }

@@ -16,9 +16,9 @@
 #import "UIAlertView+errorAlert.h"
 #import "BCUser.h"
 #import <QuartzCore/QuartzCore.h>
-
-#define BOLD_FONT           [UIFont fontWithName:@"ProximaNova-Bold" size:12]
-#define REGULAR_FONT        [UIFont fontWithName:@"ProximaNova-Regular" size:15]
+#import "BCIssueTitleLabel.h"
+#import "BCLabelView.h"
+#import "BCLabel.h"
 
 #define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define WHITE_COLOR         [UIColor whiteColor]
@@ -65,9 +65,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//  BCIssue *currentIssue = [_dataSource.issues objectAtIndex:[indexPath row]];
-//  currentIssue.title sizeWithFont:<#(UIFont *)#>
-  return 100;
+  BCIssue *currentIssue = [_dataSource.issues objectAtIndex:indexPath.row];
+  return [BCIssue heightOfIssueInProfileWithIssue:currentIssue];
 }
 
 #pragma mark -
@@ -91,6 +90,8 @@
 
 #pragma mark -
 #pragma mark private
+
+
 
 -(void)createAndPushAddIssueVC{
   BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:[_nthRepository integerValue]] andController:self];

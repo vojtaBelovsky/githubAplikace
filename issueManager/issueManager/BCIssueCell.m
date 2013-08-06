@@ -23,6 +23,7 @@
     cell = [[BCIssueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IssueCellReuseIdentifier];
     cell.profileIssue = [[BCProfileIssue alloc] init];
     [cell addSubview:cell.profileIssue];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
   }
   
   return cell;
@@ -36,6 +37,16 @@
   }
   
   return cell;
+}
+
+-(void)layoutSubviews{
+  CGRect frame;
+  
+  frame.size = _profileIssue.frame.size;
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, (self.frame.size.height-frame.size.height)/2);
+  if (!CGRectEqualToRect(_profileIssue.frame, frame)) {
+    _profileIssue.frame = frame;
+  }
 }
 
 @end

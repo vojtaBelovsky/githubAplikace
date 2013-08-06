@@ -10,13 +10,16 @@
 @class BCIssueNumberView;
 @class BCLabelView;
 @class BCIssue;
+@class BCIssueTitleLabel;
 
 @interface BCProfileIssue : UIView
 
 //rectangle around whole issue
 @property UIImageView *profileIssueBackgroundImgView;
 @property BCIssueNumberView* issueNumberView;
+@property BCIssueTitleLabel *issueTitleLabel;
 @property NSMutableArray* labelViewsArray;
+@property BCIssue *issue;
 
 - (void)setWithIssue:(BCIssue*)issue;
 

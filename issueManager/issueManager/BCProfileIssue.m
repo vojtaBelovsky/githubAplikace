@@ -11,14 +11,17 @@
 #import "BCLabelView.h"
 #import "BCLabel.h"
 #import "BCIssue.h"
+#import "BCIssueTitleLabel.h"
 
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
 
-#define LABELS_OFFSET       ( 4.0f )
-#define HASH_WIDTH          ( 30.0f )
-#define HASH_HEIGHT         ( 18.0f )
-#define HASH_TOP_OFFSET     ( 10.0f )
-#define HASH_LEFT_OFFSET    ( 10.0f )
+#define LABELS_OFFSET         ( 4.0f )
+#define HASH_WIDTH            ( 30.0f )
+#define HASH_HEIGHT           ( 19.0f )
+#define TOP_OFFSET            ( 11.0f )
+#define LEFT_OFFSET           ( 11.0f )
+#define LABELS_TOP_OFFSET     ( 6.0f )
+#define PROFILE_ISSUE_WIDTH   ( 300.0f )
 
 @implementation BCProfileIssue
 
@@ -33,15 +36,21 @@
     _issueNumberView = [[BCIssueNumberView alloc] init];
     [self addSubview:_issueNumberView];
     
+    _issueTitleLabel = [[BCIssueTitleLabel alloc] init];
+    [self addSubview:_issueTitleLabel];
+    
     _labelViewsArray = [[NSMutableArray alloc] init];
+    _issue = nil;
   }
   return self;
 }
 
 - (void)setWithIssue:(BCIssue*)issue
 {
-  [_issueNumberView.hashNumber setText:[NSString stringWithFormat:@"%@11",issue.number]];
-  [_issueNumberView.hashNumber layoutIfNeeded];
+  _issue = issue;
+  [_issueNumberView.hashNumber setText:[NSString stringWithFormat:@"%@",issue.number]];
+  
+  [_issueTitleLabel setText:issue.title];
   
   for (BCLabelView *object in _labelViewsArray) {
     [object removeFromSuperview];
@@ -57,19 +66,33 @@
 
 -(void)layoutSubviews{
   CGRect frame;
-  frame = CGRectMake(0, 0, 300, 80);
   
+  frame.size = CGSizeMake(PROFILE_ISSUE_WIDTH, [BCIssue heightOfIssueInProfileWithIssue:_issue]);
+  frame.origin = CGPointZero;
+  if (!CGRectEqualToRect(self.frame, frame)) {
+    self.frame = frame;
+  }
   if (!CGRectEqualToRect(_profileIssueBackgroundImgView.frame, frame)) {
     _profileIssueBackgroundImgView.frame = frame;
   }
   
-  frame = CGRectMake(HASH_LEFT_OFFSET, HASH_TOP_OFFSET, HASH_WIDTH, HASH_HEIGHT);
+  frame = CGRectMake(LEFT_OFFSET, TOP_OFFSET, HASH_WIDTH, HASH_HEIGHT);
   if (!CGRectEqualToRect(_issueNumberView.frame, frame)) {
     _issueNumberView.frame = frame;
   }
   
-  CGPoint origin = CGPointMake(10, 50);
+  frame.size = [BCIssueTitleLabel countSizeFromString:_issueTitleLabel.text];
+  frame.origin = CGPointMake(LEFT_OFFSET, TOP_OFFSET);
+  if (!CGRectEqualToRect(_issueTitleLabel.frame, frame)) {
+    _issueTitleLabel.frame = frame;
+  }
+  
+  CGPoint origin = CGPointMake(LEFT_OFFSET, LABELS_TOP_OFFSET+TOP_OFFSET+_issueTitleLabel.frame.size.height);
   for (BCLabelView *object in _labelViewsArray) {
+    if ((origin.x+object.frame.size.width)>(PROFILE_ISSUE_WIDTH-(2*LEFT_OFFSET))) {
+      origin.y += object.frame.size.height+LABELS_OFFSET;
+      origin.x = LEFT_OFFSET;
+    }
     frame.origin = origin;
     frame.size = object.frame.size;
     if (!CGRectEqualToRect(object.frame, frame)) {
