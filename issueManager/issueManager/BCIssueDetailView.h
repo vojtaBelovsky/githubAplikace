@@ -9,16 +9,21 @@
 #import <UIKit/UIKit.h>
 @class BCIssue;
 @class BCIssueDetailViewController;
+@class BCIssueNumberView;
+@class BCIssueTitleLabel;
+@class BCIssueBodyLabel;
+@class BCIssueInDetailView;
 
 @interface BCIssueDetailView : UIScrollView
 
-@property UIImageView *avatar;
-@property UIButton *assignee;
-@property UIButton *milestone;
-@property UITextView *labels;
-@property UITextField *title;
-@property UITextView *body;
-@property UIButton *labelsButton;
+@property BCIssue *issue;
+@property UIImageView *backgroundImageView;
+@property UIView *navigationBarView;
+@property UIButton *backButton;
+@property UIButton *closeButton;
+@property UILabel *theNewIssueLabel;
+@property UILabel *theNewIssueShadowLabel;
+@property BCIssueInDetailView *issueView;
 
 -(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
 

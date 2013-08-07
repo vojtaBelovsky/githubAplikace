@@ -143,6 +143,9 @@
 		10F32EBE17252D8B005E80F8 /* BCRepositoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EBD17252D8B005E80F8 /* BCRepositoryView.m */; };
 		10F32EC317253465005E80F8 /* BCRepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EC217253465005E80F8 /* BCRepositoryCell.m */; };
 		10F32EC6172534F5005E80F8 /* BCRepositoryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EC5172534F5005E80F8 /* BCRepositoryDataSource.m */; };
+		10F818FD17B10BD3003822D6 /* BCIssueBodyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F818FC17B10BD3003822D6 /* BCIssueBodyLabel.m */; };
+		10F8190117B12E3B003822D6 /* BCIssueInDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F8190017B12E3B003822D6 /* BCIssueInDetailView.m */; };
+		10F8190617B245B6003822D6 /* BCMilestoneLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F8190517B245B6003822D6 /* BCMilestoneLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -380,6 +383,12 @@
 		10F32EC217253465005E80F8 /* BCRepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRepositoryCell.m; sourceTree = "<group>"; };
 		10F32EC4172534F5005E80F8 /* BCRepositoryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCRepositoryDataSource.h; sourceTree = "<group>"; };
 		10F32EC5172534F5005E80F8 /* BCRepositoryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRepositoryDataSource.m; sourceTree = "<group>"; };
+		10F818FB17B10BD3003822D6 /* BCIssueBodyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueBodyLabel.h; sourceTree = "<group>"; };
+		10F818FC17B10BD3003822D6 /* BCIssueBodyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueBodyLabel.m; sourceTree = "<group>"; };
+		10F818FF17B12E3B003822D6 /* BCIssueInDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueInDetailView.h; sourceTree = "<group>"; };
+		10F8190017B12E3B003822D6 /* BCIssueInDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueInDetailView.m; sourceTree = "<group>"; };
+		10F8190417B245B6003822D6 /* BCMilestoneLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCMilestoneLabel.h; sourceTree = "<group>"; };
+		10F8190517B245B6003822D6 /* BCMilestoneLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCMilestoneLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -510,6 +519,8 @@
 		102B8B33172A624C003BA22F /* view */ = {
 			isa = PBXGroup;
 			children = (
+				10F818FE17B12D56003822D6 /* issueDetail */,
+				10F818F717B10A5C003822D6 /* bodyLabel */,
 				102B8B38172A6289003BA22F /* BCIssueDetailView.h */,
 				102B8B39172A6289003BA22F /* BCIssueDetailView.m */,
 			);
@@ -601,8 +612,9 @@
 		1045729917ABC5590010BA86 /* profileIssue */ = {
 			isa = PBXGroup;
 			children = (
+				10F8190317B2458C003822D6 /* milestoneLabel */,
 				10D2D36F17AFD62B00E0DAAD /* issueTitleLabel */,
-				104572A117ABD9290010BA86 /* labelView */,
+				104572A117ABD9290010BA86 /* labelsView */,
 				1045729D17ABC6FD0010BA86 /* issueNumberView */,
 				1045729A17ABC59C0010BA86 /* BCProfileIssue.h */,
 				1045729B17ABC59C0010BA86 /* BCProfileIssue.m */,
@@ -619,13 +631,13 @@
 			name = issueNumberView;
 			sourceTree = "<group>";
 		};
-		104572A117ABD9290010BA86 /* labelView */ = {
+		104572A117ABD9290010BA86 /* labelsView */ = {
 			isa = PBXGroup;
 			children = (
 				104572A217ABD94B0010BA86 /* BCLabelView.h */,
 				104572A317ABD94B0010BA86 /* BCLabelView.m */,
 			);
-			name = labelView;
+			name = labelsView;
 			sourceTree = "<group>";
 		};
 		1095E9CC175F69C2009CCEDB /* github cutted */ = {
@@ -1021,6 +1033,33 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
+		10F818F717B10A5C003822D6 /* bodyLabel */ = {
+			isa = PBXGroup;
+			children = (
+				10F818FB17B10BD3003822D6 /* BCIssueBodyLabel.h */,
+				10F818FC17B10BD3003822D6 /* BCIssueBodyLabel.m */,
+			);
+			name = bodyLabel;
+			sourceTree = "<group>";
+		};
+		10F818FE17B12D56003822D6 /* issueDetail */ = {
+			isa = PBXGroup;
+			children = (
+				10F818FF17B12E3B003822D6 /* BCIssueInDetailView.h */,
+				10F8190017B12E3B003822D6 /* BCIssueInDetailView.m */,
+			);
+			name = issueDetail;
+			sourceTree = "<group>";
+		};
+		10F8190317B2458C003822D6 /* milestoneLabel */ = {
+			isa = PBXGroup;
+			children = (
+				10F8190417B245B6003822D6 /* BCMilestoneLabel.h */,
+				10F8190517B245B6003822D6 /* BCMilestoneLabel.m */,
+			);
+			name = milestoneLabel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1252,6 +1291,9 @@
 				104572A017ABC71D0010BA86 /* BCIssueNumberView.m in Sources */,
 				104572A417ABD94B0010BA86 /* BCLabelView.m in Sources */,
 				10D2D37317AFD64E00E0DAAD /* BCIssueTitleLabel.m in Sources */,
+				10F818FD17B10BD3003822D6 /* BCIssueBodyLabel.m in Sources */,
+				10F8190117B12E3B003822D6 /* BCIssueInDetailView.m in Sources */,
+				10F8190617B245B6003822D6 /* BCMilestoneLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

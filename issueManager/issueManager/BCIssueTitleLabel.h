@@ -10,6 +10,8 @@
 
 @interface BCIssueTitleLabel : UILabel
 
-+(CGSize)countSizeFromString:(NSString*)string;
+- (id)initWithFont:(UIFont*)font andColor:(UIColor*)color;
+
++(CGSize)sizeOfLabelWithText:(NSString*)string withFont:(UIFont*)font;
   
 @end

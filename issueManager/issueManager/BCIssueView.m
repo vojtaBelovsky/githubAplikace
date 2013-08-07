@@ -16,7 +16,6 @@
 #define USER_NAME_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
 #define USER_NAME_SHADOW_FONT_COLOR   [UIColor whiteColor]
 
-
 #define CHOOSE_COLLABORATOR_IMAGE         [UIImage imageNamed:@"profileNavbarPplOff.png"]
 #define CHOOSE_COLLABORATOR_HL_IMAGE      [UIImage imageNamed:@"profileNavbarPplOn.png"]
 #define CHOOSE_COLLABORATOR_IMAGE_WIDTH   30
@@ -70,6 +69,7 @@
       
       _tableView = [[UITableView alloc] init];
       [_tableView setBackgroundColor:[UIColor clearColor]];
+      [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
       [self addSubview:_tableView];
     }
     return self;
@@ -115,7 +115,8 @@
   }
     
   frame = self.frame;
-  frame.origin.y = TABLE_VIEW_OFFSET;
+  frame.size.height -= _navigationBarView.frame.size.height;
+  frame.origin.y = _navigationBarView.frame.size.height;
   if(!CGRectEqualToRect(frame, _tableView.frame)){
     _tableView.frame = frame;
   }

@@ -62,6 +62,7 @@
 }
 
 -(void)layoutSubviews{
+  [super layoutSubviews];
   CGRect frame;
   frame.size = _myLabel.frame.size;
   frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, (self.frame.size.height-frame.size.height)/2);

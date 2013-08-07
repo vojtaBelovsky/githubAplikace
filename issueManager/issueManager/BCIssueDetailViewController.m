@@ -28,45 +28,38 @@
 
 - (id)initWithIssue:(BCIssue *)issue andController:(BCIssueViewController *)controller
 {
-    self = [super init];
-    if (self) {
-        _myParentViewController = controller;
-        _issue = issue;
-        _editedIssue = [issue copy];
-        _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
-        _editButton = [self editButtonItem];
-        [_editButton setTarget:self];
-        [_editButton setAction:@selector(editButtionAction)];
-        _buttons = [[NSMutableArray alloc] initWithObjects:_editButton, nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-        
-        if(_issue.assignee == nil){
-            _isSetedAssignee = NO;
-        }else{
-            _isSetedAssignee = YES;
-        }
-        if(_issue.milestone == nil){
-            _isSetedMilestone = NO;
-        }else{
-            _isSetedMilestone = YES;
-        }
-        if(_issue.labels == nil){
-            _isSetedLabel = NO;
-        }else{
-            _isSetedLabel = YES;
-        }
+  self = [super init];
+  if (self) {
+    _myParentViewController = controller;
+    _issue = issue;
+    _editedIssue = [issue copy];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+    if(_issue.assignee == nil){
+      _isSetedAssignee = NO;
+    }else{
+      _isSetedAssignee = YES;
     }
-    return self;
+    if(_issue.milestone == nil){
+      _isSetedMilestone = NO;
+    }else{
+      _isSetedMilestone = YES;
+    }
+    if(_issue.labels == nil){
+      _isSetedLabel = NO;
+    }else{
+      _isSetedLabel = YES;
+    }
+  }
+  return self;
 }
 
 -(void) loadView{
-//    [super loadView];
-    _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue andController:self];
-    [_issueDetailview.title setDelegate:self];
-    [_issueDetailview.body setDelegate:self];
-    self.view = _issueDetailview;
-    self.navigationItem.rightBarButtonItems = _buttons;
+  _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue andController:self];
+  [_issueDetailview.backButton addTarget:self action:@selector(backButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  self.view = _issueDetailview;
+  self.navigationItem.rightBarButtonItems = _buttons;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -90,8 +83,8 @@
 
 -(void) editButtionAction{
     if([self isEditing]){
-        [_editedIssue setTitle:_issueDetailview.title.text];
-        [_editedIssue setBody:_issueDetailview.body.text];
+//        [_editedIssue setTitle:_issueDetailview.title.text];
+//        [_editedIssue setBody:_issueDetailview.body.text];
         NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%d", _issue.repository.owner.userLogin, _issue.repository.name, [_issue.number intValue]];
         [[BCHTTPClient sharedInstance] patchPath:path parameters:[self createParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Issue was updated");
@@ -111,7 +104,7 @@
         [self setItemsEditable:YES];
         [_buttons addObject:_cancelButton];
         self.navigationItem.rightBarButtonItems = _buttons;
-        [_issueDetailview.title becomeFirstResponder];
+//        [_issueDetailview.title becomeFirstResponder];
     }
 }
 
@@ -125,15 +118,21 @@
     [_issueDetailview rewriteContentWithIssue:_issue];
 }
 
+#pragma mark - buttonActions
+
+-(void)backButtonDidPress{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark -
 #pragma mark delegateMethods
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    [_editedIssue setBody:_issueDetailview.body.text];
+//    [_editedIssue setBody:_issueDetailview.body.text];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    [_editedIssue setTitle:_issueDetailview.title.text];
+//    [_editedIssue setTitle:_issueDetailview.title.text];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -178,11 +177,11 @@
 }
 
 -(void)setItemsEditable:(BOOL)isEditable{
-    [_issueDetailview.body setEditable:isEditable];
-    [_issueDetailview.title setEnabled:isEditable];
-    [_issueDetailview.assignee setEnabled:isEditable];
-    [_issueDetailview.milestone setEnabled:isEditable];
-    [_issueDetailview.labelsButton setEnabled:isEditable];
+//    [_issueDetailview.body setEditable:isEditable];
+//    [_issueDetailview.title setEnabled:isEditable];
+//    [_issueDetailview.assignee setEnabled:isEditable];
+//    [_issueDetailview.milestone setEnabled:isEditable];
+//    [_issueDetailview.labelsButton setEnabled:isEditable];
 }
 
 -(NSDictionary *) createParameters{

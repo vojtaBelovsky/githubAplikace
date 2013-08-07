@@ -23,6 +23,8 @@
 #define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define WHITE_COLOR         [UIColor whiteColor]
 
+#define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:16]
+
 @interface BCIssueViewController ()
 
 @end
@@ -66,7 +68,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   BCIssue *currentIssue = [_dataSource.issues objectAtIndex:indexPath.row];
-  return [BCIssue heightOfIssueInProfileWithIssue:currentIssue];
+  return [BCIssue heightOfIssueInProfileWithIssue:currentIssue withFont:TITLE_FONT];
 }
 
 #pragma mark -

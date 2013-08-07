@@ -35,6 +35,7 @@
 }
 
 -(void)layoutSubviews{
+  [super layoutSubviews];
   CGRect frame = CGRectZero;
   
   frame.size = self.frame.size;

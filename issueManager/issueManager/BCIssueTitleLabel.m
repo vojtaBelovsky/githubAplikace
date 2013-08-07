@@ -8,20 +8,18 @@
 
 #import "BCIssueTitleLabel.h"
 
-#define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:16]
-
 #define TITLE_LINE_WIDTH    ( 280.0f )
-#define TITLE_LINE_HEIGHT   ( 20.0f )
 
 @implementation BCIssueTitleLabel
 
 
-- (id)init
+- (id)initWithFont:(UIFont*)font andColor:(UIColor*)color
 {
   self = [super init];
   if (self) {
     [self setNumberOfLines:0];
-    [self setFont:TITLE_FONT];
+    [self setFont:font];
+    [self setTextColor:color];
     [self setBackgroundColor:[UIColor clearColor]];
   }
   return self;
@@ -32,12 +30,13 @@
   [super setText:text];
 }
 
-+(CGSize)countSizeFromString:(NSString*)string {
++(CGSize)sizeOfLabelWithText:(NSString*)string withFont:(UIFont*)font{
   string = [[NSString alloc] initWithFormat:@"         %@",string];
   CGSize sizeOfIssue;
-  sizeOfIssue = [string sizeWithFont:TITLE_FONT];
+  sizeOfIssue = [string sizeWithFont:font];
+  int titleLineHeight = sizeOfIssue.height;
   int numberOfLines = sizeOfIssue.width/TITLE_LINE_WIDTH+1;
-  sizeOfIssue = CGSizeMake(TITLE_LINE_WIDTH, numberOfLines*TITLE_LINE_HEIGHT);
+  sizeOfIssue = CGSizeMake(TITLE_LINE_WIDTH, numberOfLines*titleLineHeight);
   return sizeOfIssue;
 }
 

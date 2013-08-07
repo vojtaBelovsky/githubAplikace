@@ -14,6 +14,8 @@
 #define MilestoneCellReuseIdentifier @"MilestoneCellReuseIdentifier"
 
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
+#define PROFILE_ISSUE_WIDTH           ( 300.0f )
+#define TITLE_FONT                    [UIFont fontWithName:@"ProximaNova-Regular" size:16]
 
 @implementation BCIssueCell
 
@@ -40,9 +42,10 @@
 }
 
 -(void)layoutSubviews{
+  [super layoutSubviews];
   CGRect frame;
   
-  frame.size = _profileIssue.frame.size;
+  frame.size = CGSizeMake(PROFILE_ISSUE_WIDTH, [BCIssue heightOfIssueInProfileWithIssue:_profileIssue.issue withFont:TITLE_FONT]);
   frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_profileIssue.frame, frame)) {
     _profileIssue.frame = frame;
