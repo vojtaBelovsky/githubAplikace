@@ -26,6 +26,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ProximaNova-LightItalic.otf</string>
 		<string>ProximaNova-RegItalic.otf</string>
 		<string>ProximaNova-Bold.otf</string>
 		<string>ProximaNovaCond-Light.otf</string>

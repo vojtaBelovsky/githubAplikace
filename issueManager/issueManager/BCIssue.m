@@ -12,15 +12,6 @@
 #import "BCMilestone.h"
 #import "BCRepository.h"
 #import "BCLabel.h"
-#import "BCIssueTitleLabel.h"
-#import "BCLabelView.h"
-#import "BCIssueBodyLabel.h"
-
-#define INNER_OFFSET         ( 2.0f )
-#define OUTER_OFFSET         ( 10.0f )
-#define MAX_TITLE_WIDTH      ( 280.0f )
-
-#define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:16]
 
 @implementation BCIssue
 
@@ -141,31 +132,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail");
     }];
-}
-
-+(CGFloat)heightOfIssueInProfileWithIssue:(BCIssue*)issue withFont:(UIFont *)font{
-  CGSize sizeOfCurrentIssueTitle = [BCIssueTitleLabel sizeOfLabelWithText:issue.title withFont:font];
-  CGSize sizeOfCurrentLabel;
-  int width = 281;
-  int heightOfLabels = 0;
-  int numberOfLines = 0;
-  for (BCLabel *object in issue.labels) {
-    sizeOfCurrentLabel = [BCLabelView sizeOfLabelWithText:object.name];
-    if ((width+sizeOfCurrentLabel.width)>MAX_TITLE_WIDTH) {
-      numberOfLines++;
-      heightOfLabels += sizeOfCurrentLabel.height;
-      width = 0;
-    }
-    width += sizeOfCurrentLabel.width;
-  }
-  
-  return (sizeOfCurrentIssueTitle.height+(2*OUTER_OFFSET)+heightOfLabels+(numberOfLines*INNER_OFFSET));
-}
-
-+(CGFloat)heightOfIssueInDetailWithIssue:(BCIssue *)issue withFont:(UIFont*)font{
-  CGFloat newHeight = [self heightOfIssueInProfileWithIssue:issue withFont:font];
-  newHeight += [BCIssueBodyLabel sizeOfLabelWithText:issue.body].height+INNER_OFFSET;
-  return newHeight;
 }
 
 -(NSArray *)getLabelsAsStrings{

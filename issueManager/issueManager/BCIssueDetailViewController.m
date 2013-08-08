@@ -88,7 +88,7 @@
         NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%d", _issue.repository.owner.userLogin, _issue.repository.name, [_issue.number intValue]];
         [[BCHTTPClient sharedInstance] patchPath:path parameters:[self createParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Issue was updated");
-            [_myParentViewController changeIssue:_editedIssue];
+            [_myParentViewController changeIssue:_issue forNewIssue:_editedIssue];
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             if([[_editedIssue title] isEqualToString:@""]){

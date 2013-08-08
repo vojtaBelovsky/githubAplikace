@@ -16,26 +16,21 @@
 @implementation BCIssueBodyLabel
 
 
-- (id)initWithText:(NSString*)text
+- (id)init
 {
   self = [super init];
   if (self) {
     [self setNumberOfLines:0];
     [self setFont:BODY_FONT];
     [self setTextColor:BODY_FONT_COLOR];
+    [self setLineBreakMode:NSLineBreakByWordWrapping];
     [self setBackgroundColor:[UIColor clearColor]];
-    [self setText:text];
   }
   return self;
 }
 
-+(CGSize)sizeOfLabelWithText:(NSString*)string {
-  CGSize sizeOfBody;
-  sizeOfBody = [string sizeWithFont:BODY_FONT];
-  int titleLineHeight = sizeOfBody.height;
-  int numberOfLines = sizeOfBody.width/TITLE_LINE_WIDTH+1;
-  sizeOfBody = CGSizeMake(TITLE_LINE_WIDTH, numberOfLines*titleLineHeight);
-  return sizeOfBody;
+-(CGSize)sizeOfLabel{
+  return [self.text sizeWithFont:self.font constrainedToSize:CGSizeMake(TITLE_LINE_WIDTH, 1000000) lineBreakMode:NSLineBreakByWordWrapping];
 }
 
 @end

@@ -10,8 +10,6 @@
 
 @interface BCIssueBodyLabel : UILabel
 
-+(CGSize)sizeOfLabelWithText:(NSString*)string;
-
-- (id)initWithText:(NSString*)text;
+-(CGSize)sizeOfLabel;
 
 @end

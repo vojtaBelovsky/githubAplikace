@@ -56,6 +56,7 @@
 
 +(CGSize)sizeOfLabelWithText:(NSString*)text{
   CGSize mySize = [text sizeWithFont:REGULAR_FONT_SMALL];
+  mySize.width = MIN(mySize.width, MAXIMUM_WIDTH);
   mySize.width += (2*LABEL_TEXT_OFFSET)+LABELS_OFFSET;
   mySize.height += (2*LABEL_TEXT_OFFSET);
   return mySize;

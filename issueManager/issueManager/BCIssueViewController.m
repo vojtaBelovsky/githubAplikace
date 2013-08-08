@@ -19,11 +19,14 @@
 #import "BCIssueTitleLabel.h"
 #import "BCLabelView.h"
 #import "BCLabel.h"
+#import "BCHeadeView.h"
+#import "BCIssueCell.h"
 
 #define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define WHITE_COLOR         [UIColor whiteColor]
 
 #define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:16]
+#define HEADER_HEIGHT       ( 40.0f )
 
 @interface BCIssueViewController ()
 
@@ -47,7 +50,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue:[_dataSource.issues objectAtIndex:indexPath.row] andController:self];
+  BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue:[self getIssueForIndexPath:indexPath] andController:self];
   [self.navigationController pushViewController:issueDetailViewController animated:YES];
 }
 
@@ -67,8 +70,22 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  BCIssue *currentIssue = [_dataSource.issues objectAtIndex:indexPath.row];
-  return [BCIssue heightOfIssueInProfileWithIssue:currentIssue withFont:TITLE_FONT];
+  BCIssue *currentIssue = [self getIssueForIndexPath:indexPath];
+  return [BCIssueCell heightOfCellWithIssue:currentIssue];
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+  if (_dataSource != nil) {
+    BCIssue *currentIssue = [[_dataSource.dataSource objectForKey:[_dataSource.dataSourceKeyNames objectAtIndex:section]] objectAtIndex:0];
+    BCHeadeView *headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _tableView.navigationBarView.frame.size.height, _tableView.frame.size.width, HEADER_HEIGHT) andMilestone:currentIssue.milestone];
+    return headerView;
+  }else{
+    return nil;
+  }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+  return HEADER_HEIGHT;
 }
 
 #pragma mark -
@@ -86,14 +103,16 @@
   [_tableView.tableView setDataSource:_dataSource];
 }
 
--(void)changeIssue:(BCIssue *)issue{
-  [_dataSource changeIssue:issue atIndex:[_tableView.tableView indexPathForSelectedRow].row];
+-(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue*)newIssue{
+  [_dataSource changeIssue:issue forNewIssue:newIssue];
 }
 
 #pragma mark -
 #pragma mark private
 
-
+-(BCIssue *)getIssueForIndexPath:(NSIndexPath *)indexPath{
+  return [(NSArray*)[_dataSource.dataSource objectForKey:[_dataSource.dataSourceKeyNames objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+}
 
 -(void)createAndPushAddIssueVC{
   BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:[_nthRepository integerValue]] andController:self];

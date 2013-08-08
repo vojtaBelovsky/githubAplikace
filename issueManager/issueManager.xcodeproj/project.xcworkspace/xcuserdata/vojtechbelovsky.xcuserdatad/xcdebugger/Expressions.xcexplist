@@ -3,6 +3,9 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[BCIssueCell layoutSubviews]:BCIssueCell.m">
+      </ContextState>
+      <ContextState
          contextName = "-[BCRepositoryViewController tableView:didDeselectRowAtIndexPath:]:BCRepositoryViewController.m">
       </ContextState>
       <ContextState
@@ -15,6 +18,14 @@
       </ContextState>
       <ContextState
          contextName = "-[BCIssueDetailViewController initWithIssue:]:BCIssueDetailViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[BCIssueViewController tableView:viewForHeaderInSection:]:BCIssueViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_dataSource.dataSource objectForKey:[_dataSource.dataSourceKeyNames objectAtIndex:section]]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[BCSelectAssigneeViewController getIndexPathOfSelectedRow]:BCSelectAssigneeViewController.m">

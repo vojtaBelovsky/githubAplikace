@@ -123,10 +123,10 @@
   __block NSMutableArray *dataSourceKeyNames = [[NSMutableArray alloc] init];
   
   BCUser *loggedInUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
-  [dataSourceKeyNames addObject:loggedInUser.userLogin];
   
   [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
     //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!(array inicializuju, melo by tam byt 0 prvku) - PRIDAT POLOZKU "NO REPOZITORIES"
+    [dataSourceKeyNames addObject:loggedInUser.userLogin];
     [dataAvatar setImageWithURL:loggedInUser.avatarUrl placeholderImage:placeholderImage];
     dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: loggedInUser, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, dataAvatar.image, KEY_IMAGE, nil];
     [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[0]];

@@ -23,6 +23,6 @@
 - (id) initWithRepositories:(NSArray *)repositories;
 
 -(void)addNewIssue:(BCIssue *)newIssue;
--(void)changeIssue:(BCIssue *)issue;
+-(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue*)newIssue;
 
 @end

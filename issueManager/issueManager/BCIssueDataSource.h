@@ -11,13 +11,13 @@
 
 @interface BCIssueDataSource : NSObject<UITableViewDataSource>
 
-@property (copy) NSMutableArray *issues;
-@property (copy) NSMutableArray *milestones;
+@property NSMutableDictionary *dataSource;
+@property NSMutableArray *dataSourceKeyNames;
 
 -(id) initWithIssues:(NSMutableArray *)issues andMilestones:(NSMutableArray *)milestones;
 
 -(void)addNewIssue:(BCIssue *)newIssue;
--(void)changeIssue:(BCIssue *)issue atIndex:(NSUInteger)index;
+-(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue *)newIssue;
 
 
 @end

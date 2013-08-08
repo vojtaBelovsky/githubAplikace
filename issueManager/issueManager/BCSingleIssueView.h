@@ -11,16 +11,23 @@
 @class BCLabelView;
 @class BCIssue;
 @class BCIssueTitleLabel;
+@class BCIssueBodyLabel;
+@class BCIssueUserView;
 
-@interface BCProfileIssue : UIView
+@interface BCSingleIssueView : UIView
 
 //rectangle around whole issue
+@property BOOL showAll;
 @property UIImageView *profileIssueBackgroundImgView;
-@property BCIssueNumberView* issueNumberView;
-@property BCIssueTitleLabel *issueTitleLabel;
+@property BCIssueNumberView* numberView;
+@property BCIssueTitleLabel *titleLabel;
+@property BCIssueBodyLabel *bodyLabel;
+@property BCIssueUserView *userView;
 @property NSMutableArray* labelViewsArray;
 @property BCIssue *issue;
 
 - (void)setWithIssue:(BCIssue*)issue;
+
+- (id)initWithTitleFont:(UIFont *)font showAll:(BOOL)showAll;
 
 @end

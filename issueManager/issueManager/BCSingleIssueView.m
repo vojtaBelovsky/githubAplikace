@@ -6,16 +6,17 @@
 //  Copyright (c) 2013 vojta. All rights reserved.
 //
 
-#import "BCProfileIssue.h"
+#import "BCSingleIssueView.h"
 #import "BCLabelView.h"
 #import "BCLabel.h"
 #import "BCIssue.h"
 #import "BCIssueTitleLabel.h"
 #import "BCIssueNumberView.h"
+#import "BCIssueBodyLabel.h"
+#import "BCIssueUserView.h"
 
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
 
-#define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:16]
 #define TITLE_FONT_COLOR    [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 
 #define LABELS_OFFSET         ( 4.0f )
@@ -25,21 +26,27 @@
 #define LEFT_OFFSET           ( 11.0f )
 #define LABELS_TOP_OFFSET     ( 6.0f )
 
-@implementation BCProfileIssue
+@implementation BCSingleIssueView
 
-- (id)init
+- (id)initWithTitleFont:(UIFont *)font showAll:(BOOL)showAll
 {
   self = [super init];
   if (self) {
+    _showAll = showAll;
+    
     UIImage *image = [BACKGROUND_IMAGE_FOR_FORM stretchableImageWithLeftCapWidth:8 topCapHeight:8];
     _profileIssueBackgroundImgView = [[UIImageView alloc] initWithImage:image];
     [self addSubview:_profileIssueBackgroundImgView];
     
-    _issueNumberView = [[BCIssueNumberView alloc] init];
-    [self addSubview:_issueNumberView];
+    _numberView = [[BCIssueNumberView alloc] init];
+    [self addSubview:_numberView];
     
-    _issueTitleLabel = [[BCIssueTitleLabel alloc] initWithFont:TITLE_FONT andColor:TITLE_FONT_COLOR];
-    [self addSubview:_issueTitleLabel];
+    _titleLabel = [[BCIssueTitleLabel alloc] initWithFont:font andColor:TITLE_FONT_COLOR];
+    [self addSubview:_titleLabel];
+    
+    _bodyLabel = [[BCIssueBodyLabel alloc] init];
+    
+    _userView = [[BCIssueUserView alloc] init];
     
     _labelViewsArray = [[NSMutableArray alloc] init];
     _issue = nil;
@@ -49,10 +56,14 @@
 
 - (void)setWithIssue:(BCIssue*)issue
 {
+  if (_showAll) {
+    [_bodyLabel setText:issue.body];
+    [_userView setWithIssue:issue];
+  }
   _issue = issue;
-  [_issueNumberView.hashNumber setText:[NSString stringWithFormat:@"%@",issue.number]];
+  [_numberView.hashNumber setText:[NSString stringWithFormat:@"%@",issue.number]];
   
-  [_issueTitleLabel setText:issue.title];
+  [_titleLabel setText:issue.title];
   
   for (BCLabelView *object in _labelViewsArray) {
     [object removeFromSuperview];
@@ -76,17 +87,17 @@
   }
   
   frame = CGRectMake(LEFT_OFFSET, TOP_OFFSET, HASH_WIDTH, HASH_HEIGHT);
-  if (!CGRectEqualToRect(_issueNumberView.frame, frame)) {
-    _issueNumberView.frame = frame;
+  if (!CGRectEqualToRect(_numberView.frame, frame)) {
+    _numberView.frame = frame;
   }
   
-  frame.size = [BCIssueTitleLabel sizeOfLabelWithText:_issueTitleLabel.text withFont:TITLE_FONT];
+  frame.size = [BCIssueTitleLabel sizeOfLabelWithText:_titleLabel.text withFont:[self.titleLabel font]];
   frame.origin = CGPointMake(LEFT_OFFSET, TOP_OFFSET);
-  if (!CGRectEqualToRect(_issueTitleLabel.frame, frame)) {
-    _issueTitleLabel.frame = frame;
+  if (!CGRectEqualToRect(_titleLabel.frame, frame)) {
+    _titleLabel.frame = frame;
   }
   
-  CGPoint origin = CGPointMake(LEFT_OFFSET, LABELS_TOP_OFFSET+TOP_OFFSET+_issueTitleLabel.frame.size.height);
+  CGPoint origin = CGPointMake(LEFT_OFFSET, LABELS_TOP_OFFSET+TOP_OFFSET+_titleLabel.frame.size.height);
   for (BCLabelView *object in _labelViewsArray) {
     if ((origin.x+object.frame.size.width)>(self.frame.size.width-(2*LEFT_OFFSET))) {
       origin.y += object.frame.size.height+LABELS_OFFSET;
@@ -99,6 +110,8 @@
     }
     origin.x += object.frame.size.width+LABELS_OFFSET;
   }
+  
+  
   
 }
 

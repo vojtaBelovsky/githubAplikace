@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 @class BCIssue;
-@class BCProfileIssue;
+@class BCSingleIssueView;
 
 @interface BCIssueCell : UITableViewCell
 
-@property BCProfileIssue* profileIssue;
+@property BCSingleIssueView* issueView;
 
 + (BCIssueCell *)createIssueCellWithTableView:(UITableView *)tableView;
+
++(CGFloat)heightOfCellWithIssue:(BCIssue *)issue;
 
 @end

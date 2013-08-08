@@ -18,10 +18,10 @@
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
 #define NEW_ISSUE_SEPARATOR           [UIImage imageNamed:@"newIssueSeparator.png"]
-#define BACK_BUTTON_IMG               [UIImage imageNamed:@"selectMemberXOff.png"]
-#define BACK_BUTTON_IMG_HL            [UIImage imageNamed:@"selectMemberXOn.png"]
-#define CLOSE_BUTTON_IMG              [UIImage imageNamed:@"selectMemberXOff.png"]
-#define CLOSE_BUTTON_IMG_HL           [UIImage imageNamed:@"selectMemberXOn.png"]
+#define BACK_BUTTON_IMG               [UIImage imageNamed:@"issueNavbarXOff.png"]
+#define BACK_BUTTON_IMG_HL            [UIImage imageNamed:@"issueNavbarXOn.png"]
+#define CLOSE_BUTTON_IMG              [UIImage imageNamed:@"issueNavbarCheckOff.png"]
+#define CLOSE_BUTTON_IMG_HL           [UIImage imageNamed:@"issueNavbarCheckOn.png"]
 
 #define ISSUE_FORM_WIDTH              ( 300.0f )
 #define NEW_ISSUE_FORM_HEIGHT         ( 400.0f )
@@ -59,7 +59,7 @@
       _theNewIssueShadowLabel.font = NEW_ISSUE_FONT;
       _theNewIssueShadowLabel.textColor = NEW_ISSUE_SHADOW_FONT_COLOR;
       _theNewIssueShadowLabel.backgroundColor = [UIColor clearColor];
-      [_theNewIssueShadowLabel setText:@"New Issue"];
+      [_theNewIssueShadowLabel setText:issue.assignee.userLogin];
       [self addSubview:_theNewIssueShadowLabel];
       
       _theNewIssueLabel = [[UILabel alloc] init];
@@ -67,7 +67,7 @@
       _theNewIssueLabel.font = NEW_ISSUE_FONT;
       _theNewIssueLabel.textColor = NEW_ISSUE_FONT_COLOR;
       _theNewIssueLabel.backgroundColor = [UIColor clearColor];
-      [_theNewIssueLabel setText:@"New Issue"];
+      [_theNewIssueLabel setText:issue.assignee.userLogin];
       [self addSubview:_theNewIssueLabel];
       
       

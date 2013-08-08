@@ -18,12 +18,11 @@
 
 #define CHOOSE_COLLABORATOR_IMAGE         [UIImage imageNamed:@"profileNavbarPplOff.png"]
 #define CHOOSE_COLLABORATOR_HL_IMAGE      [UIImage imageNamed:@"profileNavbarPplOn.png"]
-#define CHOOSE_COLLABORATOR_IMAGE_WIDTH   30
-#define CHOOSE_COLLABORATOR_IMAGE_HEIGHT  21
+#define CHOOSE_COLLABORATOR_IMAGE_WIDTH   ( 30.0f )
+#define CHOOSE_COLLABORATOR_IMAGE_HEIGHT  ( 21.0f )
 
-#define ADD_NEW_ISSUE_IMAGE             [UIImage imageNamed:@"profileNavbarPlusOff.png"]
+#define ADD_NEW_ISSUE_IMAGE       [UIImage imageNamed:@"profileNavbarPlusOff.png"]
 #define ADD_NEW_ISSUE_HL_IMAGE    [UIImage imageNamed:@"profileNavbarPlusOn.png"]
-
 
 #define DONE_FONT            [UIFont fontWithName:@"ProximaNova-Light" size:13]
 #define DONE_FONT_COLOR      [UIColor whiteColor]

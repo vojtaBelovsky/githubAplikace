@@ -36,8 +36,4 @@ typedef enum : NSUInteger {
 
 -(NSArray *)getLabelsAsStrings;
 
-+(CGFloat)heightOfIssueInProfileWithIssue:(BCIssue*)issue withFont:(UIFont *)font;
-
-+(CGFloat)heightOfIssueInDetailWithIssue:(BCIssue *)issue withFont:(UIFont*)font;
-
 @end

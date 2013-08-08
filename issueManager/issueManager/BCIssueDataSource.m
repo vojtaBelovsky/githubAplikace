@@ -9,46 +9,95 @@
 #import "BCIssueDataSource.h"
 #import "BCIssueCell.h"
 #import "BCIssue.h"
-#import "BCProfileIssue.h"
+#import "BCSingleIssueView.h"
+#import "BCMilestone.h"
+
+#define NO_MILESTONE @"No milestone"
 
 @implementation BCIssueDataSource
 
 -(id) initWithIssues:(NSMutableArray *)issues andMilestones:(NSMutableArray *)milestones{
   self = [super init];
   if(self){
-    _issues = issues;
-    _milestones = milestones;
+    _dataSourceKeyNames = [[NSMutableArray alloc] init];
+    _dataSource = [[NSMutableDictionary alloc] init];
+    
+    for (BCMilestone *milestone in milestones) {
+      [self setDatasourcePairWithKeyName:milestone.title];
+    }
+    [self setDatasourcePairWithKeyName:NO_MILESTONE];
+    
+    for (BCIssue *issue in issues) {
+      if ([milestones containsObject:issue.milestone]) {
+        [(NSMutableArray *)[_dataSource objectForKey:issue.milestone.title] addObject:issue];
+      }else{
+        [(NSMutableArray *)[_dataSource objectForKey:NO_MILESTONE] addObject:issue];
+      }
+    }
   }
   return self;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//  return _milestones.count+1;
-  return 1;
+  return [_dataSourceKeyNames count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_issues count];
+    return [(NSArray*)[_dataSource objectForKey:[_dataSourceKeyNames objectAtIndex:section]] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   BCIssueCell *cell;
   cell = [BCIssueCell createIssueCellWithTableView:tableView];
-  BCIssue *issueForRow = [_issues objectAtIndex:indexPath.row];
-  [cell.profileIssue setWithIssue:issueForRow];
-  
+  BCIssue *issueForRow = [(NSArray*)[_dataSource objectForKey:[_dataSourceKeyNames objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+  [cell.issueView setWithIssue:issueForRow];
   return cell;
+}
+
+#pragma mark - private
+
+-(void)setDatasourcePairWithKeyName:(NSString *)keyName{
+  NSMutableArray *dataSourceIssues = [[NSMutableArray alloc] init];
+  [_dataSourceKeyNames addObject:keyName];
+  [_dataSource setValue:dataSourceIssues forKey:[_dataSourceKeyNames lastObject]];
+}
+
+-(void)addNewMilstone:(NSString *)milestoneName withIssue:(BCIssue *)issue{
+  NSMutableArray *dataSourceIssues = [[NSMutableArray alloc] init];
+  [dataSourceIssues addObject:issue];
+  [_dataSourceKeyNames insertObject:milestoneName atIndex:0];
+  [_dataSource setValue:dataSourceIssues forKey:milestoneName];
 }
 
 #pragma mark -
 #pragma mark public
 
 -(void)addNewIssue:(BCIssue *)newIssue{
-    [_issues insertObject:newIssue atIndex:0];
+  if (newIssue.milestone == nil) {
+    [(NSMutableArray *)[_dataSource objectForKey:NO_MILESTONE] addObject:newIssue];
+  }else{
+    if ([_dataSourceKeyNames containsObject:newIssue.milestone.title]) {
+      [(NSMutableArray *)[_dataSource objectForKey:newIssue.milestone.title] insertObject:newIssue atIndex:0];
+    }else{//its neccesery to add new milestone to data source
+      [self addNewMilstone:newIssue.title withIssue:newIssue];
+    }
+  }
 }
 
--(void)changeIssue:(BCIssue *)issue atIndex:(NSUInteger)index{
-    [_issues replaceObjectAtIndex:index withObject:issue];
+-(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue *)newIssue {
+  if ([issue.milestone isEqual:newIssue.milestone]) {
+    NSMutableArray *currentArray = [_dataSource objectForKey:issue.milestone.title];
+    NSUInteger index = [currentArray indexOfObject:issue];
+    [currentArray replaceObjectAtIndex:index withObject:newIssue];
+  }else{
+    NSMutableArray *currentArray = [_dataSource objectForKey:issue.milestone.title];
+    [currentArray removeObject:issue];
+    if (![currentArray count]) {
+      [_dataSourceKeyNames removeObject:issue.milestone.title];
+    }
+    currentArray = [_dataSource objectForKey:newIssue.milestone.title];
+    [currentArray insertObject:newIssue atIndex:0];
+  }
 }
 
 

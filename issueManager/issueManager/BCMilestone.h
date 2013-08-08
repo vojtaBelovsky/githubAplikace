@@ -14,5 +14,6 @@
 @property (nonatomic, copy, readonly) NSString *title;
 @property (nonatomic, copy, readonly) NSNumber *milestoneId;
 @property (nonatomic, copy, readonly) NSNumber *number;
+@property (nonatomic, copy, readonly) NSDate *dueOn;
 
 @end
