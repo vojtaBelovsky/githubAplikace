@@ -144,7 +144,6 @@
 		10F32EC317253465005E80F8 /* BCRepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EC217253465005E80F8 /* BCRepositoryCell.m */; };
 		10F32EC6172534F5005E80F8 /* BCRepositoryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32EC5172534F5005E80F8 /* BCRepositoryDataSource.m */; };
 		10F818FD17B10BD3003822D6 /* BCIssueBodyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F818FC17B10BD3003822D6 /* BCIssueBodyLabel.m */; };
-		10F8190117B12E3B003822D6 /* BCIssueInDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F8190017B12E3B003822D6 /* BCIssueInDetailView.m */; };
 		10F8190617B245B6003822D6 /* BCMilestoneLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F8190517B245B6003822D6 /* BCMilestoneLabel.m */; };
 		10F8190A17B28EDE003822D6 /* BCHeadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F8190917B28EDE003822D6 /* BCHeadeView.m */; };
 		10F8190E17B37BD4003822D6 /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F8190D17B37BD4003822D6 /* NSDate+Additions.m */; };
@@ -388,8 +387,6 @@
 		10F32EC5172534F5005E80F8 /* BCRepositoryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCRepositoryDataSource.m; sourceTree = "<group>"; };
 		10F818FB17B10BD3003822D6 /* BCIssueBodyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueBodyLabel.h; sourceTree = "<group>"; };
 		10F818FC17B10BD3003822D6 /* BCIssueBodyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueBodyLabel.m; sourceTree = "<group>"; };
-		10F818FF17B12E3B003822D6 /* BCIssueInDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueInDetailView.h; sourceTree = "<group>"; };
-		10F8190017B12E3B003822D6 /* BCIssueInDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueInDetailView.m; sourceTree = "<group>"; };
 		10F8190417B245B6003822D6 /* BCMilestoneLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCMilestoneLabel.h; sourceTree = "<group>"; };
 		10F8190517B245B6003822D6 /* BCMilestoneLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCMilestoneLabel.m; sourceTree = "<group>"; };
 		10F8190817B28EDE003822D6 /* BCHeadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCHeadeView.h; sourceTree = "<group>"; };
@@ -489,7 +486,6 @@
 		102B8B1D17268C68003BA22F /* view */ = {
 			isa = PBXGroup;
 			children = (
-				10F8190717B28B11003822D6 /* headerView */,
 				102B8B2317268CCC003BA22F /* BCIssueView.h */,
 				102B8B2417268CCC003BA22F /* BCIssueView.m */,
 				102B8B1E17268C72003BA22F /* cell */,
@@ -528,7 +524,6 @@
 		102B8B33172A624C003BA22F /* view */ = {
 			isa = PBXGroup;
 			children = (
-				10F818FE17B12D56003822D6 /* issueDetail */,
 				102B8B38172A6289003BA22F /* BCIssueDetailView.h */,
 				102B8B39172A6289003BA22F /* BCIssueDetailView.m */,
 			);
@@ -976,8 +971,9 @@
 		10F32EA3172526B2005E80F8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				10F8191817B3BCB7003822D6 /* singleIssueView */,
 				102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */,
+				10F8190717B28B11003822D6 /* headerView */,
+				10F8191817B3BCB7003822D6 /* singleIssueView */,
 				10AFAAA2179EA5B70083511E /* maskImgView */,
 				104105D21757706D003B0B9F /* login */,
 				10EF01D917379F2200346E9F /* selectLables */,
@@ -1037,15 +1033,6 @@
 				10F818FC17B10BD3003822D6 /* BCIssueBodyLabel.m */,
 			);
 			name = bodyLabel;
-			sourceTree = "<group>";
-		};
-		10F818FE17B12D56003822D6 /* issueDetail */ = {
-			isa = PBXGroup;
-			children = (
-				10F818FF17B12E3B003822D6 /* BCIssueInDetailView.h */,
-				10F8190017B12E3B003822D6 /* BCIssueInDetailView.m */,
-			);
-			name = issueDetail;
 			sourceTree = "<group>";
 		};
 		10F8190317B2458C003822D6 /* milestoneLabel */ = {
@@ -1331,7 +1318,6 @@
 				104572A417ABD94B0010BA86 /* BCLabelView.m in Sources */,
 				10D2D37317AFD64E00E0DAAD /* BCIssueTitleLabel.m in Sources */,
 				10F818FD17B10BD3003822D6 /* BCIssueBodyLabel.m in Sources */,
-				10F8190117B12E3B003822D6 /* BCIssueInDetailView.m in Sources */,
 				10F8190617B245B6003822D6 /* BCMilestoneLabel.m in Sources */,
 				10F8190A17B28EDE003822D6 /* BCHeadeView.m in Sources */,
 				10F8190E17B37BD4003822D6 /* NSDate+Additions.m in Sources */,

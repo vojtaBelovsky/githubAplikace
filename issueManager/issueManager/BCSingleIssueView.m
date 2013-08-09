@@ -16,22 +16,20 @@
 #import "BCIssueUserView.h"
 
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
+#define TITLE_FONT_COLOR              [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 
-#define TITLE_FONT_COLOR    [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
-
-#define LABELS_OFFSET         ( 4.0f )
 #define HASH_WIDTH            ( 30.0f )
-#define HASH_HEIGHT           ( 19.0f )
-#define TOP_OFFSET            ( 11.0f )
-#define LEFT_OFFSET           ( 11.0f )
-#define LABELS_TOP_OFFSET     ( 6.0f )
+#define HASH_HEIGHT           _titleLabel.font.pointSize
+
+#define USER_VIEW_HEIGHT      ( 20.0f )
 
 @implementation BCSingleIssueView
 
-- (id)initWithTitleFont:(UIFont *)font showAll:(BOOL)showAll
+- (id)initWithTitleFont:(UIFont *)font showAll:(BOOL)showAll offset:(CGFloat)offset
 {
   self = [super init];
   if (self) {
+    _offset = offset;
     _showAll = showAll;
     
     UIImage *image = [BACKGROUND_IMAGE_FOR_FORM stretchableImageWithLeftCapWidth:8 topCapHeight:8];
@@ -45,8 +43,11 @@
     [self addSubview:_titleLabel];
     
     _bodyLabel = [[BCIssueBodyLabel alloc] init];
+    [self addSubview:_bodyLabel];
     
     _userView = [[BCIssueUserView alloc] init];
+    [_userView setHidden:YES];
+    [self addSubview:_userView];
     
     _labelViewsArray = [[NSMutableArray alloc] init];
     _issue = nil;
@@ -59,6 +60,7 @@
   if (_showAll) {
     [_bodyLabel setText:issue.body];
     [_userView setWithIssue:issue];
+    [_userView setHidden:NO];
   }
   _issue = issue;
   [_numberView.hashNumber setText:[NSString stringWithFormat:@"%@",issue.number]];
@@ -77,42 +79,89 @@
   }
 }
 
++(CGSize)sizeOfSingleIssueViewWithIssue:(BCIssue *)issue width:(CGFloat)width offset:(CGFloat)offset titleFont:(UIFont *)font showAll:(BOOL)show{
+  CGFloat maxContentWidth = width-(2*offset);
+  CGFloat totalHeight = [BCIssueTitleLabel sizeOfLabelWithText:issue.title font:font width:maxContentWidth].height+(2*offset);
+  CGSize sizeOfCurrentLabel;
+  int labelsWidth = maxContentWidth+1;
+  int heightOfLabels = 0;
+  int numberOfLines = 0;
+  for (BCLabel *object in issue.labels) {
+    sizeOfCurrentLabel = [BCLabelView sizeOfLabelWithText:object.name];
+    if ((labelsWidth+sizeOfCurrentLabel.width)>maxContentWidth) {
+      numberOfLines++;
+      heightOfLabels += sizeOfCurrentLabel.height;
+      labelsWidth = 0;
+    }
+    labelsWidth += sizeOfCurrentLabel.width;
+  }
+  totalHeight += heightOfLabels+(numberOfLines*TOP_OFFSET_BETWEEN_CONTENT);
+  
+  if (!show) {
+    return CGSizeMake(width, totalHeight);
+  }
+  
+  CGSize bodySize = [BCIssueBodyLabel sizeOfLabelWithText:issue.body width:width font:font];
+  if (bodySize.height) {
+    totalHeight += bodySize.height+TOP_OFFSET_BETWEEN_CONTENT;
+  }
+  
+  totalHeight += USER_VIEW_HEIGHT+TOP_OFFSET_BETWEEN_CONTENT;
+  return CGSizeMake(width, totalHeight);
+}
+
 -(void)layoutSubviews{
   [super layoutSubviews];
   CGRect frame = self.frame;
-  frame.origin = CGPointZero;
+  CGFloat maxContentWidth = frame.size.width-(2*_offset);
+  CGPoint origin;
   
+  frame.origin = CGPointZero;
   if (!CGRectEqualToRect(_profileIssueBackgroundImgView.frame, frame)) {
     _profileIssueBackgroundImgView.frame = frame;
   }
   
-  frame = CGRectMake(LEFT_OFFSET, TOP_OFFSET, HASH_WIDTH, HASH_HEIGHT);
+  frame = CGRectMake(_offset, _offset, HASH_WIDTH, HASH_HEIGHT);
   if (!CGRectEqualToRect(_numberView.frame, frame)) {
     _numberView.frame = frame;
   }
   
-  frame.size = [BCIssueTitleLabel sizeOfLabelWithText:_titleLabel.text withFont:[self.titleLabel font]];
-  frame.origin = CGPointMake(LEFT_OFFSET, TOP_OFFSET);
+  frame.size = [BCIssueTitleLabel sizeOfLabelWithText:_titleLabel.text font:_titleLabel.font width:maxContentWidth];
+  frame.origin = CGPointMake(_offset, _offset);
   if (!CGRectEqualToRect(_titleLabel.frame, frame)) {
     _titleLabel.frame = frame;
   }
   
-  CGPoint origin = CGPointMake(LEFT_OFFSET, LABELS_TOP_OFFSET+TOP_OFFSET+_titleLabel.frame.size.height);
+  frame.size = [BCIssueBodyLabel sizeOfLabelWithText:_bodyLabel.text width:maxContentWidth font:_bodyLabel.font];
+  frame.origin = CGPointMake(_offset, _offset+_titleLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT);
+  if (!CGRectEqualToRect(_bodyLabel.frame, frame)) {
+    _bodyLabel.frame = frame;
+  }
+  
+  origin = CGPointMake(_offset, _offset+_titleLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT);
+  if (_bodyLabel.frame.size.height) {
+    origin.y += _bodyLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT;
+  }
   for (BCLabelView *object in _labelViewsArray) {
-    if ((origin.x+object.frame.size.width)>(self.frame.size.width-(2*LEFT_OFFSET))) {
-      origin.y += object.frame.size.height+LABELS_OFFSET;
-      origin.x = LEFT_OFFSET;
+    if ((origin.x+object.frame.size.width)>maxContentWidth) {
+      origin.y += object.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT;
+      origin.x = _offset;
     }
     frame.origin = origin;
     frame.size = object.frame.size;
     if (!CGRectEqualToRect(object.frame, frame)) {
       object.frame = frame;
     }
-    origin.x += object.frame.size.width+LABELS_OFFSET;
+    origin.x += object.frame.size.width+OFFSET_BETWEEN_LABELS;
   }
   
-  
-  
+  if (_showAll) {
+    frame.size = CGSizeMake(maxContentWidth, USER_VIEW_HEIGHT);
+    frame.origin = CGPointMake(_offset, self.frame.size.height-_offset-USER_VIEW_HEIGHT);
+    if (!CGRectEqualToRect(_userView.frame, frame)) {
+      _userView.frame = frame;
+    }
+  }
 }
 
 @end

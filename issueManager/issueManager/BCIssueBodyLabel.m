@@ -11,8 +11,6 @@
 #define BODY_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:16]
 #define BODY_FONT_COLOR    [UIColor colorWithRed:.41 green:.41 blue:.41 alpha:1.00]
 
-#define TITLE_LINE_WIDTH    ( 280.0f )
-
 @implementation BCIssueBodyLabel
 
 
@@ -29,8 +27,8 @@
   return self;
 }
 
--(CGSize)sizeOfLabel{
-  return [self.text sizeWithFont:self.font constrainedToSize:CGSizeMake(TITLE_LINE_WIDTH, 1000000) lineBreakMode:NSLineBreakByWordWrapping];
++(CGSize)sizeOfLabelWithText:(NSString *)text width:(CGFloat)width font:(UIFont *)font{
+  return [text sizeWithFont:font constrainedToSize:CGSizeMake(width, 1000000) lineBreakMode:NSLineBreakByWordWrapping];
 }
 
 @end

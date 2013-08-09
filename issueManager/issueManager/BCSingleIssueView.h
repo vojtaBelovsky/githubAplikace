@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+
+#define OFFSET_BETWEEN_LABELS        ( 4.0f )
+#define TOP_OFFSET_BETWEEN_CONTENT   ( 6.0f )
+
 @class BCIssueNumberView;
 @class BCLabelView;
 @class BCIssue;
@@ -16,8 +20,9 @@
 
 @interface BCSingleIssueView : UIView
 
-//rectangle around whole issue
+@property CGFloat offset;
 @property BOOL showAll;
+//rectangle around whole issue
 @property UIImageView *profileIssueBackgroundImgView;
 @property BCIssueNumberView* numberView;
 @property BCIssueTitleLabel *titleLabel;
@@ -27,7 +32,7 @@
 @property BCIssue *issue;
 
 - (void)setWithIssue:(BCIssue*)issue;
-
-- (id)initWithTitleFont:(UIFont *)font showAll:(BOOL)showAll;
+- (id)initWithTitleFont:(UIFont *)font showAll:(BOOL)showAll offset:(CGFloat)offset;
++(CGSize)sizeOfSingleIssueViewWithIssue:(BCIssue *)issue width:(CGFloat)width offset:(CGFloat)offset titleFont:(UIFont *)font showAll:(BOOL)show;
 
 @end

@@ -28,6 +28,7 @@
     _hashNumber = [[UILabel alloc] init];
     [_hashNumber setFont:HASH_FONT];
     [_hashNumber setTextColor:HASH_FONT_COLOR];
+    [_hashNumber setBackgroundColor:[UIColor clearColor]];
     _hashNumber.adjustsFontSizeToFitWidth = YES;
     [self addSubview:_hashNumber];
   }

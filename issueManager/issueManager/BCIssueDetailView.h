@@ -11,8 +11,8 @@
 @class BCIssueDetailViewController;
 @class BCIssueNumberView;
 @class BCIssueTitleLabel;
-@class BCIssueBodyLabel;
-@class BCIssueInDetailView;
+@class BCSingleIssueView;
+@class BCHeadeView;
 
 @interface BCIssueDetailView : UIScrollView
 
@@ -23,10 +23,9 @@
 @property UIButton *closeButton;
 @property UILabel *theNewIssueLabel;
 @property UILabel *theNewIssueShadowLabel;
-@property BCIssueInDetailView *issueView;
+@property BCSingleIssueView *issueView;
+@property BCHeadeView *headerView;
 
 -(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
-
--(void) rewriteContentWithIssue:(BCIssue *)issue;
 
 @end

@@ -13,8 +13,6 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSDate+Additions.h"
 
-#define AVATAR_WIDTH        ( 20.0f )
-#define AVATAR_HEIGHT       ( 20.0f )
 #define AVATAR_OFFSET       ( 10.0f )
 #define USER_OFFSET         ( 20.0f )
 
@@ -25,9 +23,9 @@
 
 @implementation BCIssueUserView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)init
 {
-    self = [super initWithFrame:frame];
+  self = [super init];
     if (self) {
       _avatarImgView = [[BCAvatarImgView alloc] init];
       [self addSubview:_avatarImgView];
@@ -60,6 +58,7 @@
   
   frame.size.width = self.frame.size.height;
   frame.size.height = self.frame.size.height;
+  frame.origin = CGPointZero;
   if (!CGRectEqualToRect(_avatarImgView.frame, frame)) {
     _avatarImgView.frame = frame;
   }

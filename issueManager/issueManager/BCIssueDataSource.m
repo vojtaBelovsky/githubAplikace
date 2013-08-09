@@ -16,22 +16,31 @@
 
 @implementation BCIssueDataSource
 
--(id) initWithIssues:(NSMutableArray *)issues andMilestones:(NSMutableArray *)milestones{
+-(id) initWithIssues:(NSMutableArray *)issues milestones:(NSMutableArray *)milestones{
   self = [super init];
   if(self){
     _dataSourceKeyNames = [[NSMutableArray alloc] init];
     _dataSource = [[NSMutableDictionary alloc] init];
     
+    //creating of sections
     for (BCMilestone *milestone in milestones) {
       [self setDatasourcePairWithKeyName:milestone.title];
     }
     [self setDatasourcePairWithKeyName:NO_MILESTONE];
     
+    //filling sections with data
     for (BCIssue *issue in issues) {
       if ([milestones containsObject:issue.milestone]) {
         [(NSMutableArray *)[_dataSource objectForKey:issue.milestone.title] addObject:issue];
       }else{
         [(NSMutableArray *)[_dataSource objectForKey:NO_MILESTONE] addObject:issue];
+      }
+    }
+    
+    //removing empty sections
+    for (NSString *keyName in _dataSourceKeyNames) {
+      if (![[_dataSource objectForKey:keyName] count]) {
+        [_dataSource removeObjectForKey:keyName];
       }
     }
   }
@@ -48,7 +57,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   BCIssueCell *cell;
-  cell = [BCIssueCell createIssueCellWithTableView:tableView];
+  cell = [BCIssueCell createIssueCellWithTableView:tableView offset:OFFSET font:TITLE_FONT];
   BCIssue *issueForRow = [(NSArray*)[_dataSource objectForKey:[_dataSourceKeyNames objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
   [cell.issueView setWithIssue:issueForRow];
   return cell;
@@ -63,9 +72,14 @@
 }
 
 -(void)addNewMilstone:(NSString *)milestoneName withIssue:(BCIssue *)issue{
-  NSMutableArray *dataSourceIssues = [[NSMutableArray alloc] init];
-  [dataSourceIssues addObject:issue];
-  [_dataSourceKeyNames insertObject:milestoneName atIndex:0];
+  NSMutableArray *dataSourceIssues = [[NSMutableArray alloc] initWithObjects:issue, nil];
+  if ([milestoneName isEqualToString:NO_MILESTONE]) {
+    //if issue has no milestone and is only one, I will create new section and put it
+    //at the end of the table
+    [_dataSourceKeyNames addObject:milestoneName];
+  }else{
+    [_dataSourceKeyNames insertObject:milestoneName atIndex:0];
+  }
   [_dataSource setValue:dataSourceIssues forKey:milestoneName];
 }
 
@@ -74,7 +88,11 @@
 
 -(void)addNewIssue:(BCIssue *)newIssue{
   if (newIssue.milestone == nil) {
-    [(NSMutableArray *)[_dataSource objectForKey:NO_MILESTONE] addObject:newIssue];
+    if ([_dataSourceKeyNames containsObject:NO_MILESTONE]) {
+      [(NSMutableArray *)[_dataSource objectForKey:NO_MILESTONE] addObject:newIssue];
+    }else{
+      [self addNewMilstone:NO_MILESTONE withIssue:newIssue];
+    }
   }else{
     if ([_dataSourceKeyNames containsObject:newIssue.milestone.title]) {
       [(NSMutableArray *)[_dataSource objectForKey:newIssue.milestone.title] insertObject:newIssue atIndex:0];

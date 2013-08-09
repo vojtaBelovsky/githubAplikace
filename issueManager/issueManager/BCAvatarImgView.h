@@ -13,6 +13,4 @@
   UIImageView *_maskImageView;
 }
 
--(void)setOrigin:(CGPoint)point;
-
 @end

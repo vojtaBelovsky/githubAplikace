@@ -24,8 +24,6 @@
 
 #define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define WHITE_COLOR         [UIColor whiteColor]
-
-#define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:16]
 #define HEADER_HEIGHT       ( 40.0f )
 
 @interface BCIssueViewController ()
@@ -71,7 +69,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   BCIssue *currentIssue = [self getIssueForIndexPath:indexPath];
-  return [BCIssueCell heightOfCellWithIssue:currentIssue];
+  return [BCIssueCell heightOfCellWithIssue:currentIssue width:ISSUE_WIDTH titleFont:TITLE_FONT offset:OFFSET];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -122,7 +120,7 @@
 -(void)createModelFromRepository:(BCRepository *)repository{
   [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:[_nthRepository integerValue]] withSuccess:^(NSMutableArray *allMilestones) {
     [BCIssue getAllIssuesFromRepository:repository WithSuccess:^(NSMutableArray *issues) {
-      _dataSource = [[BCIssueDataSource alloc] initWithIssues:issues andMilestones:allMilestones];
+      _dataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:allMilestones];
       [_tableView.tableView setDataSource:_dataSource];
       [_tableView.tableView reloadData];
     } failure:^(NSError *error) {

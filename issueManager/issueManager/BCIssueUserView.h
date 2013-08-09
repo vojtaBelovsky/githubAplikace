@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class BCAvatarImgView;
+@class BCIssue;
 
 @interface BCIssueUserView : UIView
 

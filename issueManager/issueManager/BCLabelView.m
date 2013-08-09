@@ -11,7 +11,7 @@
 #import "BCLabel.h"
 
 #define REGULAR_FONT_SMALL  [UIFont fontWithName:@"ProximaNova-Regular" size:13]
-#define MAXIMUM_WIDTH       ( 150.0f )
+#define MAXIMUM_WIDTH       ( 80.0f )
 #define LABEL_TEXT_OFFSET   ( 7.0f )
 #define LABELS_OFFSET       ( 4.0f )
 

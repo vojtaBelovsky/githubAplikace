@@ -8,8 +8,6 @@
 
 #import "BCIssueTitleLabel.h"
 
-#define TITLE_LINE_WIDTH    ( 280.0f )
-
 @implementation BCIssueTitleLabel
 
 
@@ -30,13 +28,13 @@
   [super setText:text];
 }
 
-+(CGSize)sizeOfLabelWithText:(NSString*)string withFont:(UIFont*)font{
++(CGSize)sizeOfLabelWithText:(NSString*)string font:(UIFont*)font width:(CGFloat)width{
   string = [[NSString alloc] initWithFormat:@"         %@",string];
   CGSize sizeOfIssue;
   sizeOfIssue = [string sizeWithFont:font];
   int titleLineHeight = sizeOfIssue.height;
-  int numberOfLines = sizeOfIssue.width/TITLE_LINE_WIDTH+1;
-  sizeOfIssue = CGSizeMake(TITLE_LINE_WIDTH, numberOfLines*titleLineHeight);
+  int numberOfLines = sizeOfIssue.width/width+1;
+  sizeOfIssue = CGSizeMake(width, numberOfLines*titleLineHeight);
   return sizeOfIssue;
 }
 

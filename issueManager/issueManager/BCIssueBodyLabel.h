@@ -12,4 +12,6 @@
 
 -(CGSize)sizeOfLabel;
 
++(CGSize)sizeOfLabelWithText:(NSString *)text width:(CGFloat)width font:(UIFont *)font;
+
 @end

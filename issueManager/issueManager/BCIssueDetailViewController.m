@@ -19,6 +19,7 @@
 #import "BCSelectMilestoneViewController.h"
 #import "BCSelectLabelsViewController.h"
 #import "BCIssueViewController.h"
+#import "BCSingleIssueView.h"
 
 @interface BCIssueDetailViewController ()
 
@@ -63,7 +64,7 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    [_issueDetailview rewriteContentWithIssue:_editedIssue];
+    [_issueDetailview.issueView setWithIssue:_editedIssue];
 }
 
 #pragma mark -
@@ -115,7 +116,7 @@
     _editedIssue = [_issue copy];
     self.navigationItem.rightBarButtonItems = _buttons;
     
-    [_issueDetailview rewriteContentWithIssue:_issue];
+    [_issueDetailview.issueView setWithIssue:_issue];
 }
 
 #pragma mark - buttonActions

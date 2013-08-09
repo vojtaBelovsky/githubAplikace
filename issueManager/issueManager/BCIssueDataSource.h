@@ -14,7 +14,7 @@
 @property NSMutableDictionary *dataSource;
 @property NSMutableArray *dataSourceKeyNames;
 
--(id) initWithIssues:(NSMutableArray *)issues andMilestones:(NSMutableArray *)milestones;
+-(id) initWithIssues:(NSMutableArray *)issues milestones:(NSMutableArray *)milestones;
 
 -(void)addNewIssue:(BCIssue *)newIssue;
 -(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue *)newIssue;
