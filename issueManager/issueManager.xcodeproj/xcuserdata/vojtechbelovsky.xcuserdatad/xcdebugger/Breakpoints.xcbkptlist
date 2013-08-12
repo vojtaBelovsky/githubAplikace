@@ -4,55 +4,16 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "issueManager/BCSingleIssueView.m"
-         timestampString = "397746160.478307"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "84"
-         endingLineNumber = "84"
-         landmarkName = "+sizeOfSingleIssueViewWithIssue:width:offset:titleFont:showAll:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "issueManager/BCSingleIssueView.m"
-         timestampString = "397984573.135911"
+         filePath = "issueManager/BCIssueViewController.m"
+         timestampString = "397999832.318904"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "162"
-         endingLineNumber = "162"
-         landmarkName = "-layoutSubviews"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "issueManager/BCSingleIssueView.m"
-         timestampString = "397747783.967918"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "101"
-         endingLineNumber = "101"
-         landmarkName = "+sizeOfSingleIssueViewWithIssue:width:offset:titleFont:showAll:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "issueManager/BCSingleIssueView.m"
-         timestampString = "397984573.135911"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
-         landmarkName = "-layoutSubviews"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
+         landmarkName = "-tableView:viewForHeaderInSection:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

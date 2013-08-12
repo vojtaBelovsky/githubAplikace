@@ -26,6 +26,9 @@
 #define WHITE_COLOR         [UIColor whiteColor]
 #define HEADER_HEIGHT       ( 40.0f )
 
+#define MILESTONES_KEY      @"milestones"
+#define ISSUES_KEY          @"issues"
+
 @interface BCIssueViewController ()
 
 @end
@@ -41,6 +44,7 @@
       [self setTitle:NSLocalizedString(@"issues", @"")];
       _repositories = repositories;
       _nthRepository = 0;
+      _allDataSources = [[NSMutableArray alloc] init];
       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonAction)];
       
     }
@@ -63,7 +67,7 @@
   [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchDown];
   self.view = _tableView;
   
-  [self createModelFromRepository:[_repositories objectAtIndex:_nthRepository]];
+  [self createModel];
   [_tableView.tableView setDelegate:self];
 }
 
@@ -117,19 +121,31 @@
   [self.navigationController pushViewController:addIssueVC animated:YES];
 }
 
--(void)createModelFromRepository:(BCRepository *)repository{
-  [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:_nthRepository] withSuccess:^(NSMutableArray *allMilestones) {
-    [BCIssue getAllIssuesFromRepository:repository WithSuccess:^(NSMutableArray *issues) {
-      _dataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:allMilestones];
-      [_tableView.tableView setDataSource:_dataSource];
-      [_tableView.tableView reloadData];
-    } failure:^(NSError *error) {
-      [UIAlertView showWithError:error];
-    }];
-  } failure:^(NSError *error) {
-    [UIAlertView showWithError:error];
-  }];
+-(void)createModel{
+  __block int i = 0;
   
+  __block void (^myFailureBlock) (NSError *error) = [^(NSError *error){
+    [UIAlertView showWithError:error];
+  } copy];
+  __block void (^milestonesSuccessBlock) (NSMutableArray *milestones);
+  milestonesSuccessBlock = [^(NSMutableArray *milestones) {
+    [BCIssue getAllIssuesFromRepository:[_repositories objectAtIndex:i] WithSuccess:^(NSMutableArray *issues){
+      BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:milestones];
+      [_allDataSources addObject:currentDataSource];
+      if (i == 0) {
+        _dataSource = currentDataSource;
+        [_tableView.tableView setDataSource:_dataSource];
+        [_tableView.tableView reloadData];
+      }
+      i++;
+      if (i != [_repositories count]) {
+        [BCIssue getAllIssuesFromRepository:[_repositories objectAtIndex:i] WithSuccess:milestonesSuccessBlock failure:myFailureBlock];
+      }
+    }failure:myFailureBlock];
+  } copy];
+  
+  [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
+
 }
 
 @end
