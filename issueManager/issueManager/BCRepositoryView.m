@@ -78,7 +78,8 @@
   
   frame = CGRectZero;
   frame.origin.y = TABLE_VIEW_OFFSET;
-  frame.size = self.bounds.size;
+  frame.size = self.frame.size;
+  frame.size.height -= TABLE_VIEW_OFFSET;
   if ( !CGRectEqualToRect( _tableView.frame, frame ) ) {
     _tableView.frame = frame;
   }
