@@ -13,13 +13,12 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSDate+Additions.h"
 
-#define AVATAR_OFFSET       ( 10.0f )
-#define USER_OFFSET         ( 20.0f )
+#define OFFSET         ( 10.0f )
 
 #define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
 #define COMMON_COLOR        [UIColor colorWithRed:.67 green:.67 blue:.67 alpha:1.00]
-#define USER_NAME_FONT      [UIFont fontWithName:@"ProximaNova-Semibold" size:16]
-#define CREATED_FONT        [UIFont fontWithName:@"ProximaNova-Light" size:16]
+#define USER_NAME_FONT      [UIFont fontWithName:@"ProximaNova-Semibold" size:15]
+#define CREATED_FONT        [UIFont fontWithName:@"ProximaNova-Light" size:15]
 
 @implementation BCIssueUserView
 
@@ -33,13 +32,14 @@
       _userName = [[UILabel alloc] init];
       [_userName setTextColor:COMMON_COLOR];
       [_userName setFont:USER_NAME_FONT];
-      [_userName setNumberOfLines:0];
+      [_userName setNumberOfLines:1];
+      [_userName setTextAlignment:NSTextAlignmentLeft];
       [self addSubview:_userName];
       
       _updated = [[UILabel alloc] init];
       [_updated setTextColor:COMMON_COLOR];
       [_updated setFont:CREATED_FONT];
-      [_updated setNumberOfLines:0];
+      [_updated setNumberOfLines:1];
       [_updated setTextAlignment:NSTextAlignmentRight];
       [self addSubview:_updated];
     }
@@ -63,14 +63,15 @@
     _avatarImgView.frame = frame;
   }
   
-  frame.size = [_userName sizeThatFits:self.frame.size];
-  frame.origin = CGPointMake(_avatarImgView.frame.size.width+USER_OFFSET, (self.frame.size.height-frame.size.height)/2);
+  CGFloat rest = self.frame.size.width-_avatarImgView.frame.size.width-OFFSET;
+  frame.size = CGSizeMake(rest/2, self.frame.size.height);
+  frame.origin = CGPointMake(_avatarImgView.frame.size.width+OFFSET, (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_userName.frame, frame)) {
     _userName.frame = frame;
   }
   
-  frame.size = [_updated sizeThatFits:self.frame.size];
-  frame.origin = CGPointMake(_avatarImgView.frame.size.width+USER_OFFSET+_userName.frame.size.width, (self.frame.size.height-frame.size.height)/2);
+  frame.size = CGSizeMake(rest/2, self.frame.size.height);
+  frame.origin = CGPointMake(self.frame.size.width-(rest/2), (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_updated.frame, frame)) {
     _updated.frame = frame;
   }

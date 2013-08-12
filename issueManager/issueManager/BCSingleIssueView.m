@@ -85,17 +85,23 @@
   CGSize sizeOfCurrentLabel;
   int labelsWidth = maxContentWidth+1;
   int heightOfLabels = 0;
-  int numberOfLines = 0;
+  int numberOfOffets = 0;
   for (BCLabel *object in issue.labels) {
     sizeOfCurrentLabel = [BCLabelView sizeOfLabelWithText:object.name];
     if ((labelsWidth+sizeOfCurrentLabel.width)>maxContentWidth) {
-      numberOfLines++;
+      numberOfOffets++;
       heightOfLabels += sizeOfCurrentLabel.height;
       labelsWidth = 0;
     }
     labelsWidth += sizeOfCurrentLabel.width;
   }
-  totalHeight += heightOfLabels+(numberOfLines*TOP_OFFSET_BETWEEN_CONTENT);
+  if (numberOfOffets) {
+    numberOfOffets--;
+  }
+  totalHeight += heightOfLabels+(numberOfOffets*OFFSET_BETWEEN_LABELS);
+  if (heightOfLabels) {
+    totalHeight += TOP_OFFSET_BETWEEN_CONTENT;
+  }
   
   if (!show) {
     return CGSizeMake(width, totalHeight);
@@ -144,7 +150,7 @@
   }
   for (BCLabelView *object in _labelViewsArray) {
     if ((origin.x+object.frame.size.width)>maxContentWidth) {
-      origin.y += object.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT;
+      origin.y += [BCLabelView sizeOfLabelWithText:object.myLabel.text].height+OFFSET_BETWEEN_LABELS;
       origin.x = _offset;
     }
     frame.origin = origin;

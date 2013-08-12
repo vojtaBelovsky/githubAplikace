@@ -77,6 +77,7 @@
       
       _headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _navigationBarView.frame.size.height, self.frame.size.width, HEADER_HEIGHT) andMilestone:issue.milestone];
       [self addSubview:_headerView];
+      
       _issueView = [[BCSingleIssueView alloc] initWithTitleFont:TITLE_FONT showAll:YES offset:OFFSET];
       [_issueView setWithIssue:issue];
       [self addSubview:_issueView];
@@ -130,7 +131,7 @@
   }
   
   frame.size = CGSizeMake(ISSUE_WIDTH, [BCSingleIssueView sizeOfSingleIssueViewWithIssue:_issue width:ISSUE_WIDTH offset:OFFSET titleFont:TITLE_FONT showAll:YES].height);
-  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, _navigationBarView.frame.size.height);
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, _navigationBarView.frame.size.height+HEADER_HEIGHT);
   if (!CGRectEqualToRect(_issueView.frame, frame)) {
     _issueView.frame = frame;
   }

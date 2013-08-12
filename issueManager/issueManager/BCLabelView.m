@@ -12,8 +12,7 @@
 
 #define REGULAR_FONT_SMALL  [UIFont fontWithName:@"ProximaNova-Regular" size:13]
 #define MAXIMUM_WIDTH       ( 80.0f )
-#define LABEL_TEXT_OFFSET   ( 7.0f )
-#define LABELS_OFFSET       ( 4.0f )
+#define LABEL_TEXT_OFFSET   ( 4.0f )
 
 @implementation BCLabelView
 
@@ -38,8 +37,8 @@
     [self addSubview:_myLabel];
     
     frame.origin = CGPointZero;
-    frame.size.height += LABEL_TEXT_OFFSET;
-    frame.size.width += LABEL_TEXT_OFFSET;
+    frame.size.height += 2*LABEL_TEXT_OFFSET;
+    frame.size.width += 2*LABEL_TEXT_OFFSET;
     [self setFrame:frame];
     
     frame.origin.x += 1;
@@ -57,8 +56,8 @@
 +(CGSize)sizeOfLabelWithText:(NSString*)text{
   CGSize mySize = [text sizeWithFont:REGULAR_FONT_SMALL];
   mySize.width = MIN(mySize.width, MAXIMUM_WIDTH);
-  mySize.width += (2*LABEL_TEXT_OFFSET)+LABELS_OFFSET;
-  mySize.height += (2*LABEL_TEXT_OFFSET);
+  mySize.width += 2*LABEL_TEXT_OFFSET;
+  mySize.height += 2*LABEL_TEXT_OFFSET;
   return mySize;
 }
 
