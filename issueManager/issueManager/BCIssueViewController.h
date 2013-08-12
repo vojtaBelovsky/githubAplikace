@@ -16,7 +16,6 @@
 @private
   NSArray *_repositories;
   BCIssueView *_tableView;
-  BCIssueDataSource *_dataSource;
   int _nthRepository;
   NSMutableArray *_allDataSources;
 }

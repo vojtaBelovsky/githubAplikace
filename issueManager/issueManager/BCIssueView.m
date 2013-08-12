@@ -29,9 +29,10 @@
 
 @implementation BCIssueView
 
--(id)initWithUserName:(NSString *)userName{
+-(id)initWithUserName:(NSString *)userName numberOfRepos:(int)numberOfRepos{
     self = [super init];
     if(self){
+      _numberOfRepos = numberOfRepos;
       UIImage *resizableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:5 topCapHeight:64];
       _backgroundImageView = [[UIImageView alloc] initWithImage:resizableImage];
       [self addSubview:_backgroundImageView];
@@ -66,10 +67,20 @@
       [_addNewIssueButton setImage:ADD_NEW_ISSUE_HL_IMAGE forState:UIControlStateSelected];
       [self addSubview:_addNewIssueButton];
       
-      _tableView = [[UITableView alloc] init];
-      [_tableView setBackgroundColor:[UIColor clearColor]];
-      [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-      [self addSubview:_tableView];
+      _tableViews = [[UIScrollView alloc] init];
+      [_tableViews setPagingEnabled:YES];
+      [_tableViews setBackgroundColor:[UIColor clearColor]];
+      [self addSubview:_tableViews];
+      
+      _allTableViews = [[NSMutableArray alloc] initWithCapacity:_numberOfRepos];
+      UITableView *currentTableView;
+      for (int i = 0; i < _numberOfRepos; i++) {
+        currentTableView = [[UITableView alloc] init];
+        [currentTableView setBackgroundColor:[UIColor clearColor]];
+        [currentTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [_allTableViews addObject:currentTableView];
+        [_tableViews addSubview:currentTableView];
+      }
     }
     return self;
 }
@@ -113,11 +124,15 @@
     _addNewIssueButton.frame = frame;
   }
     
-  frame = self.frame;
-  frame.size.height -= _navigationBarView.frame.size.height;
-  frame.origin.y = _navigationBarView.frame.size.height;
-  if(!CGRectEqualToRect(frame, _tableView.frame)){
-    _tableView.frame = frame;
+  frame = CGRectMake(0, _navigationBarView.frame.size.height, self.frame.size.width*_numberOfRepos, self.frame.size.height-_navigationBarView.frame.size.height);
+  if(!CGRectEqualToRect(frame, _tableViews.frame)){
+    _tableViews.frame = frame;
+  }
+
+  frame = CGRectMake(0, 0, _tableViews.frame.size.width, _tableViews.frame.size.height);
+  for (int i = 0; i < _numberOfRepos; i++) {
+    frame.origin.x = i*frame.size.width;
+    [[_allTableViews objectAtIndex:i] setFrame:frame];
   }
 }
 

@@ -58,17 +58,19 @@
 
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
-  [_tableView.tableView reloadData];
+  [[_tableView.allTableViews objectAtIndex:_nthRepository] reloadData];
 }
 
 - (void)loadView {
   BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
-  _tableView = [[BCIssueView alloc] initWithUserName:currentUser.userLogin];
+  _tableView = [[BCIssueView alloc] initWithUserName:currentUser.userLogin numberOfRepos:[_repositories count]];
   [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchDown];
   self.view = _tableView;
   
   [self createModel];
-  [_tableView.tableView setDelegate:self];
+  for (int i = 0; i < [_repositories count]; i++) {
+    [[_tableView.allTableViews objectAtIndex:i] setDelegate:self];
+  }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -77,8 +79,10 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-  if (_dataSource != nil) {
-    BCIssue *currentIssue = [[_dataSource.dataSource objectForKey:[_dataSource.dataSourceKeyNames objectAtIndex:section]] objectAtIndex:0];
+  int index = [_tableView.allTableViews indexOfObject:tableView];
+  if ([_allDataSources count] >= index) {
+    BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:index];
+    BCIssue *currentIssue = [[currentDataSource.dataSource objectForKey:[currentDataSource.dataSourceKeyNames objectAtIndex:section]] objectAtIndex:0];
     BCHeadeView *headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _tableView.navigationBarView.frame.size.height, _tableView.frame.size.width, HEADER_HEIGHT) andMilestone:currentIssue.milestone];
     return headerView;
   }else{
@@ -132,11 +136,8 @@
     [BCIssue getAllIssuesFromRepository:[_repositories objectAtIndex:i] WithSuccess:^(NSMutableArray *issues){
       BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:milestones];
       [_allDataSources addObject:currentDataSource];
-      if (i == 0) {
-        _dataSource = currentDataSource;
-        [_tableView.tableView setDataSource:_dataSource];
-        [_tableView.tableView reloadData];
-      }
+      [[_tableView.allTableViews objectAtIndex:i] setDataSource:currentDataSource];
+      [[_tableView.allTableViews objectAtIndex:i] reloadData];
       i++;
       if (i != [_repositories count]) {
         [BCIssue getAllIssuesFromRepository:[_repositories objectAtIndex:i] WithSuccess:milestonesSuccessBlock failure:myFailureBlock];
