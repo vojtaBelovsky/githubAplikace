@@ -17,7 +17,7 @@
   NSArray *_repositories;
   BCIssueView *_tableView;
   BCIssueDataSource *_dataSource;
-  NSNumber *_nthRepository;
+  int _nthRepository;
 }
 
 - (id) initWithRepositories:(NSArray *)repositories;

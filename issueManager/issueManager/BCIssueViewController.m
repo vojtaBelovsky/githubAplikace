@@ -40,7 +40,7 @@
     if(self){
       [self setTitle:NSLocalizedString(@"issues", @"")];
       _repositories = repositories;
-      _nthRepository = [[NSNumber alloc] initWithInt:0];
+      _nthRepository = 0;
       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonAction)];
       
     }
@@ -63,7 +63,7 @@
   [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchDown];
   self.view = _tableView;
   
-  [self createModelFromRepository:[_repositories objectAtIndex:[_nthRepository integerValue]]];
+  [self createModelFromRepository:[_repositories objectAtIndex:_nthRepository]];
   [_tableView.tableView setDelegate:self];
 }
 
@@ -113,12 +113,12 @@
 }
 
 -(void)createAndPushAddIssueVC{
-  BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:[_nthRepository integerValue]] andController:self];
+  BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:_nthRepository] andController:self];
   [self.navigationController pushViewController:addIssueVC animated:YES];
 }
 
 -(void)createModelFromRepository:(BCRepository *)repository{
-  [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:[_nthRepository integerValue]] withSuccess:^(NSMutableArray *allMilestones) {
+  [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:_nthRepository] withSuccess:^(NSMutableArray *allMilestones) {
     [BCIssue getAllIssuesFromRepository:repository WithSuccess:^(NSMutableArray *issues) {
       _dataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:allMilestones];
       [_tableView.tableView setDataSource:_dataSource];
