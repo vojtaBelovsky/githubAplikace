@@ -107,7 +107,7 @@
     return CGSizeMake(width, totalHeight);
   }
   
-  CGSize bodySize = [BCIssueBodyLabel sizeOfLabelWithText:issue.body width:width font:font];
+  CGSize bodySize = [BCIssueBodyLabel sizeOfLabelWithText:issue.body width:maxContentWidth];
   if (bodySize.height) {
     totalHeight += bodySize.height+TOP_OFFSET_BETWEEN_CONTENT;
   }
@@ -120,7 +120,6 @@
   [super layoutSubviews];
   CGRect frame = self.frame;
   CGFloat maxContentWidth = frame.size.width-(2*_offset);
-  CGPoint origin;
   
   frame.origin = CGPointZero;
   if (!CGRectEqualToRect(_profileIssueBackgroundImgView.frame, frame)) {
@@ -138,32 +137,37 @@
     _titleLabel.frame = frame;
   }
   
-  frame.size = [BCIssueBodyLabel sizeOfLabelWithText:_bodyLabel.text width:maxContentWidth font:_bodyLabel.font];
+  frame.size = [BCIssueBodyLabel sizeOfLabelWithText:_bodyLabel.text width:maxContentWidth];
   frame.origin = CGPointMake(_offset, _offset+_titleLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT);
   if (!CGRectEqualToRect(_bodyLabel.frame, frame)) {
     _bodyLabel.frame = frame;
   }
   
-  origin = CGPointMake(_offset, _offset+_titleLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT);
   if (_bodyLabel.frame.size.height) {
-    origin.y += _bodyLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT;
+    frame.origin.y += _bodyLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT;
   }
+  int heightOfLabel = 0;
   for (BCLabelView *object in _labelViewsArray) {
-    if ((origin.x+object.frame.size.width)>maxContentWidth) {
-      origin.y += [BCLabelView sizeOfLabelWithText:object.myLabel.text].height+OFFSET_BETWEEN_LABELS;
-      origin.x = _offset;
+    if ((frame.origin.x+object.frame.size.width)>maxContentWidth) {
+      frame.origin.y += [BCLabelView sizeOfLabelWithText:object.myLabel.text].height+OFFSET_BETWEEN_LABELS;
+      frame.origin.x = _offset;
     }
-    frame.origin = origin;
-    frame.size = object.frame.size;
+    frame.size = [BCLabelView sizeOfLabelWithText:object.myLabel.text];
     if (!CGRectEqualToRect(object.frame, frame)) {
       object.frame = frame;
     }
-    origin.x += object.frame.size.width+OFFSET_BETWEEN_LABELS;
+    frame.origin.x += frame.size.width+OFFSET_BETWEEN_LABELS;
+    if (!heightOfLabel) {
+      heightOfLabel = frame.size.height;
+    }
   }
-  
+
+  if (heightOfLabel) {
+    heightOfLabel += TOP_OFFSET_BETWEEN_CONTENT;
+  }
   if (_showAll) {
     frame.size = CGSizeMake(maxContentWidth, USER_VIEW_HEIGHT);
-    frame.origin = CGPointMake(_offset, self.frame.size.height-_offset-USER_VIEW_HEIGHT);
+    frame.origin = CGPointMake(_offset, frame.origin.y+heightOfLabel);
     if (!CGRectEqualToRect(_userView.frame, frame)) {
       _userView.frame = frame;
     }

@@ -13,7 +13,6 @@
 
 @implementation BCIssueBodyLabel
 
-
 - (id)init
 {
   self = [super init];
@@ -27,8 +26,8 @@
   return self;
 }
 
-+(CGSize)sizeOfLabelWithText:(NSString *)text width:(CGFloat)width font:(UIFont *)font{
-  return [text sizeWithFont:font constrainedToSize:CGSizeMake(width, 1000000) lineBreakMode:NSLineBreakByWordWrapping];
++(CGSize)sizeOfLabelWithText:(NSString *)text width:(CGFloat)width{
+  return [text sizeWithFont:BODY_FONT constrainedToSize:CGSizeMake(width, 1000000) lineBreakMode:NSLineBreakByWordWrapping];
 }
 
 @end

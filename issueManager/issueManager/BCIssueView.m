@@ -124,12 +124,17 @@
     _addNewIssueButton.frame = frame;
   }
     
-  frame = CGRectMake(0, _navigationBarView.frame.size.height, self.frame.size.width*_numberOfRepos, self.frame.size.height-_navigationBarView.frame.size.height);
+  frame = CGRectMake(0, _navigationBarView.frame.size.height, self.frame.size.width, self.frame.size.height-_navigationBarView.frame.size.height);
   if(!CGRectEqualToRect(frame, _tableViews.frame)){
     _tableViews.frame = frame;
   }
-
-  frame = CGRectMake(0, 0, _tableViews.frame.size.width, _tableViews.frame.size.height);
+  
+  frame = CGRectMake(0, _navigationBarView.frame.size.height, self.frame.size.width*_numberOfRepos, self.frame.size.height-_navigationBarView.frame.size.height);
+  if (!CGSizeEqualToSize(_tableViews.contentSize, frame.size)) {
+    _tableViews.contentSize = frame.size;
+  }
+  
+  frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
   for (int i = 0; i < _numberOfRepos; i++) {
     frame.origin.x = i*frame.size.width;
     [[_allTableViews objectAtIndex:i] setFrame:frame];

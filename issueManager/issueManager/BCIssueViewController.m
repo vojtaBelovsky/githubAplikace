@@ -44,15 +44,14 @@
       [self setTitle:NSLocalizedString(@"issues", @"")];
       _repositories = repositories;
       _nthRepository = 0;
-      _allDataSources = [[NSMutableArray alloc] init];
-      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonAction)];
-      
+      _allDataSources = [[NSMutableArray alloc] init];      
     }
     return self;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue:[self getIssueForIndexPath:indexPath] andController:self];
+  int index = [_tableView.allTableViews indexOfObject:tableView];
+  BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue:[self getIssueForIndexPath:indexPath fromNthRepository:index] andController:self];
   [self.navigationController pushViewController:issueDetailViewController animated:YES];
 }
 
@@ -64,6 +63,7 @@
 - (void)loadView {
   BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
   _tableView = [[BCIssueView alloc] initWithUserName:currentUser.userLogin numberOfRepos:[_repositories count]];
+  [_tableView.tableViews setDelegate:self];
   [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchDown];
   self.view = _tableView;
   
@@ -74,13 +74,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  BCIssue *currentIssue = [self getIssueForIndexPath:indexPath];
+  int index = [_tableView.allTableViews indexOfObject:tableView];
+  BCIssue *currentIssue = [self getIssueForIndexPath:indexPath fromNthRepository:index];
   return [BCIssueCell heightOfCellWithIssue:currentIssue width:ISSUE_WIDTH titleFont:TITLE_FONT offset:OFFSET];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
   int index = [_tableView.allTableViews indexOfObject:tableView];
-  if ([_allDataSources count] >= index) {
+  if ([_allDataSources count] > index) {
     BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:index];
     BCIssue *currentIssue = [[currentDataSource.dataSource objectForKey:[currentDataSource.dataSourceKeyNames objectAtIndex:section]] objectAtIndex:0];
     BCHeadeView *headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _tableView.navigationBarView.frame.size.height, _tableView.frame.size.width, HEADER_HEIGHT) andMilestone:currentIssue.milestone];
@@ -94,6 +95,19 @@
   return HEADER_HEIGHT;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+  int contentOffset = scrollView.contentOffset.x;
+  if (contentOffset%(int)self.view.frame.size.width == 0) {
+    int originalOffset = _nthRepository*self.view.frame.size.width;
+    if (contentOffset != originalOffset) {
+      if (contentOffset < originalOffset) {
+        _nthRepository--;
+      }else{
+        _nthRepository++;
+      }
+    }
+  }
+}
 #pragma mark -
 #pragma mark buttonActions
 
@@ -105,19 +119,22 @@
 #pragma mark public
 
 -(void)addNewIssue:(BCIssue *)newIssue{
-  [_dataSource addNewIssue:newIssue];
-  [_tableView.tableView setDataSource:_dataSource];
+  BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:_nthRepository];
+  [currentDataSource addNewIssue:newIssue];
+  [[_tableView.allTableViews objectAtIndex:_nthRepository] setDataSource:currentDataSource];
 }
 
 -(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue*)newIssue{
-  [_dataSource changeIssue:issue forNewIssue:newIssue];
+  [[_allDataSources objectAtIndex:_nthRepository] changeIssue:issue forNewIssue:newIssue];
 }
 
 #pragma mark -
 #pragma mark private
 
--(BCIssue *)getIssueForIndexPath:(NSIndexPath *)indexPath{
-  return [(NSArray*)[_dataSource.dataSource objectForKey:[_dataSource.dataSourceKeyNames objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+-(BCIssue *)getIssueForIndexPath:(NSIndexPath *)indexPath fromNthRepository:(int)nthRepository{
+  BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:nthRepository];
+  BCIssue *myIssue = [[currentDataSource.dataSource objectForKey:[currentDataSource.dataSourceKeyNames objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+  return myIssue;
 }
 
 -(void)createAndPushAddIssueVC{
@@ -140,7 +157,7 @@
       [[_tableView.allTableViews objectAtIndex:i] reloadData];
       i++;
       if (i != [_repositories count]) {
-        [BCIssue getAllIssuesFromRepository:[_repositories objectAtIndex:i] WithSuccess:milestonesSuccessBlock failure:myFailureBlock];
+        [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
       }
     }failure:myFailureBlock];
   } copy];

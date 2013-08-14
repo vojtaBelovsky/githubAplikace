@@ -39,6 +39,7 @@
     self = [super init];
     if(self){
       _issue = issue;
+      [self setScrollEnabled:YES];
       
       UIImage *resizableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:5 topCapHeight:64];
       _backgroundImageView = [[UIImageView alloc] initWithImage:resizableImage];
@@ -87,12 +88,7 @@
 
 -(void) layoutSubviews{
   [super layoutSubviews];
-  
   CGRect frame= CGRectZero;
-  frame.size = self.frame.size;
-  if (!CGRectEqualToRect(_backgroundImageView.frame, frame)){
-    _backgroundImageView.frame = frame;
-  }
   
   frame = CGRectMake(0, 0, self.frame.size.width, NAV_BAR_HEIGHT);
   if(!CGRectEqualToRect(_navigationBarView.frame, frame)){
@@ -135,6 +131,21 @@
   if (!CGRectEqualToRect(_issueView.frame, frame)) {
     _issueView.frame = frame;
   }
+
+  frame.size.height += _navigationBarView.frame.size.height+HEADER_HEIGHT+OFFSET;
+  if (!CGSizeEqualToSize(self.contentSize, frame.size)) {
+    self.contentSize = frame.size;
+  }
+  
+  frame.origin = CGPointZero;
+  frame.size.width = self.frame.size.width;
+  if (self.frame.size.height > frame.size.height) {
+    frame.size.height = self.frame.size.height;
+  }
+  if (!CGRectEqualToRect(_backgroundImageView.frame, frame)){
+    _backgroundImageView.frame = frame;
+  }
+
 }
 
 @end

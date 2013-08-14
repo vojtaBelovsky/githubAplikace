@@ -12,7 +12,7 @@
 @class BCIssueView;
 @class BCIssueDataSource;
 
-@interface BCIssueViewController : UIViewController<UITableViewDelegate>{
+@interface BCIssueViewController : UIViewController<UITableViewDelegate, UIScrollViewDelegate>{
 @private
   NSArray *_repositories;
   BCIssueView *_tableView;

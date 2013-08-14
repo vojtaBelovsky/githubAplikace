@@ -10,8 +10,6 @@
 
 @interface BCIssueBodyLabel : UILabel
 
--(CGSize)sizeOfLabel;
-
-+(CGSize)sizeOfLabelWithText:(NSString *)text width:(CGFloat)width font:(UIFont *)font;
++(CGSize)sizeOfLabelWithText:(NSString *)text width:(CGFloat)width;
 
 @end
