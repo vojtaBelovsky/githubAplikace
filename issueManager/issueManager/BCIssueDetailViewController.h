@@ -13,7 +13,7 @@
 @class BCUser;
 @class BCIssueViewController;
 
-@interface BCIssueDetailViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate, BCSelectDataManager>{
+@interface BCIssueDetailViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate>{
 @private
     BCIssueDetailView *_issueDetailview;
 }
@@ -24,9 +24,6 @@
 @property NSMutableArray *buttons;
 @property UIBarButtonItem *cancelButton;
 @property UIBarButtonItem *editButton;
-@property BOOL isSetedAssignee;
-@property BOOL isSetedMilestone;
-@property BOOL isSetedLabel;
 
 - (id)initWithIssue:(BCIssue *)issue andController:(BCIssueViewController *)controller;
 
