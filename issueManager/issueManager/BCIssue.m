@@ -12,6 +12,9 @@
 #import "BCMilestone.h"
 #import "BCRepository.h"
 #import "BCLabel.h"
+#import "UIAlertView+errorAlert.h"
+
+#define PAGINATION 30
 
 @implementation BCIssue
 
@@ -118,20 +121,26 @@
     }];
 }
 
-+(void)getAllIssuesFromRepository:(BCRepository *)repository WithSuccess:(void(^)(NSMutableArray* issues))success failure:(void(^)(NSError * error))failrue{
-    [[BCHTTPClient sharedInstance] getPath:repository.issuesUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *responseIssues = [[NSArray alloc] initWithArray:responseObject];
-        NSMutableArray *issues = [[NSMutableArray alloc] initWithCapacity:[responseIssues count]];
-        int i = 0;
-        for(NSDictionary *object in responseIssues){
-            [issues addObject:[MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:object error:nil]];
-            [[issues objectAtIndex:i] setRepository:repository];
-            i++;
-        }
-        success( issues );
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"fail");
-    }];
++(void)getIssuesFromRepository:(BCRepository *)repository forUser:(BCUser *)user since:(NSDate *)since WithSuccess:(void(^)(NSMutableArray* issues))success failure:(void(^)(NSError * error))failrue{
+  NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"state", @"open", @"sort", @"updated", nil];
+  if (since != nil) {
+    NSString *sinceInString = [self.dateFormatter stringFromDate:since];
+    [params setObject:sinceInString forKey:@"since"];
+  }
+  
+  [[BCHTTPClient sharedInstance] getPath:repository.issuesUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSArray *responseIssues = [[NSArray alloc] initWithArray:responseObject];
+    NSMutableArray *issues = [[NSMutableArray alloc] initWithCapacity:[responseIssues count]];
+    int i = 0;
+    for(NSDictionary *object in responseIssues){
+      [issues addObject:[MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:object error:nil]];
+      [[issues objectAtIndex:i] setRepository:repository];
+      i++;
+    }
+    success( issues );
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [UIAlertView showWithError:error];
+  }];
 }
 
 -(NSArray *)getLabelsAsStrings{
