@@ -12,6 +12,8 @@
 
 - (id)initWithFont:(UIFont*)font andColor:(UIColor*)color;
 
-+(CGSize)sizeOfLabelWithText:(NSString*)string font:(UIFont*)font width:(CGFloat)width;
+-(CGSize)sizeOfLabelWithWidth:(CGFloat)width;
+
++(CGSize)sizeOfLabelWithText:(NSString*)text font:(UIFont*)font width:(CGFloat)width;
 
 @end

@@ -134,7 +134,7 @@
     _tableViews.contentSize = frame.size;
   }
   
-  frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+  frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-TABLE_VIEW_OFFSET);
   for (int i = 0; i < _numberOfRepos; i++) {
     frame.origin.x = i*frame.size.width;
     [[_allTableViews objectAtIndex:i] setFrame:frame];

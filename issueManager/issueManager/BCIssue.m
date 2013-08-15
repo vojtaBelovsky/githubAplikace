@@ -106,7 +106,7 @@
 }
 
 + (NSValueTransformer *)milestoneJSONTransformer {    
-    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[BCMilestone class]];
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:BCMilestone.class];
 }
 
 + (NSValueTransformer *)repositoryJSONTransformer {

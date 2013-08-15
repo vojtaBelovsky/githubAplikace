@@ -88,6 +88,7 @@
 		10AFAAB217A008930083511E /* 60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AFAAB017A008930083511E /* 60x60.png */; };
 		10AFAAB617A10CA70083511E /* BCAddIssueButtonMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAAB517A10CA70083511E /* BCAddIssueButtonMC.m */; };
 		10BE364C175F0A840026DA45 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE364B175F0A840026DA45 /* login.png */; };
+		10C7B13C17BCE57D0033FEBC /* BCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C7B13B17BCE57D0033FEBC /* BCComment.m */; };
 		10CA880B178D723E00DF1B43 /* BCAddIssueTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */; };
 		10CA880F178DB54F00DF1B43 /* BCaddIssueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880E178DB54F00DF1B43 /* BCaddIssueButton.m */; };
 		10CD6B1B1765BC4500F64DC1 /* BCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CD6B1A1765BC4500F64DC1 /* BCTextField.m */; };
@@ -298,6 +299,8 @@
 		10AFAAB417A10CA70083511E /* BCAddIssueButtonMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueButtonMC.h; sourceTree = "<group>"; };
 		10AFAAB517A10CA70083511E /* BCAddIssueButtonMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueButtonMC.m; sourceTree = "<group>"; };
 		10BE364B175F0A840026DA45 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = issueManager/grafika/login.png; sourceTree = "<group>"; };
+		10C7B13A17BCE57D0033FEBC /* BCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCComment.h; path = issueManager/BCComment.h; sourceTree = "<group>"; };
+		10C7B13B17BCE57D0033FEBC /* BCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCComment.m; path = issueManager/BCComment.m; sourceTree = "<group>"; };
 		10CA8809178D723E00DF1B43 /* BCAddIssueTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueTextField.h; sourceTree = "<group>"; };
 		10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueTextField.m; sourceTree = "<group>"; };
 		10CA880D178DB54F00DF1B43 /* BCaddIssueButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCaddIssueButton.h; sourceTree = "<group>"; };
@@ -815,6 +818,8 @@
 				10F32E9C172525E7005E80F8 /* BCUser.m */,
 				10200105175E18E9005DD92F /* BCOrg.h */,
 				10200106175E18E9005DD92F /* BCOrg.m */,
+				10C7B13A17BCE57D0033FEBC /* BCComment.h */,
+				10C7B13B17BCE57D0033FEBC /* BCComment.m */,
 			);
 			name = models;
 			path = ..;
@@ -1322,6 +1327,7 @@
 				10F8190A17B28EDE003822D6 /* BCHeadeView.m in Sources */,
 				10F8190E17B37BD4003822D6 /* NSDate+Additions.m in Sources */,
 				10F8191717B3BA8A003822D6 /* BCIssueUserView.m in Sources */,
+				10C7B13C17BCE57D0033FEBC /* BCComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

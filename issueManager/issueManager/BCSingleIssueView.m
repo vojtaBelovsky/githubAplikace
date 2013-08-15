@@ -81,6 +81,7 @@
 
 +(CGSize)sizeOfSingleIssueViewWithIssue:(BCIssue *)issue width:(CGFloat)width offset:(CGFloat)offset titleFont:(UIFont *)font showAll:(BOOL)show{
   CGFloat maxContentWidth = width-(2*offset);
+  
   CGFloat totalHeight = [BCIssueTitleLabel sizeOfLabelWithText:issue.title font:font width:maxContentWidth].height+(2*offset);
   CGSize sizeOfCurrentLabel;
   int labelsWidth = maxContentWidth+1;
@@ -131,7 +132,7 @@
     _numberView.frame = frame;
   }
   
-  frame.size = [BCIssueTitleLabel sizeOfLabelWithText:_titleLabel.text font:_titleLabel.font width:maxContentWidth];
+  frame.size = [_titleLabel sizeOfLabelWithWidth:maxContentWidth];
   frame.origin = CGPointMake(_offset, _offset);
   if (!CGRectEqualToRect(_titleLabel.frame, frame)) {
     _titleLabel.frame = frame;

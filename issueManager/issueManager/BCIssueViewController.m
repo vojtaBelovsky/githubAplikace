@@ -108,6 +108,11 @@
     }
   }
 }
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+  
+}
+
 #pragma mark -
 #pragma mark buttonActions
 
@@ -142,15 +147,18 @@
   [self.navigationController pushViewController:addIssueVC animated:YES];
 }
 
+
+
 -(void)createModel{
   __block int i = 0;
+  __block BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
   
   __block void (^myFailureBlock) (NSError *error) = [^(NSError *error){
     [UIAlertView showWithError:error];
   } copy];
   __block void (^milestonesSuccessBlock) (NSMutableArray *milestones);
   milestonesSuccessBlock = [^(NSMutableArray *milestones) {
-    [BCIssue getAllIssuesFromRepository:[_repositories objectAtIndex:i] WithSuccess:^(NSMutableArray *issues){
+    [BCIssue getIssuesFromRepository:[_repositories objectAtIndex:i] forUser:currentUser since:nil WithSuccess:^(NSMutableArray *issues){
       BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:milestones];
       [_allDataSources addObject:currentDataSource];
       [[_tableView.allTableViews objectAtIndex:i] setDataSource:currentDataSource];

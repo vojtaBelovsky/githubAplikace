@@ -10,9 +10,16 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BCLabel.h"
 
-#define REGULAR_FONT_SMALL  [UIFont fontWithName:@"ProximaNova-Regular" size:13]
-#define MAXIMUM_WIDTH       ( 80.0f )
-#define LABEL_TEXT_OFFSET   ( 4.0f )
+#define REGULAR_FONT_SMALL  [UIFont fontWithName:@"ProximaNova-Regular" size:11]
+#define MAXIMUM_WIDTH      ( 80.0f )
+#define TOP_TEXT_OFFSET    ( 2.0f )
+#define LEFT_TEXT_OFFSET   ( 4.0f )
+#define CORNER_RADIUS      ( 4.0f )
+
+#define WHITE_COLOR        [UIColor whiteColor]
+#define BLACK_COLOR        [UIColor blackColor]
+
+#define brightnessLeve(r,g,b) 0.299*r + 0.587*g + 0.114*b
 
 @implementation BCLabelView
 
@@ -22,12 +29,21 @@
   if (self) {
     [self.layer setBorderWidth:1];
     [self.layer setBorderColor:label.color.CGColor];
-    [self.layer setCornerRadius:5];
+    [self.layer setCornerRadius:CORNER_RADIUS];
     [self.layer setBackgroundColor:label.color.CGColor];
+    
+    UIColor *textColor;
+    CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
+    [label.color getRed:&red green:&green blue:&blue alpha:&alpha];
+    if (brightnessLeve(red, green, blue) > 0.5) {
+      textColor = BLACK_COLOR;
+    }else{
+      textColor = WHITE_COLOR;
+    }
     
     _myLabel = [[UILabel alloc] init];
     [_myLabel setFont:REGULAR_FONT_SMALL];
-    [_myLabel setTextColor:[UIColor whiteColor]];
+    [_myLabel setTextColor:textColor];
     [_myLabel setText:label.name];
     [_myLabel setBackgroundColor:[UIColor clearColor]];
     CGRect frame;
@@ -37,8 +53,8 @@
     [self addSubview:_myLabel];
     
     frame.origin = CGPointZero;
-    frame.size.height += 2*LABEL_TEXT_OFFSET;
-    frame.size.width += 2*LABEL_TEXT_OFFSET;
+    frame.size.height += 2*TOP_TEXT_OFFSET;
+    frame.size.width += 2*LEFT_TEXT_OFFSET;
     [self setFrame:frame];
     
     frame.origin.x += 1;
@@ -56,8 +72,8 @@
 +(CGSize)sizeOfLabelWithText:(NSString*)text{
   CGSize mySize = [text sizeWithFont:REGULAR_FONT_SMALL];
   mySize.width = MIN(mySize.width, MAXIMUM_WIDTH);
-  mySize.width += 2*LABEL_TEXT_OFFSET;
-  mySize.height += 2*LABEL_TEXT_OFFSET;
+  mySize.width += 2*LEFT_TEXT_OFFSET;
+  mySize.height += 2*TOP_TEXT_OFFSET;
   return mySize;
 }
 
