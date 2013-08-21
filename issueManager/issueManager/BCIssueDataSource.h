@@ -18,6 +18,6 @@
 
 -(void)addNewIssue:(BCIssue *)newIssue;
 -(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue *)newIssue;
-
+-(void)removeIssue:(BCIssue *)issue;
 
 @end

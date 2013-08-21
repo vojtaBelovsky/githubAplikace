@@ -129,8 +129,13 @@
   [[_tableView.allTableViews objectAtIndex:_nthRepository] setDataSource:currentDataSource];
 }
 
+//to the future, for changing issues
 -(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue*)newIssue{
   [[_allDataSources objectAtIndex:_nthRepository] changeIssue:issue forNewIssue:newIssue];
+}
+
+-(void)removeIssue:(BCIssue *)issue{
+  [[_allDataSources objectAtIndex:_nthRepository] removeIssue:issue];
 }
 
 #pragma mark -

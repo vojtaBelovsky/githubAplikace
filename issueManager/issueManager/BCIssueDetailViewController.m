@@ -43,6 +43,7 @@
 -(void) loadView{
   _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue andController:self];
   [_issueDetailview.backButton addTarget:self action:@selector(backButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  [_issueDetailview.closeButton addTarget:self action:@selector(closeButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   self.view = _issueDetailview;
 }
 
@@ -55,6 +56,16 @@
 
 -(void)backButtonDidPress{
   [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)closeButtonDidPress{
+  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%d",   _issue.repository.owner.userLogin, _issue.repository.name, [_issue.number intValue]];
+  [[BCHTTPClient sharedInstance] patchPath:path parameters:[self createParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_myParentViewController removeIssue:_issue];
+    [self.navigationController popViewControllerAnimated:YES];
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [UIAlertView showWithError:error];
+  }];
 }
 
 //-(void) editButtionAction{
@@ -113,16 +124,16 @@
     _issueDetailview.contentSize = scrollContentSize;
 }
 
-//-(NSDictionary *) createParameters{
-//    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                                _editedIssue.title ?: [NSNull null], @"title",
-//                                _editedIssue.body ?: [NSNull null], @"body",
-//                                _editedIssue.assignee.userLogin ?: [NSNull null], @"assignee",
-//                                (_editedIssue.state == GHIssueStateOpen) ? @"open" : @"closed", @"state",
-//                                _editedIssue.milestone.number ?: [NSNull null], @"milestone",
-//                                ([_editedIssue getLabelsAsStrings]) ?: [NSNull null], @"labels",
-//                                nil];
-//    return parameters;
-//}
+-(NSDictionary *) createParameters{
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                _editedIssue.title ?: [NSNull null], @"title",
+                                _editedIssue.body ?: [NSNull null], @"body",
+                                _editedIssue.assignee.userLogin ?: [NSNull null], @"assignee",
+                                @"closed", @"state",
+                                _editedIssue.milestone.number ?: [NSNull null], @"milestone",
+                                ([_editedIssue getLabelsAsStrings]) ?: [NSNull null], @"labels",
+                                nil];
+    return parameters;
+}
 
 @end

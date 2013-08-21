@@ -86,6 +86,14 @@
 #pragma mark -
 #pragma mark public
 
+-(void)removeIssue:(BCIssue *)issue{
+  NSMutableArray *currentArray = [_dataSource objectForKey:issue.milestone.title];
+  [currentArray removeObject:issue];
+  if (![currentArray count]) {
+    [_dataSourceKeyNames removeObject:issue.milestone.title];
+  }
+}
+
 -(void)addNewIssue:(BCIssue *)newIssue{
   if (newIssue.milestone == nil) {
     if ([_dataSourceKeyNames containsObject:NO_MILESTONE]) {
@@ -108,13 +116,13 @@
     NSUInteger index = [currentArray indexOfObject:issue];
     [currentArray replaceObjectAtIndex:index withObject:newIssue];
   }else{
-    NSMutableArray *currentArray = [_dataSource objectForKey:issue.milestone.title];
-    [currentArray removeObject:issue];
-    if (![currentArray count]) {
-      [_dataSourceKeyNames removeObject:issue.milestone.title];
+    [self removeIssue:issue];
+    if ([_dataSourceKeyNames containsObject:newIssue.milestone.title]) {
+      NSMutableArray *currentArray = [_dataSource objectForKey:newIssue.milestone.title];
+      [currentArray insertObject:newIssue atIndex:0];
+    }else{
+      [self addNewMilstone:newIssue.milestone.title withIssue:newIssue];
     }
-    currentArray = [_dataSource objectForKey:newIssue.milestone.title];
-    [currentArray insertObject:newIssue atIndex:0];
   }
 }
 
