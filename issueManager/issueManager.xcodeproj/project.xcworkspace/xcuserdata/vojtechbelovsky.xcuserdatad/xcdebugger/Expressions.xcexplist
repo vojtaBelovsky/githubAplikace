@@ -11,6 +11,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[BCIssueDataSource numberOfSectionsInTableView:]:BCIssueDataSource.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_dataSourceKeyNames count];">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[BCRepositoryViewController tableView:didDeselectRowAtIndexPath:]:BCRepositoryViewController.m">
       </ContextState>
       <ContextState
@@ -31,6 +39,9 @@
                value = "[_dataSource.dataSource objectForKey:[_dataSource.dataSourceKeyNames objectAtIndex:section]]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BCIssueDataSource initWithIssues:milestones:]:BCIssueDataSource.m">
       </ContextState>
       <ContextState
          contextName = "-[BCRepositoryDataSource tableView:cellForRowAtIndexPath:]:BCRepositoryDataSource.m">

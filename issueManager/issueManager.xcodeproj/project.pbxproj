@@ -93,6 +93,7 @@
 		10AFAAB617A10CA70083511E /* BCAddIssueButtonMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAAB517A10CA70083511E /* BCAddIssueButtonMC.m */; };
 		10BAB0D317C5F4BE00056A1D /* BCCollaboratorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BAB0D217C5F4BE00056A1D /* BCCollaboratorsViewController.m */; };
 		10BE364C175F0A840026DA45 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE364B175F0A840026DA45 /* login.png */; };
+		10C51D4517C7654D009637D3 /* BCNoIssuesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C51D4417C7654D009637D3 /* BCNoIssuesView.m */; };
 		10C7B13C17BCE57D0033FEBC /* BCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C7B13B17BCE57D0033FEBC /* BCComment.m */; };
 		10CA880B178D723E00DF1B43 /* BCAddIssueTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */; };
 		10CA880F178DB54F00DF1B43 /* BCaddIssueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880E178DB54F00DF1B43 /* BCaddIssueButton.m */; };
@@ -314,6 +315,8 @@
 		10BAB0D117C5F4BE00056A1D /* BCCollaboratorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollaboratorsViewController.h; sourceTree = "<group>"; };
 		10BAB0D217C5F4BE00056A1D /* BCCollaboratorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollaboratorsViewController.m; sourceTree = "<group>"; };
 		10BE364B175F0A840026DA45 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = issueManager/grafika/login.png; sourceTree = "<group>"; };
+		10C51D4317C7654D009637D3 /* BCNoIssuesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCNoIssuesView.h; sourceTree = "<group>"; };
+		10C51D4417C7654D009637D3 /* BCNoIssuesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCNoIssuesView.m; sourceTree = "<group>"; };
 		10C7B13A17BCE57D0033FEBC /* BCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCComment.h; path = issueManager/BCComment.h; sourceTree = "<group>"; };
 		10C7B13B17BCE57D0033FEBC /* BCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCComment.m; path = issueManager/BCComment.m; sourceTree = "<group>"; };
 		10CA8809178D723E00DF1B43 /* BCAddIssueTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueTextField.h; sourceTree = "<group>"; };
@@ -513,6 +516,7 @@
 		102B8B1D17268C68003BA22F /* view */ = {
 			isa = PBXGroup;
 			children = (
+				10C51D3F17C76533009637D3 /* noIssuesView */,
 				102B8B2317268CCC003BA22F /* BCIssueView.h */,
 				102B8B2417268CCC003BA22F /* BCIssueView.m */,
 				102B8B1E17268C72003BA22F /* cell */,
@@ -786,6 +790,15 @@
 				109FAE1C17C5FDDB00F13EB8 /* cell */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		10C51D3F17C76533009637D3 /* noIssuesView */ = {
+			isa = PBXGroup;
+			children = (
+				10C51D4317C7654D009637D3 /* BCNoIssuesView.h */,
+				10C51D4417C7654D009637D3 /* BCNoIssuesView.m */,
+			);
+			name = noIssuesView;
 			sourceTree = "<group>";
 		};
 		10CA8805178D721F00DF1B43 /* textField */ = {
@@ -1398,6 +1411,7 @@
 				109FAE1B17C5FDB200F13EB8 /* BCCollaboratorsDataSource.m in Sources */,
 				109FAE1F17C5FDEE00F13EB8 /* BCCollaboratorsView.m in Sources */,
 				109FAE2217C5FE0A00F13EB8 /* BCCollaboratorsCell.m in Sources */,
+				10C51D4517C7654D009637D3 /* BCNoIssuesView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

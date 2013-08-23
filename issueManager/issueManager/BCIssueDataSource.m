@@ -38,9 +38,12 @@
     }
     
     //removing empty sections
-    for (NSString *keyName in _dataSourceKeyNames) {
+    int count = [_dataSourceKeyNames count];
+    for (int i = count-1; i >= 0; i--) {
+      NSString *keyName = [_dataSourceKeyNames objectAtIndex:i];
       if (![[_dataSource objectForKey:keyName] count]) {
         [_dataSource removeObjectForKey:keyName];
+        [_dataSourceKeyNames removeObject:keyName];
       }
     }
   }
