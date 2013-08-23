@@ -29,6 +29,7 @@
 #define BODY_COLOR          [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define BODY_FONT           [UIFont fontWithName:@"ProximaNova-Regular" size:14]
 #define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
+#define COMMENT_MASK        [UIImage imageNamed:@"commentMask.png"]
 
 @implementation BCCommentView
 
@@ -56,6 +57,7 @@
     
     _avatar = [[BCAvatarImgView alloc] init];
     [_avatar setImageWithURL:comment.user.avatarUrl placeholderImage:PLACEHOLDER_IMG];
+    [[_avatar maskImageView] setImage:COMMENT_MASK];
     [self addSubview:_avatar];
     
     _body = [[UILabel alloc] init];
