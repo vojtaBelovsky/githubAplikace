@@ -20,6 +20,7 @@
 @property int numberOfRepos;
 @property NSMutableArray *allTableViews;
 
--(id)initWithUserName:(NSString *)userName numberOfRepos:(int)numberOfRepos;
+-(id)initWithNumberOfRepos:(int)numberOfRepos;
+-(void)setUserName:(NSString *)userName;
 
 @end

@@ -20,6 +20,7 @@
 #import "BCSelectLabelsViewController.h"
 #import "BCIssueViewController.h"
 #import "BCSingleIssueView.h"
+#import "BCCommentView.h"
 
 @interface BCIssueDetailViewController ()
 
@@ -44,6 +45,7 @@
   _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue andController:self];
   [_issueDetailview.backButton addTarget:self action:@selector(backButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_issueDetailview.closeButton addTarget:self action:@selector(closeButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  [_issueDetailview.commentButton addTarget:self action:@selector(commentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   self.view = _issueDetailview;
 }
 
@@ -66,6 +68,10 @@
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     [UIAlertView showWithError:error];
   }];
+}
+
+-(void)commentButtonDidPress{
+//  BCCommentView *commentView = [BCCommentView alloc] initWithComment:<#(BCComment *)#>
 }
 
 //-(void) editButtionAction{

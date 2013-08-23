@@ -15,6 +15,6 @@
 @interface NSDate (Additions)
 
 - (NSString*)stringDifferenceFromNow;
-- (NSString*)stringDifferenceFromNowDetailStyle;
+- (NSString*)stringDifferenceFromNowShortStyle;
 
 @end

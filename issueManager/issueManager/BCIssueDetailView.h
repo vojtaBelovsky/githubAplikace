@@ -25,6 +25,8 @@
 @property UILabel *theNewIssueShadowLabel;
 @property BCSingleIssueView *issueView;
 @property BCHeadeView *headerView;
+@property NSMutableArray *commentViews;
+@property UIButton *commentButton;
 
 -(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
 

@@ -122,7 +122,7 @@
 }
 
 +(void)getIssuesFromRepository:(BCRepository *)repository forUser:(BCUser *)user since:(NSDate *)since WithSuccess:(void(^)(NSMutableArray* issues))success failure:(void(^)(NSError * error))failrue{
-  NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"state", @"open", @"sort", @"updated", nil];
+  NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"open", @"state", @"updated", @"sort", user.userLogin, @"assignee", nil];
   if (since != nil) {
     NSString *sinceInString = [self.dateFormatter stringFromDate:since];
     [params setObject:sinceInString forKey:@"since"];

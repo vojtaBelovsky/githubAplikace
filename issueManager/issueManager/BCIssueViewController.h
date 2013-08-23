@@ -19,6 +19,7 @@
   int _nthRepository;
   NSMutableArray *_allDataSources;
 }
+@property BOOL userChanged;
 
 - (id) initWithRepositories:(NSArray *)repositories;
 

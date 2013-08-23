@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BCAvatarImgView : UIImageView{
-@private
-  UIImageView *_maskImageView;
-}
+@interface BCAvatarImgView : UIImageView
+
+@property UIImageView *maskImageView;
 
 @end

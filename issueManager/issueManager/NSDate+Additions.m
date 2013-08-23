@@ -53,7 +53,7 @@
   }
 }
 
-- (NSString*)stringDifferenceFromNowDetailStyle {
+- (NSString*)stringDifferenceFromNowShortStyle {
   
   NSTimeInterval interval = fabsf([self timeIntervalSinceNow]);
   double minutes = ((double)interval) / 60.0;

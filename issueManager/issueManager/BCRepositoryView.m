@@ -28,7 +28,7 @@
 - (id)init {
   self = [super init];
   if ( self ) {
-    UIImage *resizeableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:8 topCapHeight:44];
+    UIImage *resizeableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:8 topCapHeight:88];
     _backgroundImageView = [[UIImageView alloc] initWithImage:resizeableImage];
     [self addSubview:_backgroundImageView];
     

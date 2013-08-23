@@ -32,17 +32,13 @@
 - (id)init{
     self = [super init];
     if ( self ) {
-      [self setTitle:NSLocalizedString(@"Choose repositories", @"")];
       _chosenRepositories = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (void)loadView {
-//  [super loadView];
   self.navigationController.navigationBarHidden = YES;
-  [self.navigationItem setHidesBackButton:YES];
-  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStylePlain target:self action:@selector(selectButtonDidPress)];
   
   _tableView = [[BCRepositoryView alloc] init];
   [_tableView.tableView setMultipleTouchEnabled:YES];
@@ -122,13 +118,13 @@
   __block UIImage *placeholderImage = [UIImage imageNamed:@"gravatar-user-420.png"];
   __block NSMutableArray *dataSourceKeyNames = [[NSMutableArray alloc] init];
   
-  BCUser *loggedInUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+  BCUser *chosenUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
   
-  [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
+  [BCUser getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
     //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!(array inicializuju, melo by tam byt 0 prvku) - PRIDAT POLOZKU "NO REPOZITORIES"
-    [dataSourceKeyNames addObject:loggedInUser.userLogin];
-    [dataAvatar setImageWithURL:loggedInUser.avatarUrl placeholderImage:placeholderImage];
-    dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: loggedInUser, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, dataAvatar.image, KEY_IMAGE, nil];
+    [dataSourceKeyNames addObject:chosenUser.userLogin];
+    [dataAvatar setImageWithURL:chosenUser.avatarUrl placeholderImage:placeholderImage];
+    dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: chosenUser, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, dataAvatar.image, KEY_IMAGE, nil];
     [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[0]];
     [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
       if([allOrgs count] > 0){
@@ -152,10 +148,10 @@
             [_tableView.tableView setDataSource:_dataSource];
             [_tableView.tableView reloadData];
           }else{
-            [BCRepository getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
+            [BCOrg getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
           }
         } copy];
-        [BCRepository getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
+        [BCOrg getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
       }else{//set data source in case of user don't have Orgs
         _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
         [_tableView.tableView setDataSource:_dataSource];

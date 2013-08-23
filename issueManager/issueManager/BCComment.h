@@ -8,6 +8,7 @@
 
 #import <Mantle/Mantle.h>
 @class BCUser;
+@class BCIssue;
 
 @interface BCComment : MTLModel <MTLJSONSerializing>
 
@@ -15,5 +16,7 @@
 @property NSString *body;
 @property BCUser *user;
 @property NSDate *updatedAt;
+
++(void)getCommentsForIssue:(BCIssue *)issue withSuccess:(void(^)(NSMutableArray *comments))success failure:(void(^)(NSError *error))failure;
 
 @end

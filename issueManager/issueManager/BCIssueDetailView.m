@@ -15,12 +15,17 @@
 #import "BCMilestone.h"
 #import "BCSingleIssueView.h"
 #import "BCHeadeView.h"
+#import "BCComment.h"
+#import "BCCommentView.h"
+#import "UIAlertView+errorAlert.h"
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define BACK_BUTTON_IMG               [UIImage imageNamed:@"issueNavbarXOff.png"]
 #define BACK_BUTTON_IMG_HL            [UIImage imageNamed:@"issueNavbarXOn.png"]
 #define CLOSE_BUTTON_IMG              [UIImage imageNamed:@"issueNavbarCheckOff.png"]
 #define CLOSE_BUTTON_IMG_HL           [UIImage imageNamed:@"issueNavbarCheckOn.png"]
+#define COMMENT_BUTTON_IMG            [UIImage imageNamed:@"issueCommentButtonOn.png"]
+#define COMMENT_BUTTON_IMG_HL         [UIImage imageNamed:@"issueCommentButtonOff.png"]
 
 #define ISSUE_WIDTH                   ( 300.0f )
 #define OFFSET                        ( 10.f )
@@ -82,6 +87,23 @@
       _issueView = [[BCSingleIssueView alloc] initWithTitleFont:TITLE_FONT showAll:YES offset:OFFSET];
       [_issueView setWithIssue:issue];
       [self addSubview:_issueView];
+      
+      _commentViews = [[NSMutableArray alloc] init];
+      [BCComment getCommentsForIssue:issue withSuccess:^(NSMutableArray *comments) {
+        BCCommentView *commentView;
+        for (BCComment *comment in comments) {
+          commentView = [[BCCommentView alloc] initWithComment:comment];
+          [self addSubview:commentView];
+          [_commentViews addObject:commentView];
+        }
+      } failure:^(NSError *error) {
+        [UIAlertView showWithError:error];
+      }];
+      
+      _commentButton = [[UIButton alloc] init];
+      [_commentButton setImage:COMMENT_BUTTON_IMG forState:UIControlStateNormal];
+      [_commentButton setImage:COMMENT_BUTTON_IMG_HL forState:UIControlStateSelected];
+      [self addSubview:_commentButton];
     }
     return self;
 }
@@ -131,8 +153,26 @@
   if (!CGRectEqualToRect(_issueView.frame, frame)) {
     _issueView.frame = frame;
   }
-
-  frame.size.height += _navigationBarView.frame.size.height+HEADER_HEIGHT+OFFSET;
+  
+  frame.origin.y = NAV_BAR_HEIGHT+HEADER_HEIGHT+_issueView.frame.size.height+OFFSET;
+  for (BCCommentView *commentView in _commentViews) {
+    frame.size = [commentView sizeOfViewWithWidth:ISSUE_WIDTH];
+    frame.origin.x = (self.frame.size.width-frame.size.width)/2;
+    if (!CGRectEqualToRect(commentView.frame, frame)) {
+      commentView.frame = frame;
+    }
+    frame.origin.y += commentView.frame.size.height+OFFSET;
+  }
+  
+      frame.origin.y += OFFSET;
+  frame.size = [_commentButton sizeThatFits:self.frame.size];
+  frame.origin.x = (self.frame.size.width-frame.size.width)/2;
+  if (!CGRectEqualToRect(_commentButton.frame, frame)) {
+    _commentButton.frame = frame;
+  }
+  
+  frame.size.height = frame.origin.y+_commentButton.frame.size.height+3*OFFSET;
+  frame.size.width = self.frame.size.width;
   if (!CGSizeEqualToSize(self.contentSize, frame.size)) {
     self.contentSize = frame.size;
   }
@@ -145,7 +185,6 @@
   if (!CGRectEqualToRect(_backgroundImageView.frame, frame)){
     _backgroundImageView.frame = frame;
   }
-
 }
 
 @end

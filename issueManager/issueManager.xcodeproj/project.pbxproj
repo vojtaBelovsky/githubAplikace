@@ -15,6 +15,7 @@
 		10200119175F0629005DD92F /* new-issue.png in Resources */ = {isa = PBXBuildFile; fileRef = 10200111175F0629005DD92F /* new-issue.png */; };
 		1020011A175F0629005DD92F /* repos.png in Resources */ = {isa = PBXBuildFile; fileRef = 10200112175F0629005DD92F /* repos.png */; };
 		1020011B175F0629005DD92F /* tapmates.png in Resources */ = {isa = PBXBuildFile; fileRef = 10200113175F0629005DD92F /* tapmates.png */; };
+		10242B7817C4BF31006665EF /* BCCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10242B7717C4BF31006665EF /* BCCommentView.m */; };
 		102ACED61733BA84000250F9 /* BCSelectMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACED51733BA84000250F9 /* BCSelectMilestoneViewController.m */; };
 		102ACEDB1733BAB0000250F9 /* BCSelectMilestoneDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACEDA1733BAB0000250F9 /* BCSelectMilestoneDataSource.m */; };
 		102ACEDF1733BAEF000250F9 /* BCSelectMilestoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102ACEDE1733BAEF000250F9 /* BCSelectMilestoneView.m */; };
@@ -79,6 +80,9 @@
 		1095EA0F175F6A62009CCEDB /* selectMemberSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EE175F6A62009CCEDB /* selectMemberSettings@2x.png */; };
 		1095EA10175F6A62009CCEDB /* selectMemberXOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */; };
 		1095EA11175F6A62009CCEDB /* selectMemberXOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */; };
+		109FAE1B17C5FDB200F13EB8 /* BCCollaboratorsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 109FAE1A17C5FDB200F13EB8 /* BCCollaboratorsDataSource.m */; };
+		109FAE1F17C5FDEE00F13EB8 /* BCCollaboratorsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 109FAE1E17C5FDEE00F13EB8 /* BCCollaboratorsView.m */; };
+		109FAE2217C5FE0A00F13EB8 /* BCCollaboratorsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 109FAE2117C5FE0A00F13EB8 /* BCCollaboratorsCell.m */; };
 		10AFAA9D179D30810083511E /* BCAddIssueContentImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAA9C179D30810083511E /* BCAddIssueContentImgView.m */; };
 		10AFAAA1179EA4A80083511E /* BCAvatarImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAAA0179EA4A80083511E /* BCAvatarImgView.m */; };
 		10AFAAAA179FC6140083511E /* BCLabelColorImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAAA9179FC6140083511E /* BCLabelColorImgView.m */; };
@@ -87,6 +91,7 @@
 		10AFAAB117A008930083511E /* 40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AFAAAF17A008930083511E /* 40x40.png */; };
 		10AFAAB217A008930083511E /* 60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AFAAB017A008930083511E /* 60x60.png */; };
 		10AFAAB617A10CA70083511E /* BCAddIssueButtonMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AFAAB517A10CA70083511E /* BCAddIssueButtonMC.m */; };
+		10BAB0D317C5F4BE00056A1D /* BCCollaboratorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BAB0D217C5F4BE00056A1D /* BCCollaboratorsViewController.m */; };
 		10BE364C175F0A840026DA45 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE364B175F0A840026DA45 /* login.png */; };
 		10C7B13C17BCE57D0033FEBC /* BCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C7B13B17BCE57D0033FEBC /* BCComment.m */; };
 		10CA880B178D723E00DF1B43 /* BCAddIssueTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */; };
@@ -199,6 +204,8 @@
 		10200111175F0629005DD92F /* new-issue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "new-issue.png"; path = "issueManager/grafika/new-issue.png"; sourceTree = "<group>"; };
 		10200112175F0629005DD92F /* repos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = repos.png; path = issueManager/grafika/repos.png; sourceTree = "<group>"; };
 		10200113175F0629005DD92F /* tapmates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tapmates.png; path = issueManager/grafika/tapmates.png; sourceTree = "<group>"; };
+		10242B7617C4BF31006665EF /* BCCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCommentView.h; sourceTree = "<group>"; };
+		10242B7717C4BF31006665EF /* BCCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCommentView.m; sourceTree = "<group>"; };
 		102ACED41733BA84000250F9 /* BCSelectMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectMilestoneViewController.h; sourceTree = "<group>"; };
 		102ACED51733BA84000250F9 /* BCSelectMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectMilestoneViewController.m; sourceTree = "<group>"; };
 		102ACED91733BAB0000250F9 /* BCSelectMilestoneDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectMilestoneDataSource.h; sourceTree = "<group>"; };
@@ -286,6 +293,12 @@
 		1095E9EE175F6A62009CCEDB /* selectMemberSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberSettings@2x.png"; path = "issueManager/grafika/github cutted/selectMemberSettings@2x.png"; sourceTree = "<group>"; };
 		1095E9EF175F6A62009CCEDB /* selectMemberXOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberXOff@2x.png"; path = "issueManager/grafika/github cutted/selectMemberXOff@2x.png"; sourceTree = "<group>"; };
 		1095E9F0175F6A62009CCEDB /* selectMemberXOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberXOn@2x.png"; path = "issueManager/grafika/github cutted/selectMemberXOn@2x.png"; sourceTree = "<group>"; };
+		109FAE1917C5FDB200F13EB8 /* BCCollaboratorsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollaboratorsDataSource.h; sourceTree = "<group>"; };
+		109FAE1A17C5FDB200F13EB8 /* BCCollaboratorsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollaboratorsDataSource.m; sourceTree = "<group>"; };
+		109FAE1D17C5FDEE00F13EB8 /* BCCollaboratorsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollaboratorsView.h; sourceTree = "<group>"; };
+		109FAE1E17C5FDEE00F13EB8 /* BCCollaboratorsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollaboratorsView.m; sourceTree = "<group>"; };
+		109FAE2017C5FE0A00F13EB8 /* BCCollaboratorsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollaboratorsCell.h; sourceTree = "<group>"; };
+		109FAE2117C5FE0A00F13EB8 /* BCCollaboratorsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollaboratorsCell.m; sourceTree = "<group>"; };
 		10AFAA9B179D30810083511E /* BCAddIssueContentImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueContentImgView.h; sourceTree = "<group>"; };
 		10AFAA9C179D30810083511E /* BCAddIssueContentImgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueContentImgView.m; sourceTree = "<group>"; };
 		10AFAA9F179EA4A80083511E /* BCAvatarImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAvatarImgView.h; sourceTree = "<group>"; };
@@ -298,6 +311,8 @@
 		10AFAAB017A008930083511E /* 60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 60x60.png; path = "issueManager/grafika/github cutted/60x60.png"; sourceTree = "<group>"; };
 		10AFAAB417A10CA70083511E /* BCAddIssueButtonMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueButtonMC.h; sourceTree = "<group>"; };
 		10AFAAB517A10CA70083511E /* BCAddIssueButtonMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueButtonMC.m; sourceTree = "<group>"; };
+		10BAB0D117C5F4BE00056A1D /* BCCollaboratorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollaboratorsViewController.h; sourceTree = "<group>"; };
+		10BAB0D217C5F4BE00056A1D /* BCCollaboratorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollaboratorsViewController.m; sourceTree = "<group>"; };
 		10BE364B175F0A840026DA45 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = issueManager/grafika/login.png; sourceTree = "<group>"; };
 		10C7B13A17BCE57D0033FEBC /* BCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCComment.h; path = issueManager/BCComment.h; sourceTree = "<group>"; };
 		10C7B13B17BCE57D0033FEBC /* BCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCComment.m; path = issueManager/BCComment.m; sourceTree = "<group>"; };
@@ -434,6 +449,15 @@
 				10200113175F0629005DD92F /* tapmates.png */,
 			);
 			name = grafika;
+			sourceTree = "<group>";
+		};
+		10242B7217C4BEFE006665EF /* commentView */ = {
+			isa = PBXGroup;
+			children = (
+				10242B7617C4BF31006665EF /* BCCommentView.h */,
+				10242B7717C4BF31006665EF /* BCCommentView.m */,
+			);
+			name = commentView;
 			sourceTree = "<group>";
 		};
 		102ACED01733BA65000250F9 /* selectMilestone */ = {
@@ -680,6 +704,15 @@
 			name = "github cutted";
 			sourceTree = "<group>";
 		};
+		109FAE1C17C5FDDB00F13EB8 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				109FAE2017C5FE0A00F13EB8 /* BCCollaboratorsCell.h */,
+				109FAE2117C5FE0A00F13EB8 /* BCCollaboratorsCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		10AFAA97179D305C0083511E /* contentImgView */ = {
 			isa = PBXGroup;
 			children = (
@@ -723,6 +756,36 @@
 				10AFAAB517A10CA70083511E /* BCAddIssueButtonMC.m */,
 			);
 			name = buttonWithMultipleContent;
+			sourceTree = "<group>";
+		};
+		10BAB0CD17C5F42F00056A1D /* collaborators */ = {
+			isa = PBXGroup;
+			children = (
+				10BAB0D417C5F4E300056A1D /* dataSource */,
+				10BAB0D517C5F4EB00056A1D /* view */,
+				10BAB0D117C5F4BE00056A1D /* BCCollaboratorsViewController.h */,
+				10BAB0D217C5F4BE00056A1D /* BCCollaboratorsViewController.m */,
+			);
+			name = collaborators;
+			sourceTree = "<group>";
+		};
+		10BAB0D417C5F4E300056A1D /* dataSource */ = {
+			isa = PBXGroup;
+			children = (
+				109FAE1917C5FDB200F13EB8 /* BCCollaboratorsDataSource.h */,
+				109FAE1A17C5FDB200F13EB8 /* BCCollaboratorsDataSource.m */,
+			);
+			name = dataSource;
+			sourceTree = "<group>";
+		};
+		10BAB0D517C5F4EB00056A1D /* view */ = {
+			isa = PBXGroup;
+			children = (
+				109FAE1D17C5FDEE00F13EB8 /* BCCollaboratorsView.h */,
+				109FAE1E17C5FDEE00F13EB8 /* BCCollaboratorsView.m */,
+				109FAE1C17C5FDDB00F13EB8 /* cell */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 		10CA8805178D721F00DF1B43 /* textField */ = {
@@ -977,8 +1040,10 @@
 			isa = PBXGroup;
 			children = (
 				102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */,
+				10BAB0CD17C5F42F00056A1D /* collaborators */,
 				10F8190717B28B11003822D6 /* headerView */,
 				10F8191817B3BCB7003822D6 /* singleIssueView */,
+				10242B7217C4BEFE006665EF /* commentView */,
 				10AFAAA2179EA5B70083511E /* maskImgView */,
 				104105D21757706D003B0B9F /* login */,
 				10EF01D917379F2200346E9F /* selectLables */,
@@ -1328,6 +1393,11 @@
 				10F8190E17B37BD4003822D6 /* NSDate+Additions.m in Sources */,
 				10F8191717B3BA8A003822D6 /* BCIssueUserView.m in Sources */,
 				10C7B13C17BCE57D0033FEBC /* BCComment.m in Sources */,
+				10242B7817C4BF31006665EF /* BCCommentView.m in Sources */,
+				10BAB0D317C5F4BE00056A1D /* BCCollaboratorsViewController.m in Sources */,
+				109FAE1B17C5FDB200F13EB8 /* BCCollaboratorsDataSource.m in Sources */,
+				109FAE1F17C5FDEE00F13EB8 /* BCCollaboratorsView.m in Sources */,
+				109FAE2217C5FE0A00F13EB8 /* BCCollaboratorsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

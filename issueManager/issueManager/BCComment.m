@@ -14,6 +14,15 @@
 
 @implementation BCComment
 
+- (id)init
+{
+  self = [super init];
+  if (self) {
+    [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+  }
+  return self;
+}
+
 + (NSDateFormatter *)dateFormatter {
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
@@ -28,8 +37,6 @@
            @"updatedAt": @"updated_at"
            };
 }
-
-
 
 + (NSValueTransformer *)userJSONTransformer {
   return [MTLValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[BCUser class]];

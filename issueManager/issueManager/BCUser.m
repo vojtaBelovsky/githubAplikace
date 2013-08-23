@@ -9,6 +9,7 @@
 #import "BCUser.h"
 #import "BCHTTPClient.h"
 #import "UIAlertView+errorAlert.h"
+#import "BCRepository.h"
 
 @implementation BCUser
 
@@ -39,6 +40,20 @@
 
 + (NSValueTransformer *)htmlUrlJSONTransformer {
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+}
+
++ (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error))failure{
+  [[BCHTTPClient sharedInstance] getPath:@"user/repos" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
+    NSArray *response = [NSArray arrayWithArray:responseObject];
+    NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:[response count]];
+    for (NSDictionary *object in response) {
+      BCRepository *repo = [MTLJSONAdapter modelOfClass:[BCRepository class] fromJSONDictionary:object error:nil];
+      [repositories addObject:repo];
+    }
+    success ( repositories );
+  }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+    [UIAlertView showWithError:error];
+  }];
 }
 
 + (BCUser *)sharedInstanceChangeableWithUser:(BCUser *)changeUser succes:(void(^)(BCUser *user))succes failure:(void(^)(NSError *error))failure{

@@ -29,7 +29,7 @@
 
 @implementation BCIssueView
 
--(id)initWithUserName:(NSString *)userName numberOfRepos:(int)numberOfRepos{
+-(id)initWithNumberOfRepos:(int)numberOfRepos{
     self = [super init];
     if(self){
       _numberOfRepos = numberOfRepos;
@@ -46,7 +46,6 @@
       _userNameShadowLabel.font = USER_NAME_FONT;
       _userNameShadowLabel.textColor = USER_NAME_SHADOW_FONT_COLOR;
       _userNameShadowLabel.backgroundColor = [UIColor clearColor];
-      [_userNameShadowLabel setText:userName];
       [self addSubview:_userNameShadowLabel];
       
       _userNameLabel = [[UILabel alloc] init];
@@ -54,7 +53,6 @@
       _userNameLabel.font = USER_NAME_FONT;
       _userNameLabel.textColor = USER_NAME_FONT_COLOR;
       _userNameLabel.backgroundColor = [UIColor clearColor];
-      [_userNameLabel setText:userName];
       [self addSubview:_userNameLabel];
       
       _chooseCollaboratorButton = [[UIButton alloc] init];
@@ -83,6 +81,12 @@
       }
     }
     return self;
+}
+
+#pragma mark - public
+-(void)setUserName:(NSString *)userName{
+  [self.userNameLabel setText:userName];
+  [self.userNameShadowLabel setText:userName];
 }
 
 -(void)layoutSubviews{

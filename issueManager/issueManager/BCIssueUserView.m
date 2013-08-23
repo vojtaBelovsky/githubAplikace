@@ -49,7 +49,7 @@
 -(void)setWithIssue:(BCIssue *)issue{
   [_avatarImgView setImageWithURL:issue.user.avatarUrl placeholderImage:PLACEHOLDER_IMG];
   [_userName setText:issue.user.userLogin];
-  [_updated setText:[issue.updatedAt stringDifferenceFromNowDetailStyle]];
+  [_updated setText:[issue.updatedAt stringDifferenceFromNowShortStyle]];
 }
 
 -(void)layoutSubviews{

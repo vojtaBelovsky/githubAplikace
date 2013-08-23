@@ -21,6 +21,7 @@
 #import "BCLabel.h"
 #import "BCHeadeView.h"
 #import "BCIssueCell.h"
+#import "BCCollaboratorsViewController.h"
 
 #define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define WHITE_COLOR         [UIColor whiteColor]
@@ -44,7 +45,8 @@
       [self setTitle:NSLocalizedString(@"issues", @"")];
       _repositories = repositories;
       _nthRepository = 0;
-      _allDataSources = [[NSMutableArray alloc] init];      
+      _userChanged = NO;
+        _allDataSources = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -56,15 +58,18 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+  if (_userChanged) {
+    [self createModel];
+  }
   [super viewWillAppear:animated];
   [[_tableView.allTableViews objectAtIndex:_nthRepository] reloadData];
 }
 
 - (void)loadView {
-  BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
-  _tableView = [[BCIssueView alloc] initWithUserName:currentUser.userLogin numberOfRepos:[_repositories count]];
+  _tableView = [[BCIssueView alloc] initWithNumberOfRepos:[_repositories count]];
   [_tableView.tableViews setDelegate:self];
   [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchDown];
+  [_tableView.chooseCollaboratorButton addTarget:self action:@selector(chooseButtonDidPress) forControlEvents:UIControlEventTouchDown];
   self.view = _tableView;
   
   [self createModel];
@@ -117,7 +122,13 @@
 #pragma mark buttonActions
 
 - (void)addButtonDidPress{
-  [self createAndPushAddIssueVC];
+  BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:_nthRepository] andController:self];
+  [self.navigationController pushViewController:addIssueVC animated:YES];
+}
+
+-(void)chooseButtonDidPress{
+  BCCollaboratorsViewController *chooseCollVC = [[BCCollaboratorsViewController alloc] initWithRepositories:_repositories andIssueViewCtrl:self];
+  [self.navigationController pushViewController:chooseCollVC animated:YES];
 }
 
 #pragma mark -
@@ -147,17 +158,11 @@
   return myIssue;
 }
 
--(void)createAndPushAddIssueVC{
-  BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:_nthRepository] andController:self];
-  [self.navigationController pushViewController:addIssueVC animated:YES];
-}
-
-
-
 -(void)createModel{
+//  [_allDataSources removeAllObjects];
   __block int i = 0;
   __block BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
-  
+  [_tableView setUserName:currentUser.userLogin];
   __block void (^myFailureBlock) (NSError *error) = [^(NSError *error){
     [UIAlertView showWithError:error];
   } copy];
@@ -165,7 +170,11 @@
   milestonesSuccessBlock = [^(NSMutableArray *milestones) {
     [BCIssue getIssuesFromRepository:[_repositories objectAtIndex:i] forUser:currentUser since:nil WithSuccess:^(NSMutableArray *issues){
       BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:milestones];
-      [_allDataSources addObject:currentDataSource];
+      if ( _allDataSources.count > i ){
+        [_allDataSources replaceObjectAtIndex:i withObject:currentDataSource];
+      } else {
+        [_allDataSources addObject:currentDataSource];
+      }
       [[_tableView.allTableViews objectAtIndex:i] setDataSource:currentDataSource];
       [[_tableView.allTableViews objectAtIndex:i] reloadData];
       i++;
