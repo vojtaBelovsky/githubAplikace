@@ -10,6 +10,6 @@
 
 @interface BCAvatarImgView : UIImageView
 
-@property UIImageView *maskImageView;
+@property (nonatomic) UIImageView *maskImageView;
 
 @end

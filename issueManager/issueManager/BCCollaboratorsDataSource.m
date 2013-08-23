@@ -13,7 +13,6 @@
 #import "BCAvatarImgView.h"
 
 #define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
-#define COLLABORATORS_MASK  [UIImage imageNamed:@"user-mask.png"]
 
 @implementation BCCollaboratorsDataSource
 
@@ -32,7 +31,6 @@
   BCUser *user = [_collaborators objectAtIndex:indexPath.row];
   [cell.myTextLabel setText:user.userLogin];
   [cell.avatarImgView setImageWithURL:user.avatarUrl placeholderImage:PLACEHOLDER_IMG];
-  [cell.avatarImgView.maskImageView setImage:COLLABORATORS_MASK];
   
   return cell;
 }

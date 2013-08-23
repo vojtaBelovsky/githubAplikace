@@ -14,6 +14,7 @@
 @property BCAvatarImgView *avatarImgView;
 @property UILabel *myTextLabel;
 @property UIImageView *selectMemberArrow;
+@property UIImageView *backgroundImgView;
 
 + (BCCollaboratorsCell *)createCollaboratorCell:(UITableView *)tableView;
 

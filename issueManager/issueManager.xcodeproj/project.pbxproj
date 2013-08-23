@@ -94,6 +94,9 @@
 		10BAB0D317C5F4BE00056A1D /* BCCollaboratorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BAB0D217C5F4BE00056A1D /* BCCollaboratorsViewController.m */; };
 		10BE364C175F0A840026DA45 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE364B175F0A840026DA45 /* login.png */; };
 		10C51D4517C7654D009637D3 /* BCNoIssuesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C51D4417C7654D009637D3 /* BCNoIssuesView.m */; };
+		10C51D4717C76613009637D3 /* commentMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 10C51D4617C76611009637D3 /* commentMask.png */; };
+		10C51D4A17C76E54009637D3 /* selectMemberNotSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10C51D4817C76E50009637D3 /* selectMemberNotSelected@2x.png */; };
+		10C51D4B17C76E54009637D3 /* userMaskSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 10C51D4917C76E52009637D3 /* userMaskSelected.png */; };
 		10C7B13C17BCE57D0033FEBC /* BCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C7B13B17BCE57D0033FEBC /* BCComment.m */; };
 		10CA880B178D723E00DF1B43 /* BCAddIssueTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880A178D723E00DF1B43 /* BCAddIssueTextField.m */; };
 		10CA880F178DB54F00DF1B43 /* BCaddIssueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA880E178DB54F00DF1B43 /* BCaddIssueButton.m */; };
@@ -317,6 +320,9 @@
 		10BE364B175F0A840026DA45 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = issueManager/grafika/login.png; sourceTree = "<group>"; };
 		10C51D4317C7654D009637D3 /* BCNoIssuesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCNoIssuesView.h; sourceTree = "<group>"; };
 		10C51D4417C7654D009637D3 /* BCNoIssuesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCNoIssuesView.m; sourceTree = "<group>"; };
+		10C51D4617C76611009637D3 /* commentMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = commentMask.png; path = "issueManager/grafika/github cutted/commentMask.png"; sourceTree = "<group>"; };
+		10C51D4817C76E50009637D3 /* selectMemberNotSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectMemberNotSelected@2x.png"; path = "issueManager/grafika/github cutted/selectMemberNotSelected@2x.png"; sourceTree = "<group>"; };
+		10C51D4917C76E52009637D3 /* userMaskSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = userMaskSelected.png; path = "issueManager/grafika/github cutted/userMaskSelected.png"; sourceTree = "<group>"; };
 		10C7B13A17BCE57D0033FEBC /* BCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCComment.h; path = issueManager/BCComment.h; sourceTree = "<group>"; };
 		10C7B13B17BCE57D0033FEBC /* BCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCComment.m; path = issueManager/BCComment.m; sourceTree = "<group>"; };
 		10CA8809178D723E00DF1B43 /* BCAddIssueTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCAddIssueTextField.h; sourceTree = "<group>"; };
@@ -664,6 +670,9 @@
 		1095E9CC175F69C2009CCEDB /* github cutted */ = {
 			isa = PBXGroup;
 			children = (
+				10C51D4817C76E50009637D3 /* selectMemberNotSelected@2x.png */,
+				10C51D4917C76E52009637D3 /* userMaskSelected.png */,
+				10C51D4617C76611009637D3 /* commentMask.png */,
 				10AFAAAF17A008930083511E /* 40x40.png */,
 				10AFAAB017A008930083511E /* 60x60.png */,
 				10AFAAAB17A002AD0083511E /* corp-mask.png */,
@@ -1334,6 +1343,9 @@
 				10AFAAAE17A002AD0083511E /* user-mask.png in Resources */,
 				10AFAAB117A008930083511E /* 40x40.png in Resources */,
 				10AFAAB217A008930083511E /* 60x60.png in Resources */,
+				10C51D4717C76613009637D3 /* commentMask.png in Resources */,
+				10C51D4A17C76E54009637D3 /* selectMemberNotSelected@2x.png in Resources */,
+				10C51D4B17C76E54009637D3 /* userMaskSelected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

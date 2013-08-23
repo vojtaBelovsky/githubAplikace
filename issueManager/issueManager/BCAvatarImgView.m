@@ -27,4 +27,11 @@
   [_maskImageView setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
 }
 
+ -(void)setMaskImageView:(UIImageView *)maskImageView{
+  _maskImageView = maskImageView;
+  _maskImageView.frame = self.frame;
+}
+
+
+
 @end

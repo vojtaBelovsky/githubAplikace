@@ -13,10 +13,13 @@
 
 #define SELECT_MEMBER_ARROW     [UIImage imageNamed:@"selectMemberArrowOff.png"]
 #define SELECT_MEMBER_ARROW_HL  [UIImage imageNamed:@"selectMemberArrowOn.png"]
+#define MEMBER_SELECTED         [UIImage imageNamed:@"selectMemberSelected.png"]
+#define MEMBER_NOT_SELECTED     [UIImage imageNamed:@"selectMemberNotSelected.png"]
 
 #define CELL_FONT_COLOR         [UIColor whiteColor]
 #define CELL_FONT               [UIFont fontWithName:@"ProximaNova-Regular" size:13]
 #define CORP_MASK               [UIImage imageNamed:@"user-mask.png"]
+#define CORP_MASK_SELECTED      [UIImage imageNamed:@"userMaskSelected"]
 
 #define AVATAR_WIDTH            ( 30.0f )
 #define AVATAR_HEIGHT           ( 30.0f )
@@ -32,6 +35,11 @@
   if (! cell ) {
     cell = [[BCCollaboratorsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createCollaboratorCellReuseIdentifier];
     
+    UIImage *stretchableImage = [MEMBER_NOT_SELECTED stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    UIImage *stretchableImageHL = [MEMBER_SELECTED stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    cell.backgroundImgView = [[UIImageView alloc] initWithImage:stretchableImage highlightedImage:stretchableImageHL];
+    [cell addSubview:cell.backgroundImgView];
+    
     cell.myTextLabel = [[UILabel alloc] init];
     cell.myTextLabel.backgroundColor = [UIColor clearColor];
     cell.myTextLabel.textColor = CELL_FONT_COLOR;
@@ -39,6 +47,8 @@
     [cell addSubview:cell.myTextLabel];
     
     cell.avatarImgView = [[BCAvatarImgView alloc] init];
+    [cell.avatarImgView.maskImageView setImage:CORP_MASK];
+    [cell.avatarImgView.maskImageView setHighlightedImage:CORP_MASK_SELECTED];
     [cell addSubview:cell.avatarImgView];
     
     cell.selectMemberArrow = [[UIImageView alloc] initWithImage:SELECT_MEMBER_ARROW highlightedImage:SELECT_MEMBER_ARROW_HL];
@@ -55,7 +65,7 @@
   CGRect frame = CGRectZero;
   
   frame.size = CGSizeMake(AVATAR_WIDTH, AVATAR_HEIGHT);
-  frame.origin = CGPointMake(AVATAR_LEFT_OFFSET, self.frame.size.height-frame.size.height);
+  frame.origin = CGPointMake(AVATAR_LEFT_OFFSET, (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_avatarImgView.frame, frame)) {
     _avatarImgView.frame = frame;
   }
@@ -70,6 +80,12 @@
   frame.origin = CGPointMake(self.frame.size.width-_selectMemberArrow.frame.size.width-ARROW_RIGHT_OFFSET, (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_selectMemberArrow.frame, frame)) {
     _selectMemberArrow.frame = frame;
+  }
+  
+  frame.size = self.frame.size;
+  frame.origin = CGPointZero;
+  if (!CGRectEqualToRect(_backgroundImgView.frame, frame)) {
+    _backgroundImgView.frame = frame;
   }
 }
 
