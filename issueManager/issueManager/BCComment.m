@@ -14,11 +14,14 @@
 
 @implementation BCComment
 
-- (id)init
+- (id)initNewComment
 {
   self = [super init];
   if (self) {
-    [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+    _commentId = 0;
+    _user = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+    _body = @"leave a comment";
+    _updatedAt = [NSDate date];
   }
   return self;
 }

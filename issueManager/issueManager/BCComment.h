@@ -19,4 +19,6 @@
 
 +(void)getCommentsForIssue:(BCIssue *)issue withSuccess:(void(^)(NSMutableArray *comments))success failure:(void(^)(NSError *error))failure;
 
+- (id)initNewComment;
+
 @end

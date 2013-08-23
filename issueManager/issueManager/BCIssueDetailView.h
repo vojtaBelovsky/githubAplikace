@@ -13,6 +13,7 @@
 @class BCIssueTitleLabel;
 @class BCSingleIssueView;
 @class BCHeadeView;
+@class BCCommentView;
 
 @interface BCIssueDetailView : UIScrollView
 
@@ -27,6 +28,7 @@
 @property BCHeadeView *headerView;
 @property NSMutableArray *commentViews;
 @property UIButton *commentButton;
+@property BCCommentView *myNewCommentView;
 
 -(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
 

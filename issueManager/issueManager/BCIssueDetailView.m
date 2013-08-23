@@ -44,6 +44,7 @@
     self = [super init];
     if(self){
       _issue = issue;
+      _commentButtonDidPress = NO;
       [self setScrollEnabled:YES];
       
       UIImage *resizableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:5 topCapHeight:64];
@@ -164,11 +165,15 @@
     frame.origin.y += commentView.frame.size.height+OFFSET;
   }
   
-      frame.origin.y += OFFSET;
-  frame.size = [_commentButton sizeThatFits:self.frame.size];
-  frame.origin.x = (self.frame.size.width-frame.size.width)/2;
-  if (!CGRectEqualToRect(_commentButton.frame, frame)) {
-    _commentButton.frame = frame;
+  if (_commentButtonDidPress ) {
+    
+  }else{
+    frame.origin.y += OFFSET;
+    frame.size = [_commentButton sizeThatFits:self.frame.size];
+    frame.origin.x = (self.frame.size.width-frame.size.width)/2;
+    if (!CGRectEqualToRect(_commentButton.frame, frame)) {
+      _commentButton.frame = frame;
+    }
   }
   
   frame.size.height = frame.origin.y+_commentButton.frame.size.height+3*OFFSET;

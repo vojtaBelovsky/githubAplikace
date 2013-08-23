@@ -71,6 +71,7 @@
 }
 
 -(void)commentButtonDidPress{
+  _issueDetailview.commentButtonDidPress = YES;
 //  BCCommentView *commentView = [BCCommentView alloc] initWithComment:<#(BCComment *)#>
 }
 
