@@ -29,7 +29,7 @@
 
 #define ISSUE_WIDTH                   ( 300.0f )
 #define OFFSET                        ( 10.f )
-#define NAV_BAR_HEIGHT                ( 50.0f )
+#define NAV_BAR_HEIGHT                ( 70.0f )
 #define HEADER_HEIGHT                 ( 40.0f )
 
 #define USER_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
@@ -163,10 +163,13 @@
     [_commentViews addObject:_myNewCommentView];
   }
   frame.origin.y = NAV_BAR_HEIGHT+HEADER_HEIGHT+_issueView.frame.size.height+OFFSET;
+  frame.origin.x = (self.frame.size.width-ISSUE_WIDTH)/2;
   for (BCCommentView *commentView in _commentViews) {
     frame.size = [commentView sizeOfViewWithWidth:ISSUE_WIDTH];
-    frame.origin.x = (self.frame.size.width-frame.size.width)/2;
     if (!CGRectEqualToRect(commentView.frame, frame)) {
+      if (![commentView.commentButton isHidden]) {
+        frame.size.height += COMMENT_BUTTON_HEIGHT+COMMENT_OFFSET;
+      }
       commentView.frame = frame;
     }
     frame.origin.y += commentView.frame.size.height+OFFSET;

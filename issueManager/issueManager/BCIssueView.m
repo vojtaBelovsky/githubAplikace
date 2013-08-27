@@ -10,7 +10,7 @@
 
 #define BACKGROUND_IMAGE        [UIImage imageNamed:@"appBackground.png"]
 
-#define TABLE_VIEW_OFFSET         ( 50.0f )
+#define TABLE_VIEW_OFFSET         ( 70.0f )
 
 #define USER_NAME_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define USER_NAME_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
@@ -18,14 +18,9 @@
 
 #define CHOOSE_COLLABORATOR_IMAGE         [UIImage imageNamed:@"profileNavbarPplOff.png"]
 #define CHOOSE_COLLABORATOR_HL_IMAGE      [UIImage imageNamed:@"profileNavbarPplOn.png"]
-#define CHOOSE_COLLABORATOR_IMAGE_WIDTH   ( 30.0f )
-#define CHOOSE_COLLABORATOR_IMAGE_HEIGHT  ( 21.0f )
 
 #define ADD_NEW_ISSUE_IMAGE       [UIImage imageNamed:@"profileNavbarPlusOff.png"]
 #define ADD_NEW_ISSUE_HL_IMAGE    [UIImage imageNamed:@"profileNavbarPlusOn.png"]
-
-#define DONE_FONT            [UIFont fontWithName:@"ProximaNova-Light" size:13]
-#define DONE_FONT_COLOR      [UIColor whiteColor]
 
 @implementation BCIssueView
 
@@ -93,7 +88,7 @@
     [super layoutSubviews];
   
   CGRect frame= CGRectZero;
-  frame.size = self.bounds.size;
+  frame.size = self.frame.size;
   if ( !CGRectEqualToRect( frame, _backgroundImageView.frame ) ) {
     _backgroundImageView.frame = frame;
   }

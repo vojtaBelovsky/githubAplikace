@@ -54,7 +54,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   int index = [_tableView.allTableViews indexOfObject:tableView];
   BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue:[self getIssueForIndexPath:indexPath fromNthRepository:index] andController:self];
-  [self.navigationController pushViewController:issueDetailViewController animated:YES];
+  [self presentViewController:issueDetailViewController animated:YES completion:^{
+    
+  }];
+//  [self.navigationController pushViewController:issueDetailViewController animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

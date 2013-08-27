@@ -58,14 +58,14 @@
 #pragma mark ButtonActions
 
 -(void)backButtonDidPress{
-  [self.navigationController popViewControllerAnimated:YES];
+  [_myParentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)closeButtonDidPress{
   NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%d",   _issue.repository.owner.userLogin, _issue.repository.name, [_issue.number intValue]];
   [[BCHTTPClient sharedInstance] patchPath:path parameters:[self createParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
     [_myParentViewController removeIssue:_issue];
-    [self.navigationController popViewControllerAnimated:YES];
+    [_myParentViewController dismissViewControllerAnimated:YES completion:nil];
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     [UIAlertView showWithError:error];
   }];
@@ -77,15 +77,20 @@
   [commentView.commentButton addTarget:self action:@selector(commentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   _issueDetailview.myNewCommentView = commentView;
   [_issueDetailview addSubview:_issueDetailview.myNewCommentView];
+  _issueDetailview.myNewCommentView.alpha = 0.0f;
+  
+  [UIView animateWithDuration:0.2f animations:^{
+    _issueDetailview.myNewCommentView.alpha = 1.0f;
+  }];
+  
   _issueDetailview.addedNewComment = YES;
 }
 
 -(void)commentButtonDidPress{
-  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%@/comments", _issue.repository.owner.userLogin, _issue.repository.name, _issue.idOfIssue];
-  NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_issueDetailview.myNewCommentView.body.text, @"body", nil];
+  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%@/comments", _issue.repository.owner.userLogin, _issue.repository.name, _issue.number];
+  NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_issueDetailview.myNewCommentView.commentTextView.text, @"body", nil];
   [[BCHTTPClient sharedInstance] postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
     [_issueDetailview.myNewCommentView setDisabledForCommenting];
-    [_issueDetailview.commentViews addObject:_issueDetailview.myNewCommentView];
     _issueDetailview.myNewCommentView = nil;
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     [UIAlertView showWithError:error];

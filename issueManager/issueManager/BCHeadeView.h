@@ -13,6 +13,7 @@
 
 @property UILabel *title;
 @property UILabel *dueIn;
+@property UIImageView *backgroundImageView;
 
 - (id)initWithFrame:(CGRect)frame andMilestone:(BCMilestone *)milestone;
 

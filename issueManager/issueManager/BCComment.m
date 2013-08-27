@@ -20,7 +20,7 @@
   if (self) {
     _commentId = 0;
     _user = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
-    _body = @"leave a comment";
+    _body = @"";
     _updatedAt = [NSDate date];
   }
   return self;

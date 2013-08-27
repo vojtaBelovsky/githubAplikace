@@ -47,6 +47,7 @@
 		1073C73417799687008EC0CD /* checkbox_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1073C73117799687008EC0CD /* checkbox_checked@2x.png */; };
 		1073C73517799687008EC0CD /* checkbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1073C73217799687008EC0CD /* checkbox@2x.png */; };
 		1073C73617799687008EC0CD /* repositories_gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1073C73317799687008EC0CD /* repositories_gradient@2x.png */; };
+		108E6F9D17CCD3CF00160898 /* headerBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 108E6F9C17CCD3CF00160898 /* headerBackground@2x.png */; };
 		1095E9F1175F6A62009CCEDB /* appBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D0175F6A62009CCEDB /* appBackground@2x.png */; };
 		1095E9F2175F6A62009CCEDB /* issueCommentBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D1175F6A62009CCEDB /* issueCommentBackground@2x.png */; };
 		1095E9F3175F6A62009CCEDB /* issueCommentButtonOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1095E9D2175F6A62009CCEDB /* issueCommentButtonOff@2x.png */; };
@@ -264,6 +265,7 @@
 		1073C73117799687008EC0CD /* checkbox_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkbox_checked@2x.png"; path = "issueManager/grafika/github cutted/checkbox_checked@2x.png"; sourceTree = "<group>"; };
 		1073C73217799687008EC0CD /* checkbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkbox@2x.png"; path = "issueManager/grafika/github cutted/checkbox@2x.png"; sourceTree = "<group>"; };
 		1073C73317799687008EC0CD /* repositories_gradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "repositories_gradient@2x.png"; path = "issueManager/grafika/github cutted/repositories_gradient@2x.png"; sourceTree = "<group>"; };
+		108E6F9C17CCD3CF00160898 /* headerBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "headerBackground@2x.png"; path = "issueManager/grafika/github cutted/headerBackground@2x.png"; sourceTree = "<group>"; };
 		1095E9D0175F6A62009CCEDB /* appBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appBackground@2x.png"; path = "issueManager/grafika/github cutted/appBackground@2x.png"; sourceTree = "<group>"; };
 		1095E9D1175F6A62009CCEDB /* issueCommentBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueCommentBackground@2x.png"; path = "issueManager/grafika/github cutted/issueCommentBackground@2x.png"; sourceTree = "<group>"; };
 		1095E9D2175F6A62009CCEDB /* issueCommentButtonOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issueCommentButtonOff@2x.png"; path = "issueManager/grafika/github cutted/issueCommentButtonOff@2x.png"; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 		1095E9CC175F69C2009CCEDB /* github cutted */ = {
 			isa = PBXGroup;
 			children = (
+				108E6F9C17CCD3CF00160898 /* headerBackground@2x.png */,
 				10C51D4817C76E50009637D3 /* selectMemberNotSelected@2x.png */,
 				10C51D4917C76E52009637D3 /* userMaskSelected.png */,
 				10C51D4617C76611009637D3 /* commentMask.png */,
@@ -1346,6 +1349,7 @@
 				10C51D4717C76613009637D3 /* commentMask.png in Resources */,
 				10C51D4A17C76E54009637D3 /* selectMemberNotSelected@2x.png in Resources */,
 				10C51D4B17C76E54009637D3 /* userMaskSelected.png in Resources */,
+				108E6F9D17CCD3CF00160898 /* headerBackground@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

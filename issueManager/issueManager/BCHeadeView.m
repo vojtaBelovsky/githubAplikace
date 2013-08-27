@@ -13,6 +13,7 @@
 #define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define DUE_IN_FONT         [UIFont fontWithName:@"ProximaNova-Light" size:14]
 #define TEXT_COLOR          [UIColor colorWithRed:.39 green:.39 blue:.39 alpha:1.00]
+#define BACKGROUND          [UIImage imageNamed:@"headerBackground.png"]
 
 #define TITLE_OFFSET        ( 20.0f )
 #define DUE_IN_OFFSET       ( 10.0f )
@@ -23,8 +24,10 @@
 {
   self = [super initWithFrame:frame];
   if (self) {
-    [self setBackgroundColor:[UIColor clearColor]];
-
+    UIImage *resizableImage = [BACKGROUND stretchableImageWithLeftCapWidth:1 topCapHeight:10];
+    _backgroundImageView = [[UIImageView alloc] initWithImage:resizableImage];
+    [self addSubview:_backgroundImageView];
+  
     _title = [[UILabel alloc] init];
     [_title setBackgroundColor:[UIColor clearColor]];
     [_title setFont:TITLE_FONT];
@@ -68,6 +71,12 @@
   frame.origin = CGPointMake(TITLE_OFFSET+_title.frame.size.width, (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_dueIn.frame, frame)) {
     _dueIn.frame = frame;
+  }
+  
+  frame = self.frame;
+  frame.origin = CGPointZero;
+  if (!CGRectEqualToRect(_backgroundImageView.frame, frame)) {
+    _backgroundImageView.frame = frame;
   }
 }
 

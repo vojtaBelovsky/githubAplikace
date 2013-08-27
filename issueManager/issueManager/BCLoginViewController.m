@@ -67,7 +67,7 @@
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPasswordDidPress)];
     [_loginView.forgotPasswordLabel addGestureRecognizer:tgr];
     
-    [_loginView.loginButton addTarget:self action:@selector(loginButtonDidPress) forControlEvents:UIControlEventTouchDown];
+    [_loginView.loginButton addTarget:self action:@selector(loginButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   }
 }
 
