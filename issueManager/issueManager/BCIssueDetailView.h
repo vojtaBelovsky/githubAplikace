@@ -27,8 +27,10 @@
 @property BCSingleIssueView *issueView;
 @property BCHeadeView *headerView;
 @property NSMutableArray *commentViews;
-@property UIButton *commentButton;
+@property UIButton *addNewCommentButton;
 @property BCCommentView *myNewCommentView;
+@property BOOL addedNewComment;
+@property CGFloat sizeOfKeyborad;
 
 -(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
 

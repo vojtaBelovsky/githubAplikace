@@ -38,13 +38,17 @@
 
 #define TITLE_FONT               [UIFont fontWithName:@"ProximaNova-Semibold" size:16]
 
+#define CommentButtonFrameWithOrigin(x, y) CGRectMake(x, y, COMMENT_BUTTON_WIDTH, COMMENT_BUTTON_HEIGHT)
+
 @implementation BCIssueDetailView
 
 -(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller{
     self = [super init];
     if(self){
       _issue = issue;
-      _commentButtonDidPress = NO;
+      _myNewCommentView = nil;
+      _addedNewComment = NO;
+      _sizeOfKeyborad = 0;
       [self setScrollEnabled:YES];
       
       UIImage *resizableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:5 topCapHeight:64];
@@ -101,10 +105,10 @@
         [UIAlertView showWithError:error];
       }];
       
-      _commentButton = [[UIButton alloc] init];
-      [_commentButton setImage:COMMENT_BUTTON_IMG forState:UIControlStateNormal];
-      [_commentButton setImage:COMMENT_BUTTON_IMG_HL forState:UIControlStateSelected];
-      [self addSubview:_commentButton];
+      _addNewCommentButton = [[UIButton alloc] init];
+      [_addNewCommentButton setImage:COMMENT_BUTTON_IMG forState:UIControlStateNormal];
+      [_addNewCommentButton setImage:COMMENT_BUTTON_IMG_HL forState:UIControlStateSelected];
+      [self addSubview:_addNewCommentButton];
     }
     return self;
 }
@@ -155,6 +159,9 @@
     _issueView.frame = frame;
   }
   
+  if (_myNewCommentView != nil && _addedNewComment) {
+    [_commentViews addObject:_myNewCommentView];
+  }
   frame.origin.y = NAV_BAR_HEIGHT+HEADER_HEIGHT+_issueView.frame.size.height+OFFSET;
   for (BCCommentView *commentView in _commentViews) {
     frame.size = [commentView sizeOfViewWithWidth:ISSUE_WIDTH];
@@ -165,18 +172,21 @@
     frame.origin.y += commentView.frame.size.height+OFFSET;
   }
   
-  if (_commentButtonDidPress ) {
-    
-  }else{
+  if (_addedNewComment == NO && _myNewCommentView == nil) {
     frame.origin.y += OFFSET;
-    frame.size = [_commentButton sizeThatFits:self.frame.size];
+    frame.size = [_addNewCommentButton sizeThatFits:self.frame.size];
     frame.origin.x = (self.frame.size.width-frame.size.width)/2;
-    if (!CGRectEqualToRect(_commentButton.frame, frame)) {
-      _commentButton.frame = frame;
+    if (!CGRectEqualToRect(_addNewCommentButton.frame, frame)) {
+      _addNewCommentButton.frame = frame;
     }
+    [_addNewCommentButton setHidden:NO];
+  }else{
+    //pridat tlacitko na odeslani komentare
+    [_addNewCommentButton setHidden:YES];
+    _addedNewComment = NO;
   }
   
-  frame.size.height = frame.origin.y+_commentButton.frame.size.height+3*OFFSET;
+  frame.size.height = frame.origin.y+_addNewCommentButton.frame.size.height+3*OFFSET+_sizeOfKeyborad;
   frame.size.width = self.frame.size.width;
   if (!CGSizeEqualToSize(self.contentSize, frame.size)) {
     self.contentSize = frame.size;

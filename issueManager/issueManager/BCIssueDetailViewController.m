@@ -21,6 +21,7 @@
 #import "BCIssueViewController.h"
 #import "BCSingleIssueView.h"
 #import "BCCommentView.h"
+#import "BCComment.h"
 
 @interface BCIssueDetailViewController ()
 
@@ -45,7 +46,7 @@
   _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue andController:self];
   [_issueDetailview.backButton addTarget:self action:@selector(backButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_issueDetailview.closeButton addTarget:self action:@selector(closeButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-  [_issueDetailview.commentButton addTarget:self action:@selector(commentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  [_issueDetailview.addNewCommentButton addTarget:self action:@selector(addNewCommentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   self.view = _issueDetailview;
 }
 
@@ -70,9 +71,25 @@
   }];
 }
 
+-(void)addNewCommentButtonDidPress{
+  BCCommentView *commentView = [[BCCommentView alloc] initWithComment:[[BCComment alloc] initNewComment]];
+  [commentView setEnabledForCommenting];
+  [commentView.commentButton addTarget:self action:@selector(commentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  _issueDetailview.myNewCommentView = commentView;
+  [_issueDetailview addSubview:_issueDetailview.myNewCommentView];
+  _issueDetailview.addedNewComment = YES;
+}
+
 -(void)commentButtonDidPress{
-  _issueDetailview.commentButtonDidPress = YES;
-//  BCCommentView *commentView = [BCCommentView alloc] initWithComment:<#(BCComment *)#>
+  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%@/comments", _issue.repository.owner.userLogin, _issue.repository.name, _issue.idOfIssue];
+  NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_issueDetailview.myNewCommentView.body.text, @"body", nil];
+  [[BCHTTPClient sharedInstance] postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_issueDetailview.myNewCommentView setDisabledForCommenting];
+    [_issueDetailview.commentViews addObject:_issueDetailview.myNewCommentView];
+    _issueDetailview.myNewCommentView = nil;
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [UIAlertView showWithError:error];
+  }];
 }
 
 //-(void) editButtionAction{
@@ -116,19 +133,14 @@
 #pragma mark private
 
 - (void) keyboardDidHide:(NSNotification*)notification{//zmensi velikost skrolovatelneho obsahu
-    NSDictionary* keyboardInfo = [notification userInfo];
-    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
-    CGSize scrollContentSize = CGSizeMake(CGRectGetWidth(_issueDetailview.frame), CGRectGetHeight(_issueDetailview.frame)-keyboardFrameBeginRect.size.height);
-    _issueDetailview.contentSize = scrollContentSize;
+  _issueDetailview.sizeOfKeyborad = 0;
 }
 
 - (void) keyboardDidShow:(NSNotification*)notification{//zvetsi velikost skrolovatelneho obsahu
-    NSDictionary* keyboardInfo = [notification userInfo];
-    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
-    CGSize scrollContentSize = CGSizeMake(CGRectGetWidth(_issueDetailview.frame), CGRectGetHeight(_issueDetailview.frame)+keyboardFrameBeginRect.size.height);
-    _issueDetailview.contentSize = scrollContentSize;
+  NSDictionary* keyboardInfo = [notification userInfo];
+  NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+  CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+  _issueDetailview.sizeOfKeyborad = keyboardFrameBeginRect.size.height;
 }
 
 -(NSDictionary *) createParameters{

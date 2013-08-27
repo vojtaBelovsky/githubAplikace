@@ -21,9 +21,6 @@
 @property BCIssueViewController *myParentViewController;
 @property BCIssue *issue;
 @property (copy) BCIssue *editedIssue;
-@property NSMutableArray *buttons;
-@property UIBarButtonItem *cancelButton;
-@property UIBarButtonItem *editButton;
 
 - (id)initWithIssue:(BCIssue *)issue andController:(BCIssueViewController *)controller;
 
