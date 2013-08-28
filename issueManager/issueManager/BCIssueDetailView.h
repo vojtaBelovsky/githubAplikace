@@ -22,8 +22,8 @@
 @property UIView *navigationBarView;
 @property UIButton *backButton;
 @property UIButton *closeButton;
-@property UILabel *theNewIssueLabel;
-@property UILabel *theNewIssueShadowLabel;
+@property UILabel *userNameLabel;
+@property UILabel *userNameShadowLabel;
 @property BCSingleIssueView *issueView;
 @property BCHeadeView *headerView;
 @property NSMutableArray *commentViews;

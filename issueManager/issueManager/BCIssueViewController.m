@@ -66,6 +66,7 @@
   }
   [super viewWillAppear:animated];
   [[_tableView.allTableViews objectAtIndex:_nthRepository] reloadData];
+  [_tableView setNeedsLayout];
 }
 
 - (void)loadView {

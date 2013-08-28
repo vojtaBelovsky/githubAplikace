@@ -59,21 +59,21 @@
       [_navigationBarView setBackgroundColor:[UIColor clearColor]];
       [self addSubview:_navigationBarView];
       
-      _theNewIssueShadowLabel = [[UILabel alloc] init];
-      _theNewIssueShadowLabel.numberOfLines = 0;
-      _theNewIssueShadowLabel.font = USER_FONT;
-      _theNewIssueShadowLabel.textColor = USER_SHADOW_FONT_COLOR;
-      _theNewIssueShadowLabel.backgroundColor = [UIColor clearColor];
-      [_theNewIssueShadowLabel setText:issue.assignee.userLogin];
-      [self addSubview:_theNewIssueShadowLabel];
+      _userNameShadowLabel = [[UILabel alloc] init];
+      _userNameShadowLabel.numberOfLines = 0;
+      _userNameShadowLabel.font = USER_FONT;
+      _userNameShadowLabel.textColor = USER_SHADOW_FONT_COLOR;
+      _userNameShadowLabel.backgroundColor = [UIColor clearColor];
+      [_userNameShadowLabel setText:issue.assignee.userLogin];
+      [self addSubview:_userNameShadowLabel];
       
-      _theNewIssueLabel = [[UILabel alloc] init];
-      _theNewIssueLabel.numberOfLines = 0;
-      _theNewIssueLabel.font = USER_FONT;
-      _theNewIssueLabel.textColor = USER_FONT_COLOR;
-      _theNewIssueLabel.backgroundColor = [UIColor clearColor];
-      [_theNewIssueLabel setText:issue.assignee.userLogin];
-      [self addSubview:_theNewIssueLabel];
+      _userNameLabel = [[UILabel alloc] init];
+      _userNameLabel.numberOfLines = 0;
+      _userNameLabel.font = USER_FONT;
+      _userNameLabel.textColor = USER_FONT_COLOR;
+      _userNameLabel.backgroundColor = [UIColor clearColor];
+      [_userNameLabel setText:issue.assignee.userLogin];
+      [self addSubview:_userNameLabel];
       
       
       _backButton = [[UIButton alloc] init];
@@ -128,16 +128,16 @@
     _backButton.frame = frame;
   }
   
-  frame.size = [_theNewIssueShadowLabel sizeThatFits:_navigationBarView.frame.size];
+  frame.size = [_userNameShadowLabel sizeThatFits:_navigationBarView.frame.size];
   frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2)+1, ((self.navigationBarView.frame.size.height-frame.size.height)/2)+1);
-  if(!CGRectEqualToRect(_theNewIssueShadowLabel.frame, frame)){
-    _theNewIssueShadowLabel.frame = frame;
+  if(!CGRectEqualToRect(_userNameShadowLabel.frame, frame)){
+    _userNameShadowLabel.frame = frame;
   }
   
-  frame.size = [_theNewIssueLabel sizeThatFits:_navigationBarView.frame.size];
+  frame.size = [_userNameLabel sizeThatFits:_navigationBarView.frame.size];
   frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), ((self.navigationBarView.frame.size.height-frame.size.height)/2));
-  if(!CGRectEqualToRect(_theNewIssueLabel.frame, frame)){
-    _theNewIssueLabel.frame = frame;
+  if(!CGRectEqualToRect(_userNameLabel.frame, frame)){
+    _userNameLabel.frame = frame;
   }
   
   

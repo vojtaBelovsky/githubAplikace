@@ -8,19 +8,16 @@
 
 #import "BCIssueView.h"
 
-#define BACKGROUND_IMAGE        [UIImage imageNamed:@"appBackground.png"]
-
-#define TABLE_VIEW_OFFSET         ( 70.0f )
-
+#define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
+#define NAV_BAR_HEIGHT                ( 70.0f )
 #define USER_NAME_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define USER_NAME_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
 #define USER_NAME_SHADOW_FONT_COLOR   [UIColor whiteColor]
+#define ADD_NEW_ISSUE_IMAGE           [UIImage imageNamed:@"profileNavbarPlusOff.png"]
+#define ADD_NEW_ISSUE_HL_IMAGE        [UIImage imageNamed:@"profileNavbarPlusOn.png"]
 
 #define CHOOSE_COLLABORATOR_IMAGE         [UIImage imageNamed:@"profileNavbarPplOff.png"]
 #define CHOOSE_COLLABORATOR_HL_IMAGE      [UIImage imageNamed:@"profileNavbarPplOn.png"]
-
-#define ADD_NEW_ISSUE_IMAGE       [UIImage imageNamed:@"profileNavbarPlusOff.png"]
-#define ADD_NEW_ISSUE_HL_IMAGE    [UIImage imageNamed:@"profileNavbarPlusOn.png"]
 
 @implementation BCIssueView
 
@@ -93,7 +90,7 @@
     _backgroundImageView.frame = frame;
   }
   
-  frame = CGRectMake(0, 0, self.frame.size.width, TABLE_VIEW_OFFSET);
+  frame = CGRectMake(0, 0, self.frame.size.width, NAV_BAR_HEIGHT);
   if(! CGRectEqualToRect(_navigationBarView.frame, frame)){
     _navigationBarView.frame = frame;
   }
@@ -133,7 +130,7 @@
     _tableViews.contentSize = frame.size;
   }
   
-  frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-TABLE_VIEW_OFFSET);
+  frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-NAV_BAR_HEIGHT);
   for (int i = 0; i < _numberOfRepos; i++) {
     frame.origin.x = i*frame.size.width;
     [[_allTableViews objectAtIndex:i] setFrame:frame];
