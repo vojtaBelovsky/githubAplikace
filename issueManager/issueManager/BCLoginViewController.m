@@ -62,7 +62,7 @@
     [_loginView.passwordTextField.textField setDelegate:self];
     
     self.view = _loginView;
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES];
     
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPasswordDidPress)];
     [_loginView.forgotPasswordLabel addGestureRecognizer:tgr];

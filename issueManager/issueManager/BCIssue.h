@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 vojta. All rights reserved.
 //
 
+#define NO_ISSUES @"No issues"
+
 #import <Foundation/Foundation.h>
 #import <Mantle/Mantle.h>
 @class BCUser;
@@ -35,5 +37,6 @@ typedef enum : NSUInteger {
 +(void)getIssuesFromRepository:(BCRepository *)repository forUser:(BCUser *)user since:(NSDate *)since WithSuccess:(void(^)(NSMutableArray* issues))success failure:(void(^)(NSError * error))failrue;
 
 -(NSArray *)getLabelsAsStrings;
+- (id)initNoIssues;
 
 @end

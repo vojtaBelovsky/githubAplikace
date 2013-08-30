@@ -17,9 +17,12 @@
 @interface BCIssueCell : UITableViewCell
 
 @property BCSingleIssueView* issueView;
+@property UIImageView *noIssuesImgView;
 
 + (BCIssueCell *)createIssueCellWithTableView:(UITableView *)tableView offset:(CGFloat)offset font:(UIFont *)font;
 
 +(CGFloat)heightOfCellWithIssue:(BCIssue *)issue width:(CGFloat)width titleFont:(UIFont *)font offset:(CGFloat)offset;
+
++ (BCIssueCell *)createNoIssuesCellWithTableView:(UITableView *)tableView;
 
 @end

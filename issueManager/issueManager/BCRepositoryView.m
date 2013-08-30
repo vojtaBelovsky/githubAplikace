@@ -8,10 +8,8 @@
 
 #import "BCRepositoryView.h"
 
-#define REPOSITORY_BG_COLOR             [UIColor colorWithRed:.11 green:.11 blue:.11 alpha:1.00]
-#define BACKGROUND_IMAGE                [UIImage imageNamed:@"repositories_gradient.png"]
-
-#define TABLE_VIEW_OFFSET               ( 50.0f )
+#define NAV_BAR_HEIGHT    ( 44.0f )
+#define BACKGROUND_IMAGE  [UIImage imageNamed:@"repositories_gradient.png"]
 
 #define REPOSITORIES_FONT               [UIFont fontWithName:@"ProximaNova-Light" size:24]
 #define REPOSITORIES_FONT_COLOR         [UIColor colorWithRed:.44 green:.44 blue:.44 alpha:1.00]
@@ -19,6 +17,7 @@
 
 #define DONE_FONT            [UIFont fontWithName:@"ProximaNova-Light" size:13]
 #define DONE_FONT_COLOR      [UIColor whiteColor]
+#define REPOSITORY_BG_COLOR  [UIColor colorWithRed:.11 green:.11 blue:.11 alpha:1.00]
 
 @implementation BCRepositoryView
 
@@ -28,8 +27,8 @@
 - (id)init {
   self = [super init];
   if ( self ) {
-    UIImage *resizeableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:8 topCapHeight:88];
-    _backgroundImageView = [[UIImageView alloc] initWithImage:resizeableImage];
+    UIImage *resizableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:5 topCapHeight:64];
+    _backgroundImageView = [[UIImageView alloc] initWithImage:resizableImage];
     [self addSubview:_backgroundImageView];
     
     _repositoryLabelShadow = [[UILabel alloc] init];
@@ -71,15 +70,15 @@
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  CGRect frame = CGRectMake(0, 0, self.frame.size.width, 50);
+  CGRect frame = CGRectMake(0, 0, self.frame.size.width, NAV_BAR_HEIGHT);
   if( !CGRectEqualToRect(_backgroundImageView.frame, frame)){
     _backgroundImageView.frame = frame;
   }
-  
-  frame = CGRectZero;
-  frame.origin.y = TABLE_VIEW_OFFSET;
+
   frame.size = self.frame.size;
-  frame.size.height -= TABLE_VIEW_OFFSET;
+  frame.size.height -= NAV_BAR_HEIGHT;
+  frame.origin = CGPointMake(0, NAV_BAR_HEIGHT);
+  frame.size = self.frame.size;
   if ( !CGRectEqualToRect( _tableView.frame, frame ) ) {
     _tableView.frame = frame;
   }

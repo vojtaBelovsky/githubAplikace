@@ -21,8 +21,9 @@
 
 #define CHECKBOX_OFFSET         ( 50.0f )
 
-#define createOrgOrMyRepositoryCellIdnetifier @"createOrgOrMyRepositoryCellIdnetifier"
-#define createRepositoryCell @"createRepositoryCell"
+#define createOrgOrMyRepositoryCellIdnetifier   @"createOrgOrMyRepositoryCellIdnetifier"
+#define createRepositoryCell                    @"createRepositoryCell"
+#define noRepoCellReuseIdentifier               @"noRepoCellReuseIdentifier"
 
 #define CORP_MASK           [UIImage imageNamed:@"corp-mask.png"]
 
@@ -81,11 +82,35 @@
       [[cell myImageView] setFrame:CGRectMake(30, (cell.frame.size.height-cell.myImageView.frame.size.height)/2, cell.myImageView.frame.size.width, cell.myImageView.frame.size.height)];
       [cell addSubview:cell.myImageView];
       
+      cell.corpMask = nil;
+      cell.selectUsrOrOrgImgView = nil;
+      
       [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
       cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
       [cell.selectedBackgroundView setBackgroundColor:[UIColor clearColor]];
     }
     return cell;
+}
+
++(BCRepositoryCell *)createNoRepoCellWithTableView:(UITableView *)tableView{
+  BCRepositoryCell *cell = [tableView dequeueReusableCellWithIdentifier:noRepoCellReuseIdentifier];
+  
+  if (!cell) {
+    cell = [[BCRepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:noRepoCellReuseIdentifier];
+    cell.userInteractionEnabled = NO;
+    
+    cell.myTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 10, 250, 20)];
+    cell.myTextLabel.backgroundColor = [UIColor clearColor];
+    cell.myTextLabel.textColor = CELL_FONT_COLOR;
+    cell.myTextLabel.font = CELL_FONT;
+    [cell addSubview:cell.myTextLabel];
+    
+    cell.myImageView = nil;
+    cell.corpMask = nil;
+    cell.selectUsrOrOrgImgView = nil;
+  }
+  
+  return cell;
 }
 
 @end

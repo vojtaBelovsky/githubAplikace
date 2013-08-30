@@ -19,6 +19,6 @@
 
 + (BCUser *)sharedInstanceChangeableWithUser:(BCUser *)changeUser succes:(void(^)(BCUser *user))succes failure:(void(^)(NSError *error))failure;
 
-+ (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error))failure;
++ (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSMutableArray *allRepositories))success failure:(void(^) (NSError *error))failure;
 
 @end

@@ -18,6 +18,7 @@
 {
   self = [super init];
   if (self) {
+    [self setBackgroundColor:[UIColor clearColor]];
     UIImage *image = [BACKGROUND_IMG stretchableImageWithLeftCapWidth:8 topCapHeight:8];
     _backgroundRectangle = [[UIImageView alloc] initWithImage:image];
     [self addSubview:_backgroundRectangle];
@@ -26,6 +27,7 @@
     [_hashNumber setFont:HASH_FONT];
     [_hashNumber setTextColor:HASH_FONT_COLOR];
     [_hashNumber setBackgroundColor:[UIColor clearColor]];
+    [_hashNumber setTextAlignment:NSTextAlignmentCenter];
     _hashNumber.adjustsFontSizeToFitWidth = YES;
     [self addSubview:_hashNumber];
   }
@@ -42,7 +44,7 @@
   }
   
   frame.size = [_hashNumber sizeThatFits:self.frame.size];
-  frame.origin = CGPointMake((self.frame.size.width-_hashNumber.frame.size.width)/2, (self.frame.size.height-_hashNumber.frame.size.height)/2+1);
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, (self.frame.size.height-frame.size.height)/2+1);
   if (!CGRectEqualToRect(_hashNumber.frame, frame)) {
     _hashNumber.frame = frame;
   }

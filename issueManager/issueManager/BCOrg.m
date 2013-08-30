@@ -44,7 +44,7 @@
     }];
 }
 
-+ (void)getAllRepositoriesFromOrg:(BCOrg *)org WithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error)) failure{
++ (void)getAllRepositoriesFromOrg:(BCOrg *)org WithSuccess:(void (^)(NSMutableArray *allRepositories))success failure:(void(^) (NSError *error)) failure{
   NSString *path = [[NSString alloc] initWithFormat:@"orgs/%@/repos", org.orgLogin];
   [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
     

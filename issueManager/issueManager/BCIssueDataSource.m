@@ -60,9 +60,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   BCIssueCell *cell;
-  cell = [BCIssueCell createIssueCellWithTableView:tableView offset:OFFSET font:TITLE_FONT];
   BCIssue *issueForRow = [(NSArray*)[_dataSource objectForKey:[_dataSourceKeyNames objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-  [cell.issueView setWithIssue:issueForRow];
+  if ([issueForRow.title isEqualToString:NO_ISSUES]) {
+    cell = [BCIssueCell createNoIssuesCellWithTableView:tableView];
+  }else{
+    cell = [BCIssueCell createIssueCellWithTableView:tableView offset:OFFSET font:TITLE_FONT];
+    [cell.issueView setWithIssue:issueForRow];
+  }
   return cell;
 }
 

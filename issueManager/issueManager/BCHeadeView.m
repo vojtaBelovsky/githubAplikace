@@ -10,8 +10,8 @@
 #import "NSDate+Additions.h"
 #import "BCMilestone.h"
 
-#define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:18]
-#define DUE_IN_FONT         [UIFont fontWithName:@"ProximaNova-Light" size:14]
+#define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:14]
+#define DUE_IN_FONT         [UIFont fontWithName:@"ProximaNova-Light" size:11]
 #define TEXT_COLOR          [UIColor colorWithRed:.39 green:.39 blue:.39 alpha:1.00]
 #define BACKGROUND          [UIImage imageNamed:@"headerBackground.png"]
 
@@ -36,7 +36,7 @@
     if (milestone) {
       [_title setText:milestone.title];
     }else{
-      [_title setText:@"Issues with no milestone"];
+      [_title setText:@"No milestone"];
     }
     [_title setNumberOfLines:1];
     [self addSubview:_title];
@@ -61,13 +61,13 @@
   [super layoutSubviews];
   CGRect frame;
   
-  frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)/2, self.frame.size.height);
+  frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)*0.65, self.frame.size.height);
   frame.origin = CGPointMake(TITLE_OFFSET, (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_title.frame, frame)) {
     _title.frame = frame;
   }
   
-  frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)/2, self.frame.size.height);
+  frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)*0.35, self.frame.size.height);
   frame.origin = CGPointMake(TITLE_OFFSET+_title.frame.size.width, (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_dueIn.frame, frame)) {
     _dueIn.frame = frame;

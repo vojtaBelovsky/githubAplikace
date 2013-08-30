@@ -18,6 +18,15 @@
 
 @implementation BCIssue
 
+- (id)initNoIssues
+{
+  self = [super init];
+  if (self) {
+    _title = NO_ISSUES;
+  }
+  return self;
+}
+
 - (id)copyWithZone:(NSZone *)zone{
     BCIssue *newIssue = [[BCIssue alloc] init];
     

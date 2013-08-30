@@ -28,7 +28,6 @@
 #define BODY_FONT              [UIFont fontWithName:@"ProximaNova-Regular" size:16]
 
 #define VIEW_OFFSET           ( -200.0f )
-#define ANIMATION_DURATION    ( 0.2f )
 
 @interface BCAddIssueViewController ()
 

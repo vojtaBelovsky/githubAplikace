@@ -25,7 +25,7 @@
 
 #define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define WHITE_COLOR         [UIColor whiteColor]
-#define HEADER_HEIGHT       ( 40.0f )
+#define HEADER_HEIGHT       ( 20.0f )
 
 #define MILESTONES_KEY      @"milestones"
 #define ISSUES_KEY          @"issues"
@@ -74,6 +74,7 @@
   [_tableView.tableViews setDelegate:self];
   [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchDown];
   [_tableView.chooseCollaboratorButton addTarget:self action:@selector(chooseButtonDidPress) forControlEvents:UIControlEventTouchDown];
+  [_tableView setRepoName:[(BCRepository *)[_repositories objectAtIndex:_nthRepository] name]];
   self.view = _tableView;
   
   [self createModel];
@@ -90,13 +91,17 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
   int index = [_tableView.allTableViews indexOfObject:tableView];
+  BCHeadeView *headerView;
   if ([_allDataSources count] > index) {
     BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:index];
     BCIssue *currentIssue = [[currentDataSource.dataSource objectForKey:[currentDataSource.dataSourceKeyNames objectAtIndex:section]] objectAtIndex:0];
-    BCHeadeView *headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _tableView.navigationBarView.frame.size.height, _tableView.frame.size.width, HEADER_HEIGHT) andMilestone:currentIssue.milestone];
+    if ([currentIssue.title isEqualToString:NO_ISSUES]) {
+      return [[BCHeadeView alloc] init];
+    }
+    headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _tableView.navigationBarView.frame.size.height, _tableView.frame.size.width, HEADER_HEIGHT) andMilestone:currentIssue.milestone];
     return headerView;
   }else{
-    return nil;
+    return [[BCHeadeView alloc] init];
   }
 }
 
@@ -105,21 +110,21 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-  int contentOffset = scrollView.contentOffset.x;
-  if (contentOffset%(int)self.view.frame.size.width == 0) {
-    int originalOffset = _nthRepository*self.view.frame.size.width;
-    if (contentOffset != originalOffset) {
-      if (contentOffset < originalOffset) {
-        _nthRepository--;
-      }else{
-        _nthRepository++;
+  if (scrollView == _tableView.tableViews) {
+    int contentOffset = scrollView.contentOffset.x;
+    if (contentOffset%(int)self.view.frame.size.width == 0) {
+      int originalOffset = _nthRepository*self.view.frame.size.width;
+      if (contentOffset != originalOffset) {
+        if (contentOffset < originalOffset) {
+          _nthRepository--;
+          [_tableView setRepoName:[(BCRepository *)[_repositories objectAtIndex:_nthRepository] name]];
+        }else{
+          _nthRepository++;
+          [_tableView setRepoName:[(BCRepository *)[_repositories objectAtIndex:_nthRepository] name]];
+        }
       }
     }
   }
-}
-
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-  
 }
 
 #pragma mark -
@@ -173,6 +178,9 @@
   __block void (^milestonesSuccessBlock) (NSMutableArray *milestones);
   milestonesSuccessBlock = [^(NSMutableArray *milestones) {
     [BCIssue getIssuesFromRepository:[_repositories objectAtIndex:i] forUser:currentUser since:nil WithSuccess:^(NSMutableArray *issues){
+      if (![issues count]) {
+        [issues addObject:[[BCIssue alloc] initNoIssues]];
+      }
       BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:milestones];
       if ( _allDataSources.count > i ){
         [_allDataSources replaceObjectAtIndex:i withObject:currentDataSource];

@@ -16,6 +16,18 @@
 
 @implementation BCRepository
 
+- (id)initNoRepositories
+{
+  self = [super init];
+  if (self) {
+    _repositoryId = 0;
+    _name = NO_REPOSITORIES;
+    _issuesUrl = nil;
+    _owner = nil;
+  }
+  return self;
+}
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"repositoryId": @"id",

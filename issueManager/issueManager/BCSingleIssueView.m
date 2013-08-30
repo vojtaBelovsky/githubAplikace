@@ -64,6 +64,7 @@
   }
   _issue = issue;
   [_numberView.hashNumber setText:[NSString stringWithFormat:@"%@",issue.number]];
+  [_numberView setNeedsLayout];
   
   [_titleLabel setText:issue.title];
   

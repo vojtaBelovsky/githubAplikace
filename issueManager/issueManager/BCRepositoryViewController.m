@@ -38,12 +38,11 @@
 }
 
 - (void)loadView {
-  self.navigationController.navigationBarHidden = YES;
-  
+  [self.navigationController setNavigationBarHidden:YES];
   _tableView = [[BCRepositoryView alloc] init];
   [_tableView.tableView setMultipleTouchEnabled:YES];
-  [_tableView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchDown];
   self.view = _tableView;
+  [_tableView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchDown];
   [self createModel];
   [_tableView.tableView setDelegate:self];
 }
@@ -99,8 +98,13 @@
 #pragma mark buttons
 
 -(void)doneButtonDidPress{
-  BCIssueViewController *issueVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories];
-  [self.navigationController pushViewController:issueVC animated:YES];
+  if ([_chosenRepositories count]) {
+    BCIssueViewController *issueVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories];
+    [self.navigationController pushViewController:issueVC animated:YES];
+  }else{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Empty repository list" message:@"you can't proceed until you choose some repository/ies" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alertView show];
+  }
 }
 
 
@@ -120,8 +124,11 @@
   
   BCUser *chosenUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
   
-  [BCUser getAllRepositoriesOfUserWithSuccess:^(NSArray *allRepositories) {
+  [BCUser getAllRepositoriesOfUserWithSuccess:^(NSMutableArray *allRepositories) {
     //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!(array inicializuju, melo by tam byt 0 prvku) - PRIDAT POLOZKU "NO REPOZITORIES"
+    if (![allRepositories count]) {
+      [allRepositories addObject:[[BCRepository alloc] initNoRepositories]];
+    }
     [dataSourceKeyNames addObject:chosenUser.userLogin];
     [dataAvatar setImageWithURL:chosenUser.avatarUrl placeholderImage:placeholderImage];
     dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: chosenUser, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, dataAvatar.image, KEY_IMAGE, nil];
@@ -135,8 +142,11 @@
           [UIAlertView showWithError:error];
         } copy];
         //// COPY!!!!!!!!!!!
-        __block void (^mySuccessBlock) (NSArray *allRepositories);
-        mySuccessBlock = [^ (NSArray *allRepositories){
+        __block void (^mySuccessBlock) (NSMutableArray *allRepositories);
+        mySuccessBlock = [^ (NSMutableArray *allRepositories){
+          if (![allRepositories count]) {
+            [allRepositories addObject:[[BCRepository alloc] initNoRepositories]];
+          }
           BCOrg *myOrg = (BCOrg *)allOrgs[i];
           i++;
           [dataAvatar setImageWithURL:[myOrg avatarUrl] placeholderImage:placeholderImage];

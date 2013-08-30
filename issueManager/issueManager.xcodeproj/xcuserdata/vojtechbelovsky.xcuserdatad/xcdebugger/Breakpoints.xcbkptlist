@@ -4,16 +4,16 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "issueManager/BCIssueDetailView.m"
-         timestampString = "399301829.756818"
+         filePath = "issueManager/BCLoginViewController.m"
+         timestampString = "399372795.484956"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "168"
-         endingLineNumber = "168"
-         landmarkName = "-layoutSubviews"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
+         landmarkName = "-forgotPasswordDidPress"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

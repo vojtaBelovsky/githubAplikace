@@ -12,6 +12,9 @@
 
 #define COMMENT_BUTTON_WIDTH     ( 80.0f )
 #define COMMENT_BUTTON_HEIGHT    ( 20.0f )
+#define BACKGROUND_IMAGE  [UIImage imageNamed:@"repositories_gradient.png"]
+#define REPOSITORY_BG_COLOR             [UIColor colorWithRed:.11 green:.11 blue:.11 alpha:1.00]
+
 
 #import <UIKit/UIKit.h>
 @class BCAvatarImgView;

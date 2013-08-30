@@ -18,7 +18,7 @@
 #define AVATAR_WIDTH  ( 20.0f )
 
 #define USER_LEFT_OFFSET    ( 30.0f )
-#define TIME_RIGHT_OFFSET   ( 20.0f )
+#define TIME_RIGHT_OFFSET   ( 10.0f )
 #define BEAK_WIDTH          ( 10.0f )
 
 #define BACKGROUND          [UIImage imageNamed:@"issueCommentBackground.png"]
@@ -39,7 +39,7 @@
 {
   self = [super init];
   if (self) {
-    UIImage *resizableImage = [BACKGROUND stretchableImageWithLeftCapWidth:15 topCapHeight:30];
+    UIImage *resizableImage = [BACKGROUND stretchableImageWithLeftCapWidth:15 topCapHeight:25];
     _backgroundImageView = [[UIImageView alloc] initWithImage:resizableImage];
     [self addSubview:_backgroundImageView];
     _lastContentHeight = 0;

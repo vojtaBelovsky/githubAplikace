@@ -18,6 +18,6 @@
 
 + (BCRepositoryCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView WithImg:(UIImage *)img;
 + (BCRepositoryCell *)createRepositoryCellWithTableView:(UITableView *)tableView;
-
++(BCRepositoryCell *)createNoRepoCellWithTableView:(UITableView *)tableView;
 
 @end

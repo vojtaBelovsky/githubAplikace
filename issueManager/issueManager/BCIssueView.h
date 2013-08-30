@@ -16,11 +16,12 @@
 @property UIButton *chooseCollaboratorButton;
 @property UIButton *addNewIssueButton;
 @property UILabel *userNameLabel;
-@property UILabel *userNameShadowLabel;
 @property int numberOfRepos;
 @property NSMutableArray *allTableViews;
+@property UILabel *repositoryNameLabel;
 
 -(id)initWithNumberOfRepos:(int)numberOfRepos;
 -(void)setUserName:(NSString *)userName;
+-(void)setRepoName:(NSString *)repoName;
 
 @end

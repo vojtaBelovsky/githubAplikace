@@ -12,16 +12,18 @@
 @implementation UIAlertView (errorAlert)
 
 +(UIAlertView*) showWithError:(NSError*) error {
-    
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:[error localizedDescription]
-                          message:[error localizedRecoverySuggestion]
-                          delegate:nil
-                          cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
-                          otherButtonTitles:nil];
-    
-    [alert show];
-    return alert;
+  
+  NSString *myStr = [[error localizedRecoverySuggestion] substringFromIndex:[@"{\"message\":\"" length]];
+  myStr = [myStr substringToIndex:([myStr length]-2)];
+  UIAlertView *alert = [[UIAlertView alloc]
+                        initWithTitle:myStr
+                        message:nil
+                        delegate:nil
+                        cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+                        otherButtonTitles:nil];
+  
+  [alert show];
+  return alert;
 }
 
 @end

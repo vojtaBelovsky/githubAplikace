@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		101C655217CF4E7E0019B896 /* gravatar-user-420.png in Resources */ = {isa = PBXBuildFile; fileRef = 101C655117CF4E7E0019B896 /* gravatar-user-420.png */; };
 		10200107175E18E9005DD92F /* BCOrg.m in Sources */ = {isa = PBXBuildFile; fileRef = 10200106175E18E9005DD92F /* BCOrg.m */; };
 		10200114175F0629005DD92F /* issue-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 1020010C175F0629005DD92F /* issue-list.png */; };
 		10200115175F0629005DD92F /* issue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1020010D175F0629005DD92F /* issue.png */; };
@@ -26,7 +27,6 @@
 		102B8B2817268D38003BA22F /* BCIssueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B2717268D38003BA22F /* BCIssueCell.m */; };
 		102B8B32172A621B003BA22F /* BCIssueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B31172A621B003BA22F /* BCIssueDetailViewController.m */; };
 		102B8B3A172A6289003BA22F /* BCIssueDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B39172A6289003BA22F /* BCIssueDetailView.m */; };
-		102B8B40172A6646003BA22F /* gravatar-user-420.png in Resources */ = {isa = PBXBuildFile; fileRef = 102B8B3F172A6646003BA22F /* gravatar-user-420.png */; };
 		102B8B49172E931D003BA22F /* BCSelectAssigneeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B48172E931D003BA22F /* BCSelectAssigneeViewController.m */; };
 		102B8B4D172E9350003BA22F /* BCSelectAssigneeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B4C172E9350003BA22F /* BCSelectAssigneeView.m */; };
 		102B8B51172E9385003BA22F /* BCSelectAssigneeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 102B8B50172E9385003BA22F /* BCSelectAssigneeCell.m */; };
@@ -200,6 +200,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		101C655117CF4E7E0019B896 /* gravatar-user-420.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gravatar-user-420.png"; path = "issueManager/grafika/gravatar-user-420.png"; sourceTree = "<group>"; };
 		10200105175E18E9005DD92F /* BCOrg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCOrg.h; path = issueManager/BCOrg.h; sourceTree = "<group>"; };
 		10200106175E18E9005DD92F /* BCOrg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCOrg.m; path = issueManager/BCOrg.m; sourceTree = "<group>"; };
 		1020010C175F0629005DD92F /* issue-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "issue-list.png"; path = "issueManager/grafika/issue-list.png"; sourceTree = "<group>"; };
@@ -231,7 +232,6 @@
 		102B8B31172A621B003BA22F /* BCIssueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueDetailViewController.m; sourceTree = "<group>"; };
 		102B8B38172A6289003BA22F /* BCIssueDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueDetailView.h; sourceTree = "<group>"; };
 		102B8B39172A6289003BA22F /* BCIssueDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueDetailView.m; sourceTree = "<group>"; };
-		102B8B3F172A6646003BA22F /* gravatar-user-420.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gravatar-user-420.png"; path = "../../../../Desktop/gravatar-user-420.png"; sourceTree = "<group>"; };
 		102B8B47172E931D003BA22F /* BCSelectAssigneeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectAssigneeViewController.h; sourceTree = "<group>"; };
 		102B8B48172E931D003BA22F /* BCSelectAssigneeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectAssigneeViewController.m; sourceTree = "<group>"; };
 		102B8B4B172E9350003BA22F /* BCSelectAssigneeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectAssigneeView.h; sourceTree = "<group>"; };
@@ -445,6 +445,7 @@
 		1020010B175F060E005DD92F /* grafika */ = {
 			isa = PBXGroup;
 			children = (
+				101C655117CF4E7E0019B896 /* gravatar-user-420.png */,
 				104D2C0A176492AB00501C74 /* login_origo@2x.png */,
 				104D2C051761DF7600501C74 /* octocat@2x.png */,
 				1095E9CC175F69C2009CCEDB /* github cutted */,
@@ -999,7 +1000,6 @@
 			children = (
 				10F8190B17B37BC4003822D6 /* NSDate */,
 				10CD6B1C1765CF4E00F64DC1 /* Font */,
-				102B8B3F172A6646003BA22F /* gravatar-user-420.png */,
 				10E3FC5B1721A66B00607EBA /* issueManager-Info.plist */,
 				10E3FC5C1721A66B00607EBA /* InfoPlist.strings */,
 				10E3FC5F1721A66B00607EBA /* main.m */,
@@ -1275,7 +1275,6 @@
 				10E3FC661721A66B00607EBA /* Default.png in Resources */,
 				10E3FC681721A66B00607EBA /* Default@2x.png in Resources */,
 				10E3FC6A1721A66B00607EBA /* Default-568h@2x.png in Resources */,
-				102B8B40172A6646003BA22F /* gravatar-user-420.png in Resources */,
 				10200114175F0629005DD92F /* issue-list.png in Resources */,
 				10200115175F0629005DD92F /* issue.png in Resources */,
 				10200117175F0629005DD92F /* new-issue-name.png in Resources */,
@@ -1350,6 +1349,7 @@
 				10C51D4A17C76E54009637D3 /* selectMemberNotSelected@2x.png in Resources */,
 				10C51D4B17C76E54009637D3 /* userMaskSelected.png in Resources */,
 				108E6F9D17CCD3CF00160898 /* headerBackground@2x.png in Resources */,
+				101C655217CF4E7E0019B896 /* gravatar-user-420.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

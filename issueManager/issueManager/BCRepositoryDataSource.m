@@ -33,7 +33,7 @@
   NSUInteger count = 1;
   if ([[_actualSelected objectAtIndex:(section)] isEqual:[NSNumber numberWithBool:YES]]) {
     NSString * keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(section)], @"repositories" ];
-    count = ([[_repositories valueForKeyPath:keyPath] count]+1);
+    return ([[_repositories valueForKeyPath:keyPath] count]+1);
   }
   return count;
 }
@@ -57,9 +57,13 @@
       cell.myTextLabel.text = [(BCOrg *)object orgLogin];
     }
   }else{
-    cell = [BCRepositoryCell createRepositoryCellWithTableView:tableView];
     NSString *keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"repositories" ];
     BCRepository *repo = [(NSArray *)[_repositories valueForKeyPath:keyPath] objectAtIndex:(indexPath.row-1)];
+    if ([repo.name isEqualToString:NO_REPOSITORIES]) {
+      cell = [BCRepositoryCell createNoRepoCellWithTableView:tableView];
+    }else{
+      cell = [BCRepositoryCell createRepositoryCellWithTableView:tableView]; 
+    }
     cell.myTextLabel.text = repo.name;
   }
   
@@ -71,7 +75,12 @@
 
 -(NSInteger)getNumberOfRowsToAddToSection:(NSUInteger)section{
   NSString * keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(section)], @"repositories" ];
-  return [[_repositories valueForKeyPath:keyPath] count];
+  int count = [[_repositories valueForKeyPath:keyPath] count];
+  if (count) {
+    return count;
+  }else{
+    return 1;//NO REPOSITORY cell
+  }
 }
 
 -(BCRepository *)getRepositoryAtIndex:(NSIndexPath *)indexPath{
