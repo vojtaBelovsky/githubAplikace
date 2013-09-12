@@ -7,6 +7,7 @@
 //
 
 #import "BCRepositoryView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define NAV_BAR_HEIGHT    ( 44.0f )
 #define BACKGROUND_IMAGE  [UIImage imageNamed:@"repositories_gradient.png"]
@@ -31,19 +32,15 @@
     _backgroundImageView = [[UIImageView alloc] initWithImage:resizableImage];
     [self addSubview:_backgroundImageView];
     
-    _repositoryLabelShadow = [[UILabel alloc] init];
-    _repositoryLabelShadow.numberOfLines = 0;
-    _repositoryLabelShadow.font = REPOSITORIES_FONT;
-    _repositoryLabelShadow.textColor = REPOSITORIES_SHADOW_FONT_COLOR;
-    _repositoryLabelShadow.backgroundColor = [UIColor clearColor];
-    [_repositoryLabelShadow setText:@"Repositories"];
-    [self addSubview:_repositoryLabelShadow];
-    
     _repositoryLabel = [[UILabel alloc] init];
     _repositoryLabel.numberOfLines = 0;
     _repositoryLabel.font = REPOSITORIES_FONT;
     _repositoryLabel.textColor = REPOSITORIES_FONT_COLOR;
     _repositoryLabel.backgroundColor = [UIColor clearColor];
+    _repositoryLabel.layer.shadowOpacity = 1.0;
+    _repositoryLabel.layer.shadowRadius = 0.0;
+    _repositoryLabel.layer.shadowColor = REPOSITORIES_SHADOW_FONT_COLOR.CGColor;
+    _repositoryLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
     [_repositoryLabel setText:@"Repositories"];
     [self addSubview:_repositoryLabel];
     
@@ -64,7 +61,6 @@
     
     [self setBackgroundColor:REPOSITORY_BG_COLOR];
   }
-  
   return self;
 }
 

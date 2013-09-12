@@ -14,6 +14,8 @@
 #import "UIAlertView+errorAlert.h"
 #import "BCUser.h"
 #import "BCIssueViewController.h"
+#import "BCAppDelegate.h"
+#import "TMViewDeckController.h"
 
 @interface BCCollaboratorsViewController ()
 
@@ -41,7 +43,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   [BCUser sharedInstanceChangeableWithUser:[_dataSource.collaborators objectAtIndex:indexPath.row] succes:nil failure:nil];
   [_issueViewCtrl setUserChanged:YES];
-  [self.navigationController popViewControllerAnimated:YES];
+  [_issueViewCtrl viewWillAppear:YES];
+  [_issueViewCtrl slideBackCenterView];
+//  [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - private

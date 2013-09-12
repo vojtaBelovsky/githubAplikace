@@ -27,9 +27,8 @@
 #define HEADER_FONT_COLOR   [UIColor colorWithRed:.67 green:.67 blue:.67 alpha:1.00]
 #define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
 #define COMMENT_MASK        [UIImage imageNamed:@"commentMask.png"]
-#define COMMENT_BUTTON      [UIImage imageNamed:@"loginButtonOff.png"]
-#define COMMENT_BUTTON_HL   [UIImage imageNamed:@"loginButtonOn.png"]
 #define BUTTON_FONT         [UIFont fontWithName:@"ProximaNova-Regular" size:14]
+#define BUTTON_FONT_COLOR   [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 
 #define WIDTH_OF_COMMENT_TEXT_VIEW_WITH_WIDTH(width) width-(AVATAR_WIDTH+BEAK_WIDTH)
 
@@ -73,13 +72,11 @@
     [_commentTextView setFont:COMMENT_BODY_FONT];
     [self addSubview:_commentTextView];
     
-    resizableImage = [COMMENT_BUTTON stretchableImageWithLeftCapWidth:18 topCapHeight:18];
-    _commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_commentButton setBackgroundImage:resizableImage forState:UIControlStateNormal];
-    resizableImage = [COMMENT_BUTTON_HL stretchableImageWithLeftCapWidth:18 topCapHeight:18];
-    [_commentButton setBackgroundImage:resizableImage forState:UIControlStateHighlighted];
+    _commentButton = [[UIButton alloc] init];
+    [_commentButton setBackgroundColor:[UIColor clearColor]];
     [_commentButton setTitle:NSLocalizedString(@"Comment", @"") forState:UIControlStateNormal];
-    _commentButton.titleLabel.font = BUTTON_FONT;
+    [_commentButton.titleLabel setFont:BUTTON_FONT];
+    [_commentButton setTitleColor:BUTTON_FONT_COLOR forState:UIControlStateNormal];
     [_commentButton setEnabled:YES];
     [_commentButton setHidden:YES];
     [self addSubview:_commentButton];

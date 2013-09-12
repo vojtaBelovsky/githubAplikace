@@ -15,6 +15,8 @@
 #import "BCOrg.h"
 #import "UIAlertView+errorAlert.h"
 #import "UIImageView+AFNetworking.h"
+#import "TMViewDeckController.h"
+#import "BCAppDelegate.h"
 
 #define KEY_OBJECT        @"object"
 #define KEY_REPOSITORIES  @"repositories"
@@ -99,8 +101,10 @@
 
 -(void)doneButtonDidPress{
   if ([_chosenRepositories count]) {
-    BCIssueViewController *issueVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories];
-    [self.navigationController pushViewController:issueVC animated:YES];
+    BCIssueViewController *issuesVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories];
+    BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    [myDelegate.deckController setCenterController:issuesVC];
+//    [self.navigationController pushViewController:deckVC animated:YES];
   }else{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Empty repository list" message:@"you can't proceed until you choose some repository/ies" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alertView show];
@@ -125,7 +129,6 @@
   BCUser *chosenUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
   
   [BCUser getAllRepositoriesOfUserWithSuccess:^(NSMutableArray *allRepositories) {
-    //POZOR, overit chovani apky kdyz ma uzivatel 0 repozitaru!!(array inicializuju, melo by tam byt 0 prvku) - PRIDAT POLOZKU "NO REPOZITORIES"
     if (![allRepositories count]) {
       [allRepositories addObject:[[BCRepository alloc] initNoRepositories]];
     }

@@ -53,10 +53,10 @@
       _repositoryNameLabel.font = REPO_NAME_FONT;
       _repositoryNameLabel.textColor = REPO_NAME_FONT_COLOR;
       _repositoryNameLabel.backgroundColor = [UIColor clearColor];
-      _userNameLabel.layer.shadowOpacity = 1.0;
-      _userNameLabel.layer.shadowRadius = 0.0;
-      _userNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
-      _userNameLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
+      _repositoryNameLabel.layer.shadowOpacity = 1.0;
+      _repositoryNameLabel.layer.shadowRadius = 0.0;
+      _repositoryNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
+      _repositoryNameLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
       [self addSubview:_repositoryNameLabel];
       
       _chooseCollaboratorButton = [[UIButton alloc] init];

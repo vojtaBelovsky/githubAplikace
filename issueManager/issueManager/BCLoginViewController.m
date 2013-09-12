@@ -13,6 +13,8 @@
 #import "BCUser.h"
 #import "BCTextField.h"
 #import "UIAlertView+errorAlert.h"
+#import "BCAppDelegate.h"
+#import "TMViewDeckController.h"
 
 #define VIEW_OFFSET         ( - 150.0f )
 #define ANIMATION_DURATION  0.2f
@@ -52,7 +54,9 @@
   if(credentials != NULL){
     [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user) {
       BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
-      [self.navigationController pushViewController:repoViewCtrl animated:YES];
+      BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+      [myDelegate.deckController setCenterController:repoViewCtrl];
+//      [self.navigationController pushViewController:repoViewCtrl animated:YES];
     } failure:^(NSError *error) {
       [UIAlertView showWithError:error];
     }];
@@ -89,7 +93,9 @@
   
   [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user){
     BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
-    [self.navigationController pushViewController:repoViewCtrl animated:YES];
+    BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    [myDelegate.deckController setCenterController:repoViewCtrl];
+//    [self.navigationController pushViewController:repoViewCtrl animated:YES];
   } failure:^(NSError *error){
     [UIAlertView showWithError:error];
   }];

@@ -10,19 +10,26 @@
 #import "BCRepositoryViewController.h"
 #import "BCLoginViewController.h"
 #import "BCUser.h"
+#import "TMViewDeckController.h"
 
 @implementation BCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[BCRepositoryViewController alloc] init]];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[BCLoginViewController alloc] init]];
-    self.window.rootViewController = navController;
-    return YES;
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  _deckController = [[TMViewDeckController alloc] initWithCenterController:[[BCLoginViewController alloc] init]];
+  // Override point for customization after application launch.
+  self.window.backgroundColor = [UIColor whiteColor];
+  [self.window makeKeyAndVisible];
+  UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:_deckController];
+  self.window.rootViewController = navController;
+  return YES;
+  
+//  self.window.backgroundColor = [UIColor whiteColor];
+//  [self.window makeKeyAndVisible];
+//  UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[BCLoginViewController alloc] init]];
+//  self.window.rootViewController = navController;
+//  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

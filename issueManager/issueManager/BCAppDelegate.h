@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class TMViewDeckController;
 
 @interface BCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong)TMViewDeckController *deckController;
 
 @end

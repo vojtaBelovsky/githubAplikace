@@ -22,6 +22,8 @@
 #import "BCHeadeView.h"
 #import "BCIssueCell.h"
 #import "BCCollaboratorsViewController.h"
+#import "BCAppDelegate.h"
+#import "TMViewDeckController.h"
 
 #define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define WHITE_COLOR         [UIColor whiteColor]
@@ -40,24 +42,21 @@
 #pragma mark lifecycles
 
 - (id) initWithRepositories:(NSArray *)repositories{
-    self = [super init];
+  self = [super init];
     if(self){
-      [self setTitle:NSLocalizedString(@"issues", @"")];
       _repositories = repositories;
       _nthRepository = 0;
       _userChanged = NO;
-        _allDataSources = [[NSMutableArray alloc] init];
+      _allDataSources = [[NSMutableArray alloc] init];
+      _slideBack = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slideBackCenterView)];
     }
-    return self;
+  return self;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   int index = [_tableView.allTableViews indexOfObject:tableView];
   BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue:[self getIssueForIndexPath:indexPath fromNthRepository:index] andController:self];
-  [self presentViewController:issueDetailViewController animated:YES completion:^{
-    
-  }];
-//  [self.navigationController pushViewController:issueDetailViewController animated:YES];
+  [self presentViewController:issueDetailViewController animated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -132,16 +131,37 @@
 
 - (void)addButtonDidPress{
   BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:_nthRepository] andController:self];
-  [self.navigationController pushViewController:addIssueVC animated:YES];
+  [self.view addGestureRecognizer:_slideBack];
+  [_tableView.addNewIssueButton setEnabled:NO];
+  BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+  [myDelegate.deckController slideCenterControllerToTheLeftWithRightController:addIssueVC animated:YES withCompletion:nil];
+//  [self.navigationController pushViewController:addIssueVC animated:YES];
 }
 
 -(void)chooseButtonDidPress{
   BCCollaboratorsViewController *chooseCollVC = [[BCCollaboratorsViewController alloc] initWithRepositories:_repositories andIssueViewCtrl:self];
-  [self.navigationController pushViewController:chooseCollVC animated:YES];
+  [self.view addGestureRecognizer:_slideBack];
+  [_tableView.chooseCollaboratorButton setEnabled:NO];
+  BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+  [myDelegate.deckController slideCenterControllerToTheRightWithLeftController:chooseCollVC animated:YES withCompletion:nil];
+//  [self.navigationController pushViewController:chooseCollVC animated:YES];
 }
 
 #pragma mark -
 #pragma mark public
+
+-(void)slideBackCenterView{
+  BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+  if ([myDelegate.deckController leftControllerPresented] || [myDelegate.deckController rightControllerPresented]) {
+    if ([_tableView.chooseCollaboratorButton isEnabled]) {
+      [_tableView.addNewIssueButton setEnabled:YES];
+    }else{
+      [_tableView.chooseCollaboratorButton setEnabled:YES];
+    }
+    [self.view removeGestureRecognizer:_slideBack];
+    [myDelegate.deckController slideCenterControllerBackAnimated:YES withCompletion:nil];
+  }
+}
 
 -(void)addNewIssue:(BCIssue *)newIssue{
   BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:_nthRepository];
