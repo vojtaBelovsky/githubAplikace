@@ -28,8 +28,12 @@
 #define FORGOT_PASSWD_FONT_COLOR         [UIColor colorWithRed:.68 green:.68 blue:.71 alpha:1.00];
 #define FORGOT_PASSWD_TEXT_SHADOW_COLOR  [UIColor colorWithRed:.95 green:.95 blue:.95 alpha:1.00];
 
-#define TEXT_FIELD_SIZE   CGSizeMake ( 256.0f, 35.0f )
-#define LOGIN_FIELD_Y     324.0f
+#define LOGIN_TEXT_FIELD_HEIGHT_OFFSET  ( 0.5f )
+
+#define TEXT_FIELD_WIDTH         ( 0.7f )
+#define TEXT_FIELD_HEIGHT        ( 0.07f )
+#define LOGIN_BUTTON_OFFSET      ( 0.05f )
+#define FORGOT_PASSWD_OFFSET     ( 0.03f )
 
 #define LOGIN_ICON          [UIImage imageNamed:@"loginAccountIcon.png"]
 #define PASSWORD_ICON       [UIImage imageNamed:@"loginLockerIcon.png"]
@@ -80,42 +84,38 @@
 
 -(void)layoutSubviews{
   [super layoutSubviews];
+  CGRect frame;
   
-  CGRect backgroundFrame = CGRectZero;
-  backgroundFrame.size = self.bounds.size;
-  if ( !CGRectEqualToRect( backgroundFrame, _backgroundImageView.frame ) ) {
-    _backgroundImageView.frame = backgroundFrame;
+  frame.size = self.frame.size;
+  frame.origin = CGPointZero;
+  if (!CGRectEqualToRect(_backgroundImageView.frame, frame)) {
+    _backgroundImageView.frame = frame;
   }
   
-  CGRect loginFrame = CGRectZero;
-  loginFrame.size = TEXT_FIELD_SIZE;
-  loginFrame.origin.x = ( CGRectGetWidth( self.bounds ) - CGRectGetWidth( loginFrame ) ) / 2;
-  loginFrame.origin.y = LOGIN_FIELD_Y;
-  if(!CGRectEqualToRect(loginFrame, _loginTextField.frame)){
-    _loginTextField.frame = loginFrame;
+  frame.size = CGSizeMake(self.frame.size.width*TEXT_FIELD_WIDTH, self.frame.size.height*TEXT_FIELD_HEIGHT);
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, self.frame.size.height*LOGIN_TEXT_FIELD_HEIGHT_OFFSET);
+  if (!CGRectEqualToRect(_loginTextField.frame, frame)) {
+    _loginTextField.frame = frame;
   }
   
-  CGRect passwordFrame = CGRectZero;
-  passwordFrame.size = TEXT_FIELD_SIZE;
-  passwordFrame.origin.x = CGRectGetMinX( loginFrame );
-  passwordFrame.origin.y = CGRectGetMaxY( loginFrame );
-  if(!CGRectEqualToRect(passwordFrame, _passwordTextField.frame)){
-    _passwordTextField.frame = passwordFrame;
+  frame.size = _loginTextField.frame.size;
+  frame.origin.y = CGRectGetMaxY(_loginTextField.frame);
+  frame.origin.x = CGRectGetMinX(_loginTextField.frame);
+  if(!CGRectEqualToRect(frame, _passwordTextField.frame)){
+    _passwordTextField.frame = frame;
   }
   
-  CGRect buttonFrame = CGRectMake(32, 410, 258, 32);
-  if(!CGRectEqualToRect(buttonFrame, _loginButton.frame)){
-    _loginButton.frame = buttonFrame;
+  frame.size = _passwordTextField.frame.size;
+  frame.origin = CGPointMake(_passwordTextField.frame.origin.x, _passwordTextField.frame.origin.y+_passwordTextField.frame.size.height+self.frame.size.height*LOGIN_BUTTON_OFFSET);
+  if (!CGRectEqualToRect(_loginButton.frame, frame)) {
+    _loginButton.frame = frame;
   }
 
-  CGRect forgotPasswordFrame;
-  forgotPasswordFrame.size = [_forgotPasswordLabel sizeThatFits:CGSizeMake( CGRectGetWidth( self.frame ), 15.0f )];
-  forgotPasswordFrame.origin.x = ( CGRectGetWidth( self.frame ) - CGRectGetWidth( forgotPasswordFrame ) ) / 2;
-  forgotPasswordFrame.origin.y = CGRectGetMaxY( _loginButton.frame ) + 10.0f;
-  if ( !CGRectEqualToRect( _forgotPasswordLabel.frame, forgotPasswordFrame ) ) {
-    _forgotPasswordLabel.frame = forgotPasswordFrame;
+  frame.size = [_forgotPasswordLabel sizeThatFits:self.frame.size];
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, CGRectGetMaxY( _loginButton.frame ) + self.frame.size.height*FORGOT_PASSWD_OFFSET);
+  if ( !CGRectEqualToRect( _forgotPasswordLabel.frame, frame ) ) {
+    _forgotPasswordLabel.frame = frame;
   }
-  
 }
 
 @end

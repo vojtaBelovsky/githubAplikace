@@ -86,6 +86,7 @@
 }
 
 - (void)loginButtonDidPress {
+  [self hideKeyboard];
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
   NSDictionary *credentials = [[NSDictionary alloc] initWithObjectsAndKeys:_loginView.loginTextField.textField.text, @"login",_loginView.passwordTextField.textField.text, @"password", nil];
   [userDefaults setObject:credentials forKey:@"credentials"];
