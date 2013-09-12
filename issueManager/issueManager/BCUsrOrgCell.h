@@ -13,6 +13,8 @@
 
 @property UILabel *myTextLabel;
 @property BCAvatarImgView *avatar;
+@property UIImageView *selectionIndicator;
 
++ (BCUsrOrgCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView WithImg:(UIImage *)img;
 
 @end

@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BCRepoCell : UITableViewCell
+@property UIImageView *checkbox;
+@property UILabel *myTextLabel;
 
 @end

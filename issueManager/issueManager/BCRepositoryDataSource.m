@@ -12,6 +12,7 @@
 #import "BCOrg.h"
 #import "BCRepository.h"
 #import "BCRepositoryViewController.h"
+#import "BCUsrOrgCell.h"
 
 @implementation BCRepositoryDataSource
 

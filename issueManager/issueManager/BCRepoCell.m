@@ -8,22 +8,53 @@
 
 #import "BCRepoCell.h"
 
+#define createRepositoryCell @"createRepositoryCell"
+
+#define CELL_FONT_COLOR               [UIColor whiteColor]
+#define CELL_FONT                     [UIFont fontWithName:@"ProximaNova-Regular" size:13]
+#define REPOSITORY_CHECKBOX_IMAGE     [UIImage imageNamed:@"checkbox.png"]
+#define REPOSITORY_HL_CHECKBOX_IMAGE  [UIImage imageNamed:@"checkbox_checked.png"]
+#define CHECKBOX_OFFSET               (self.frame.size.width*0.3)
+#define TEXT_OFFSET                   (self.frame.size.width*0.1)
+
 @implementation BCRepoCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
++ (BCRepoCell *)createRepositoryCellWithTableView:(UITableView *)tableView {
+  BCRepoCell *cell = [tableView dequeueReusableCellWithIdentifier:createRepositoryCell];
+  if (! cell ) {
+    cell = [[BCRepoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createRepositoryCell];
+    
+    cell.myTextLabel = [[UILabel alloc] init];
+    cell.myTextLabel.backgroundColor = [UIColor clearColor];
+    cell.myTextLabel.textColor = CELL_FONT_COLOR;
+    cell.myTextLabel.font = CELL_FONT;
+    cell.myTextLabel.numberOfLines = 0;
+    [cell addSubview:cell.myTextLabel];
+    
+    [cell setCheckbox:[[UIImageView alloc] initWithImage:REPOSITORY_CHECKBOX_IMAGE highlightedImage:REPOSITORY_HL_CHECKBOX_IMAGE]];
+    [cell addSubview:cell.checkbox];
+    
+    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
+    [cell.selectedBackgroundView setBackgroundColor:[UIColor clearColor]];
+  }
+  return cell;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void)layoutSubviews{
+  [super layoutSubviews];
+  CGRect frame;
+  
+  frame.size = [_checkbox sizeThatFits:self.frame.size];
+  frame.origin = CGPointMake(CHECKBOX_OFFSET, (self.frame.size.height-frame.size.height)/2);
+  if (!CGRectEqualToRect(_checkbox.frame, frame)) {
+    _checkbox.frame = frame;
+  }
+  
+  frame.size = [_myTextLabel sizeThatFits:self.frame.size];
+  frame.origin = CGPointMake(CHECKBOX_OFFSET+_checkbox.frame.size.width+TEXT_OFFSET, (self.frame.size.height-frame.size.height)/2);
+  if (!CGRectEqualToRect(_myTextLabel.frame, frame)) {
+    _myTextLabel.frame = frame;
+  }
 }
 
 @end

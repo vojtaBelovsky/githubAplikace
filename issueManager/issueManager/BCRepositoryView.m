@@ -45,12 +45,16 @@
     [self addSubview:_repositoryLabel];
     
     _doneButton = [[UIButton alloc] init];
-    _doneButton.titleLabel.numberOfLines = 0;
-    _doneButton.titleLabel.font = DONE_FONT;
+    [_doneButton setTitle:@"DONE" forState:UIControlStateNormal];
     [_doneButton setTitleColor:DONE_FONT_COLOR forState:UIControlStateNormal];
     _doneButton.titleLabel.backgroundColor = [UIColor clearColor];
-    [_doneButton setTitle:@"DONE" forState:UIControlStateNormal];
-    [_doneButton setEnabled:YES];
+    _doneButton.titleLabel.numberOfLines = 0;
+    _doneButton.titleLabel.font = DONE_FONT;
+    _doneButton.enabled = YES;
+    _doneButton.layer.shadowOpacity = 1.0;
+    _doneButton.layer.shadowRadius = 0.0;
+    _doneButton.layer.shadowColor = REPOSITORIES_SHADOW_FONT_COLOR.CGColor;
+    _doneButton.layer.shadowOffset = CGSizeMake(1.0, 1.0);
     [self addSubview:_doneButton];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero];

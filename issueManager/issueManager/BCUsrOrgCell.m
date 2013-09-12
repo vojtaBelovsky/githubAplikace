@@ -15,6 +15,9 @@
 #define CELL_FONT             [UIFont fontWithName:@"ProximaNova-Regular" size:13]
 #define SELECT_MEMBER_ARROW   [UIImage imageNamed:@"selectMemberArrowOff.png"]
 #define SELECT_MEMBER_X       [UIImage imageNamed:@"selectMemberXOff.png"]
+#define AVATAR_OFFSET         (self.frame.size.width*0.1)
+#define TEXT_OFFSET           (self.frame.size.width*0.1)
+#define SEL_INDICATOR_OFFSET  (self.frame.size.width*0.1)
 
 @implementation BCUsrOrgCell
 
@@ -23,21 +26,19 @@
   if (! cell ) {
     cell = [[BCUsrOrgCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createOrgOrMyRepositoryCellIdnetifier];
     
-    cell.myTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 10, 250, 20)];
-    cell.myTextLabel.backgroundColor = [UIColor clearColor];
-    cell.myTextLabel.textColor = CELL_FONT_COLOR;
-    cell.myTextLabel.font = CELL_FONT;
-    [cell addSubview:cell.myTextLabel];
-    
-    
     cell.avatar = [[BCAvatarImgView alloc] init];
     [cell addSubview:cell.avatar];
     
-    [cell setSelectUsrOrOrgImgView:[[UIImageView alloc] initWithImage:USR_OR_ORG_SELECTION_IMAGE highlightedImage:USR_OR_ORG_SELECTION_HL_IMAGE]];
-    [[cell selectUsrOrOrgImgView] setFrame:CGRectMake((cell.frame.size.width-USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)-15, (cell.frame.size.height-USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)/2, USR_OR_ORG_IMG_WIDTH_AND_HEIGHT, USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)];
-    [cell addSubview:cell.selectUsrOrOrgImgView];
+    cell.myTextLabel = [[UILabel alloc] init];
+    cell.myTextLabel.backgroundColor = [UIColor clearColor];
+    cell.myTextLabel.textColor = CELL_FONT_COLOR;
+    cell.myTextLabel.font = CELL_FONT;
+    cell.myTextLabel.numberOfLines = 0;
+    [cell addSubview:cell.myTextLabel];
     
-    [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+    cell.selectionIndicator = [[UIImageView alloc] initWithImage:SELECT_MEMBER_ARROW highlightedImage:SELECT_MEMBER_X];
+    [cell addSubview:cell.selectionIndicator];
+    
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     [cell.selectedBackgroundView setBackgroundColor:[UIColor clearColor]];
   }
@@ -46,7 +47,25 @@
 
 -(void)layoutSubviews{
   [super layoutSubviews];
+  CGRect frame;
   
+  frame.size = [_avatar sizeThatFits:self.frame.size];
+  frame.origin = CGPointMake(AVATAR_OFFSET, (self.frame.size.height-frame.size.height)/2);
+  if (!CGRectEqualToRect(_avatar.frame, frame)) {
+    _avatar.frame = frame;
+  }
+  
+  frame.size = [_myTextLabel sizeThatFits:self.frame.size];
+  frame.origin = CGPointMake(AVATAR_OFFSET+_avatar.frame.size.width+TEXT_OFFSET, (self.frame.size.height-frame.size.height)/2);
+  if (!CGRectEqualToRect(_myTextLabel.frame, frame)) {
+    _myTextLabel.frame = frame;
+  }
+  
+  frame.size = [_selectionIndicator sizeThatFits:self.frame.size];
+  frame.origin = CGPointMake(self.frame.size.width-SEL_INDICATOR_OFFSET, (self.frame.size.height-frame.size.height)/2);
+  if (!CGRectEqualToRect(_selectionIndicator.frame, frame)) {
+    _selectionIndicator.frame = frame;
+  }
 }
 
 @end
