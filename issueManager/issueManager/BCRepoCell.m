@@ -14,8 +14,9 @@
 #define CELL_FONT                     [UIFont fontWithName:@"ProximaNova-Regular" size:13]
 #define REPOSITORY_CHECKBOX_IMAGE     [UIImage imageNamed:@"checkbox.png"]
 #define REPOSITORY_HL_CHECKBOX_IMAGE  [UIImage imageNamed:@"checkbox_checked.png"]
-#define CHECKBOX_OFFSET               (self.frame.size.width*0.3)
+#define CHECKBOX_OFFSET               (self.frame.size.width*0.2)
 #define TEXT_OFFSET                   (self.frame.size.width*0.1)
+#define SIZE_OF_CHECHBOX              0.65
 
 @implementation BCRepoCell
 
@@ -44,7 +45,7 @@
   [super layoutSubviews];
   CGRect frame;
   
-  frame.size = [_checkbox sizeThatFits:self.frame.size];
+  frame.size = CGSizeMake(self.frame.size.height*SIZE_OF_CHECHBOX, self.frame.size.height*SIZE_OF_CHECHBOX);
   frame.origin = CGPointMake(CHECKBOX_OFFSET, (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_checkbox.frame, frame)) {
     _checkbox.frame = frame;

@@ -7,12 +7,15 @@
 //
 
 #import "BCRepositoryDataSource.h"
-#import "BCRepositoryCell.h"
 #import "BCUser.h"
 #import "BCOrg.h"
 #import "BCRepository.h"
 #import "BCRepositoryViewController.h"
 #import "BCUsrOrgCell.h"
+#import "BCRepoCell.h"
+#import "BCNoRepoCell.h"
+#import "BCAvatarImgView.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation BCRepositoryDataSource
 
@@ -44,30 +47,36 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-  BCRepositoryCell *cell = nil;
+  UITableViewCell *cell = nil;
   if (indexPath.row == 0) {
+    BCUsrOrgCell *usrOrgCell;
     NSString * keyPath = [NSString stringWithFormat:@"%@.object", (NSString *)[_keyNames objectAtIndex:(indexPath.section)]];
     id object = [_repositories valueForKeyPath:keyPath];
     if ([object isKindOfClass:[BCUser class]]) {
       keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"image" ];
-      cell = [BCRepositoryCell createOrgOrUserRepositoryCellWithTableView:tableView WithImg:(UIImage *)[_repositories valueForKeyPath:keyPath]];
-      cell.myTextLabel.text = [(BCUser *)object userLogin];
+      usrOrgCell = [BCUsrOrgCell createOrgOrUserRepositoryCellWithTableView:tableView];
+      usrOrgCell.myTextLabel.text = [(BCUser *)object userLogin];
+      [usrOrgCell.avatar setImage:[_repositories valueForKeyPath:keyPath]];
     }else{
       keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"image" ];
-      cell = [BCRepositoryCell createOrgOrUserRepositoryCellWithTableView:tableView WithImg:(UIImage *)[_repositories valueForKeyPath:keyPath]];
-      cell.myTextLabel.text = [(BCOrg *)object orgLogin];
+      usrOrgCell = [BCUsrOrgCell createOrgOrUserRepositoryCellWithTableView:tableView];
+      usrOrgCell.myTextLabel.text = [(BCOrg *)object orgLogin];
+      [usrOrgCell.avatar setImage:[_repositories valueForKeyPath:keyPath]];
     }
+    cell = usrOrgCell;
   }else{
     NSString *keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"repositories" ];
     BCRepository *repo = [(NSArray *)[_repositories valueForKeyPath:keyPath] objectAtIndex:(indexPath.row-1)];
     if ([repo.name isEqualToString:NO_REPOSITORIES]) {
-      cell = [BCRepositoryCell createNoRepoCellWithTableView:tableView];
+      BCNoRepoCell *noRepoCell = [BCNoRepoCell createNoRepoCellWithTableView:tableView];
+      noRepoCell.myTextLabel.text = repo.name;
+      cell = noRepoCell;
     }else{
-      cell = [BCRepositoryCell createRepositoryCellWithTableView:tableView]; 
+      BCRepoCell *repoCell = [BCRepoCell createRepositoryCellWithTableView:tableView];
+      repoCell.myTextLabel.text = repo.name;
+      cell = repoCell;
     }
-    cell.myTextLabel.text = repo.name;
   }
-  
   return cell;
 }
 

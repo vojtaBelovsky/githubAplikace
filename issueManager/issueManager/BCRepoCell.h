@@ -12,4 +12,6 @@
 @property UIImageView *checkbox;
 @property UILabel *myTextLabel;
 
++ (BCRepoCell *)createRepositoryCellWithTableView:(UITableView *)tableView;
+
 @end

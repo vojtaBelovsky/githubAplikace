@@ -10,4 +10,8 @@
 
 @interface BCNoRepoCell : UITableViewCell
 
+@property UILabel *myTextLabel;
+
++(BCNoRepoCell *)createNoRepoCellWithTableView:(UITableView *)tableView;
+
 @end

@@ -15,18 +15,21 @@
 #define CELL_FONT             [UIFont fontWithName:@"ProximaNova-Regular" size:13]
 #define SELECT_MEMBER_ARROW   [UIImage imageNamed:@"selectMemberArrowOff.png"]
 #define SELECT_MEMBER_X       [UIImage imageNamed:@"selectMemberXOff.png"]
+#define CORP_MASK             [UIImage imageNamed:@"corp-mask.png"]
 #define AVATAR_OFFSET         (self.frame.size.width*0.1)
 #define TEXT_OFFSET           (self.frame.size.width*0.1)
 #define SEL_INDICATOR_OFFSET  (self.frame.size.width*0.1)
+#define SIZE_OF_AVATAR        0.7
 
 @implementation BCUsrOrgCell
 
-+ (BCUsrOrgCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView WithImg:(UIImage *)img{
++ (BCUsrOrgCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView {
   BCUsrOrgCell *cell = [tableView dequeueReusableCellWithIdentifier:createOrgOrMyRepositoryCellIdnetifier];
   if (! cell ) {
     cell = [[BCUsrOrgCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:createOrgOrMyRepositoryCellIdnetifier];
     
     cell.avatar = [[BCAvatarImgView alloc] init];
+    [cell.avatar.maskImageView setImage:CORP_MASK];
     [cell addSubview:cell.avatar];
     
     cell.myTextLabel = [[UILabel alloc] init];
@@ -49,7 +52,7 @@
   [super layoutSubviews];
   CGRect frame;
   
-  frame.size = [_avatar sizeThatFits:self.frame.size];
+  frame.size = CGSizeMake(self.frame.size.height*SIZE_OF_AVATAR, self.frame.size.height*SIZE_OF_AVATAR);
   frame.origin = CGPointMake(AVATAR_OFFSET, (self.frame.size.height-frame.size.height)/2);
   if (!CGRectEqualToRect(_avatar.frame, frame)) {
     _avatar.frame = frame;

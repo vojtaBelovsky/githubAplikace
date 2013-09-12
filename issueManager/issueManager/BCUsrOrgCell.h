@@ -15,6 +15,6 @@
 @property BCAvatarImgView *avatar;
 @property UIImageView *selectionIndicator;
 
-+ (BCUsrOrgCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView WithImg:(UIImage *)img;
++ (BCUsrOrgCell *)createOrgOrUserRepositoryCellWithTableView:(UITableView *)tableView;
 
 @end
