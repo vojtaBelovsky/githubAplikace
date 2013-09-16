@@ -14,11 +14,11 @@
 #define NEW_ISSUE_CHECK_ON            [UIImage imageNamed:@"newIssueCheckOn.png"]
 #define NEW_ISSUE_CHECK_OFF           [UIImage imageNamed:@"newIssueCheckOff.png"]
 
-#define TABLE_WIDTH          ( 300.0f )
-#define TABLE_HEIGHT         ( 300.0f )
-#define TABLE_OFFSET         ( 50.0f )
-#define TABLE_LINE_WIDTH     ( 292.0f )
+#define TABLE_WIDTH          ( 0.9f )
+#define NAV_BAR_HEIGHT       ( 44.0f )
 #define TABLE_LINE_HEIGHT    ( 40.0f )
+
+#define CAP_SIZE_FOR_FORM   ( 8.0f )
 
 #define NEW_ISSUE_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define NEW_ISSUE_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
@@ -75,9 +75,9 @@
       [_doneButton setEnabled:YES];
       [self addSubview:_doneButton];
       
-      resizableImage = [BACKGROUND_IMAGE_FOR_FORM stretchableImageWithLeftCapWidth:8 topCapHeight:8];
-      _issueForm = [[UIImageView alloc] initWithImage:resizableImage];
-      [self addSubview:_issueForm];
+      resizableImage = [BACKGROUND_IMAGE_FOR_FORM stretchableImageWithLeftCapWidth:CAP_SIZE_FOR_FORM topCapHeight:CAP_SIZE_FOR_FORM];
+      _form = [[UIImageView alloc] initWithImage:resizableImage];
+      [self addSubview:_form];
       
       _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
       //      [_tableView setAllowsMultipleSelection:YES];
@@ -97,7 +97,7 @@
     _backgroundImageView.frame = frame;
   }
   
-  frame = CGRectMake(0, 0, self.frame.size.width, TABLE_OFFSET);
+  frame = CGRectMake(0, 0, self.frame.size.width, NAV_BAR_HEIGHT);
   if(! CGRectEqualToRect(_navigationBarView.frame, frame)){
     _navigationBarView.frame = frame;
   }
@@ -127,14 +127,14 @@
     _doneButton.frame = frame;
   }
   
-  frame.size = CGSizeMake(TABLE_WIDTH, TABLE_HEIGHT);
-  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, TABLE_OFFSET);
-  if(! CGRectEqualToRect(_issueForm.frame, frame)){
-    _issueForm.frame = frame;
+  frame.size = CGSizeMake(self.frame.size.width*TABLE_WIDTH, self.frame.size.height-2*NAV_BAR_HEIGHT);
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, NAV_BAR_HEIGHT);
+  if(! CGRectEqualToRect(_form.frame, frame)){
+    _form.frame = frame;
   }
   
-  frame.size = CGSizeMake(TABLE_LINE_WIDTH, TABLE_HEIGHT);
-  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, TABLE_OFFSET);
+  frame.size = CGSizeMake(_form.frame.size.width-CAP_SIZE_FOR_FORM, self.frame.size.height-2*NAV_BAR_HEIGHT);
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, NAV_BAR_HEIGHT);
   if(!CGRectEqualToRect(_tableView.frame, frame)){
     _tableView.frame = frame;
   }

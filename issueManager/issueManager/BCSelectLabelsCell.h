@@ -13,7 +13,7 @@
 @interface BCSelectLabelsCell : UITableViewCell
 
 @property UIImageView *separatorImgView;
-@property BCLabelColorImgView *BCLabelColorImgView;
+@property BCLabelColorImgView *labelColorImgView;
 @property UILabel *myTextLabel;
 @property UIImageView *checkboxImgView;
 

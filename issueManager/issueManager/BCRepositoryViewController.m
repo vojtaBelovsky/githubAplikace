@@ -41,12 +41,12 @@
 
 - (void)loadView {
   [self.navigationController setNavigationBarHidden:YES];
-  _tableView = [[BCRepositoryView alloc] init];
-  [_tableView.tableView setMultipleTouchEnabled:YES];
-  self.view = _tableView;
-  [_tableView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchDown];
+  _repoView = [[BCRepositoryView alloc] init];
+  [_repoView.tableView setMultipleTouchEnabled:YES];
+  self.view = _repoView;
+  [_repoView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchDown];
   [self createModel];
-  [_tableView.tableView setDelegate:self];
+  [_repoView.tableView setDelegate:self];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -62,7 +62,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  [_tableView.tableView deselectRowAtIndexPath:indexPath animated:NO];
+  [_repoView.tableView deselectRowAtIndexPath:indexPath animated:NO];
   
   if(indexPath.row == 0){
     if ( [[_dataSource.actualSelected objectAtIndex:indexPath.section] isEqual: [NSNumber numberWithBool:NO]] ) {
@@ -72,8 +72,8 @@
       for (int i = 0; i < rowsNumber; i++) {
         [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
       }
-      [[_tableView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:YES];
-      [_tableView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+      [[_repoView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:YES];
+      [_repoView.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
     }else{
       [_dataSource.actualSelected replaceObjectAtIndex:[indexPath section] withObject:[NSNumber numberWithBool:NO]];
       NSInteger rowsNumber = [_dataSource getNumberOfRowsToAddToSection:[indexPath section]];
@@ -81,17 +81,17 @@
       for (int i = 0; i < rowsNumber; i++) {
         [indexPaths addObject:[NSIndexPath indexPathForRow:i+1 inSection:[indexPath section]]];
       }
-      [[_tableView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:NO];
-      [_tableView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
+      [[_repoView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:NO];
+      [_repoView.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
     }
   }else{
     BCRepository *repo = [_dataSource getRepositoryAtIndex:indexPath];
     if( [_chosenRepositories indexOfObject:repo] == NSNotFound){
       [_chosenRepositories addObject:repo];
-      [[_tableView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:YES];
+      [[_repoView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:YES];
     }else{
       [_chosenRepositories removeObject:repo];
-      [[_tableView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:NO];
+      [[_repoView.tableView cellForRowAtIndexPath:indexPath] setHighlighted:NO];
     }
   }
 }
@@ -103,7 +103,7 @@
   if ([_chosenRepositories count]) {
     BCIssueViewController *issuesVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories];
     BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    [myDelegate.deckController setCenterController:issuesVC];
+    [myDelegate.deckController setAndPresentCenterController:issuesVC];
 //    [self.navigationController pushViewController:deckVC animated:YES];
   }else{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Empty repository list" message:@"you can't proceed until you choose some repository/ies" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -158,8 +158,8 @@
           [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[i]];
           if([allOrgs count] == (i)){
             _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
-            [_tableView.tableView setDataSource:_dataSource];
-            [_tableView.tableView reloadData];
+            [_repoView.tableView setDataSource:_dataSource];
+            [_repoView.tableView reloadData];
           }else{
             [BCOrg getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
           }
@@ -167,8 +167,8 @@
         [BCOrg getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
       }else{//set data source in case of user don't have Orgs
         _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
-        [_tableView.tableView setDataSource:_dataSource];
-        [_tableView.tableView reloadData];
+        [_repoView.tableView setDataSource:_dataSource];
+        [_repoView.tableView reloadData];
       }
     } failure:^(NSError *error) {
       [UIAlertView showWithError:error];

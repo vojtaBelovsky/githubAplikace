@@ -17,6 +17,6 @@
 @property UIButton *doneButton;
 @property UILabel *theNewIssueLabel;
 @property UILabel *theNewIssueShadowLabel;
-@property UIImageView *issueForm;
+@property UIImageView *form;
 
 @end

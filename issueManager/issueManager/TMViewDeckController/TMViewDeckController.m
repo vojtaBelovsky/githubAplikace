@@ -30,7 +30,7 @@
   
   [super loadView];
   
-  [self presentCenterController:_centerController];
+  [self setAndPresentCenterController:_centerController];
 }
 
 #pragma mark -
@@ -75,30 +75,9 @@
   _leftController = leftController;
 }
 
-- (void)setCenterController:(UIViewController *)centerController {
+- (void)setAndPresentCenterController:(UIViewController *)centerController {
   
-  _centerController = centerController;
-  [self addChildViewController:centerController];
-  [centerController didMoveToParentViewController:self];
-  
-  CGRect frame = self.view.bounds;
-  centerController.view.frame = frame;
-  
-  [UIView animateWithDuration:0.2 animations:^{
-    [self.view setAlpha:0];
-  } completion:^(BOOL finished) {
-    [self.view addSubview:centerController.view];
-    [UIView animateWithDuration:0.3 animations:^{
-      [self.view setAlpha:1];
-    }];
-  }];
-}
-
-#pragma mark -
-#pragma mark Private
-
-- (void)presentCenterController:(UIViewController *)centerController {
-  
+  UIView *previousView = self.centerController.view;
   self.centerController = centerController;
   
   [self addChildViewController:centerController];
@@ -106,8 +85,53 @@
   
   CGRect frame = self.view.bounds;
   centerController.view.frame = frame;
+
+  [centerController.view setAlpha:0];
+  [self.view addSubview:centerController.view];
+  [UIView animateWithDuration:0.5 animations:^{
+    [previousView setAlpha:0];
+    [centerController.view setAlpha:1];
+  }];
+
+
   
-  [self.view addSubview:centerController.view];  
+//  [self addChildViewController:centerController];
+//  [_centerController willMoveToParentViewController:nil];
+//  
+//  [self transitionFromViewController:_centerController toViewController:centerController duration:0.3 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//    
+//  } completion:^(BOOL finished) {
+//    [_centerController removeFromParentViewController];
+//    [centerController didMoveToParentViewController:self];
+//    _centerController = centerController;
+//  }];
+  
+//  [_centerController.view removeFromSuperview];
+//  
+//  _centerController = centerController;
+//  [self addChildViewController:centerController];
+//  [centerController didMoveToParentViewController:self];
+//  
+//  CGRect frame = self.view.bounds;
+//  centerController.view.frame = frame;
+//  [self.view addSubview:centerController.view];
+  
+}
+
+#pragma mark -
+#pragma mark Private
+
+- (void)presentCenterController:(UIViewController *)centerController {
+  
+//  self.centerController = centerController;
+//  
+//  [self addChildViewController:centerController];
+//  [centerController didMoveToParentViewController:self];
+//  
+//  CGRect frame = self.view.bounds;
+//  centerController.view.frame = frame;
+//  
+//  [self.view addSubview:centerController.view];  
 }
 
 #pragma mark -

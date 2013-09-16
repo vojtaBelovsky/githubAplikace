@@ -3,45 +3,19 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "__41-[BCRepositoryViewController createModel]_block_invoke_2119:BCRepositoryViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[dataSource objectForKey:@&quot;vojtaBelovsky.repositories&quot;];">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "-[BCIssueDataSource initWithIssues:milestones:]:BCIssueDataSource.m">
       </ContextState>
       <ContextState
-         contextName = "-[BCIssueDataSource numberOfSectionsInTableView:]:BCIssueDataSource.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[_dataSourceKeyNames count];">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "-[BCIssueCell layoutSubviews]:BCIssueCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[BCSelectAssigneeViewController getIndexPathOfSelectedRow]:BCSelectAssigneeViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[BCRepositoryViewController tableView:didDeselectRowAtIndexPath:]:BCRepositoryViewController.m">
       </ContextState>
       <ContextState
-         contextName = "-[BCIssueDetailViewController createParameters]:BCIssueDetailViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "parameters1">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[BCIssueDetailViewController initWithIssue:]:BCIssueDetailViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[BCIssueViewController tableView:viewForHeaderInSection:]:BCIssueViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[_dataSource.dataSource objectForKey:[_dataSource.dataSourceKeyNames objectAtIndex:section]]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[BCIssueDataSource initWithIssues:milestones:]:BCIssueDataSource.m">
       </ContextState>
       <ContextState
          contextName = "-[BCRepositoryDataSource tableView:cellForRowAtIndexPath:]:BCRepositoryDataSource.m">
@@ -52,13 +26,47 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[BCIssueCell layoutSubviews]:BCIssueCell.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[BCSelectAssigneeViewController getIndexPathOfSelectedRow]:BCSelectAssigneeViewController.m">
+         contextName = "-[BCRepositoryView layoutSubviews]:BCRepositoryView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[BCRepositoryViewController tableView:didSelectRowAtIndexPath:]:BCRepositoryViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[BCIssueDetailViewController createParameters]:BCIssueDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "parameters1">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__41-[BCRepositoryViewController createModel]_block_invoke_2119:BCRepositoryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[dataSource objectForKey:@&quot;vojtaBelovsky.repositories&quot;];">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BCIssueViewController tableView:viewForHeaderInSection:]:BCIssueViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_dataSource.dataSource objectForKey:[_dataSource.dataSourceKeyNames objectAtIndex:section]]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BCIssueDataSource numberOfSectionsInTableView:]:BCIssueDataSource.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_dataSourceKeyNames count];">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

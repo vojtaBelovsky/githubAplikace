@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10080C2A17E71AA500F39AFE /* repositories_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10080C2917E71AA500F39AFE /* repositories_background@2x.png */; };
 		100CC31D17DF156D007E6A6A /* TMViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 100CC31C17DF156D007E6A6A /* TMViewDeckController.m */; };
 		101C655217CF4E7E0019B896 /* gravatar-user-420.png in Resources */ = {isa = PBXBuildFile; fileRef = 101C655117CF4E7E0019B896 /* gravatar-user-420.png */; };
 		10200107175E18E9005DD92F /* BCOrg.m in Sources */ = {isa = PBXBuildFile; fileRef = 10200106175E18E9005DD92F /* BCOrg.m */; };
@@ -204,6 +205,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10080C2917E71AA500F39AFE /* repositories_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "repositories_background@2x.png"; path = "issueManager/grafika/github cutted/repositories_background@2x.png"; sourceTree = "<group>"; };
 		100CC31B17DF156D007E6A6A /* TMViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMViewDeckController.h; path = TMViewDeckController/TMViewDeckController.h; sourceTree = "<group>"; };
 		100CC31C17DF156D007E6A6A /* TMViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMViewDeckController.m; path = TMViewDeckController/TMViewDeckController.m; sourceTree = "<group>"; };
 		101C655117CF4E7E0019B896 /* gravatar-user-420.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gravatar-user-420.png"; path = "issueManager/grafika/gravatar-user-420.png"; sourceTree = "<group>"; };
@@ -721,6 +723,7 @@
 		1095E9CC175F69C2009CCEDB /* github cutted */ = {
 			isa = PBXGroup;
 			children = (
+				10080C2917E71AA500F39AFE /* repositories_background@2x.png */,
 				108E6F9C17CCD3CF00160898 /* headerBackground@2x.png */,
 				10C51D4817C76E50009637D3 /* selectMemberNotSelected@2x.png */,
 				10C51D4917C76E52009637D3 /* userMaskSelected.png */,
@@ -1402,6 +1405,7 @@
 				10C51D4B17C76E54009637D3 /* userMaskSelected.png in Resources */,
 				108E6F9D17CCD3CF00160898 /* headerBackground@2x.png in Resources */,
 				101C655217CF4E7E0019B896 /* gravatar-user-420.png in Resources */,
+				10080C2A17E71AA500F39AFE /* repositories_background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@
 #import "BCAppDelegate.h"
 #import "TMViewDeckController.h"
 
-#define VIEW_OFFSET         ( - 150.0f )
+#define VIEW_OFFSET         ( - 180.0f )
 #define ANIMATION_DURATION  0.2f
 
 #define FILLED_TEXT_FIELD_FONT_COLOR     [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
@@ -55,7 +55,7 @@
     [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user) {
       BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
       BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-      [myDelegate.deckController setCenterController:repoViewCtrl];
+      [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
 //      [self.navigationController pushViewController:repoViewCtrl animated:YES];
     } failure:^(NSError *error) {
       [UIAlertView showWithError:error];
@@ -95,7 +95,7 @@
   [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user){
     BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
     BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    [myDelegate.deckController setCenterController:repoViewCtrl];
+    [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
 //    [self.navigationController pushViewController:repoViewCtrl animated:YES];
   } failure:^(NSError *error){
     [UIAlertView showWithError:error];

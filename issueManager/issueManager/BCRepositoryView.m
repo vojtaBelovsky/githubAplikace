@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define NAV_BAR_HEIGHT    ( 44.0f )
-#define BACKGROUND_IMAGE  [UIImage imageNamed:@"repositories_gradient.png"]
+#define BACKGROUND_IMAGE  [UIImage imageNamed:@"repositories_background.png"]
 
 #define REPOSITORIES_FONT               [UIFont fontWithName:@"ProximaNova-Light" size:24]
 #define REPOSITORIES_FONT_COLOR         [UIColor colorWithRed:.44 green:.44 blue:.44 alpha:1.00]
@@ -28,9 +28,13 @@
 - (id)init {
   self = [super init];
   if ( self ) {
-    UIImage *resizableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:5 topCapHeight:64];
+    UIImage *resizableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:10 topCapHeight:86];
     _backgroundImageView = [[UIImageView alloc] initWithImage:resizableImage];
     [self addSubview:_backgroundImageView];
+    
+    _navBarView = [[UIView alloc] init];
+    [_navBarView setBackgroundColor:[UIColor clearColor]];
+    [self addSubview:_navBarView];
     
     _repositoryLabel = [[UILabel alloc] init];
     _repositoryLabel.numberOfLines = 0;
@@ -57,46 +61,44 @@
     _doneButton.layer.shadowOffset = CGSizeMake(1.0, 1.0);
     [self addSubview:_doneButton];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+    _tableView = [[UITableView alloc] init];
     [_tableView setAllowsMultipleSelection:YES];
-    _tableView.backgroundColor = REPOSITORY_BG_COLOR;
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self addSubview:_tableView];
     
-    [self setBackgroundColor:REPOSITORY_BG_COLOR];
+    [self setBackgroundColor:[UIColor clearColor]];
   }
   return self;
 }
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  CGRect frame = CGRectMake(0, 0, self.frame.size.width, NAV_BAR_HEIGHT);
+  
+  CGRect frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
   if( !CGRectEqualToRect(_backgroundImageView.frame, frame)){
     _backgroundImageView.frame = frame;
   }
+  
+  frame = CGRectMake(0, 0, self.frame.size.width, NAV_BAR_HEIGHT);
+  if( !CGRectEqualToRect(_navBarView.frame, frame)){
+    _navBarView.frame = frame;
+  }
 
-  frame.size = self.frame.size;
-  frame.size.height -= NAV_BAR_HEIGHT;
+  frame.size = CGSizeMake(self.frame.size.width, self.frame.size.height);
   frame.origin = CGPointMake(0, NAV_BAR_HEIGHT);
-  frame.size = self.frame.size;
   if ( !CGRectEqualToRect( _tableView.frame, frame ) ) {
     _tableView.frame = frame;
   }
   
-  frame.size = [_repositoryLabelShadow sizeThatFits:_backgroundImageView.frame.size];
-  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2)+1, ((self.backgroundImageView.frame.size.height-frame.size.height)/2)+1);
-  if( !CGRectEqualToRect(_repositoryLabelShadow.frame, frame)){
-    _repositoryLabelShadow.frame = frame;
-  }
-  
-  frame.size = [_repositoryLabel sizeThatFits:_backgroundImageView.frame.size];
-  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, (self.backgroundImageView.frame.size.height-frame.size.height)/2);
+  frame.size = [_repositoryLabel sizeThatFits:_navBarView.frame.size];
+  frame.origin = CGPointMake((_navBarView.frame.size.width-frame.size.width)/2, (_navBarView.frame.size.height-frame.size.height)/2);
   if( !CGRectEqualToRect(_repositoryLabel.frame, frame)){
     _repositoryLabel.frame = frame;
   }
   
-  frame.size = [_doneButton sizeThatFits:_backgroundImageView.frame.size];
-  frame.origin = CGPointMake((self.backgroundImageView.frame.size.width-frame.size.width)-10, (self.backgroundImageView.frame.size.height-frame.size.height)/2);
+  frame.size = [_doneButton sizeThatFits:_navBarView.frame.size];
+  frame.origin = CGPointMake((_navBarView.frame.size.width-frame.size.width)-10, (_navBarView.frame.size.height-frame.size.height)/2);
   if(! CGRectEqualToRect(_doneButton.frame, frame)){
     _doneButton.frame = frame;
   }

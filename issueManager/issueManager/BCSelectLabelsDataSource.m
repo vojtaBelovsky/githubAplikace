@@ -26,7 +26,7 @@
   BCSelectLabelsCell *cell = [BCSelectLabelsCell createLabelCellWithTableView:tableView];
   BCLabel *label = [_labels objectAtIndex:indexPath.row];
 
-  [cell.BCLabelColorImgView setBackgroundColor:label.color];
+  [cell.labelColorImgView setBackgroundColor:label.color];
   
   [cell.myTextLabel setText:label.name];
   

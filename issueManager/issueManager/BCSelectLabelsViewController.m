@@ -89,18 +89,4 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//  if (_checkedAssignee == nil) {
-//    _checkedAssignee = indexPath;
-//  }else{
-//    if (_checkedAssignee.row == indexPath.row) {
-//      [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//      _checkedAssignee = nil;
-//    }else{
-//      [[tableView cellForRowAtIndexPath:_checkedAssignee] setSelected:NO];
-//      _checkedAssignee = indexPath;
-//    }
-//  }
-}
-
 @end

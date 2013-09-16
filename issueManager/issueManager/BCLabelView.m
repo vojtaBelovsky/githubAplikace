@@ -11,13 +11,14 @@
 #import "BCLabel.h"
 
 #define REGULAR_FONT_SMALL  [UIFont fontWithName:@"ProximaNova-Regular" size:11]
-#define MAXIMUM_WIDTH      ( 80.0f )
-#define TOP_TEXT_OFFSET    ( 2.0f )
-#define LEFT_TEXT_OFFSET   ( 4.0f )
-#define CORNER_RADIUS      ( 4.0f )
+#define MAXIMUM_WIDTH       ( 80.0f )
+#define TOP_TEXT_OFFSET     ( 2.0f )
+#define LEFT_TEXT_OFFSET    ( 4.0f )
+#define CORNER_RADIUS       ( 4.0f )
 
-#define WHITE_COLOR        [UIColor whiteColor]
-#define BLACK_COLOR        [UIColor blackColor]
+#define WHITE_COLOR         [UIColor whiteColor]
+#define BLACK_COLOR         [UIColor blackColor]
+#define GRAY_COLOR          [UIColor colorWithRed:.95 green:.95 blue:.95 alpha:1.00]
 
 #define brightnessLeve(r,g,b) 0.299*r + 0.587*g + 0.114*b
 
@@ -39,6 +40,11 @@
       textColor = BLACK_COLOR;
     }else{
       textColor = WHITE_COLOR;
+    }
+    
+    if (brightnessLeve(red, green, blue) > 0.8) {
+      [self.layer setBorderColor:GRAY_COLOR.CGColor];
+      [self.layer setBackgroundColor:GRAY_COLOR.CGColor];
     }
     
     _myLabel = [[UILabel alloc] init];

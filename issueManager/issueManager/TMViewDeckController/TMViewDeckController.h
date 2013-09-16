@@ -18,6 +18,7 @@
 
 - (id)initWithCenterController:(UIViewController *)centerController;
 
+- (void)setAndPresentCenterController:(UIViewController *)centerController;
 - (void)slideCenterControllerToTheRightWithLeftController:(UIViewController *)leftController animated:(BOOL)animated withCompletion:(void (^) (void))completion;
 - (void)slideCenterControllerToTheLeftWithRightController:(UIViewController *)rightController animated:(BOOL)animated withCompletion:(void (^) (void))completion;
 - (void)slideCenterControllerBackAnimated:(BOOL)animated withCompletion:(void (^) (void))completion;
