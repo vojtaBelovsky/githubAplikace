@@ -10,7 +10,7 @@
 
 #define BACKGROUND_IMG    [UIImage imageNamed:@"profileHashBorder.png"]
 #define HASH_FONT_COLOR   [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
-#define HASH_FONT         [UIFont fontWithName:@"ProximaNova-Bold" size:13]
+#define HASH_FONT         [UIFont fontWithName:@"ProximaNova-Bold" size:10]
 
 @implementation BCIssueNumberView
 

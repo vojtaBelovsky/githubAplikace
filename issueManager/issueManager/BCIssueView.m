@@ -14,8 +14,8 @@
 #define OFFSET                        ( 6.0f )
 #define USER_NAME_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define REPO_NAME_FONT                [UIFont fontWithName:@"ProximaNovaCond-Light" size:15]
-#define USER_NAME_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
-#define REPO_NAME_FONT_COLOR          [UIColor colorWithRed:.52 green:.52 blue:.52 alpha:1.00];
+#define REPO_NAME_FONT_COLOR          [UIColor colorWithRed:.52 green:.52 blue:.52 alpha:1.00]
+#define USER_NAME_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 #define USER_NAME_SHADOW_FONT_COLOR   [UIColor whiteColor]
 #define ADD_NEW_ISSUE_IMAGE           [UIImage imageNamed:@"profileNavbarPlusOff.png"]
 #define ADD_NEW_ISSUE_HL_IMAGE        [UIImage imageNamed:@"profileNavbarPlusOn.png"]
@@ -37,27 +37,27 @@
       [_navigationBarView setBackgroundColor:[UIColor clearColor]];
       [self addSubview:_navigationBarView];
       
-      _userNameLabel = [[UILabel alloc] init];
-      _userNameLabel.numberOfLines = 0;
-      _userNameLabel.font = USER_NAME_FONT;
-      _userNameLabel.textColor = USER_NAME_FONT_COLOR;
-      _userNameLabel.backgroundColor = [UIColor clearColor];
-      _userNameLabel.layer.shadowOpacity = 1.0;
-      _userNameLabel.layer.shadowRadius = 0.0;
-      _userNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
-      _userNameLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
-      [self addSubview:_userNameLabel];
-      
       _repositoryNameLabel = [[UILabel alloc] init];
       _repositoryNameLabel.numberOfLines = 0;
-      _repositoryNameLabel.font = REPO_NAME_FONT;
-      _repositoryNameLabel.textColor = REPO_NAME_FONT_COLOR;
+      _repositoryNameLabel.font = USER_NAME_FONT;
+      _repositoryNameLabel.textColor = USER_NAME_FONT_COLOR;
       _repositoryNameLabel.backgroundColor = [UIColor clearColor];
       _repositoryNameLabel.layer.shadowOpacity = 1.0;
       _repositoryNameLabel.layer.shadowRadius = 0.0;
       _repositoryNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
       _repositoryNameLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
       [self addSubview:_repositoryNameLabel];
+      
+      _userNameLabel = [[UILabel alloc] init];
+      _userNameLabel.numberOfLines = 0;
+      _userNameLabel.font = REPO_NAME_FONT;
+      _userNameLabel.textColor = REPO_NAME_FONT_COLOR;
+      _userNameLabel.backgroundColor = [UIColor clearColor];
+      _userNameLabel.layer.shadowOpacity = 1.0;
+      _userNameLabel.layer.shadowRadius = 0.0;
+      _userNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
+      _userNameLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
+      [self addSubview:_userNameLabel];
       
       _chooseCollaboratorButton = [[UIButton alloc] init];
       [_chooseCollaboratorButton setImage:CHOOSE_COLLABORATOR_IMAGE forState:UIControlStateNormal];
@@ -127,16 +127,16 @@
     _chooseCollaboratorButton.frame = frame;
   }
   
-  frame.size = [_userNameLabel sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), ((self.navigationBarView.frame.size.height-frame.size.height)/2)-OFFSET);
-  if( !CGRectEqualToRect(_userNameLabel.frame, frame)){
-    _userNameLabel.frame = frame;
-  }
-  
   frame.size = [_repositoryNameLabel sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), _userNameLabel.frame.origin.y+_userNameLabel.frame.size.height);
+  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), ((self.navigationBarView.frame.size.height-frame.size.height)/2)-OFFSET);
   if( !CGRectEqualToRect(_repositoryNameLabel.frame, frame)){
     _repositoryNameLabel.frame = frame;
+  }
+  
+  frame.size = [_userNameLabel sizeThatFits:_navigationBarView.frame.size];
+  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), _repositoryNameLabel.frame.origin.y+_repositoryNameLabel.frame.size.height);
+  if( !CGRectEqualToRect(_userNameLabel.frame, frame)){
+    _userNameLabel.frame = frame;
   }
   
   frame.size = [_addNewIssueButton sizeThatFits:_navigationBarView.frame.size];

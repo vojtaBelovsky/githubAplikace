@@ -18,7 +18,7 @@
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
 #define TITLE_FONT_COLOR              [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 
-#define HASH_WIDTH            ( 30.0f )
+#define HASH_WIDTH            ( 20.0f )
 #define HASH_HEIGHT           _titleLabel.font.pointSize
 
 #define USER_VIEW_HEIGHT      ( 20.0f )

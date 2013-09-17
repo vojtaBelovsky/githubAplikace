@@ -62,13 +62,13 @@
   CGRect frame;
   
   frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)*0.65, self.frame.size.height);
-  frame.origin = CGPointMake(TITLE_OFFSET, (self.frame.size.height-frame.size.height)/2);
+  frame.origin = CGPointMake(TITLE_OFFSET, (self.frame.size.height-frame.size.height)/2+10);
   if (!CGRectEqualToRect(_title.frame, frame)) {
     _title.frame = frame;
   }
   
   frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)*0.35, self.frame.size.height);
-  frame.origin = CGPointMake(TITLE_OFFSET+_title.frame.size.width, (self.frame.size.height-frame.size.height)/2);
+  frame.origin = CGPointMake(TITLE_OFFSET+_title.frame.size.width, (self.frame.size.height-frame.size.height)/2+10);
   if (!CGRectEqualToRect(_dueIn.frame, frame)) {
     _dueIn.frame = frame;
   }

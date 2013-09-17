@@ -15,7 +15,7 @@
 #define MilestoneCellReuseIdentifier  @"MilestoneCellReuseIdentifier"
 
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
-#define NO_ISSUES                     [UIImage imageNamed:@"issueNavbarXOn.png"]
+#define NO_ISSUES_X                   [UIImage imageNamed:@"issueNavbarXOn.png"]
 
 @implementation BCIssueCell
 
@@ -39,7 +39,7 @@
     cell.issueView = nil;
     cell.userInteractionEnabled = NO;
     
-    cell.noIssuesImgView = [[UIImageView alloc] initWithImage:NO_ISSUES];
+    cell.noIssuesImgView = [[UIImageView alloc] initWithImage:NO_ISSUES_X];
     [cell addSubview:cell.noIssuesImgView];
   }
   

@@ -23,7 +23,7 @@
 @property UIButton *backButton;
 @property UIButton *closeButton;
 @property UILabel *userNameLabel;
-@property UILabel *userNameShadowLabel;
+@property UILabel *repositoryNameLabel;
 @property BCSingleIssueView *issueView;
 @property BCHeadeView *headerView;
 @property NSMutableArray *commentViews;

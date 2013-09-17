@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #define ISSUE_WIDTH         ( 300.0f )
 #define OFFSET              ( 10.0f )
-#define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:16]
+#define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:12]
 
 @class BCIssue;
 @class BCSingleIssueView;

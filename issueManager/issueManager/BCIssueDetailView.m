@@ -18,6 +18,8 @@
 #import "BCComment.h"
 #import "BCCommentView.h"
 #import "UIAlertView+errorAlert.h"
+#import "BCRepository.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define BACK_BUTTON_IMG               [UIImage imageNamed:@"issueNavbarXOff.png"]
@@ -29,12 +31,18 @@
 
 #define ISSUE_WIDTH                   ( 300.0f )
 #define OFFSET                        ( 10.f )
-#define NAV_BAR_HEIGHT                ( 70.0f )
+#define NAV_BAR_HEIGHT                ( 44.0f )
 #define HEADER_HEIGHT                 ( 40.0f )
 
 #define USER_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define USER_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 #define USER_SHADOW_FONT_COLOR   [UIColor whiteColor]
+#define USER_NAME_FONT_COLOR     [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
+#define USER_NAME_FONT           [UIFont fontWithName:@"ProximaNova-Regular" size:18]
+#define REPO_NAME_FONT           [UIFont fontWithName:@"ProximaNovaCond-Light" size:15]
+#define REPO_NAME_FONT_COLOR     [UIColor colorWithRed:.52 green:.52 blue:.52 alpha:1.00]
+
+#define USER_NAME_SHADOW_FONT_COLOR   [UIColor whiteColor]
 
 #define TITLE_FONT               [UIFont fontWithName:@"ProximaNova-Semibold" size:16]
 
@@ -59,22 +67,29 @@
       [_navigationBarView setBackgroundColor:[UIColor clearColor]];
       [self addSubview:_navigationBarView];
       
-      _userNameShadowLabel = [[UILabel alloc] init];
-      _userNameShadowLabel.numberOfLines = 0;
-      _userNameShadowLabel.font = USER_FONT;
-      _userNameShadowLabel.textColor = USER_SHADOW_FONT_COLOR;
-      _userNameShadowLabel.backgroundColor = [UIColor clearColor];
-      [_userNameShadowLabel setText:issue.assignee.userLogin];
-      [self addSubview:_userNameShadowLabel];
+      _repositoryNameLabel = [[UILabel alloc] init];
+      _repositoryNameLabel.text = issue.repository.name;
+      _repositoryNameLabel.numberOfLines = 0;
+      _repositoryNameLabel.font = USER_NAME_FONT;
+      _repositoryNameLabel.textColor = USER_NAME_FONT_COLOR;
+      _repositoryNameLabel.backgroundColor = [UIColor clearColor];
+      _repositoryNameLabel.layer.shadowOpacity = 1.0;
+      _repositoryNameLabel.layer.shadowRadius = 0.0;
+      _repositoryNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
+      _repositoryNameLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
+      [self addSubview:_repositoryNameLabel];
       
       _userNameLabel = [[UILabel alloc] init];
+      _userNameLabel.text = issue.user.userLogin;
       _userNameLabel.numberOfLines = 0;
-      _userNameLabel.font = USER_FONT;
-      _userNameLabel.textColor = USER_FONT_COLOR;
+      _userNameLabel.font = REPO_NAME_FONT;
+      _userNameLabel.textColor = REPO_NAME_FONT_COLOR;
       _userNameLabel.backgroundColor = [UIColor clearColor];
-      [_userNameLabel setText:issue.assignee.userLogin];
+      _userNameLabel.layer.shadowOpacity = 1.0;
+      _userNameLabel.layer.shadowRadius = 0.0;
+      _userNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
+      _userNameLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
       [self addSubview:_userNameLabel];
-      
       
       _backButton = [[UIButton alloc] init];
       [_backButton setImage:BACK_BUTTON_IMG forState:UIControlStateNormal];
@@ -128,18 +143,17 @@
     _backButton.frame = frame;
   }
   
-  frame.size = [_userNameShadowLabel sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2)+1, ((self.navigationBarView.frame.size.height-frame.size.height)/2)+1);
-  if(!CGRectEqualToRect(_userNameShadowLabel.frame, frame)){
-    _userNameShadowLabel.frame = frame;
+  frame.size = [_repositoryNameLabel sizeThatFits:_navigationBarView.frame.size];
+  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), ((self.navigationBarView.frame.size.height-frame.size.height)/2)-OFFSET);
+  if( !CGRectEqualToRect(_repositoryNameLabel.frame, frame)){
+    _repositoryNameLabel.frame = frame;
   }
   
   frame.size = [_userNameLabel sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), ((self.navigationBarView.frame.size.height-frame.size.height)/2));
-  if(!CGRectEqualToRect(_userNameLabel.frame, frame)){
+  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), _repositoryNameLabel.frame.origin.y+_repositoryNameLabel.frame.size.height);
+  if( !CGRectEqualToRect(_userNameLabel.frame, frame)){
     _userNameLabel.frame = frame;
   }
-  
   
   frame.size = [_closeButton sizeThatFits:_navigationBarView.frame.size];
   frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width)-15, (_navigationBarView.frame.size.height-frame.size.height)/2);

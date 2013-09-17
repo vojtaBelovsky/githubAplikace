@@ -69,7 +69,7 @@
     frame.size.height -= 2;
     _whiteRect = [[UIView alloc] initWithFrame:frame];
     [_whiteRect setBackgroundColor:[UIColor whiteColor]];
-    _whiteRect.alpha = 0.4;
+    _whiteRect.alpha = 0.3;
     [self addSubview:_whiteRect];
   }
   return self;

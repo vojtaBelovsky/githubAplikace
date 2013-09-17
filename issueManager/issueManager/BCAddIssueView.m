@@ -21,8 +21,7 @@
 #define NEW_ISSUE_SEPARATOR           [UIImage imageNamed:@"newIssueSeparator.png"]
 
 #define NEW_ISSUE_FORM_WIDTH          ( 300.0f )
-#define NEW_ISSUE_FORM_HEIGHT         ( 400.0f )
-#define NEW_ISSUE_FORM_OFFSET         ( 50.0f )
+#define NAV_BAR_OFFSET                ( 44.0f )
 #define NEW_ISSUE_FORM_LINE_WIDTH     ( 292.0f )
 #define NEW_ISSUE_FORM_LINE_HEIGHT    ( 40.0f )
 #define NEW_ISSUE_SHADOW_HEIGHT       ( 4.0f )
@@ -159,7 +158,7 @@
     _backgroundImageView.frame = frame;
   }
   
-  frame = CGRectMake(0, 0, self.frame.size.width, NEW_ISSUE_FORM_OFFSET);
+  frame = CGRectMake(0, 0, self.frame.size.width, NAV_BAR_OFFSET);
   if(! CGRectEqualToRect(_navigationBarView.frame, frame)){
     _navigationBarView.frame = frame;
   }
@@ -189,8 +188,8 @@
     _postButton.frame = frame;
   }
   
-  frame.size = CGSizeMake(NEW_ISSUE_FORM_WIDTH, NEW_ISSUE_FORM_HEIGHT);
-  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, NEW_ISSUE_FORM_OFFSET);
+  frame.size = CGSizeMake(NEW_ISSUE_FORM_WIDTH, self.frame.size.height-2*NAV_BAR_OFFSET);
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, NAV_BAR_OFFSET);
   if(! CGRectEqualToRect(_issueForm.frame, frame)){
     _issueForm.frame = frame;
   }

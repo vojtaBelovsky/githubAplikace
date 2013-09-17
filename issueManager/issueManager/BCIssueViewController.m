@@ -27,7 +27,7 @@
 
 #define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define WHITE_COLOR         [UIColor whiteColor]
-#define HEADER_HEIGHT       ( 20.0f )
+#define HEADER_HEIGHT       ( 40.0f )
 
 #define MILESTONES_KEY      @"milestones"
 #define ISSUES_KEY          @"issues"
@@ -131,11 +131,7 @@
 
 - (void)addButtonDidPress{
   BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:_nthRepository] andController:self];
-  [self.view addGestureRecognizer:_slideBack];
-  [_tableView.addNewIssueButton setEnabled:NO];
-  BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-  [myDelegate.deckController slideCenterControllerToTheLeftWithRightController:addIssueVC animated:YES withCompletion:nil];
-//  [self.navigationController pushViewController:addIssueVC animated:YES];
+  [self.navigationController pushViewController:addIssueVC animated:YES];
 }
 
 -(void)chooseButtonDidPress{
