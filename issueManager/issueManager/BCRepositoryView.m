@@ -85,7 +85,7 @@
     _navBarView.frame = frame;
   }
 
-  frame.size = CGSizeMake(self.frame.size.width, self.frame.size.height);
+  frame.size = CGSizeMake(self.frame.size.width, self.frame.size.height-NAV_BAR_HEIGHT);
   frame.origin = CGPointMake(0, NAV_BAR_HEIGHT);
   if ( !CGRectEqualToRect( _tableView.frame, frame ) ) {
     _tableView.frame = frame;

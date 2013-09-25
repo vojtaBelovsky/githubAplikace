@@ -41,7 +41,7 @@
     BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
     _assignee = currentUser;
     _milestone = nil;
-    _labels = [[NSArray alloc] init];
+    _labels = [[NSMutableArray alloc] init];
     _repository = repository;
     _myParentViewController = controller;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
@@ -198,11 +198,11 @@
     return _milestone;
 }
 
--(void)setNewLables:(NSArray *)labels{
+-(void)setNewLables:(NSMutableArray *)labels{
     _labels = labels;
 }
 
--(NSArray *)getLabels{
+-(NSMutableArray *)getLabels{
     return _labels;
 }
 

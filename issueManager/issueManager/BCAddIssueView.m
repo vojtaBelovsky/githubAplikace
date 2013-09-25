@@ -15,16 +15,18 @@
 #import "BCaddIssueButton.h"
 #import "BCAddIssueTextField.h"
 #import "BCAddIssueButtonMC.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
 #define NEW_ISSUE_SEPARATOR           [UIImage imageNamed:@"newIssueSeparator.png"]
 
-#define NEW_ISSUE_FORM_WIDTH          ( 300.0f )
-#define NAV_BAR_OFFSET                ( 44.0f )
-#define NEW_ISSUE_FORM_LINE_WIDTH     ( 292.0f )
-#define NEW_ISSUE_FORM_LINE_HEIGHT    ( 40.0f )
-#define NEW_ISSUE_SHADOW_HEIGHT       ( 4.0f )
+#define TABLE_WIDTH          ( 0.9f )
+#define LINE_WIDTH           ( 0.972f )
+#define NAV_BAR_HEIGHT       ( 44.0f )
+#define TABLE_LINE_HEIGHT    ( 40.0f )
+
+#define CAP_SIZE_FOR_FORM   ( 8.0f )
 
 #define NEW_ISSUE_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define NEW_ISSUE_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
@@ -50,22 +52,17 @@
       [_navigationBarView setBackgroundColor:[UIColor clearColor]];
       [self addSubview:_navigationBarView];
       
-      _theNewIssueShadowLabel = [[UILabel alloc] init];
-      _theNewIssueShadowLabel.numberOfLines = 0;
-      _theNewIssueShadowLabel.font = NEW_ISSUE_FONT;
-      _theNewIssueShadowLabel.textColor = NEW_ISSUE_SHADOW_FONT_COLOR;
-      _theNewIssueShadowLabel.backgroundColor = [UIColor clearColor];
-      [_theNewIssueShadowLabel setText:@"New Issue"];
-      [self addSubview:_theNewIssueShadowLabel];
-      
       _theNewIssueLabel = [[UILabel alloc] init];
       _theNewIssueLabel.numberOfLines = 0;
       _theNewIssueLabel.font = NEW_ISSUE_FONT;
       _theNewIssueLabel.textColor = NEW_ISSUE_FONT_COLOR;
       _theNewIssueLabel.backgroundColor = [UIColor clearColor];
+      _theNewIssueLabel.layer.shadowOpacity = 1.0;
+      _theNewIssueLabel.layer.shadowRadius = 0.0;
+      _theNewIssueLabel.layer.shadowColor = NEW_ISSUE_SHADOW_FONT_COLOR.CGColor;
+      _theNewIssueLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
       [_theNewIssueLabel setText:@"New Issue"];
-      [self addSubview:_theNewIssueLabel];
-      
+      [self addSubview:_theNewIssueLabel];      
       
       _cancelButton = [[UIButton alloc] init];
       _cancelButton.titleLabel.numberOfLines = 0;
@@ -89,17 +86,17 @@
       _issueForm = [[UIImageView alloc] initWithImage:resizableImage];
       [self addSubview:_issueForm];
       
-      CGSize lineSize = CGSizeMake(NEW_ISSUE_FORM_LINE_WIDTH, NEW_ISSUE_FORM_LINE_HEIGHT);
-      _issueTitle = [[BCAddIssueTextField alloc] initWithSize:lineSize Title:@"Title:"];
+      _issueTitle = [[BCAddIssueTextField alloc] initWithTitle:@"Title:"];
       [self addSubview:_issueTitle];
       
-      _addMilestone = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Milestone:"];
+      _addMilestone = [[BCaddIssueButton alloc] initWithTitle:@"Milestone:"];
       [self addSubview:_addMilestone];
       
-      _selectAssignee = [[BCaddIssueButton alloc] initWithSize:lineSize andTitle:@"Assigned:"];
+      _selectAssignee = [[BCaddIssueButton alloc] initWithTitle:@"Assigned:"];
       [self addSubview:_selectAssignee];
       
-      _selectLabels = [[BCaddIssueButtonMC alloc] initWithSize:lineSize andTitle:@"Labels:"];
+      _selectLabels = [[BCaddIssueButtonMC alloc] initWithTitle:@"Labels:"];
+      [_selectLabels setOriginalHeight:TABLE_LINE_HEIGHT];
       [self addSubview:_selectLabels];
       
       _issueBody = [[UITextView alloc] init];
@@ -111,42 +108,11 @@
     return self;
 }
 
--(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSArray *)labels{
-//    if(assignee.userId != 0){
-//        [_avatar setImageWithURL:assignee.avatarUrl placeholderImage:[UIImage imageNamed:@"gravatar-user-420.png"]];
-//        [_assignee setTitle:assignee.userLogin forState:UIControlStateNormal];
-//        [_assignee setBackgroundColor:[UIColor whiteColor]];
-//        [_assignee setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    }else{
-//        [_avatar setImage:[UIImage imageNamed:@"gravatar-user-420.png"]];
-//        [_assignee setTitle:@"nobody is assigned" forState:UIControlStateNormal];
-//        [_assignee setBackgroundColor:[UIColor grayColor]];
-//        [_assignee setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    }
-//    
-  [_addMilestone setContentWithString:milestone.title];
-  
-  [_selectAssignee setContentWithString:assignee.userLogin];
-  
-  [_selectLabels  setContentWithLabels:labels];
+-(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSMutableArray *)labels{
+  [_addMilestone setContentWithText:milestone.title];
+  [_selectAssignee setContentWithText:assignee.userLogin];
+  [_selectLabels setLabels:labels];
   [self setNeedsLayout];
-  
-  
-//
-//    if(labels.count != 0){
-//        NSMutableString *labelsInString = [[NSMutableString alloc] init];
-//        for(BCLabel *object in labels){
-//            [labelsInString insertString:object.name atIndex:[labelsInString length]];
-//            [labelsInString insertString:@" " atIndex:[labelsInString length]];
-//        }
-//        [_labels setText:labelsInString];
-//        [_labels setBackgroundColor:[UIColor whiteColor]];
-//        [_labels setTextColor:[UIColor blackColor]];
-//    }else{
-//        [_labels setText:@"no label is assigned"];
-//        [_labels setBackgroundColor:[UIColor grayColor]];
-//        [_labels setTextColor:[UIColor whiteColor]];
-//    }
 }
 
 -(void) layoutSubviews{
@@ -158,7 +124,7 @@
     _backgroundImageView.frame = frame;
   }
   
-  frame = CGRectMake(0, 0, self.frame.size.width, NAV_BAR_OFFSET);
+  frame = CGRectMake(0, 0, self.frame.size.width, NAV_BAR_HEIGHT);
   if(! CGRectEqualToRect(_navigationBarView.frame, frame)){
     _navigationBarView.frame = frame;
   }
@@ -169,18 +135,11 @@
     _cancelButton.frame = frame;
   }
   
-  frame.size = [_theNewIssueShadowLabel sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2)+1, ((self.navigationBarView.frame.size.height-frame.size.height)/2)+1);
-  if( !CGRectEqualToRect(_theNewIssueShadowLabel.frame, frame)){
-    _theNewIssueShadowLabel.frame = frame;
-  }
-  
   frame.size = [_theNewIssueLabel sizeThatFits:_navigationBarView.frame.size];
   frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), ((self.navigationBarView.frame.size.height-frame.size.height)/2));
   if( !CGRectEqualToRect(_theNewIssueLabel.frame, frame)){
     _theNewIssueLabel.frame = frame;
-  }
-  
+  }  
   
   frame.size = [_postButton sizeThatFits:_navigationBarView.frame.size];
   frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width)-15, (_navigationBarView.frame.size.height-frame.size.height)/2);
@@ -188,39 +147,36 @@
     _postButton.frame = frame;
   }
   
-  frame.size = CGSizeMake(NEW_ISSUE_FORM_WIDTH, self.frame.size.height-2*NAV_BAR_OFFSET);
-  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, NAV_BAR_OFFSET);
+  frame.size = CGSizeMake(self.frame.size.width*TABLE_WIDTH, self.frame.size.height-2*NAV_BAR_HEIGHT);
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, NAV_BAR_HEIGHT);
   if(! CGRectEqualToRect(_issueForm.frame, frame)){
     _issueForm.frame = frame;
   }
   
-  frame.size = CGSizeMake(NEW_ISSUE_FORM_LINE_WIDTH, NEW_ISSUE_FORM_LINE_HEIGHT);
-  frame.origin = CGPointMake((self.frame.size.width-NEW_ISSUE_FORM_LINE_WIDTH)/2, frame.origin.y+NEW_ISSUE_SHADOW_HEIGHT);
+  frame.size = CGSizeMake(_issueForm.frame.size.width*LINE_WIDTH, TABLE_LINE_HEIGHT);
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, NAV_BAR_HEIGHT);
   if(! CGRectEqualToRect(_issueTitle.frame, frame)){
     _issueTitle.frame = frame;
   }
   
-  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+NEW_ISSUE_FORM_LINE_HEIGHT);
+  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+TABLE_LINE_HEIGHT);
   if(! CGRectEqualToRect(_addMilestone.frame, frame)){
     _addMilestone.frame = frame;
   }
   
-  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+NEW_ISSUE_FORM_LINE_HEIGHT);
+  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+TABLE_LINE_HEIGHT);
   if (! CGRectEqualToRect(_selectAssignee.frame, frame)) {
     _selectAssignee.frame = frame;
   }
   
-  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+_selectLabels.originalHeight);
-  frame.size.height = _selectLabels.actualHeight;
+  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+TABLE_LINE_HEIGHT);
+  frame.size = [_selectLabels countMySizeWithWidth:frame.size.width];
   if (! CGRectEqualToRect(_selectLabels.frame, frame)) {
-    _selectLabels.frame = frame;
-    CGRect frame2 = _selectLabels.contentView.frame;
-    frame2.size.height = _selectLabels.actualHeight;
-    [_selectLabels.contentView setFrame:frame2];
+    [_selectLabels setFrame:frame];
   }
   
-  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+frame.size.height);
-  frame.size = CGSizeMake(frame.size.width, self.issueForm.frame.size.height-(frame.origin.y-self.navigationBarView.frame.size.height)-(2*NEW_ISSUE_SHADOW_HEIGHT));
+  frame.origin = CGPointMake(frame.origin.x, frame.origin.y+_selectLabels.frame.size.height);
+  frame.size = CGSizeMake(frame.size.width, self.issueForm.frame.size.height-frame.origin.y);
   if (! CGRectEqualToRect(_issueBody.frame, frame)) {
     _issueBody.frame = frame;
   }

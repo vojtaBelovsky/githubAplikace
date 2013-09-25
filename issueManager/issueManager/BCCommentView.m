@@ -98,12 +98,13 @@
 -(void)setEnabledForCommenting{
   [_commentTextView setEditable:YES];
   [_commentButton setHidden:NO];
+  [self setNeedsLayout];
 }
 
 -(void)setDisabledForCommenting{
   [_commentTextView setEditable:NO];
   [_commentButton setHidden:YES];
-  [self layoutIfNeeded];
+  [self setNeedsLayout];
 }
 
 -(CGSize)sizeOfViewWithWidth:(CGFloat)width{

@@ -11,9 +11,8 @@
 @interface BCAddIssueContentImgView : UIImageView
 
 @property UILabel *myTextLabel;
-@property UILabel *myTextShadowLabel;
 @property UIImageView *backgroundImgView;
 
--(void) setContentWithString:(NSString*)content;
+-(void)setMyTextLabelWitText:(NSString *)text;
 
 @end

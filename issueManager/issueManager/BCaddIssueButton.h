@@ -18,8 +18,7 @@
 @property UIImageView *separatorImgView;
 @property BCAddIssueContentImgView *contentImgView;
 
--(void) setContentWithString:(NSString*)string;
-
-- (id)initWithSize:(CGSize)size andTitle:(NSString *)title;
+-(void) setContentWithText:(NSString*)text;
+- (id)initWithTitle:(NSString *)title;
 
 @end

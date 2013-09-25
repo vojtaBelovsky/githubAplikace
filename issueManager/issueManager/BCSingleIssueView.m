@@ -80,7 +80,7 @@
   }
 }
 
-+(CGSize)sizeOfSingleIssueViewWithIssue:(BCIssue *)issue width:(CGFloat)width offset:(CGFloat)offset titleFont:(UIFont *)font showAll:(BOOL)show{
++(CGSize)sizeOfSingleIssueViewWithIssue:(BCIssue *)issue width:(CGFloat)width offset:(CGFloat)offset titleFont:(UIFont *)font showAll:(BOOL)showAll{
   CGFloat maxContentWidth = width-(2*offset);
   
   CGFloat totalHeight = [BCIssueTitleLabel sizeOfLabelWithText:issue.title font:font width:maxContentWidth].height+(2*offset);
@@ -105,7 +105,7 @@
     totalHeight += TOP_OFFSET_BETWEEN_CONTENT;
   }
   
-  if (!show) {
+  if (!showAll) {
     return CGSizeMake(width, totalHeight);
   }
   

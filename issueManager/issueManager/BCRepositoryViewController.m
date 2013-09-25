@@ -39,8 +39,12 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = YES;
+}
+
 - (void)loadView {
-  [self.navigationController setNavigationBarHidden:YES];
   _repoView = [[BCRepositoryView alloc] init];
   [_repoView.tableView setMultipleTouchEnabled:YES];
   self.view = _repoView;

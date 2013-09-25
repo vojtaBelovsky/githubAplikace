@@ -83,7 +83,7 @@
     for(NSIndexPath *object in selectedRows){
       [labels addObject:[_dataSource.labels objectAtIndex:[object row]]];
     }
-    [_controller setNewLables:[[NSArray alloc] initWithArray:labels]];
+    [_controller setNewLables:labels];
     [self.navigationController popViewControllerAnimated:YES];
   }
   [self.navigationController popViewControllerAnimated:YES];

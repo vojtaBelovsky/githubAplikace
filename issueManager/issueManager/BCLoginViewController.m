@@ -41,11 +41,7 @@
   return self;
 }
 
-
-
-- (void)loadView {
-//  [super loadView];
-  
+- (void)loadView {  
   //
   // ------------ uncomment - will log in last user automaticly ------------
   //
@@ -105,7 +101,7 @@
 - (void)forgotPasswordDidPress {
   [self hideKeyboard];
   
-#warning Dopsta funkcionalitu
+#warning Dopsat funkcionalitu
 }
 
 - (void)hideKeyboard {

@@ -14,6 +14,6 @@
 @property UITextField *textField;
 @property UIImageView *separatorImgView;
 
-- (id)initWithSize:(CGSize)size Title:(NSString *)title;
+- (id)initWithTitle:(NSString *)title;
 
 @end

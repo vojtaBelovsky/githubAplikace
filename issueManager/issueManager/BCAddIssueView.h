@@ -21,7 +21,6 @@
 @property UIButton *cancelButton;
 @property UIButton *postButton;
 @property UILabel *theNewIssueLabel;
-@property UILabel *theNewIssueShadowLabel;
 @property UIImageView *issueForm;
 @property BCAddIssueTextField *issueTitle;
 @property BCaddIssueButton *addMilestone;
@@ -30,6 +29,6 @@
 @property UITextView *issueBody;
 
 -(id) initWithController:(BCAddIssueViewController *)controller;
--(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSArray *)labels;
+-(void) rewriteContentWithAssignee:(BCUser *)assignee milestone:(BCMilestone *)milestone andLabels:(NSMutableArray *)labels;
 
 @end

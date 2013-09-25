@@ -23,9 +23,14 @@
 #import "BCCommentView.h"
 #import "BCComment.h"
 
+#define ANIMATION_DURATION ( 0.2f )
+
 @interface BCIssueDetailViewController ()
 
 @end
+
+#pragma mark -
+#pragma mark lifecycles
 
 @implementation BCIssueDetailViewController
 
@@ -37,9 +42,14 @@
     _issue = issue;
     _editedIssue = [issue copy];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillSHow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
   }
   return self;
+}
+
+-(void) dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void) loadView{
@@ -47,7 +57,9 @@
   [_issueDetailview.backButton addTarget:self action:@selector(backButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_issueDetailview.closeButton addTarget:self action:@selector(closeButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_issueDetailview.addNewCommentButton addTarget:self action:@selector(addNewCommentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
   self.view = _issueDetailview;
+  [self.view addGestureRecognizer:tapRecognizer];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -75,11 +87,13 @@
   BCCommentView *commentView = [[BCCommentView alloc] initWithComment:[[BCComment alloc] initNewComment]];
   [commentView setEnabledForCommenting];
   [commentView.commentButton addTarget:self action:@selector(commentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  [commentView.commentTextView becomeFirstResponder];
+  [commentView.commentTextView setDelegate:self];
   _issueDetailview.myNewCommentView = commentView;
   [_issueDetailview addSubview:_issueDetailview.myNewCommentView];
   _issueDetailview.myNewCommentView.alpha = 0.0f;
   
-  [UIView animateWithDuration:0.2f animations:^{
+  [UIView animateWithDuration:ANIMATION_DURATION animations:^{
     _issueDetailview.myNewCommentView.alpha = 1.0f;
   }];
   
@@ -92,10 +106,15 @@
   [[BCHTTPClient sharedInstance] postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
     [_issueDetailview.myNewCommentView setDisabledForCommenting];
     _issueDetailview.myNewCommentView = nil;
+    [_issueDetailview setNeedsLayout];
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+      [_issueDetailview.addNewCommentButton setHidden:NO];
+    }];
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     [UIAlertView showWithError:error];
   }];
 }
+
 
 //-(void) editButtionAction{
 //    if([self isEditing]){
@@ -137,15 +156,28 @@
 #pragma mark -
 #pragma mark private
 
-- (void) keyboardDidHide:(NSNotification*)notification{//zmensi velikost skrolovatelneho obsahu
-  _issueDetailview.sizeOfKeyborad = 0;
+-(void)hideKeyboard{
+  [_issueDetailview.myNewCommentView.commentTextView resignFirstResponder];
 }
 
-- (void) keyboardDidShow:(NSNotification*)notification{//zvetsi velikost skrolovatelneho obsahu
+- (void) keyboardDidHide:(NSNotification *)notification{//zmensi velikost skrolovatelneho obsahu
+  _issueDetailview.sizeOfKeyborad = 0;
+  [_issueDetailview setNeedsLayout];
+}
+
+-(void)keyboardWillSHow:(NSNotification *) notification{
   NSDictionary* keyboardInfo = [notification userInfo];
   NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
   CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
   _issueDetailview.sizeOfKeyborad = keyboardFrameBeginRect.size.height;
+  [_issueDetailview setNeedsLayout];
+}
+
+- (void) keyboardDidShow:(NSNotification *)notification{//zvetsi velikost skrolovatelneho obsahu
+  CGPoint bottomOffset = CGPointMake(0, _issueDetailview.contentSize.height-_issueDetailview.frame.size.height);
+  if (bottomOffset.y > 0) {
+    [_issueDetailview setContentOffset:bottomOffset animated:YES];
+  }
 }
 
 -(NSDictionary *) createParameters{

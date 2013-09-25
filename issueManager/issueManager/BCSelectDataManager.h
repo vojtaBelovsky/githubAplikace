@@ -17,7 +17,7 @@
 -(BCUser *)getAssignee;
 -(void)setNewMilestone:(BCMilestone *)milestone;
 -(BCMilestone *)getMilestone;
--(void)setNewLables:(NSArray *)labels;
--(NSArray *)getLabels;
+-(void)setNewLables:(NSMutableArray *)labels;
+-(NSMutableArray *)getLabels;
 
 @end

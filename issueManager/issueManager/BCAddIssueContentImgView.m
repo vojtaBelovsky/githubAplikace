@@ -7,6 +7,7 @@
 //
 
 #import "BCAddIssueContentImgView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define CONTENT_FONT_COLOR          [UIColor colorWithRed:1.00 green:1.00 blue:1.00 alpha:1.00]
 #define CONTENT_FONT_SHADOW_COLOR   [UIColor colorWithRed:.00 green:.47 blue:.64 alpha:1.00]
@@ -18,67 +19,62 @@
 
 #define NEW_ISSUE_SELECTED_OBJECT   [UIImage imageNamed:@"newIssueSelectedObject.png"]
 
-#define MAXIMUM_WIDTH   ( 150.0f )
-
 @implementation BCAddIssueContentImgView
 
 - (id)init
 {
   self = [super init];
   if (self) {
+    [self setAlpha:0.85];
     _backgroundImgView = [[UIImageView alloc] init];
     [_backgroundImgView setFrame:CGRectZero];
-    UIImage *image = [NEW_ISSUE_SELECTED_OBJECT stretchableImageWithLeftCapWidth:20 topCapHeight:0];
+    UIImage *image = [NEW_ISSUE_SELECTED_OBJECT stretchableImageWithLeftCapWidth:11 topCapHeight:11];
     [_backgroundImgView setImage:image];
     [self addSubview:_backgroundImgView];
-    
-    _myTextShadowLabel = [[UILabel alloc] init];
-    [_myTextShadowLabel setTextColor:CONTENT_FONT_SHADOW_COLOR];
-    [_myTextShadowLabel setFont:CONTENT_FONT];
-    [_myTextShadowLabel setFrame:CGRectZero];
-    [_myTextShadowLabel setBackgroundColor:[UIColor clearColor]];
-    [_backgroundImgView addSubview:_myTextShadowLabel];
     
     _myTextLabel = [[UILabel alloc] init];
     [_myTextLabel setTextColor:[UIColor whiteColor]];
     [_myTextLabel setFont:CONTENT_FONT];
     [_myTextLabel setFrame:CGRectZero];
     [_myTextLabel setBackgroundColor:[UIColor clearColor]];
-    [_backgroundImgView addSubview:_myTextLabel];
-    
-    self.frame = CGRectZero;
+    _myTextLabel.layer.shadowOpacity = 1.0;
+    _myTextLabel.layer.shadowRadius = 0.0;
+    _myTextLabel.layer.shadowColor = CONTENT_FONT_SHADOW_COLOR.CGColor;
+    _myTextLabel.layer.shadowOffset = CGSizeMake(0.7, 0.7);
+    [self addSubview:_myTextLabel];
     [self setBackgroundColor:[UIColor clearColor]];
   }
   return self;
 }
 
--(void) setContentWithString:(NSString*)content{
-  CGRect frame;
-  frame.size = [content sizeWithFont:CONTENT_FONT];
-  frame.size.width = MIN(frame.size.width, MAXIMUM_WIDTH);
-  frame.origin = CONTENT_ORIGIN;
-  
-  
-  frame.origin = CGPointZero;
-  frame.size = CGSizeMake(frame.size.width+(2*WIDTH_CONTENT_OFFSET), frame.size.height+(2*HEIGHT_CONTENT_OFFSET));
-  [_backgroundImgView setFrame:frame];
-  [self setFrame:frame];
-  
-  [_myTextLabel setText:content];
-  frame.size = [content sizeWithFont:CONTENT_FONT];
-  frame.size.width = MIN(frame.size.width, MAXIMUM_WIDTH);
-  frame.origin = CONTENT_ORIGIN;
-  [_myTextLabel setFrame:frame];
-  
-  [_myTextShadowLabel setText:content];
-  frame = CGRectMake(frame.origin.x+1, frame.origin.y+1, frame.size.width, frame.size.height);
-  [_myTextShadowLabel setFrame:frame];
+-(void)setMyTextLabelWitText:(NSString *)text{
+  [_myTextLabel setText:text];
+  CGSize size = [_myTextLabel.text sizeWithFont:CONTENT_FONT];
+  size = CGSizeMake(size.width+(2*WIDTH_CONTENT_OFFSET), size.height+(2*HEIGHT_CONTENT_OFFSET));
+  [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, size.width, size.height)];
 }
 
 -(void) setHidden:(BOOL)hidden{
+  [super setHidden:hidden];
   [_myTextLabel setHidden:hidden];
-  [_myTextShadowLabel setHidden:hidden];
   [_backgroundImgView setHidden:hidden];
+}
+
+-(void)layoutSubviews{
+  [super layoutSubviews];
+  CGRect frame = self.frame;
+  
+  frame.origin = CGPointZero;
+  if (!CGRectEqualToRect(_backgroundImgView.frame, frame)) {
+    _backgroundImgView.frame = frame;
+  }
+  
+  frame.size = [_myTextLabel.text sizeWithFont:CONTENT_FONT];
+  frame.size.width = MIN(frame.size.width, self.frame.size.width-(2*WIDTH_CONTENT_OFFSET));
+  frame.origin = CONTENT_ORIGIN;
+  if (!CGRectEqualToRect(_myTextLabel.frame, frame)) {
+    _myTextLabel.frame = frame;
+  }
 }
 
 @end

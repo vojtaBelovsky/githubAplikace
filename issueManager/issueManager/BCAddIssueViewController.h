@@ -20,7 +20,7 @@
   BCRepository *_repository;
   BCAddIssueView *_addIssueView;
   BCMilestone *_milestone;
-  NSArray *_labels;
+  NSMutableArray *_labels;
 }
 
 @property BCIssueViewController *myParentViewController;

@@ -21,10 +21,9 @@
 @property UIImageView *separatorImgView;
 @property UIView *contentView;
 @property NSMutableArray *contentImgViews;
-@property CGPoint contentOrigin;
+@property (nonatomic) NSMutableArray *labels;
 
--(void) setContentWithLabels:(NSArray*)labels;
-
-- (id)initWithSize:(CGSize)size andTitle:(NSString *)title;
+- (id)initWithTitle:(NSString *)title;
+-(CGSize)countMySizeWithWidth:(CGFloat)width;
 
 @end
