@@ -73,14 +73,14 @@
       [_cancelButton setEnabled:YES];
       [self addSubview:_cancelButton];
       
-      _postButton = [[UIButton alloc] init];
-      _postButton.titleLabel.numberOfLines = 0;
-      _postButton.titleLabel.font = DONE_AND_CANCEL_FONT;
-      [_postButton setTitleColor:DONE_AND_CANCEL_FONT_COLOR forState:UIControlStateNormal];
-      _postButton.titleLabel.backgroundColor = [UIColor clearColor];
-      [_postButton setTitle:@"POST" forState:UIControlStateNormal];
-      [_postButton setEnabled:YES];
-      [self addSubview:_postButton];
+      _createButton = [[UIButton alloc] init];
+      _createButton.titleLabel.numberOfLines = 0;
+      _createButton.titleLabel.font = DONE_AND_CANCEL_FONT;
+      [_createButton setTitleColor:DONE_AND_CANCEL_FONT_COLOR forState:UIControlStateNormal];
+      _createButton.titleLabel.backgroundColor = [UIColor clearColor];
+      [_createButton setTitle:@"CREATE" forState:UIControlStateNormal];
+      [_createButton setEnabled:YES];
+      [self addSubview:_createButton];
       
       resizableImage = [BACKGROUND_IMAGE_FOR_FORM stretchableImageWithLeftCapWidth:8 topCapHeight:8];
       _issueForm = [[UIImageView alloc] initWithImage:resizableImage];
@@ -141,10 +141,10 @@
     _theNewIssueLabel.frame = frame;
   }  
   
-  frame.size = [_postButton sizeThatFits:_navigationBarView.frame.size];
+  frame.size = [_createButton sizeThatFits:_navigationBarView.frame.size];
   frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width)-15, (_navigationBarView.frame.size.height-frame.size.height)/2);
-  if(! CGRectEqualToRect(_postButton.frame, frame)){
-    _postButton.frame = frame;
+  if(! CGRectEqualToRect(_createButton.frame, frame)){
+    _createButton.frame = frame;
   }
   
   frame.size = CGSizeMake(self.frame.size.width*TABLE_WIDTH, self.frame.size.height-2*NAV_BAR_HEIGHT);

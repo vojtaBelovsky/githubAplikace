@@ -32,6 +32,8 @@
 @property BOOL addedNewComment;
 @property CGFloat sizeOfKeyborad;
 
--(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
+-(id) initWithIssue:(BCIssue *)issue withComments:(NSMutableArray*)comments andController:(BCIssueDetailViewController *)controller;
+
+-(void)setCommentViewsWithComments:(NSArray*)comments;
 
 @end

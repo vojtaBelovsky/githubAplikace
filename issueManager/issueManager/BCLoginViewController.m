@@ -21,6 +21,8 @@
 
 #define FILLED_TEXT_FIELD_FONT_COLOR     [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00];
 
+#define FORGOT_PASSWD_URL   [[NSURL alloc] initWithString:@"https://github.com/sessions/forgot_password"]
+
 @interface BCLoginViewController ()
 - (void)animateViewWithFrame:(CGRect)frame;
 - (void)loginButtonDidPress;
@@ -100,8 +102,7 @@
 
 - (void)forgotPasswordDidPress {
   [self hideKeyboard];
-  
-#warning Dopsat funkcionalitu
+  [[UIApplication sharedApplication] openURL:FORGOT_PASSWD_URL];
 }
 
 - (void)hideKeyboard {

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BCSelectDataManager.h"
 @class BCRepository;
 @class BCUser;
 @class BCAddIssueView;
@@ -15,16 +14,19 @@
 @class BCIssueViewController;
 
 @interface
-  BCAddIssueViewController : UIViewController <UITextFieldDelegate,UITextViewDelegate, BCSelectDataManager>{
+  BCAddIssueViewController : UIViewController <UITextFieldDelegate,UITextViewDelegate>{
 @private
   BCRepository *_repository;
   BCAddIssueView *_addIssueView;
-  BCMilestone *_milestone;
-  NSMutableArray *_labels;
 }
 
+@property NSArray *labels;
+@property NSArray *milestones;
+@property NSArray *collaborators;
+@property BCMilestone *checkedMilestone;
+@property BCUser *checkedAssignee;
+@property NSArray *checkedLabels;
 @property BCIssueViewController *myParentViewController;
-@property BCUser *assignee;
 
 - (id)initWithRepository:(BCRepository *)repository andController:(BCIssueViewController *)controller;
 

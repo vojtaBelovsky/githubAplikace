@@ -12,8 +12,8 @@
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define NAV_BAR_HEIGHT                ( 44.0f )
 #define OFFSET                        ( 6.0f )
-#define USER_NAME_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
-#define REPO_NAME_FONT                [UIFont fontWithName:@"ProximaNovaCond-Light" size:15]
+#define USER_NAME_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:15]
+#define REPO_NAME_FONT                [UIFont fontWithName:@"ProximaNovaCond-Light" size:12]
 #define REPO_NAME_FONT_COLOR          [UIColor colorWithRed:.52 green:.52 blue:.52 alpha:1.00]
 #define USER_NAME_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 #define USER_NAME_SHADOW_FONT_COLOR   [UIColor whiteColor]
@@ -72,6 +72,7 @@
       _tableViews = [[UIScrollView alloc] init];
       [_tableViews setPagingEnabled:YES];
       [_tableViews setBackgroundColor:[UIColor clearColor]];
+      [_tableViews setShowsHorizontalScrollIndicator:NO];
       [self addSubview:_tableViews];
       
       _allTableViews = [[NSMutableArray alloc] initWithCapacity:_numberOfRepos];
@@ -80,9 +81,17 @@
         currentTableView = [[UITableView alloc] init];
         [currentTableView setBackgroundColor:[UIColor clearColor]];
         [currentTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [currentTableView setShowsVerticalScrollIndicator:NO];
         [_allTableViews addObject:currentTableView];
         [_tableViews addSubview:currentTableView];
       }
+      
+      _paginator = [[UILabel alloc] init];
+      [_paginator setAlpha:0];
+      [_paginator setFont:REPO_NAME_FONT];
+      [_paginator setTextColor:REPO_NAME_FONT_COLOR];
+      [_paginator setBackgroundColor:[UIColor clearColor]];
+      [self addSubview:_paginator];  
     }
     return self;
 }
@@ -92,15 +101,29 @@
   [self.userNameLabel setText:userName];
 }
 
--(void)setRepoName:(NSString *)repoName{
-  [UIView animateWithDuration:0.1f animations:^{
-    [self.repositoryNameLabel setAlpha:0.0f];
+-(void)animatePaginatorWithCurrentRepoNumber:(int)currentRepoNumber{
+  currentRepoNumber++;
+  [_paginator setText:[[NSString alloc] initWithFormat:@"%d / %d", currentRepoNumber, _numberOfRepos]];
+  [UIView animateWithDuration:0.5f animations:^{
+    [_paginator setAlpha:1];
   } completion:^(BOOL finished) {
     if (finished) {
-      [self.repositoryNameLabel setText:repoName];
+     [UIView animateWithDuration:0.5f animations:^{
+        [_paginator setAlpha:0];
+     }];
+    }
+  }];
+}
+
+-(void)setRepoName:(NSString *)repoName{
+  [UIView animateWithDuration:0.1f animations:^{
+    [_repositoryNameLabel setAlpha:0];
+  } completion:^(BOOL finished) {
+    if (finished) {
+      [_repositoryNameLabel setText:repoName];
       [self setNeedsLayout];
       [UIView animateWithDuration:0.2f animations:^{
-        [self.repositoryNameLabel setAlpha:1.0f];
+        [_repositoryNameLabel setAlpha:1];
       } completion:^(BOOL finished) {
       }];
     }
@@ -159,6 +182,12 @@
   for (int i = 0; i < _numberOfRepos; i++) {
     frame.origin.x = i*frame.size.width;
     [[_allTableViews objectAtIndex:i] setFrame:frame];
+  }
+  
+  frame.size = [_paginator sizeThatFits:self.frame.size];
+  frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, self.frame.size.height-NAV_BAR_HEIGHT);
+  if (!CGRectEqualToRect(_paginator.frame, frame)) {
+    _paginator.frame = frame;
   }
 }
 

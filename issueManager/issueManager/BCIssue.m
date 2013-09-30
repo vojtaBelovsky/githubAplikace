@@ -13,6 +13,7 @@
 #import "BCRepository.h"
 #import "BCLabel.h"
 #import "UIAlertView+errorAlert.h"
+#import "BCComment.h"
 
 #define PAGINATION 30
 
@@ -143,7 +144,8 @@
     int i = 0;
     for(NSDictionary *object in responseIssues){
       [issues addObject:[MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:object error:nil]];
-      [[issues objectAtIndex:i] setRepository:repository];
+      BCIssue *myIssue = [issues objectAtIndex:i];
+      [myIssue setRepository:repository];
       i++;
     }
     success( issues );

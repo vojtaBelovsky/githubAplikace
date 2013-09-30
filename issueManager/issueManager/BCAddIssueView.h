@@ -19,7 +19,7 @@
 @property UIImageView *backgroundImageView;
 @property UIView *navigationBarView;
 @property UIButton *cancelButton;
-@property UIButton *postButton;
+@property UIButton *createButton;
 @property UILabel *theNewIssueLabel;
 @property UIImageView *issueForm;
 @property BCAddIssueTextField *issueTitle;

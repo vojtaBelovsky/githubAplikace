@@ -13,11 +13,10 @@
 
 @interface BCCollaboratorsViewController : UIViewController<UITableViewDelegate>
 
-@property NSArray *repositories;
 @property BCCollaboratorsDataSource *dataSource;
 @property BCCollaboratorsView *tableView;
 @property BCIssueViewController* issueViewCtrl;
 
-- (id)initWithRepositories:(NSArray *)repositories andIssueViewCtrl:(BCIssueViewController *)issueViewCtrl;
+- (id)initWithCollaborators:(NSArray *)collaborators andIssueViewCtrl:(BCIssueViewController *)issueViewCtrl;
 
 @end

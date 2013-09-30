@@ -10,7 +10,7 @@
 
 @interface BCSelectAssigneeDataSource : NSObject<UITableViewDataSource> 
 
-@property BOOL isSelectedAssignee;
+
 @property NSMutableArray *collaborators;
 
 - (id)initWithCollaborators:(NSArray *)collaborators;

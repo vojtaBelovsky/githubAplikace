@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BCSelectDataManager.h"
 @class BCIssue;
 @class BCIssueDetailView;
 @class BCUser;

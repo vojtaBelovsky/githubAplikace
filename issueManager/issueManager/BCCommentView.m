@@ -22,12 +22,12 @@
 #define BEAK_WIDTH          ( 10.0f )
 
 #define BACKGROUND          [UIImage imageNamed:@"issueCommentBackground.png"]
-#define TIME_FONT           [UIFont fontWithName:@"ProximaNova-Light" size:12]
+#define TIME_FONT           [UIFont fontWithName:@"ProximaNova-Light" size:11]
 #define USER_FONT           [UIFont fontWithName:@"ProximaNova-Semibold" size:12]
 #define HEADER_FONT_COLOR   [UIColor colorWithRed:.67 green:.67 blue:.67 alpha:1.00]
 #define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
 #define COMMENT_MASK        [UIImage imageNamed:@"commentMask.png"]
-#define BUTTON_FONT         [UIFont fontWithName:@"ProximaNova-Regular" size:14]
+#define BUTTON_FONT         [UIFont fontWithName:@"ProximaNova-Regular" size:12]
 #define BUTTON_FONT_COLOR   [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 
 #define WIDTH_OF_COMMENT_TEXT_VIEW_WITH_WIDTH(width) width-(AVATAR_WIDTH+BEAK_WIDTH)
@@ -85,6 +85,13 @@
 }
 
 #pragma mark - private
+
+//-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+//  if([text isEqualToString:@"\n"]) {
+//    [self setNeedsLayout];
+//  }
+//  return YES;
+//}
 
 -(void)textViewDidChange:(UITextView *)textView{
   if (textView.contentSize.height != _lastContentHeight) {

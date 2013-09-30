@@ -53,13 +53,19 @@
 }
 
 -(void) loadView{
-  _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue andController:self];
+  _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue withComments:nil andController:self];
   [_issueDetailview.backButton addTarget:self action:@selector(backButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_issueDetailview.closeButton addTarget:self action:@selector(closeButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_issueDetailview.addNewCommentButton addTarget:self action:@selector(addNewCommentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
   self.view = _issueDetailview;
   [self.view addGestureRecognizer:tapRecognizer];
+  
+  [BCComment getCommentsForIssue:_issue withSuccess:^(NSMutableArray *comments) {
+    [_issueDetailview setCommentViewsWithComments:comments];
+  } failure:^(NSError *error) {
+    [UIAlertView showWithError:error];
+  }];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -88,7 +94,6 @@
   [commentView setEnabledForCommenting];
   [commentView.commentButton addTarget:self action:@selector(commentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [commentView.commentTextView becomeFirstResponder];
-  [commentView.commentTextView setDelegate:self];
   _issueDetailview.myNewCommentView = commentView;
   [_issueDetailview addSubview:_issueDetailview.myNewCommentView];
   _issueDetailview.myNewCommentView.alpha = 0.0f;

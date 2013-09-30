@@ -39,13 +39,14 @@
   self = [super init];
   if (self) {
     BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
-    _assignee = currentUser;
-    _milestone = nil;
-    _labels = [[NSMutableArray alloc] init];
+    _checkedAssignee = currentUser;
+    _checkedMilestone = nil;
+    _checkedLabels = [[NSMutableArray alloc] init];
     _repository = repository;
     _myParentViewController = controller;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [self getData];
   }
   return self;
 }
@@ -62,21 +63,17 @@
   
   UITapGestureRecognizer *addMilestoneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectMilestoneVC)];
   [_addIssueView.addMilestone addGestureRecognizer:addMilestoneTapRecognizer];
-  
   UITapGestureRecognizer *selectAssigneeTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectAssigneVC)];
   [_addIssueView. selectAssignee addGestureRecognizer:selectAssigneeTapRecognizer];
-  
   UITapGestureRecognizer *selectLabelsTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectLabelsVC)];
   [_addIssueView.selectLabels addGestureRecognizer:selectLabelsTapRecognizer];
-  
   [_addIssueView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-  [_addIssueView.postButton addTarget:self action:@selector(postButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-  
+  [_addIssueView.createButton addTarget:self action:@selector(createButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_addIssueView.issueBody setDelegate:self];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    [_addIssueView rewriteContentWithAssignee:_assignee milestone:_milestone andLabels:_labels];
+    [_addIssueView rewriteContentWithAssignee:_checkedAssignee milestone:_checkedMilestone andLabels:_checkedLabels];
 }
 
 #pragma mark -
@@ -86,8 +83,7 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)postButtonDidPress{
-  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues", _repository.owner.userLogin, _repository.name];
+-(void)createButtonDidPress{
   NSMutableDictionary *params = [self createParameters];
   if ([params objectForKey:@"title"] == [NSNull null]) {
     [UIAlertView showWithError:[[NSError alloc] initWithDomain:@"EMPTY TITLE" code:13 userInfo:nil]];
@@ -99,11 +95,13 @@
     }
   }
   
+  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues", _repository.owner.userLogin, _repository.name];  
   if ([(NSString*)[params objectForKey:@"body"] isEqualToString:@"What is the problem?"]) {
     [params setObject:@"" forKey:@"body"];
   }
   [[BCHTTPClient sharedInstance] postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
     BCIssue *newIssue = [MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:responseObject error:nil];
+    [newIssue setRepository:_repository];
     [_myParentViewController addNewIssue:newIssue];
     [self.navigationController popViewControllerAnimated:YES];
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -114,6 +112,36 @@
 
 #pragma mark -
 #pragma mark private
+
+-(void)getData{
+  [self getLabels];
+  [self getMilestones];
+  [self getCollaborators];
+}
+
+-(void)getLabels{
+  [BCRepository getAllLabelsOfRepository:_repository withSuccess:^(NSArray *allLabels) {
+    _labels = allLabels;
+  } failure:^(NSError *error) {
+    NSLog(@"fail");
+  }];
+}
+
+-(void)getMilestones{
+  [BCRepository getAllMilestonesOfRepository:_repository withSuccess:^(NSArray *allMilestones) {
+    _milestones = allMilestones;
+  } failure:^(NSError *error) {
+    NSLog(@"fail");
+  }];
+}
+
+-(void)getCollaborators{
+  [BCRepository getAllCollaboratorsOfRepository:_repository withSuccess:^(NSArray *allCollaborators) {
+    _collaborators = allCollaborators;
+  } failure:^(NSError *error) {
+    NSLog(@"fail");
+  }];
+}
 
 - (void) keyboardDidHide:(NSNotification*)notification{//zmensi velikost skrolovatelneho obsahu
     NSDictionary* keyboardInfo = [notification userInfo];
@@ -132,33 +160,33 @@
 }
 
 -(void)createAndPushSelectAssigneVC{
-    BCSelectAssigneeViewController *selectAssigneeVC = [[BCSelectAssigneeViewController alloc] initWithRepository:_repository andController:self];
+  BCSelectAssigneeViewController *selectAssigneeVC = [[BCSelectAssigneeViewController alloc] initWithController:self];
     [self.view endEditing:YES];
     [self.navigationController pushViewController:selectAssigneeVC animated:YES];
 }
 
 -(void)createAndPushSelectMilestoneVC{
-    BCSelectMilestoneViewController *selectMilestoneVC = [[BCSelectMilestoneViewController alloc] initWithRepository:_repository andController:self];
+  BCSelectMilestoneViewController *selectMilestoneVC = [[BCSelectMilestoneViewController alloc] initWithController:self];
     [self.view endEditing:YES];
     [self.navigationController pushViewController:selectMilestoneVC animated:YES];
 }
 
 -(void)createAndPushSelectLabelsVC{
-    BCSelectLabelsViewController *selectLabelsVC = [[BCSelectLabelsViewController alloc] initWithRepository:_repository andController:self];
+  BCSelectLabelsViewController *selectLabelsVC = [[BCSelectLabelsViewController alloc] initWithController:self];
     [self.view endEditing:YES];
     [self.navigationController pushViewController:selectLabelsVC animated:YES];
 }
 
 -(NSMutableDictionary *)createParameters{
   NSMutableArray *labelsNames = [[NSMutableArray alloc] init];
-  for(BCLabel *object in _labels){
+  for(BCLabel *object in _checkedLabels){
     [labelsNames addObject:object.name];
   }
   NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                 _addIssueView.issueTitle.textField.text ?: [NSNull null], @"title",
                                 _addIssueView.issueBody.text ?: [NSNull null], @"body",
-                                _assignee.userLogin ?: [NSNull null], @"assignee",
-                                _milestone.number ?: [NSNull null], @"milestone",
+                                _checkedAssignee.userLogin ?: [NSNull null], @"assignee",
+                                _checkedMilestone.number ?: [NSNull null], @"milestone",
                                 labelsNames ?: [NSNull null], @"labels",
                                 nil];
   return parameters;
@@ -178,34 +206,5 @@
     textView.textColor = BODY_FONT_COLOR;
   }
 }
-
-#pragma mark -
-#pragma mark BCSelectDataManagerProtocolMethods
-
--(void)setNewAssignee:(BCUser *)assignee{
-    _assignee = assignee;
-}
-
--(BCUser *)getAssignee{
-    return _assignee;
-}
-
--(void)setNewMilestone:(BCMilestone *)milestone{
-    _milestone = milestone;
-}
-
--(BCMilestone *)getMilestone{
-    return _milestone;
-}
-
--(void)setNewLables:(NSMutableArray *)labels{
-    _labels = labels;
-}
-
--(NSMutableArray *)getLabels{
-    return _labels;
-}
-
-
 
 @end

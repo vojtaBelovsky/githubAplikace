@@ -80,7 +80,6 @@
       [self addSubview:_form];
       
       _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
-      //      [_tableView setAllowsMultipleSelection:YES];
       _tableView.backgroundColor = [UIColor clearColor];
       _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       [self addSubview:_tableView];

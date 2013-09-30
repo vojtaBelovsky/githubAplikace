@@ -12,8 +12,6 @@
 #import "BCSingleIssueView.h"
 #import "BCMilestone.h"
 
-#define NO_MILESTONE @"No milestone"
-
 @implementation BCIssueDataSource
 
 -(id) initWithIssues:(NSMutableArray *)issues milestones:(NSMutableArray *)milestones{
@@ -26,14 +24,14 @@
     for (BCMilestone *milestone in milestones) {
       [self setDatasourcePairWithKeyName:milestone.title];
     }
-    [self setDatasourcePairWithKeyName:NO_MILESTONE];
+    [self setDatasourcePairWithKeyName:WITHOUT_MILESTONE];
     
     //filling sections with data
     for (BCIssue *issue in issues) {
       if ([milestones containsObject:issue.milestone]) {
         [(NSMutableArray *)[_dataSource objectForKey:issue.milestone.title] addObject:issue];
       }else{
-        [(NSMutableArray *)[_dataSource objectForKey:NO_MILESTONE] addObject:issue];
+        [(NSMutableArray *)[_dataSource objectForKey:WITHOUT_MILESTONE] addObject:issue];
       }
     }
     
@@ -80,7 +78,7 @@
 
 -(void)addNewMilstone:(NSString *)milestoneName withIssue:(BCIssue *)issue{
   NSMutableArray *dataSourceIssues = [[NSMutableArray alloc] initWithObjects:issue, nil];
-  if ([milestoneName isEqualToString:NO_MILESTONE]) {
+  if ([milestoneName isEqualToString:WITHOUT_MILESTONE]) {
     //if issue has no milestone and is only one, I will create new section and put it
     //at the end of the table
     [_dataSourceKeyNames addObject:milestoneName];
@@ -103,10 +101,10 @@
 
 -(void)addNewIssue:(BCIssue *)newIssue{
   if (newIssue.milestone == nil) {
-    if ([_dataSourceKeyNames containsObject:NO_MILESTONE]) {
-      [(NSMutableArray *)[_dataSource objectForKey:NO_MILESTONE] addObject:newIssue];
+    if ([_dataSourceKeyNames containsObject:WITHOUT_MILESTONE]) {
+      [(NSMutableArray *)[_dataSource objectForKey:WITHOUT_MILESTONE] addObject:newIssue];
     }else{
-      [self addNewMilstone:NO_MILESTONE withIssue:newIssue];
+      [self addNewMilstone:WITHOUT_MILESTONE withIssue:newIssue];
     }
   }else{
     if ([_dataSourceKeyNames containsObject:newIssue.milestone.title]) {

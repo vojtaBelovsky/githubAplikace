@@ -8,7 +8,7 @@
 
 #import "BCIssueBodyLabel.h"
 
-#define BODY_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:16]
+#define BODY_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:13]
 #define BODY_FONT_COLOR    [UIColor colorWithRed:.41 green:.41 blue:.41 alpha:1.00]
 
 @implementation BCIssueBodyLabel

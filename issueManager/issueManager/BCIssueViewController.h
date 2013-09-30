@@ -19,6 +19,7 @@
   BCIssueView *_tableView;
   int _nthRepository;
   NSMutableArray *_allDataSources;
+  NSMutableArray *_allCollaborators;
 }
 @property   UITapGestureRecognizer *slideBack;
 @property TMViewDeckController *deckController;

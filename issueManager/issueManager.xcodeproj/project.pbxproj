@@ -254,7 +254,6 @@
 		102B8B5C172FE2FB003BA22F /* BCAddIssueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCAddIssueView.m; sourceTree = "<group>"; };
 		102B8B67172FF787003BA22F /* UIAlertView+errorAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+errorAlert.h"; sourceTree = "<group>"; };
 		102B8B68172FF78B003BA22F /* UIAlertView+errorAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+errorAlert.m"; sourceTree = "<group>"; };
-		102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectDataManager.h; sourceTree = "<group>"; };
 		104105D61757709C003B0B9F /* BCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLoginViewController.h; sourceTree = "<group>"; };
 		104105D71757709C003B0B9F /* BCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLoginViewController.m; sourceTree = "<group>"; };
 		104105DD175770DE003B0B9F /* BCLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLoginView.h; sourceTree = "<group>"; };
@@ -1115,7 +1114,6 @@
 		10F32EA3172526B2005E80F8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				102B8B6B17339EAA003BA22F /* BCSelectDataManager.h */,
 				100CC31717DF1545007E6A6A /* deckView */,
 				10BAB0CD17C5F42F00056A1D /* collaborators */,
 				10F8190717B28B11003822D6 /* headerView */,

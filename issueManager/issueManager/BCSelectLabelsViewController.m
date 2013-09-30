@@ -7,10 +7,11 @@
 //
 
 #import "BCSelectLabelsViewController.h"
-#import "BCSelectDataManager.h"
 #import "BCSelectLabelsDataSource.h"
 #import "BCSelectLabelsView.h"
 #import "BCRepository.h"
+#import "BCAddIssueViewController.h"
+#import "BCLabel.h"
 
 @interface BCSelectLabelsViewController ()
 
@@ -18,13 +19,11 @@
 
 @implementation BCSelectLabelsViewController
 
-- (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller
+- (id)initWithController:(BCAddIssueViewController *)controller
 {
   self = [super init];
   if (self) {
-    _repository = repository;
     _controller = controller;
-    _checkedLabels = [[NSMutableArray alloc] init];
   }
   return self;
 }
@@ -35,29 +34,25 @@
   [self setView:_BCSelectLabelsView];
   [_BCSelectLabelsView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_BCSelectLabelsView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-  [self createModel];
+  [self createModelWithLabels:_controller.labels withCheckedLabels:_controller.checkedLabels];
 }
 
 #pragma mark -
 #pragma mark private
 
--(void)createModel{
-  [BCRepository getAllLabelsOfRepository:_repository withSuccess:^(NSArray *allLabels) {
-    _dataSource = [[BCSelectLabelsDataSource alloc] initWithLables:allLabels];
-    [_BCSelectLabelsView.tableView setDataSource:_dataSource];
-    [_BCSelectLabelsView.tableView reloadData];
-    NSArray *checkedLabels = [_controller getLabels];
-    if(checkedLabels != nil){
-      for (BCLabel *object in checkedLabels) {
-        [_checkedLabels addObject:[self getIndexPathOfLabel:object]];
-      }
+-(void)createModelWithLabels:(NSArray*)labels withCheckedLabels:(NSArray*)checkedLabels{
+  
+  _dataSource = [[BCSelectLabelsDataSource alloc] initWithLables:labels];
+  [_BCSelectLabelsView.tableView setDataSource:_dataSource];
+  if(checkedLabels != nil){
+    for (BCLabel *object in checkedLabels) {
+      [_checkedLabels addObject:[self getIndexPathOfLabel:object]];
     }
-    for (NSIndexPath *object in _checkedLabels) {
-      [_BCSelectLabelsView.tableView selectRowAtIndexPath:object animated:NO scrollPosition:UITableViewScrollPositionNone];
-    }
-  } failure:^(NSError *error) {
-    NSLog(@"fail");
-  }];
+  }
+  for (NSIndexPath *object in _checkedLabels) {
+    [_BCSelectLabelsView.tableView selectRowAtIndexPath:object animated:NO scrollPosition:UITableViewScrollPositionNone];
+  }
+  [_BCSelectLabelsView.tableView reloadData];
 }
 
 -(NSIndexPath*)getIndexPathOfLabel:(BCLabel *)label{
@@ -77,13 +72,13 @@
   NSArray *selectedRows = [_BCSelectLabelsView.tableView indexPathsForSelectedRows];
   
   if ([selectedRows count] == 0) {
-    [_controller setNewLables:nil];
+    [_controller setCheckedLabels:nil];
   }else{
     NSMutableArray *labels = [[NSMutableArray alloc] init];
     for(NSIndexPath *object in selectedRows){
       [labels addObject:[_dataSource.labels objectAtIndex:[object row]]];
     }
-    [_controller setNewLables:labels];
+    [_controller setCheckedLabels:labels];
     [self.navigationController popViewControllerAnimated:YES];
   }
   [self.navigationController popViewControllerAnimated:YES];

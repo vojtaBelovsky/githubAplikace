@@ -10,9 +10,9 @@
 #import "BCRepository.h"
 #import "BCSelectMilestoneDataSource.h"
 #import "BCSelectMilestoneView.h"
-#import "BCSelectDataManager.h"
 #import "BCMilestone.h"
 #import "BCSelectMilestoneCell.h"
+#import "BCAddIssueViewController.h"
 
 #define NEW_ISSUE_CHECK_ON            [UIImage imageNamed:@"newIssueCheckOn.png"]
 #define NEW_ISSUE_CHECK_OFF           [UIImage imageNamed:@"newIssueCheckOff.png"]
@@ -23,11 +23,10 @@
 
 @implementation BCSelectMilestoneViewController
 
-- (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller
+- (id)initWithController:(BCAddIssueViewController *)controller
 {
   self = [super init];
   if (self) {
-    _repository = repository;
     _controller = controller;
   }
   return self;
@@ -39,39 +38,25 @@
   [self setView:_selectMilestoneView];
   [_selectMilestoneView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_selectMilestoneView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-  [self createModel];
-}
-
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-  if( _checkedMilestone != nil){
-    if (indexPath.row == _checkedMilestone.row) {
-      [cell setSelected:YES];
-    }
-  }
+  [self createModelWithMilestones:_controller.milestones andCheckedMilestone:_controller.checkedMilestone];
 }
 
 #pragma mark -
 #pragma mark private
 
--(void)createModel{
-  [BCRepository getAllMilestonesOfRepository:_repository withSuccess:^(NSArray *allMilestones) {
-    _dataSource = [[BCSelectMilestoneDataSource alloc] initWithMilestones:allMilestones];
-    [_selectMilestoneView.tableView setDataSource:_dataSource];
-    if([_controller getMilestone] == nil){
-      _checkedMilestone = nil;
-    }else{
-      _checkedMilestone = [self getIndexPathOfSelectedRow];
-    }
-    [_selectMilestoneView.tableView reloadData];
-  } failure:^(NSError *error) {
-    NSLog(@"fail");
-  }];
+-(void)createModelWithMilestones:(NSArray*)milestones andCheckedMilestone:(BCMilestone*)checkedMilestone {
+  _dataSource = [[BCSelectMilestoneDataSource alloc] initWithMilestones:milestones];
+  [_selectMilestoneView.tableView setDataSource:_dataSource];
+  if(checkedMilestone != nil){
+    _checkedMilestone = [self getIndexPathOfMilestone:checkedMilestone];
+    [_selectMilestoneView.tableView selectRowAtIndexPath:_checkedMilestone animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+  }else{
+    _checkedMilestone = nil;
+  }
 }
 
-
-
--(NSIndexPath*)getIndexPathOfSelectedRow{
-  NSUInteger row = [_dataSource.milestones indexOfObject:[_controller getMilestone]];
+-(NSIndexPath*)getIndexPathOfMilestone:(BCMilestone*)milestone{
+  NSUInteger row = [_dataSource.milestones indexOfObject:milestone];
   return [NSIndexPath indexPathForRow:row inSection:0];
 }
 
@@ -84,9 +69,9 @@
 
 -(void) doneButtonDidPress{
   if (_checkedMilestone == nil) {
-    [_controller setNewMilestone:nil];
+    [_controller setCheckedMilestone:nil];
   }else{
-    [_controller setNewMilestone:[_dataSource.milestones objectAtIndex:_checkedMilestone.row]];
+    [_controller setCheckedMilestone:[_dataSource.milestones objectAtIndex:_checkedMilestone.row]];
   }
   [self.navigationController popViewControllerAnimated:YES];
 }

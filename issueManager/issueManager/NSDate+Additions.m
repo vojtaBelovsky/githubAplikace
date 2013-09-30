@@ -20,36 +20,36 @@
   if (minutes > 0) {
     
     if ( minutes < 60.0f ) {
-      return [NSString stringWithFormat:NSLocalizedString(@"Due in %d minutes", @""), (int)minutes];
+      return [NSString stringWithFormat:NSLocalizedString(@"%d mins", @""), (int)minutes];
     }
     if ( minutes < 1440.0f ) {
-      return [NSString stringWithFormat:NSLocalizedString(@"Due in %d hours", @""), (int)(minutes / 60.0f)];
+      return [NSString stringWithFormat:NSLocalizedString(@"%d hours", @""), (int)(minutes / 60.0f)];
     }
     if ( minutes < 43200.0f ) {
-      return [NSString stringWithFormat:NSLocalizedString(@"Due in %d days", @""), (int)(minutes / 1440.0f)];
+      return [NSString stringWithFormat:NSLocalizedString(@"%d days", @""), (int)(minutes / 1440.0f)];
     }
     if ( minutes < 525600.0f ) {
-      return [NSString stringWithFormat:NSLocalizedString(@"Due in %d months", @""), (int)(minutes / 43200.0f)];
+      return [NSString stringWithFormat:NSLocalizedString(@"%d months", @""), (int)(minutes / 43200.0f)];
     }
     
-    return [NSString stringWithFormat:NSLocalizedString(@"Due in %d years", @""), (int)(minutes / 525600.0f)];
+    return [NSString stringWithFormat:NSLocalizedString(@"%d years", @""), (int)(minutes / 525600.0f)];
   }else{
     minutes = fabs(minutes);
     
     if ( minutes < 60.0f ) {
-      return [NSString stringWithFormat:NSLocalizedString(@"Passed by %d minutes", @""), (int)(minutes / 60.0f)];
+      return [NSString stringWithFormat:NSLocalizedString(@"-%d mins", @""), (int)(minutes / 60.0f)];
     }
     if ( minutes < 1440.0f ) {
-      return [NSString stringWithFormat:NSLocalizedString(@"Passed by %d hours", @""), (int)(minutes / 60.0f)];
+      return [NSString stringWithFormat:NSLocalizedString(@"-%d hours", @""), (int)(minutes / 60.0f)];
     }
     if ( minutes < 43200.0f ) {
-      return [NSString stringWithFormat:NSLocalizedString(@"Passed by %d days", @""), (int)(minutes / 1440.0f)];
+      return [NSString stringWithFormat:NSLocalizedString(@"-%d days", @""), (int)(minutes / 1440.0f)];
     }
     if ( minutes < 525600.0f ) {
-      return [NSString stringWithFormat:NSLocalizedString(@"Passed by %d months", @""), (int)(minutes / 43200.0f)];
+      return [NSString stringWithFormat:NSLocalizedString(@"-%d months", @""), (int)(minutes / 43200.0f)];
     }
     
-    return [NSString stringWithFormat:NSLocalizedString(@"Passed byt %d years", @""), (int)(minutes / 525600.0f)];
+    return [NSString stringWithFormat:NSLocalizedString(@"-%d years", @""), (int)(minutes / 525600.0f)];
   }
 }
 

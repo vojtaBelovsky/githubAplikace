@@ -25,9 +25,10 @@
 #import "BCAppDelegate.h"
 #import "TMViewDeckController.h"
 
-#define GRAY_FONT_COLOR     [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
-#define WHITE_COLOR         [UIColor whiteColor]
-#define HEADER_HEIGHT       ( 40.0f )
+#define GRAY_FONT_COLOR       [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
+#define WHITE_COLOR           [UIColor whiteColor]
+#define FIRST_HEADER_HEIGHT   ( 20.0f )
+#define OTHER_HEADER_HEIGHT   ( 50.0f )
 
 #define MILESTONES_KEY      @"milestones"
 #define ISSUES_KEY          @"issues"
@@ -77,6 +78,7 @@
   self.view = _tableView;
   
   [self createModel];
+  [self getAllCollaborators];
   for (int i = 0; i < [_repositories count]; i++) {
     [[_tableView.allTableViews objectAtIndex:i] setDelegate:self];
   }
@@ -89,6 +91,12 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+  int headerHeight;
+  if (section == 0) {
+    headerHeight = FIRST_HEADER_HEIGHT;
+  }else{
+    headerHeight = OTHER_HEADER_HEIGHT;
+  }
   int index = [_tableView.allTableViews indexOfObject:tableView];
   BCHeadeView *headerView;
   if ([_allDataSources count] > index) {
@@ -97,7 +105,7 @@
     if ([currentIssue.title isEqualToString:NO_ISSUES]) {
       return [[BCHeadeView alloc] init];
     }
-    headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _tableView.navigationBarView.frame.size.height, _tableView.frame.size.width, HEADER_HEIGHT) andMilestone:currentIssue.milestone];
+    headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _tableView.navigationBarView.frame.size.height, _tableView.frame.size.width, headerHeight) andMilestone:currentIssue.milestone];
     return headerView;
   }else{
     return [[BCHeadeView alloc] init];
@@ -105,7 +113,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-  return HEADER_HEIGHT;
+  if (section == 0) {
+    return FIRST_HEADER_HEIGHT;
+  }
+  return OTHER_HEADER_HEIGHT;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -117,9 +128,11 @@
         if (contentOffset < originalOffset) {
           _nthRepository--;
           [_tableView setRepoName:[(BCRepository *)[_repositories objectAtIndex:_nthRepository] name]];
+          [_tableView animatePaginatorWithCurrentRepoNumber:_nthRepository];
         }else{
           _nthRepository++;
           [_tableView setRepoName:[(BCRepository *)[_repositories objectAtIndex:_nthRepository] name]];
+          [_tableView animatePaginatorWithCurrentRepoNumber:_nthRepository];
         }
       }
     }
@@ -135,8 +148,9 @@
 }
 
 -(void)chooseButtonDidPress{
-  BCCollaboratorsViewController *chooseCollVC = [[BCCollaboratorsViewController alloc] initWithRepositories:_repositories andIssueViewCtrl:self];
+  BCCollaboratorsViewController *chooseCollVC = [[BCCollaboratorsViewController alloc] initWithCollaborators:_allCollaborators andIssueViewCtrl:self];
   [self.view addGestureRecognizer:_slideBack];
+  [_tableView.tableViews setUserInteractionEnabled:NO];
   [_tableView.chooseCollaboratorButton setEnabled:NO];
   BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
   [myDelegate.deckController slideCenterControllerToTheRightWithLeftController:chooseCollVC animated:YES withCompletion:nil];
@@ -155,6 +169,7 @@
       [_tableView.chooseCollaboratorButton setEnabled:YES];
     }
     [self.view removeGestureRecognizer:_slideBack];
+    [_tableView.tableViews setUserInteractionEnabled:YES];
     [myDelegate.deckController slideCenterControllerBackAnimated:YES withCompletion:nil];
   }
 }
@@ -213,7 +228,44 @@
   } copy];
   
   [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
-
 }
+
+-(void)getAllCollaborators{
+  __block int i = 0;
+  __block BCRepository *currentRepo = [_repositories objectAtIndex:i];
+  __block NSMutableArray *allCollaborators = [[NSMutableArray alloc] init];
+  __block void (^myFailureBlock) (NSError *error) = [^(NSError *error) {
+    [UIAlertView showWithError:error];
+  } copy];
+  __block void (^mySuccessBlock) (NSArray *collaborators);
+  mySuccessBlock = [^(NSArray *collaborators){
+    for (BCUser *newCollaborator in collaborators) {
+      BOOL addCollaborator = YES;
+      int numberOfCollaborators = [allCollaborators count];
+      if (numberOfCollaborators) {
+        for (int i = 0; i < numberOfCollaborators; i++){
+          BCUser *currentCollaborator = [allCollaborators objectAtIndex:i];
+          if ([currentCollaborator.userId isEqualToNumber:newCollaborator.userId]) {
+            addCollaborator = NO;
+          }
+        }
+        if (addCollaborator) {
+          [allCollaborators addObject:newCollaborator];
+        }
+      }else{
+        [allCollaborators addObject:newCollaborator];
+      }
+    }
+    i++;
+    if ([_repositories count] == i) {
+      _allCollaborators = allCollaborators;
+    }else{
+      currentRepo = [_repositories objectAtIndex:i];
+      [BCRepository getAllCollaboratorsOfRepository:currentRepo withSuccess:mySuccessBlock failure:myFailureBlock];
+    }
+  } copy];
+  [BCRepository getAllCollaboratorsOfRepository:currentRepo withSuccess:mySuccessBlock failure:myFailureBlock];
+}
+
 
 @end

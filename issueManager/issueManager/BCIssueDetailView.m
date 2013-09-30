@@ -32,25 +32,23 @@
 #define ISSUE_WIDTH                   ( 300.0f )
 #define OFFSET                        ( 10.f )
 #define NAV_BAR_HEIGHT                ( 44.0f )
-#define HEADER_HEIGHT                 ( 40.0f )
+#define HEADER_HEIGHT                 ( 20.0f )
 
-#define USER_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
-#define USER_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 #define USER_SHADOW_FONT_COLOR   [UIColor whiteColor]
 #define USER_NAME_FONT_COLOR     [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
-#define USER_NAME_FONT           [UIFont fontWithName:@"ProximaNova-Regular" size:18]
-#define REPO_NAME_FONT           [UIFont fontWithName:@"ProximaNovaCond-Light" size:15]
+#define USER_NAME_FONT           [UIFont fontWithName:@"ProximaNova-Regular" size:15]
+#define REPO_NAME_FONT           [UIFont fontWithName:@"ProximaNovaCond-Light" size:12]
 #define REPO_NAME_FONT_COLOR     [UIColor colorWithRed:.52 green:.52 blue:.52 alpha:1.00]
 
 #define USER_NAME_SHADOW_FONT_COLOR   [UIColor whiteColor]
 
-#define TITLE_FONT               [UIFont fontWithName:@"ProximaNova-Semibold" size:16]
+#define TITLE_FONT               [UIFont fontWithName:@"ProximaNova-Semibold" size:14]
 
 #define CommentButtonFrameWithOrigin(x, y) CGRectMake(x, y, COMMENT_BUTTON_WIDTH, COMMENT_BUTTON_HEIGHT)
 
 @implementation BCIssueDetailView
 
--(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller{
+-(id) initWithIssue:(BCIssue *)issue withComments:(NSMutableArray*)comments andController:(BCIssueDetailViewController *)controller{
     self = [super init];
     if(self){
       _issue = issue;
@@ -108,24 +106,22 @@
       [_issueView setWithIssue:issue];
       [self addSubview:_issueView];
       
-      _commentViews = [[NSMutableArray alloc] init];
-      [BCComment getCommentsForIssue:issue withSuccess:^(NSMutableArray *comments) {
-        BCCommentView *commentView;
-        for (BCComment *comment in comments) {
-          commentView = [[BCCommentView alloc] initWithComment:comment];
-          [self addSubview:commentView];
-          [_commentViews addObject:commentView];
-        }
-      } failure:^(NSError *error) {
-        [UIAlertView showWithError:error];
-      }];
-      
       _addNewCommentButton = [[UIButton alloc] init];
       [_addNewCommentButton setImage:COMMENT_BUTTON_IMG forState:UIControlStateNormal];
       [_addNewCommentButton setImage:COMMENT_BUTTON_IMG_HL forState:UIControlStateSelected];
       [self addSubview:_addNewCommentButton];
     }
     return self;
+}
+
+-(void)setCommentViewsWithComments:(NSArray*)comments{
+  _commentViews = [[NSMutableArray alloc] init];
+  BCCommentView *commentView;
+  for (BCComment *comment in comments) {
+    commentView = [[BCCommentView alloc] initWithComment:comment];
+    [self addSubview:commentView];
+    [_commentViews addObject:commentView];
+  }
 }
 
 -(void) layoutSubviews{

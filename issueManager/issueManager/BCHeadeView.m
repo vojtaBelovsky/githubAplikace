@@ -9,14 +9,17 @@
 #import "BCHeadeView.h"
 #import "NSDate+Additions.h"
 #import "BCMilestone.h"
+#import "BCIssueDataSource.h"
 
 #define TITLE_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:14]
-#define DUE_IN_FONT         [UIFont fontWithName:@"ProximaNova-Light" size:11]
-#define TEXT_COLOR          [UIColor colorWithRed:.39 green:.39 blue:.39 alpha:1.00]
+#define DUE_IN_FONT         [UIFont fontWithName:@"ProximaNova-Light" size:9]
+#define TEXT_COLOR_GRAY     [UIColor colorWithRed:.39 green:.39 blue:.39 alpha:1.00]
+#define TEXT_COLOR_RED      [UIColor colorWithRed:1.39 green:.39 blue:.39 alpha:1.00]
 #define BACKGROUND          [UIImage imageNamed:@"headerBackground.png"]
 
 #define TITLE_OFFSET        ( 20.0f )
 #define DUE_IN_OFFSET       ( 10.0f )
+#define BOTTOM_OFFSET       ( 5.0f )
 
 @implementation BCHeadeView
 
@@ -31,12 +34,12 @@
     _title = [[UILabel alloc] init];
     [_title setBackgroundColor:[UIColor clearColor]];
     [_title setFont:TITLE_FONT];
-    [_title setTextColor:TEXT_COLOR];
+    [_title setTextColor:TEXT_COLOR_GRAY];
     [_title setTextAlignment:NSTextAlignmentLeft];
     if (milestone) {
       [_title setText:milestone.title];
     }else{
-      [_title setText:@"No milestone"];
+      [_title setText:WITHOUT_MILESTONE];
     }
     [_title setNumberOfLines:1];
     [self addSubview:_title];
@@ -44,12 +47,14 @@
     _dueIn = [[UILabel alloc] init];
     [_dueIn setBackgroundColor:[UIColor clearColor]];
     [_dueIn setFont:DUE_IN_FONT];
-    [_dueIn setTextColor:TEXT_COLOR];
     [_dueIn setTextAlignment:NSTextAlignmentRight];
     if (milestone.dueOn) {
       [_dueIn setText:[milestone.dueOn stringDifferenceFromNow]];
-    }else{
-      [_dueIn setText:@"No due date"];
+      if ([_dueIn.text characterAtIndex:0] == '-') {
+        [_dueIn setTextColor:TEXT_COLOR_RED];
+      }else{
+        [_dueIn setTextColor:TEXT_COLOR_GRAY];
+      }
     }
     [_dueIn setNumberOfLines:1];
     [self addSubview:_dueIn];
@@ -61,14 +66,14 @@
   [super layoutSubviews];
   CGRect frame;
   
-  frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)*0.65, self.frame.size.height);
-  frame.origin = CGPointMake(TITLE_OFFSET, (self.frame.size.height-frame.size.height)/2+10);
+  frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)*0.80, [_title sizeThatFits:self.frame.size].height);
+  frame.origin = CGPointMake(TITLE_OFFSET, self.frame.size.height-BOTTOM_OFFSET-frame.size.height);
   if (!CGRectEqualToRect(_title.frame, frame)) {
     _title.frame = frame;
   }
   
-  frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)*0.35, self.frame.size.height);
-  frame.origin = CGPointMake(TITLE_OFFSET+_title.frame.size.width, (self.frame.size.height-frame.size.height)/2+10);
+  frame.size = CGSizeMake((self.frame.size.width-TITLE_OFFSET-DUE_IN_OFFSET)*0.20, [_dueIn sizeThatFits:self.frame.size].height);
+  frame.origin = CGPointMake(TITLE_OFFSET+_title.frame.size.width, _title.frame.origin.y+_title.frame.size.height-frame.size.height);
   if (!CGRectEqualToRect(_dueIn.frame, frame)) {
     _dueIn.frame = frame;
   }

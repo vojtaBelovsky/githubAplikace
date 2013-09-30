@@ -19,9 +19,11 @@
 @property int numberOfRepos;
 @property NSMutableArray *allTableViews;
 @property UILabel *repositoryNameLabel;
+@property UILabel *paginator;
 
 -(id)initWithNumberOfRepos:(int)numberOfRepos;
 -(void)setUserName:(NSString *)userName;
 -(void)setRepoName:(NSString *)repoName;
+-(void)animatePaginatorWithCurrentRepoNumber:(int)currentRepoNumber;
 
 @end

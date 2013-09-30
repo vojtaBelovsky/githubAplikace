@@ -7,22 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BCSelectDataManager.h"
 @class BCRepository;
 @class BCSelectLabelsView;
 @class BCSelectLabelsDataSource;
-
+@class BCAddIssueViewController;
 
 @interface BCSelectLabelsViewController : UIViewController<UITableViewDelegate>{
 @private
     BCRepository *_repository;
     BCSelectLabelsView *_BCSelectLabelsView;
     BCSelectLabelsDataSource *_dataSource;
-    UIViewController<BCSelectDataManager> *_controller;
+    BCAddIssueViewController *_controller;
   NSMutableArray *_checkedLabels; //array of NSIndexPath of selected labels
 }
 
-- (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller;
-
+- (id)initWithController:(BCAddIssueViewController *)controller;
 
 @end

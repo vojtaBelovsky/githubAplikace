@@ -12,17 +12,17 @@
 @class BCSelectAssigneeView;
 @class BCIssueDetailViewController;
 @class BCUser;
-@protocol BCSelectDataManager;
+@class BCAddIssueViewController;
 
 @interface BCSelectAssigneeViewController : UIViewController<UITableViewDelegate>{
 @private
     BCRepository *_repository;
-    BCSelectAssigneeView *_BCSelectAssigneView;
+    BCSelectAssigneeView *_selectAssigneView;
     BCSelectAssigneeDataSource *_dataSource;
-    UIViewController<BCSelectDataManager> *_controller;
+    BCAddIssueViewController *_controller;
   NSIndexPath *_checkedAssignee;
 }
 
-- (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller;
+- (id)initWithController:(BCAddIssueViewController *)controller;
 
 @end

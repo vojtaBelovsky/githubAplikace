@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 vojta. All rights reserved.
 //
 
+#define WITHOUT_MILESTONE @"Without milestone"
+
 #import <Foundation/Foundation.h>
 @class BCIssue;
 

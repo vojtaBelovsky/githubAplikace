@@ -7,23 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-@class BCRepository;
 @class BCSelectMilestoneDataSource;
 @class BCSelectMilestoneView;
-@class BCIssueDetailViewController;
-@class BCUser;
-@protocol BCSelectDataManager;
+@class BCAddIssueViewController;
+@class BCMilestone;
 
 @interface BCSelectMilestoneViewController : UIViewController<UITableViewDelegate>{
 @private
-    BCRepository *_repository;
-    BCSelectMilestoneView *_selectMilestoneView;
-    BCSelectMilestoneDataSource *_dataSource;
-    UIViewController<BCSelectDataManager> *_controller;
-    NSIndexPath *_checkedMilestone;
+  BCSelectMilestoneView *_selectMilestoneView;
+  BCSelectMilestoneDataSource *_dataSource;
+  BCAddIssueViewController *_controller;
+  NSIndexPath *_checkedMilestone;
 }
 
-- (id)initWithRepository:(BCRepository *)repository andController:(UIViewController<BCSelectDataManager> *)controller;
+- (id)initWithController:(BCAddIssueViewController *)controller;
 
 
 @end
