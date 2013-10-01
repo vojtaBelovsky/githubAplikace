@@ -13,7 +13,7 @@
 @class BCIssueDataSource;
 @class TMViewDeckController;
 
-@interface BCIssueViewController : UIViewController <UITableViewDelegate, UIScrollViewDelegate>{
+@interface BCIssueViewController : UITableViewController <UITableViewDelegate, UIScrollViewDelegate>{
 @private
   NSArray *_repositories;
   BCIssueView *_tableView;
@@ -21,7 +21,8 @@
   NSMutableArray *_allDataSources;
   NSMutableArray *_allCollaborators;
 }
-@property   UITapGestureRecognizer *slideBack;
+
+@property UITapGestureRecognizer *slideBack;
 @property TMViewDeckController *deckController;
 @property BOOL userChanged;
 

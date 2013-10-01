@@ -16,5 +16,6 @@
 @property BCTextField *passwordTextField;
 @property UIButton *loginButton;
 @property UILabel *forgotPasswordLabel;
+@property UIActivityIndicatorView *activityIndicatorView;
 
 @end

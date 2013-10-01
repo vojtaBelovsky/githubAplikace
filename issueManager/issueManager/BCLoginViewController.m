@@ -43,34 +43,39 @@
   return self;
 }
 
-- (void)loadView {  
-  //
-  // ------------ uncomment - will log in last user automaticly ------------
-  //
+-(void)loadView {
+  _loginView = [[BCLoginView alloc] init];
+  [_loginView.loginTextField.textField setDelegate:self];
+  [_loginView.passwordTextField.textField setDelegate:self];
+  
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  NSDictionary *credentials = [userDefaults objectForKey:@"credentials"];
+  NSDictionary *credentials = [userDefaults objectForKey:CREDENTIALS];
   if(credentials != NULL){
+    [_loginView.loginTextField.textField setText:[credentials valueForKey:LOGIN]];
+    [_loginView.passwordTextField.textField setText:[credentials valueForKey:PASSWORD]];
+    [_loginView.activityIndicatorView startAnimating];
+    [_loginView setUserInteractionEnabled:NO];
     [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user) {
       BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
       BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+      [_loginView.activityIndicatorView stopAnimating];
       [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
-//      [self.navigationController pushViewController:repoViewCtrl animated:YES];
+      //      [self.navigationController pushViewController:repoViewCtrl animated:YES];
     } failure:^(NSError *error) {
-      [UIAlertView showWithError:error];
+      [_loginView.activityIndicatorView stopAnimating];
+      [_loginView setUserInteractionEnabled:YES];
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Bad Credentials", @"") message:NSLocalizedString(@"You probably changed your credentials", @"") delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+      [alert show];
     }];
-  }else{
-    _loginView = [[BCLoginView alloc] init];
-    [_loginView.loginTextField.textField setDelegate:self];
-    [_loginView.passwordTextField.textField setDelegate:self];
-    
-    self.view = _loginView;
-    [self.navigationController setNavigationBarHidden:YES];
-    
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPasswordDidPress)];
-    [_loginView.forgotPasswordLabel addGestureRecognizer:tgr];
-    
-    [_loginView.loginButton addTarget:self action:@selector(loginButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   }
+  
+  self.view = _loginView;
+  [self.navigationController setNavigationBarHidden:YES];
+  
+  UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPasswordDidPress)];
+  [_loginView.forgotPasswordLabel addGestureRecognizer:tgr];
+  
+  [_loginView.loginButton addTarget:self action:@selector(loginButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark -
@@ -85,6 +90,7 @@
 
 - (void)loginButtonDidPress {
   [self hideKeyboard];
+  [_loginView.activityIndicatorView startAnimating];
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
   NSDictionary *credentials = [[NSDictionary alloc] initWithObjectsAndKeys:_loginView.loginTextField.textField.text, @"login",_loginView.passwordTextField.textField.text, @"password", nil];
   [userDefaults setObject:credentials forKey:@"credentials"];
@@ -93,9 +99,11 @@
   [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user){
     BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
     BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    [_loginView.activityIndicatorView stopAnimating];
     [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
 //    [self.navigationController pushViewController:repoViewCtrl animated:YES];
   } failure:^(NSError *error){
+    [_loginView.activityIndicatorView stopAnimating];
     [UIAlertView showWithError:error];
   }];
 }

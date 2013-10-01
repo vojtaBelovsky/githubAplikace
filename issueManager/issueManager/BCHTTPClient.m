@@ -52,19 +52,19 @@
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *credentials = [userDefaults objectForKey:@"credentials"];
-    instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BCHTTPCLIENT_BASE_URL] UserName:[credentials valueForKey:@"login"] andPassword:[credentials valueForKey:@"password"]];
+    NSDictionary *credentials = [userDefaults objectForKey:CREDENTIALS];
+    instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BCHTTPCLIENT_BASE_URL] UserName:[credentials valueForKey:LOGIN] andPassword:[credentials valueForKey:PASSWORD]];
+    
+    if(isLoggedIn == NO){
+      [instance getPath:@"user" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ( responseObject ) {
+          isLoggedIn = YES;
+        }
+      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        onceToken++;
+      }];
+    }
   });
-  
-  if(isLoggedIn == NO){
-    [instance getPath:@"user" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-      if ( responseObject ) {
-        isLoggedIn = YES;
-      }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      onceToken++;
-    }];
-  }
   
   return instance;
 }

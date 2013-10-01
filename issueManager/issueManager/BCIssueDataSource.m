@@ -102,7 +102,7 @@
 -(void)addNewIssue:(BCIssue *)newIssue{
   if (newIssue.milestone == nil) {
     if ([_dataSourceKeyNames containsObject:WITHOUT_MILESTONE]) {
-      [(NSMutableArray *)[_dataSource objectForKey:WITHOUT_MILESTONE] addObject:newIssue];
+      [(NSMutableArray *)[_dataSource objectForKey:WITHOUT_MILESTONE] insertObject:newIssue atIndex:0];
     }else{
       [self addNewMilstone:WITHOUT_MILESTONE withIssue:newIssue];
     }

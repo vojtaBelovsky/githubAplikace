@@ -34,7 +34,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) BCMilestone *milestone;
 @property (nonatomic, strong) BCRepository *repository;
 
-+(void)getIssuesFromRepository:(BCRepository *)repository forUser:(BCUser *)user since:(NSDate *)since WithSuccess:(void(^)(NSMutableArray* issues))success failure:(void(^)(NSError * error))failrue;
++(void)getIssuesFromRepository:(BCRepository *)repository forUser:(BCUser *)user WithSuccess:(void(^)(NSMutableArray* issues))success failure:(void(^)(NSError * error))failrue;
 
 -(NSArray *)getLabelsAsStrings;
 - (id)initNoIssues;

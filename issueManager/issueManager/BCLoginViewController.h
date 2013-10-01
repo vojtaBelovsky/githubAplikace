@@ -12,8 +12,7 @@
 @interface BCLoginViewController : UIViewController<UITextFieldDelegate>{
 @private
   BCLoginView *_loginView;
-//id _UIKeyboardWillShowNotification;
-//id _UIKeyboardWillHideNotification;
+  BOOL _haveCredentials;
 }
 
 @end

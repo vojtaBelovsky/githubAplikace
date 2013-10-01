@@ -78,6 +78,10 @@
     _forgotPasswordLabel.shadowColor = FORGOT_PASSWD_TEXT_SHADOW_COLOR;
     _forgotPasswordLabel.userInteractionEnabled = YES;
     [self addSubview:_forgotPasswordLabel];
+    
+    
+    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self addSubview:_activityIndicatorView];
   }
   return self;
 }
@@ -115,6 +119,10 @@
   frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, CGRectGetMaxY( _loginButton.frame ) + self.frame.size.height*FORGOT_PASSWD_OFFSET);
   if ( !CGRectEqualToRect( _forgotPasswordLabel.frame, frame ) ) {
     _forgotPasswordLabel.frame = frame;
+  }
+  
+  if (!CGPointEqualToPoint(_activityIndicatorView.center, self.center)) {
+    _activityIndicatorView.center = self.center;
   }
 }
 

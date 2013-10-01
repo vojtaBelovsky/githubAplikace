@@ -91,7 +91,10 @@
       [_paginator setFont:REPO_NAME_FONT];
       [_paginator setTextColor:REPO_NAME_FONT_COLOR];
       [_paginator setBackgroundColor:[UIColor clearColor]];
-      [self addSubview:_paginator];  
+      [self addSubview:_paginator];
+      
+      _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+      [self addSubview:_activityIndicatorView];
     }
     return self;
 }
@@ -188,6 +191,10 @@
   frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, self.frame.size.height-NAV_BAR_HEIGHT);
   if (!CGRectEqualToRect(_paginator.frame, frame)) {
     _paginator.frame = frame;
+  }
+  
+  if (!CGPointEqualToPoint(_activityIndicatorView.center, _tableViews.center)) {
+    _activityIndicatorView.center = _tableViews.center;
   }
 }
 

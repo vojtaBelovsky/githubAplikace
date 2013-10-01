@@ -32,7 +32,8 @@
     return @{
              @"repositoryId": @"id",
              @"name": @"name",
-             @"issuesUrl": @"issues_url"
+             @"issuesUrl": @"issues_url",
+             @"openIssues" : @"open_issues"
              };
 }
 

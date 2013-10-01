@@ -84,6 +84,14 @@
   }
 }
 
+-(void)viewDidLoad{
+  UIRefreshControl *refreshControl = [[UIRefreshControl alloc]
+                                      init];
+  refreshControl.tintColor = [UIColor magentaColor];
+  [refreshControl addTarget:self action:@selector(createModel) forControlEvents:UIControlEventValueChanged];
+  self.refreshControl = refreshControl;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   int index = [_tableView.allTableViews indexOfObject:tableView];
   BCIssue *currentIssue = [self getIssueForIndexPath:indexPath fromNthRepository:index];
@@ -199,16 +207,18 @@
 }
 
 -(void)createModel{
-//  [_allDataSources removeAllObjects];
+  
+  [_tableView.activityIndicatorView startAnimating];
   __block int i = 0;
   __block BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
   [_tableView setUserName:currentUser.userLogin];
   __block void (^myFailureBlock) (NSError *error) = [^(NSError *error){
+    [_tableView.activityIndicatorView stopAnimating];
     [UIAlertView showWithError:error];
   } copy];
   __block void (^milestonesSuccessBlock) (NSMutableArray *milestones);
   milestonesSuccessBlock = [^(NSMutableArray *milestones) {
-    [BCIssue getIssuesFromRepository:[_repositories objectAtIndex:i] forUser:currentUser since:nil WithSuccess:^(NSMutableArray *issues){
+    [BCIssue getIssuesFromRepository:[_repositories objectAtIndex:i] forUser:currentUser WithSuccess:^(NSMutableArray *issues){
       if (![issues count]) {
         [issues addObject:[[BCIssue alloc] initNoIssues]];
       }
@@ -223,6 +233,8 @@
       i++;
       if (i != [_repositories count]) {
         [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
+      }else{
+        [_tableView.activityIndicatorView stopAnimating];
       }
     }failure:myFailureBlock];
   } copy];

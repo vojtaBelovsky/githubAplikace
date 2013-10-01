@@ -25,5 +25,6 @@
 -(void)setUserName:(NSString *)userName;
 -(void)setRepoName:(NSString *)repoName;
 -(void)animatePaginatorWithCurrentRepoNumber:(int)currentRepoNumber;
+@property UIActivityIndicatorView *activityIndicatorView;
 
 @end

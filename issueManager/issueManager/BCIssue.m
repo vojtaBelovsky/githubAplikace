@@ -131,27 +131,34 @@
     }];
 }
 
-+(void)getIssuesFromRepository:(BCRepository *)repository forUser:(BCUser *)user since:(NSDate *)since WithSuccess:(void(^)(NSMutableArray* issues))success failure:(void(^)(NSError * error))failrue{
++(void)getIssuesFromRepository:(BCRepository *)repository forUser:(BCUser *)user WithSuccess:(void(^)(NSMutableArray* issues))success failure:(void(^)(NSError * error))failrue{
   NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"open", @"state", @"updated", @"sort", user.userLogin, @"assignee", nil];
-  if (since != nil) {
-    NSString *sinceInString = [self.dateFormatter stringFromDate:since];
-    [params setObject:sinceInString forKey:@"since"];
-  }
+  __block int page = 1;
   
-  [[BCHTTPClient sharedInstance] getPath:repository.issuesUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  __block NSMutableArray *issues = [[NSMutableArray alloc] init];
+  __block void (^myFailureBlock) (AFHTTPRequestOperation *operation, NSError *error);
+  myFailureBlock = [^(AFHTTPRequestOperation *operation, NSError *error) {
+    failrue(error);
+  } copy];
+  __block void (^mySuccessBlock) (AFHTTPRequestOperation *operation, id responseObject);
+  mySuccessBlock = [^(AFHTTPRequestOperation *operation, id responseObject) {
     NSArray *responseIssues = [[NSArray alloc] initWithArray:responseObject];
-    NSMutableArray *issues = [[NSMutableArray alloc] initWithCapacity:[responseIssues count]];
-    int i = 0;
+
     for(NSDictionary *object in responseIssues){
-      [issues addObject:[MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:object error:nil]];
-      BCIssue *myIssue = [issues objectAtIndex:i];
+       BCIssue *myIssue = [MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:object error:nil];
       [myIssue setRepository:repository];
-      i++;
+      [issues addObject:myIssue];
     }
-    success( issues );
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    [UIAlertView showWithError:error];
-  }];
+    if ([responseIssues count]) {
+      page++;
+      [params setObject:[[NSString alloc] initWithFormat:@"%d",page] forKey:@"page"];
+      [[BCHTTPClient sharedInstance] getPath:repository.issuesUrl parameters:params success:mySuccessBlock failure:myFailureBlock];
+    }else{
+      success(issues);
+    }
+  } copy];
+  
+  [[BCHTTPClient sharedInstance] getPath:repository.issuesUrl parameters:params success:mySuccessBlock failure:myFailureBlock];
 }
 
 -(NSArray *)getLabelsAsStrings{

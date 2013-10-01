@@ -20,6 +20,7 @@
 @property (nonatomic, copy, readonly) NSString *issuesUrl;
 @property (nonatomic, copy, readonly)
 BCUser *owner;
+@property int openIssues;
 
 +(void)getAllCollaboratorsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allCollaborators))success failure:(void(^) (NSError * error))failure;
 

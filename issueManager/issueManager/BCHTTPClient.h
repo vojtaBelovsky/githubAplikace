@@ -9,6 +9,10 @@
 #import "AFJSONRequestOperation.h"
 #import "AFHTTPClient.h"
 
+#define CREDENTIALS @"credentials"
+#define LOGIN       @"login"
+#define PASSWORD    @"password"
+
 @class BCUser;
 
 @interface BCHTTPClient : AFHTTPClient
