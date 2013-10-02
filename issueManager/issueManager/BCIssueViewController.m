@@ -99,11 +99,17 @@
           [tableView endUpdates];
           [tableView.pullToRefreshView stopAnimating];
         } failure:^(NSError *error) {
+          [UIView animateWithDuration:0.3 animations:^{
+            [tableView setAlpha:1];
+          }];
           [tableView endUpdates];
           [tableView.pullToRefreshView stopAnimating];
           [UIAlertView showWithError:error];
         }];
       } failure:^(NSError *error) {
+        [UIView animateWithDuration:0.3 animations:^{
+          [tableView setAlpha:1];
+        }];
         [tableView endUpdates];
         [tableView.pullToRefreshView stopAnimating];
         [UIAlertView showWithError:error];
