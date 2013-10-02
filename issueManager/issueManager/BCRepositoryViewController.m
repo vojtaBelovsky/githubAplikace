@@ -48,7 +48,7 @@
   _repoView = [[BCRepositoryView alloc] init];
   [_repoView.tableView setMultipleTouchEnabled:YES];
   self.view = _repoView;
-  [_repoView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchDown];
+  [_repoView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [self createModel];
   [_repoView.tableView setDelegate:self];
 }

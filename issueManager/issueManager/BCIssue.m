@@ -140,6 +140,7 @@
   myFailureBlock = [^(AFHTTPRequestOperation *operation, NSError *error) {
     failrue(error);
   } copy];
+  
   __block void (^mySuccessBlock) (AFHTTPRequestOperation *operation, id responseObject);
   mySuccessBlock = [^(AFHTTPRequestOperation *operation, id responseObject) {
     NSArray *responseIssues = [[NSArray alloc] initWithArray:responseObject];
