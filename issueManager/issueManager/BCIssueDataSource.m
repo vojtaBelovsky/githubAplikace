@@ -62,7 +62,7 @@
   if ([issueForRow.title isEqualToString:NO_ISSUES]) {
     cell = [BCIssueCell createNoIssuesCellWithTableView:tableView];
   }else{
-    cell = [BCIssueCell createIssueCellWithTableView:tableView offset:OFFSET font:TITLE_FONT];
+    cell = [BCIssueCell createIssueCellWithTableView:tableView offset:OFFSET font:CELL_TITLE_FONT];
     [cell.issueView setWithIssue:issueForRow];
   }
   return cell;

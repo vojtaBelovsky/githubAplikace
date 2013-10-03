@@ -141,7 +141,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   int index = [_tableView.allTableViews indexOfObject:tableView];
   BCIssue *currentIssue = [self getIssueForIndexPath:indexPath fromNthRepository:index];
-  return [BCIssueCell heightOfCellWithIssue:currentIssue width:ISSUE_WIDTH titleFont:TITLE_FONT offset:OFFSET];
+  return [BCIssueCell heightOfCellWithIssue:currentIssue width:ISSUE_WIDTH titleFont:CELL_TITLE_FONT offset:OFFSET];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

@@ -58,7 +58,7 @@
   CGRect frame;
   
   if(_issueView != nil){
-    frame.size = CGSizeMake(ISSUE_WIDTH, [BCIssueCell heightOfCellWithIssue:self.issueView.issue width:ISSUE_WIDTH titleFont:TITLE_FONT offset:OFFSET]);
+    frame.size = CGSizeMake(ISSUE_WIDTH, [BCIssueCell heightOfCellWithIssue:self.issueView.issue width:ISSUE_WIDTH titleFont:CELL_TITLE_FONT offset:OFFSET]);
     frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, (self.frame.size.height-frame.size.height)/2);
     if (!CGRectEqualToRect(_issueView.frame, frame)) {
       _issueView.frame = frame;

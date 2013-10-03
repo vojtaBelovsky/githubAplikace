@@ -16,4 +16,8 @@
 
 +(CGSize)sizeOfLabelWithText:(NSString*)text font:(UIFont*)font width:(CGFloat)width;
 
++(NSString *)getLastLineInLabelFromText:(NSString *)givenText;
+
+-(NSString *)getLastLineOfStringInLabel;
+
 @end
