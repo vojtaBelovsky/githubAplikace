@@ -8,7 +8,7 @@
 
 #import "BCIssueTitleLabel.h"
 
-#define EMPTY_STRING      @"         "
+#define EMPTY_STRING      @"          "
 #define LINE_BREAK_MODE   NSLineBreakByWordWrapping
 
 @implementation BCIssueTitleLabel

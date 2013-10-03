@@ -42,7 +42,7 @@
 
 #define USER_NAME_SHADOW_FONT_COLOR   [UIColor whiteColor]
 
-#define TITLE_FONT               [UIFont fontWithName:@"ProximaNova-Semibold" size:14]
+#define TITLE_FONT               [UIFont fontWithName:@"ProximaNova-Semibold" size:13]
 
 #define CommentButtonFrameWithOrigin(x, y) CGRectMake(x, y, COMMENT_BUTTON_WIDTH, COMMENT_BUTTON_HEIGHT)
 

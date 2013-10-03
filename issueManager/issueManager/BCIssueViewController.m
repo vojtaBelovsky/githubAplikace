@@ -28,8 +28,8 @@
 
 #define GRAY_FONT_COLOR       [UIColor colorWithRed:.55 green:.55 blue:.55 alpha:1.00]
 #define WHITE_COLOR           [UIColor whiteColor]
-#define FIRST_HEADER_HEIGHT   ( 20.0f )
-#define OTHER_HEADER_HEIGHT   ( 50.0f )
+#define HEADER_HEIGHT         ( 20.0f )
+#define FOOTER_HEIGHT         ( 30.0f )
 
 #define MILESTONES_KEY      @"milestones"
 #define ISSUES_KEY          @"issues"
@@ -80,17 +80,20 @@
   for(__weak UITableView *tableView in _tableView.allTableViews){
     [tableView addPullToRefreshWithActionHandler:^{
       __block BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+      __block int currentRepozitoryNumber = _nthRepository;
+      __block BCRepository *currentRepozitory = [_repositories objectAtIndex:currentRepozitoryNumber];
+      
       [tableView beginUpdates];
       [UIView animateWithDuration:0.3 animations:^{
         [tableView setAlpha:0.5];
       }];
-      [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:_nthRepository] withSuccess:^(NSMutableArray *allMilestones) {
-        [BCIssue getIssuesFromRepository:[_repositories objectAtIndex:_nthRepository] forUser:currentUser WithSuccess:^(NSMutableArray *issues){
+      [BCRepository getAllMilestonesOfRepository:currentRepozitory withSuccess:^(NSMutableArray *allMilestones) {
+        [BCIssue getIssuesFromRepository:currentRepozitory forUser:currentUser WithSuccess:^(NSMutableArray *issues){
           if (![issues count]) {
             [issues addObject:[[BCIssue alloc] initNoIssues]];
           }
           BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:allMilestones];
-          [_allDataSources replaceObjectAtIndex:_nthRepository withObject:currentDataSource];
+          [_allDataSources replaceObjectAtIndex:currentRepozitoryNumber withObject:currentDataSource];
           [tableView setDataSource:currentDataSource];
           [tableView reloadData];
           [UIView animateWithDuration:0.3 animations:^{
@@ -142,12 +145,6 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-  int headerHeight;
-  if (section == 0) {
-    headerHeight = FIRST_HEADER_HEIGHT;
-  }else{
-    headerHeight = OTHER_HEADER_HEIGHT;
-  }
   int index = [_tableView.allTableViews indexOfObject:tableView];
   BCHeadeView *headerView;
   if ([_allDataSources count] > index) {
@@ -156,18 +153,23 @@
     if ([currentIssue.title isEqualToString:NO_ISSUES]) {
       return [[BCHeadeView alloc] init];
     }
-    headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _tableView.navigationBarView.frame.size.height, _tableView.frame.size.width, headerHeight) andMilestone:currentIssue.milestone];
+    headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _tableView.navigationBarView.frame.size.height, _tableView.frame.size.width, HEADER_HEIGHT) andMilestone:currentIssue.milestone];
     return headerView;
   }else{
     return [[BCHeadeView alloc] init];
   }
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+  return [[UIView alloc] init];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-  if (section == 0) {
-    return FIRST_HEADER_HEIGHT;
-  }
-  return OTHER_HEADER_HEIGHT;
+  return HEADER_HEIGHT;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+  return FOOTER_HEIGHT;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

@@ -21,7 +21,8 @@
 #define HASH_WIDTH            ( 20.0f )
 #define HASH_HEIGHT           _titleLabel.font.pointSize
 
-#define USER_VIEW_HEIGHT      ( 20.0f )
+#define USER_VIEW_HEIGHT      ( 14.0f )
+#define BOTTOM_OFFSET         ( 4.0f )
 
 @implementation BCSingleIssueView
 
@@ -106,7 +107,7 @@
   }
   
   if (!showAll) {
-    return CGSizeMake(width, totalHeight);
+    return CGSizeMake(width, totalHeight+BOTTOM_OFFSET);
   }
   
   CGSize bodySize = [BCIssueBodyLabel sizeOfLabelWithText:issue.body width:maxContentWidth];
@@ -115,7 +116,7 @@
   }
   
   totalHeight += USER_VIEW_HEIGHT+TOP_OFFSET_BETWEEN_CONTENT;
-  return CGSizeMake(width, totalHeight);
+  return CGSizeMake(width, totalHeight+BOTTOM_OFFSET);
 }
 
 -(void)layoutSubviews{
@@ -128,13 +129,14 @@
     _profileIssueBackgroundImgView.frame = frame;
   }
   
-  frame = CGRectMake(_offset, _offset, HASH_WIDTH, HASH_HEIGHT);
+  frame.origin = CGPointMake(_offset, _offset);
+  frame.size = [_numberView countMySize];
   if (!CGRectEqualToRect(_numberView.frame, frame)) {
     _numberView.frame = frame;
   }
   
   frame.size = [_titleLabel sizeOfLabelWithWidth:maxContentWidth];
-  frame.origin = CGPointMake(_offset, _offset);
+  frame.origin = CGPointMake(_offset, _offset+HASH_VERTICAL_OFFSET);
   if (!CGRectEqualToRect(_titleLabel.frame, frame)) {
     _titleLabel.frame = frame;
   }
@@ -145,6 +147,7 @@
     _bodyLabel.frame = frame;
   }
   
+
   if (_bodyLabel.frame.size.height) {
     frame.origin.y += _bodyLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT;
   }

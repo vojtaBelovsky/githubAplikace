@@ -17,8 +17,9 @@
 
 #define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
 #define COMMON_COLOR        [UIColor colorWithRed:.67 green:.67 blue:.67 alpha:1.00]
-#define USER_NAME_FONT      [UIFont fontWithName:@"ProximaNova-Semibold" size:15]
-#define CREATED_FONT        [UIFont fontWithName:@"ProximaNova-Light" size:15]
+#define USER_NAME_COLOR      [UIColor colorWithRed:.41 green:.41 blue:.41 alpha:1.00]
+#define USER_NAME_FONT      [UIFont fontWithName:@"ProximaNova-Semibold" size:10]
+#define CREATED_FONT        [UIFont fontWithName:@"ProximaNova-Light" size:10]
 
 @implementation BCIssueUserView
 
@@ -30,7 +31,7 @@
       [self addSubview:_avatarImgView];
       
       _userName = [[UILabel alloc] init];
-      [_userName setTextColor:COMMON_COLOR];
+      [_userName setTextColor:USER_NAME_COLOR];
       [_userName setFont:USER_NAME_FONT];
       [_userName setNumberOfLines:1];
       [_userName setTextAlignment:NSTextAlignmentLeft];

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #define OFFSET_BETWEEN_LABELS        ( 4.0f )
-#define TOP_OFFSET_BETWEEN_CONTENT   ( 6.0f )
+#define TOP_OFFSET_BETWEEN_CONTENT   ( 10.0f )
 
 @class BCIssueNumberView;
 @class BCLabelView;
