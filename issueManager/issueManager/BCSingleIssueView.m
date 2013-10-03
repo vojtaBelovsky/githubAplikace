@@ -16,7 +16,6 @@
 #import "BCIssueUserView.h"
 
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
-#define TITLE_FONT_COLOR              [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 
 #define HASH_WIDTH            ( 20.0f )
 #define HASH_HEIGHT           _titleLabel.font.pointSize
@@ -40,7 +39,7 @@
     _numberView = [[BCIssueNumberView alloc] init];
     [self addSubview:_numberView];
     
-    _titleLabel = [[BCIssueTitleLabel alloc] initWithFont:font andColor:TITLE_FONT_COLOR];
+    _titleLabel = [[BCIssueTitleLabel alloc] initWithFont:font];
     [self addSubview:_titleLabel];
     
     _bodyLabel = [[BCIssueBodyLabel alloc] init];
@@ -80,6 +79,7 @@
     [_labelViewsArray addObject:myLabelView];
   }
 }
+
 
 +(CGSize)sizeOfSingleIssueViewWithIssue:(BCIssue *)issue width:(CGFloat)width offset:(CGFloat)offset titleFont:(UIFont *)font showAll:(BOOL)showAll{
   CGFloat maxContentWidth = width-(2*offset);
@@ -150,6 +150,8 @@
 
   if (_bodyLabel.frame.size.height) {
     frame.origin.y += _bodyLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT;
+  }else{
+//    frame.origin.x = _titleLabel.frame.origin.x+_titleLabel.frame.size.width+TOP_OFFSET_BETWEEN_CONTENT;
   }
   int heightOfLabel = 0;
   for (BCLabelView *object in _labelViewsArray) {

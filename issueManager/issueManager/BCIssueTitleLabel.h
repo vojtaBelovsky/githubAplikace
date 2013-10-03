@@ -10,7 +10,7 @@
 
 @interface BCIssueTitleLabel : UILabel
 
-- (id)initWithFont:(UIFont*)font andColor:(UIColor*)color;
+- (id)initWithFont:(UIFont*)font;
 
 -(CGSize)sizeOfLabelWithWidth:(CGFloat)width;
 
