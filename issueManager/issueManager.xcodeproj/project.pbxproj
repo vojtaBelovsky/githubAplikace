@@ -127,15 +127,6 @@
 		10CD6B41176600EE00F64DC1 /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 10CD6B2F176600EE00F64DC1 /* ProximaNovaCond-SemiboldIt.otf */; };
 		10D2D37317AFD64E00E0DAAD /* BCIssueTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D2D37217AFD64E00E0DAAD /* BCIssueTitleLabel.m */; };
 		10D4A68517FDA1B400B6BAEA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10D4A68417FDA1B300B6BAEA /* CoreText.framework */; };
-		10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300701722D1C500607EBA /* AFHTTPClient.m */; };
-		10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */; };
-		10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300741722D1C500607EBA /* AFImageRequestOperation.m */; };
-		10E302B91722D1C700607EBA /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300761722D1C500607EBA /* AFJSONRequestOperation.m */; };
-		10E302BA1722D1C700607EBA /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300781722D1C500607EBA /* AFNetworkActivityIndicatorManager.m */; };
-		10E302BB1722D1C700607EBA /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E3007B1722D1C500607EBA /* AFPropertyListRequestOperation.m */; };
-		10E302BC1722D1C700607EBA /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E3007D1722D1C500607EBA /* AFURLConnectionOperation.m */; };
-		10E302BD1722D1C700607EBA /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E3007F1722D1C500607EBA /* AFXMLRequestOperation.m */; };
-		10E302BE1722D1C700607EBA /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E300811722D1C500607EBA /* UIImageView+AFNetworking.m */; };
 		10E3FC541721A66B00607EBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E3FC531721A66B00607EBA /* UIKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		10E3FC561721A66B00607EBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E3FC551721A66B00607EBA /* Foundation.framework */; };
 		10E3FC581721A66B00607EBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E3FC571721A66B00607EBA /* CoreGraphics.framework */; };
@@ -149,7 +140,6 @@
 		10EF01E117379F9500346E9F /* BCSelectLabelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EF01E017379F9500346E9F /* BCSelectLabelsViewController.m */; };
 		10EF01E417379FBE00346E9F /* BCSelectLabelsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EF01E317379FBE00346E9F /* BCSelectLabelsView.m */; };
 		10EF01E817379FD600346E9F /* BCSelectLabelsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EF01E717379FD600346E9F /* BCSelectLabelsCell.m */; };
-		10F32E4D17252360005E80F8 /* libMantle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F32E4A17252347005E80F8 /* libMantle.a */; };
 		10F32E9D172525E7005E80F8 /* BCHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E92172525E7005E80F8 /* BCHTTPClient.m */; };
 		10F32E9E172525E7005E80F8 /* BCIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E94172525E7005E80F8 /* BCIssue.m */; };
 		10F32E9F172525E7005E80F8 /* BCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F32E96172525E7005E80F8 /* BCLabel.m */; };
@@ -167,44 +157,6 @@
 		10F8191717B3BA8A003822D6 /* BCIssueUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F8191617B3BA8A003822D6 /* BCIssueUserView.m */; };
 		A7F51027ABCC4E0ABC1497F3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD43433C39FB42A8978FDA54 /* libPods.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		10F32E4517252347005E80F8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10F32E3C17252346005E80F8 /* Mantle.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D042FC3C15F72B23004E8054;
-			remoteInfo = "Mantle Mac";
-		};
-		10F32E4717252347005E80F8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10F32E3C17252346005E80F8 /* Mantle.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D042FC5415F72B23004E8054;
-			remoteInfo = "Mantle Mac Tests";
-		};
-		10F32E4917252347005E80F8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10F32E3C17252346005E80F8 /* Mantle.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D042FC7915F72BC7004E8054;
-			remoteInfo = "Mantle iOS";
-		};
-		10F32E4B17252347005E80F8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10F32E3C17252346005E80F8 /* Mantle.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D042FC8715F72BC7004E8054;
-			remoteInfo = "Mantle iOS Tests";
-		};
-		10F32E4E17252365005E80F8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10F32E3C17252346005E80F8 /* Mantle.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D042FC7815F72BC7004E8054;
-			remoteInfo = "Mantle iOS";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		10080C2917E71AA500F39AFE /* repositories_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "repositories_background@2x.png"; path = "issueManager/grafika/github cutted/repositories_background@2x.png"; sourceTree = "<group>"; };
@@ -369,25 +321,6 @@
 		10D2D37117AFD64E00E0DAAD /* BCIssueTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCIssueTitleLabel.h; sourceTree = "<group>"; };
 		10D2D37217AFD64E00E0DAAD /* BCIssueTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCIssueTitleLabel.m; sourceTree = "<group>"; };
 		10D4A68417FDA1B300B6BAEA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		10E3006F1722D1C500607EBA /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
-		10E300701722D1C500607EBA /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
-		10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		10E300731722D1C500607EBA /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
-		10E300741722D1C500607EBA /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
-		10E300751722D1C500607EBA /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
-		10E300761722D1C500607EBA /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
-		10E300771722D1C500607EBA /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		10E300781722D1C500607EBA /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		10E300791722D1C500607EBA /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		10E3007A1722D1C500607EBA /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
-		10E3007B1722D1C500607EBA /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
-		10E3007C1722D1C500607EBA /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		10E3007D1722D1C500607EBA /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		10E3007E1722D1C500607EBA /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
-		10E3007F1722D1C500607EBA /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
-		10E300801722D1C500607EBA /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		10E300811722D1C500607EBA /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		10E3FC501721A66B00607EBA /* issueManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = issueManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10E3FC531721A66B00607EBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		10E3FC551721A66B00607EBA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -409,7 +342,6 @@
 		10EF01E317379FBE00346E9F /* BCSelectLabelsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectLabelsView.m; sourceTree = "<group>"; };
 		10EF01E617379FD600346E9F /* BCSelectLabelsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCSelectLabelsCell.h; sourceTree = "<group>"; };
 		10EF01E717379FD600346E9F /* BCSelectLabelsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCSelectLabelsCell.m; sourceTree = "<group>"; };
-		10F32E3C17252346005E80F8 /* Mantle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mantle.xcodeproj; path = ../../../frameworks/Mantle/Mantle.xcodeproj; sourceTree = "<group>"; };
 		10F32E91172525E7005E80F8 /* BCHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCHTTPClient.h; sourceTree = "<group>"; };
 		10F32E92172525E7005E80F8 /* BCHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCHTTPClient.m; sourceTree = "<group>"; };
 		10F32E93172525E7005E80F8 /* BCIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCIssue.h; path = issueManager/BCIssue.h; sourceTree = "<group>"; };
@@ -451,7 +383,6 @@
 			files = (
 				10D4A68517FDA1B400B6BAEA /* CoreText.framework in Frameworks */,
 				1045729517ABBF760010BA86 /* QuartzCore.framework in Frameworks */,
-				10F32E4D17252360005E80F8 /* libMantle.a in Frameworks */,
 				10E3FC541721A66B00607EBA /* UIKit.framework in Frameworks */,
 				10E3FC561721A66B00607EBA /* Foundation.framework in Frameworks */,
 				10E3FC581721A66B00607EBA /* CoreGraphics.framework in Frameworks */,
@@ -940,15 +871,6 @@
 			name = titleLabel;
 			sourceTree = "<group>";
 		};
-		10E300481721A6AA00607EBA /* 3rd */ = {
-			isa = PBXGroup;
-			children = (
-				10F32E3C17252346005E80F8 /* Mantle.xcodeproj */,
-				10E3006E1722D1C500607EBA /* AFNetworking */,
-			);
-			name = 3rd;
-			sourceTree = "<group>";
-		};
 		10E3005E1721A70300607EBA /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -980,40 +902,12 @@
 			name = API;
 			sourceTree = "<group>";
 		};
-		10E3006E1722D1C500607EBA /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				10E3006F1722D1C500607EBA /* AFHTTPClient.h */,
-				10E300701722D1C500607EBA /* AFHTTPClient.m */,
-				10E300711722D1C500607EBA /* AFHTTPRequestOperation.h */,
-				10E300721722D1C500607EBA /* AFHTTPRequestOperation.m */,
-				10E300731722D1C500607EBA /* AFImageRequestOperation.h */,
-				10E300741722D1C500607EBA /* AFImageRequestOperation.m */,
-				10E300751722D1C500607EBA /* AFJSONRequestOperation.h */,
-				10E300761722D1C500607EBA /* AFJSONRequestOperation.m */,
-				10E300771722D1C500607EBA /* AFNetworkActivityIndicatorManager.h */,
-				10E300781722D1C500607EBA /* AFNetworkActivityIndicatorManager.m */,
-				10E300791722D1C500607EBA /* AFNetworking.h */,
-				10E3007A1722D1C500607EBA /* AFPropertyListRequestOperation.h */,
-				10E3007B1722D1C500607EBA /* AFPropertyListRequestOperation.m */,
-				10E3007C1722D1C500607EBA /* AFURLConnectionOperation.h */,
-				10E3007D1722D1C500607EBA /* AFURLConnectionOperation.m */,
-				10E3007E1722D1C500607EBA /* AFXMLRequestOperation.h */,
-				10E3007F1722D1C500607EBA /* AFXMLRequestOperation.m */,
-				10E300801722D1C500607EBA /* UIImageView+AFNetworking.h */,
-				10E300811722D1C500607EBA /* UIImageView+AFNetworking.m */,
-			);
-			name = AFNetworking;
-			path = issueManager/AFNetworking;
-			sourceTree = "<group>";
-		};
 		10E3FC471721A66B00607EBA = {
 			isa = PBXGroup;
 			children = (
 				10D4A68417FDA1B300B6BAEA /* CoreText.framework */,
 				1045729417ABBF760010BA86 /* QuartzCore.framework */,
 				1020010B175F060E005DD92F /* grafika */,
-				10E300481721A6AA00607EBA /* 3rd */,
 				10E3FC591721A66B00607EBA /* issueManager */,
 				10E3FC521721A66B00607EBA /* Frameworks */,
 				10E3FC511721A66B00607EBA /* Products */,
@@ -1108,17 +1002,6 @@
 				10EF01E717379FD600346E9F /* BCSelectLabelsCell.m */,
 			);
 			name = cell;
-			sourceTree = "<group>";
-		};
-		10F32E3D17252346005E80F8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				10F32E4617252347005E80F8 /* Mantle.framework */,
-				10F32E4817252347005E80F8 /* Mantle Mac Tests.octest */,
-				10F32E4A17252347005E80F8 /* libMantle.a */,
-				10F32E4C17252347005E80F8 /* Mantle iOS Tests.octest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		10F32EA3172526B2005E80F8 /* UI */ = {
@@ -1260,7 +1143,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				10F32E4F17252365005E80F8 /* PBXTargetDependency */,
 			);
 			name = issueManager;
 			productName = issueManager;
@@ -1287,49 +1169,12 @@
 			mainGroup = 10E3FC471721A66B00607EBA;
 			productRefGroup = 10E3FC511721A66B00607EBA /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 10F32E3D17252346005E80F8 /* Products */;
-					ProjectRef = 10F32E3C17252346005E80F8 /* Mantle.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				10E3FC4F1721A66B00607EBA /* issueManager */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		10F32E4617252347005E80F8 /* Mantle.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Mantle.framework;
-			remoteRef = 10F32E4517252347005E80F8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		10F32E4817252347005E80F8 /* Mantle Mac Tests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Mantle Mac Tests.octest";
-			remoteRef = 10F32E4717252347005E80F8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		10F32E4A17252347005E80F8 /* libMantle.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libMantle.a;
-			remoteRef = 10F32E4917252347005E80F8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		10F32E4C17252347005E80F8 /* Mantle iOS Tests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Mantle iOS Tests.octest";
-			remoteRef = 10F32E4B17252347005E80F8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		10E3FC4E1721A66B00607EBA /* Resources */ = {
@@ -1461,15 +1306,6 @@
 			files = (
 				10E3FC601721A66B00607EBA /* main.m in Sources */,
 				10E3FC641721A66B00607EBA /* BCAppDelegate.m in Sources */,
-				10E302B61722D1C700607EBA /* AFHTTPClient.m in Sources */,
-				10E302B71722D1C700607EBA /* AFHTTPRequestOperation.m in Sources */,
-				10E302B81722D1C700607EBA /* AFImageRequestOperation.m in Sources */,
-				10E302B91722D1C700607EBA /* AFJSONRequestOperation.m in Sources */,
-				10E302BA1722D1C700607EBA /* AFNetworkActivityIndicatorManager.m in Sources */,
-				10E302BB1722D1C700607EBA /* AFPropertyListRequestOperation.m in Sources */,
-				10E302BC1722D1C700607EBA /* AFURLConnectionOperation.m in Sources */,
-				10E302BD1722D1C700607EBA /* AFXMLRequestOperation.m in Sources */,
-				10E302BE1722D1C700607EBA /* UIImageView+AFNetworking.m in Sources */,
 				10F32E9D172525E7005E80F8 /* BCHTTPClient.m in Sources */,
 				10F32E9E172525E7005E80F8 /* BCIssue.m in Sources */,
 				10F32E9F172525E7005E80F8 /* BCLabel.m in Sources */,
@@ -1535,14 +1371,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		10F32E4F17252365005E80F8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Mantle iOS";
-			targetProxy = 10F32E4E17252365005E80F8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		10E3FC5C1721A66B00607EBA /* InfoPlist.strings */ = {
