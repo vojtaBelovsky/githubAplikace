@@ -22,6 +22,8 @@
 #define HASH_HEIGHT           _titleLabel.font.pointSize
 
 #define USER_VIEW_HEIGHT      ( 14.0f )
+#define MAGIC_CONSTANT        ( 1.2f )
+#define SIDE_OFFSET_BETWEEN_CONTENT   ( 5.0f )
 
 @implementation BCSingleIssueView
 
@@ -61,14 +63,15 @@
 #pragma mark -
 #pragma mark public
 
-- (void)setWithIssue:(BCIssue*)issue
+- (void)setIssue:(BCIssue*)issue
 {
+  _issue = issue;
+  _numberView.issueNumber = issue.number;
   if (_showAll) {
     [_bodyLabel setText:issue.body];
     [_userView setWithIssue:issue];
     [_userView setHidden:NO];
   }
-  _issue = issue;
   [_numberView.hashNumber setText:[NSString stringWithFormat:@"%@",issue.number]];
   [_numberView setNeedsLayout];
   
@@ -88,43 +91,25 @@
 
 
 +(CGSize)sizeOfSingleIssueViewWithIssue:(BCIssue *)issue width:(CGFloat)width offset:(CGFloat)offset titleFont:(UIFont *)font showAll:(BOOL)showAll{
-  CGFloat maxContentWidth = width-(2*offset);
   
-  CGFloat totalHeight = [BCIssueTitleLabel sizeOfLabelWithText:issue.title font:font width:maxContentWidth].height+(2*offset);
-  NSString *lastLine = [BCIssueTitleLabel getLastLineInLabelFromText:issue.title];
+  BCSingleIssueView *myIssueView = [[BCSingleIssueView alloc] initWithTitleFont:font showAll:showAll offset:offset];
+  [myIssueView setIssue:issue];
+  CGRect myRect = CGRectMake(0, 0, width, 0);
+  [myIssueView setFrame:myRect];
+  [myIssueView layoutSubviews];
   
-  CGSize sizeOfCurrentLabel;
-  CGFloat labelsWidth = [lastLine sizeWithFont:CELL_TITLE_FONT].width+offset+TOP_OFFSET_BETWEEN_CONTENT;
-  CGFloat heightOfLabels = 0;
-  int numberOfOffets = 0;
-  for (BCLabel *object in issue.labels) {
-    sizeOfCurrentLabel = [BCLabelView sizeOfLabelWithText:object.name];
-    if ((labelsWidth+sizeOfCurrentLabel.width)>maxContentWidth) {
-      numberOfOffets++;
-      heightOfLabels += sizeOfCurrentLabel.height;
-      labelsWidth = 0;
+  if (showAll) {
+    myRect.size.height = myIssueView.userView.frame.origin.y+myIssueView.userView.frame.size.height+offset;
+    return myRect.size;
+  }else{
+    BCLabelView *myLabelView =  (BCLabelView*)[myIssueView.labelViewsArray lastObject];
+    if (myLabelView != nil) {
+      myRect.size.height = myLabelView.frame.origin.y+myLabelView.frame.size.height+offset;
+    }else{
+      myRect.size.height = myIssueView.titleLabel.frame.origin.y+myIssueView.titleLabel.frame.size.height+offset;
     }
-    labelsWidth += sizeOfCurrentLabel.width;
+    return myRect.size;
   }
-  if (numberOfOffets) {
-    numberOfOffets--;
-  }
-  totalHeight += heightOfLabels+(numberOfOffets*OFFSET_BETWEEN_LABELS);
-  if (heightOfLabels) {
-    totalHeight += TOP_OFFSET_BETWEEN_CONTENT;
-  }
-  
-  if (!showAll) {
-    return CGSizeMake(width, totalHeight);
-  }
-  
-  CGSize bodySize = [BCIssueBodyLabel sizeOfLabelWithText:issue.body width:maxContentWidth];
-  if (bodySize.height) {
-    totalHeight += bodySize.height+TOP_OFFSET_BETWEEN_CONTENT;
-  }
-  
-  totalHeight += USER_VIEW_HEIGHT+TOP_OFFSET_BETWEEN_CONTENT;
-  return CGSizeMake(width, totalHeight);
 }
 
 #pragma mark -
@@ -147,6 +132,7 @@
   }
   
   frame.size = [_titleLabel sizeOfLabelWithWidth:maxContentWidth];
+  frame.size.height *= MAGIC_CONSTANT;
   frame.origin = CGPointMake(_offset, _offset+HASH_VERTICAL_OFFSET);
   if (!CGRectEqualToRect(_titleLabel.frame, frame)) {
     _titleLabel.frame = frame;
@@ -160,9 +146,9 @@
     }
     frame.origin.y += _bodyLabel.frame.size.height+TOP_OFFSET_BETWEEN_CONTENT;
   }else{
-    int numLines = (int)(_titleLabel.frame.size.height/_titleLabel.font.leading);
-    frame.origin.y += (numLines-1)*_titleLabel.font.leading;
-    frame.origin.x += [[_titleLabel getLastLineOfStringInLabel] sizeWithFont:CELL_TITLE_FONT].width+TOP_OFFSET_BETWEEN_CONTENT;
+    int numLines = (int)(_titleLabel.frame.size.height/LINE_HEIGHT);
+    frame.origin.y += (numLines-1)*LINE_HEIGHT;
+    frame.origin.x += [[_titleLabel getLastLineOfStringInLabel] sizeWithFont:CELL_TITLE_FONT].width+SIDE_OFFSET_BETWEEN_CONTENT;
   }
   int heightOfLabel = 0;
   for (BCLabelView *object in _labelViewsArray) {

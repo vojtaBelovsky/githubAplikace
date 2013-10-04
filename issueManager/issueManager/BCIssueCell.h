@@ -13,11 +13,12 @@
 
 @class BCIssue;
 @class BCSingleIssueView;
+@class BCNoIssuesView;
 
 @interface BCIssueCell : UITableViewCell
 
 @property BCSingleIssueView* issueView;
-@property UIImageView *noIssuesImgView;
+@property BCNoIssuesView *noIssuesView;
 
 + (BCIssueCell *)createIssueCellWithTableView:(UITableView *)tableView offset:(CGFloat)offset font:(UIFont *)font;
 

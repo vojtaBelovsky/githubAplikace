@@ -1,10 +1,13 @@
 PODS:
+  - MTLabel (0.0.1)
   - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
+  - MTLabel (~> 0.0.1)
   - SVPullToRefresh (~> 0.4.1)
 
 SPEC CHECKSUMS:
+  MTLabel: 5b326c677b5df074e844a5d2840387b9048257a7
   SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
 
 COCOAPODS: 0.25.0

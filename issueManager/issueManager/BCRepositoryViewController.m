@@ -32,11 +32,19 @@
 #pragma mark LifeCycles
 
 - (id)init{
-    self = [super init];
-    if ( self ) {
-      _chosenRepositories = [[NSMutableArray alloc] init];
-    }
-    return self;
+  self = [super init];
+  if ( self ) {
+    _chosenRepositories = [[NSMutableArray alloc] init];
+  }
+  return self;
+}
+
+- (id)initWithRepositories:(NSMutableArray*)repositories{
+  self = [super init];
+  if ( self ) {
+    _chosenRepositories = repositories;
+  }
+  return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -108,7 +116,6 @@
     BCIssueViewController *issuesVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories];
     BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     [myDelegate.deckController setAndPresentCenterController:issuesVC];
-//    [self.navigationController pushViewController:deckVC animated:YES];
   }else{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Empty repository list" message:@"you can't proceed until you choose some repository/ies" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alertView show];

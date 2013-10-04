@@ -11,6 +11,8 @@
 #import "BCIssue.h"
 #import "BCSingleIssueView.h"
 #import "BCMilestone.h"
+#import "BCUser.h"
+#import "BCNoIssuesView.h"
 
 @implementation BCIssueDataSource
 
@@ -60,10 +62,12 @@
   BCIssueCell *cell;
   BCIssue *issueForRow = [(NSArray*)[_dataSource objectForKey:[_dataSourceKeyNames objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
   if ([issueForRow.title isEqualToString:NO_ISSUES]) {
+    BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
     cell = [BCIssueCell createNoIssuesCellWithTableView:tableView];
+    [cell.noIssuesView setUserNameWithText:currentUser.userLogin];
   }else{
     cell = [BCIssueCell createIssueCellWithTableView:tableView offset:OFFSET font:CELL_TITLE_FONT];
-    [cell.issueView setWithIssue:issueForRow];
+    [cell.issueView setIssue:issueForRow];
   }
   return cell;
 }

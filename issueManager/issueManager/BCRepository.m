@@ -76,7 +76,7 @@
         }
         success ( milestones );
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"fail");
+      failure(error);
     }];
 }
 

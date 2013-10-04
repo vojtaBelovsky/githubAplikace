@@ -60,7 +60,6 @@
       BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
       [_loginView.activityIndicatorView stopAnimating];
       [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
-      //      [self.navigationController pushViewController:repoViewCtrl animated:YES];
     } failure:^(NSError *error) {
       [_loginView.activityIndicatorView stopAnimating];
       [_loginView setUserInteractionEnabled:YES];
@@ -101,7 +100,6 @@
     BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     [_loginView.activityIndicatorView stopAnimating];
     [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
-//    [self.navigationController pushViewController:repoViewCtrl animated:YES];
   } failure:^(NSError *error){
     [_loginView.activityIndicatorView stopAnimating];
     [UIAlertView showWithError:error];

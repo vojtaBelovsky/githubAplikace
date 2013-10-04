@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @class TMViewDeckController;
+@class BCRepositoryViewController;
 
 @interface BCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong)TMViewDeckController *deckController;
-
+@property (strong) TMViewDeckController *deckController;
 @end

@@ -9,13 +9,14 @@
 #import "BCIssueCell.h"
 #import "BCSingleIssueView.h"
 #import "BCIssue.h"
+#import "BCNoIssuesView.h"
 
 #define IssueCellReuseIdentifier      @"IssueCellReuseIdentifier"
 #define NoIssuesCellReuseIdentifier   @"NoIssuesCellReuseIdentifier"
 #define MilestoneCellReuseIdentifier  @"MilestoneCellReuseIdentifier"
 
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
-#define NO_ISSUES_X                   [UIImage imageNamed:@"issueNavbarXOn.png"]
+#define NO_ISSUES_FRAME               CGRectMake(0, 0, 100, 
 
 @implementation BCIssueCell
 
@@ -36,11 +37,9 @@
   BCIssueCell *cell = [tableView dequeueReusableCellWithIdentifier:NoIssuesCellReuseIdentifier];
   if ( !cell ) {
     cell = [[BCIssueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NoIssuesCellReuseIdentifier];
-    cell.issueView = nil;
+    cell.noIssuesView = [[BCNoIssuesView alloc] init];
+    [cell addSubview:cell.noIssuesView];
     cell.userInteractionEnabled = NO;
-    
-    cell.noIssuesImgView = [[UIImageView alloc] initWithImage:NO_ISSUES_X];
-    [cell addSubview:cell.noIssuesImgView];
   }
   
   return cell;
@@ -65,13 +64,12 @@
     }
   }
   
-  if (_noIssuesImgView != nil) {
-    frame.size = [_noIssuesImgView sizeThatFits:self.frame.size];
-    frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, (self.frame.size.height-frame.size.height)/2);
-    if (!CGRectEqualToRect(_noIssuesImgView.frame, frame)) {
-      _noIssuesImgView.frame = frame;
+  if (_noIssuesView != nil) {
+    if (!CGRectEqualToRect(_noIssuesView.frame, self.frame)) {
+      _noIssuesView.frame = self.frame;
     }
   }
+  
 }
 
 @end

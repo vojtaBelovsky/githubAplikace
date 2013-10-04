@@ -12,6 +12,7 @@
 @class BCIssueView;
 @class BCIssueDataSource;
 @class TMViewDeckController;
+@class BCUser;
 
 @interface BCIssueViewController : UITableViewController <UITableViewDelegate, UIScrollViewDelegate>{
 @private
@@ -20,11 +21,13 @@
   int _nthRepository;
   NSMutableArray *_allDataSources;
   NSMutableArray *_allCollaborators;
+  BOOL _isShownRepoVC;
 }
 
 @property UITapGestureRecognizer *slideBack;
 @property TMViewDeckController *deckController;
 @property BOOL userChanged;
+@property BCUser *currentUser;
 
 - (id) initWithRepositories:(NSArray *)repositories;
 

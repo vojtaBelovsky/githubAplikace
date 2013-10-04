@@ -69,21 +69,21 @@
       [_addNewIssueButton setImage:ADD_NEW_ISSUE_HL_IMAGE forState:UIControlStateSelected];
       [self addSubview:_addNewIssueButton];
       
-      _tableViews = [[UIScrollView alloc] init];
-      [_tableViews setPagingEnabled:YES];
-      [_tableViews setBackgroundColor:[UIColor clearColor]];
-      [_tableViews setShowsHorizontalScrollIndicator:NO];
-      [self addSubview:_tableViews];
+      _scrollViewForTableViews = [[UIScrollView alloc] init];
+      [_scrollViewForTableViews setPagingEnabled:YES];
+      [_scrollViewForTableViews setBackgroundColor:[UIColor clearColor]];
+      [_scrollViewForTableViews setShowsHorizontalScrollIndicator:NO];
+      [self addSubview:_scrollViewForTableViews];
       
-      _allTableViews = [[NSMutableArray alloc] initWithCapacity:_numberOfRepos];
+      _tableViews = [[NSMutableArray alloc] initWithCapacity:_numberOfRepos];
       UITableView *currentTableView;
       for (int i = 0; i < _numberOfRepos; i++) {
         currentTableView = [[UITableView alloc] init];
         [currentTableView setBackgroundColor:[UIColor clearColor]];
         [currentTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [currentTableView setShowsVerticalScrollIndicator:NO];
-        [_allTableViews addObject:currentTableView];
-        [_tableViews addSubview:currentTableView];
+        [_tableViews addObject:currentTableView];
+        [_scrollViewForTableViews addSubview:currentTableView];
       }
       
       _paginator = [[UILabel alloc] init];
@@ -172,19 +172,19 @@
   }
     
   frame = CGRectMake(0, _navigationBarView.frame.size.height, self.frame.size.width, self.frame.size.height-_navigationBarView.frame.size.height);
-  if(!CGRectEqualToRect(frame, _tableViews.frame)){
-    _tableViews.frame = frame;
+  if(!CGRectEqualToRect(frame, _scrollViewForTableViews.frame)){
+    _scrollViewForTableViews.frame = frame;
   }
   
   frame = CGRectMake(0, _navigationBarView.frame.size.height, self.frame.size.width*_numberOfRepos, self.frame.size.height-_navigationBarView.frame.size.height);
-  if (!CGSizeEqualToSize(_tableViews.contentSize, frame.size)) {
-    _tableViews.contentSize = frame.size;
+  if (!CGSizeEqualToSize(_scrollViewForTableViews.contentSize, frame.size)) {
+    _scrollViewForTableViews.contentSize = frame.size;
   }
   
   frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-NAV_BAR_HEIGHT);
   for (int i = 0; i < _numberOfRepos; i++) {
     frame.origin.x = i*frame.size.width;
-    [[_allTableViews objectAtIndex:i] setFrame:frame];
+    [[_tableViews objectAtIndex:i] setFrame:frame];
   }
   
   frame.size = [_paginator sizeThatFits:self.frame.size];
@@ -193,8 +193,8 @@
     _paginator.frame = frame;
   }
   
-  if (!CGPointEqualToPoint(_activityIndicatorView.center, _tableViews.center)) {
-    _activityIndicatorView.center = _tableViews.center;
+  if (!CGPointEqualToPoint(_activityIndicatorView.center, _scrollViewForTableViews.center)) {
+    _activityIndicatorView.center = _scrollViewForTableViews.center;
   }
 }
 

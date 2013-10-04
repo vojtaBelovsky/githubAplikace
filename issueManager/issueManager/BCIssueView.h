@@ -11,13 +11,13 @@
 @interface BCIssueView : UIView
 
 @property UIImageView *backgroundImageView;
-@property UIScrollView *tableViews;
+@property UIScrollView *scrollViewForTableViews;
 @property UIView *navigationBarView;
 @property UIButton *chooseCollaboratorButton;
 @property UIButton *addNewIssueButton;
 @property UILabel *userNameLabel;
 @property int numberOfRepos;
-@property NSMutableArray *allTableViews;
+@property NSMutableArray *tableViews;
 @property UILabel *repositoryNameLabel;
 @property UILabel *paginator;
 

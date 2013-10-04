@@ -6,6 +6,12 @@
 // project.
 
 
+// MTLabel
+#define COCOAPODS_POD_AVAILABLE_MTLabel
+#define COCOAPODS_VERSION_MAJOR_MTLabel 0
+#define COCOAPODS_VERSION_MINOR_MTLabel 0
+#define COCOAPODS_VERSION_PATCH_MTLabel 1
+
 // SVPullToRefresh
 #define COCOAPODS_POD_AVAILABLE_SVPullToRefresh
 #define COCOAPODS_VERSION_MAJOR_SVPullToRefresh 0

@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BCLabel.h"
 
-#define REGULAR_FONT_SMALL  [UIFont fontWithName:@"ProximaNova-Regular" size:11]
+#define REGULAR_FONT_SMALL  [UIFont fontWithName:@"ProximaNova-Regular" size:9]
 #define MAXIMUM_WIDTH       ( 80.0f )
 #define TOP_TEXT_OFFSET     ( 2.0f )
 #define LEFT_TEXT_OFFSET    ( 4.0f )

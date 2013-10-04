@@ -17,6 +17,6 @@
     NSMutableArray *_chosenRepositories;
 }
 
-- (id)init;
+- (id)initWithRepositories:(NSMutableArray*)repositories;
 
 @end

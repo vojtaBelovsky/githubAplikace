@@ -103,7 +103,7 @@
       [self addSubview:_headerView];
       
       _issueView = [[BCSingleIssueView alloc] initWithTitleFont:TITLE_FONT showAll:YES offset:OFFSET];
-      [_issueView setWithIssue:issue];
+      [_issueView setIssue:issue];
       [self addSubview:_issueView];
       
       _addNewCommentButton = [[UIButton alloc] init];

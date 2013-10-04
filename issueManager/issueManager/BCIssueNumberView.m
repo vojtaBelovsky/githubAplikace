@@ -12,12 +12,16 @@
 #define HASH_FONT_COLOR   [UIColor colorWithRed:.31 green:.31 blue:.31 alpha:1.00]
 #define HASH_FONT         [UIFont fontWithName:@"ProximaNova-Bold" size:11]
 
+#define SIZE_FOR_ONE_TO_THREE_DIGIT      CGSizeMake(26,16)
+#define SIZE_FOR_FOUR_AND_MORE_DIGITS    CGSizeMake(30,16)
+
 @implementation BCIssueNumberView
 
 - (id)init
 {
   self = [super init];
   if (self) {
+    _issueNumber = [NSNumber numberWithInt:0];
     [self setBackgroundColor:[UIColor clearColor]];
     UIImage *image = [BACKGROUND_IMG stretchableImageWithLeftCapWidth:8 topCapHeight:0];
     _backgroundRectangle = [[UIImageView alloc] initWithImage:image];
@@ -33,8 +37,10 @@
 }
 
 -(CGSize)countMySize{
-  CGSize size = [_hashNumber.text sizeWithFont:HASH_FONT];
-  return CGSizeMake(size.width+2*HASH_HORIZONTAL_OFFSET, size.height+2*HASH_VERTICAL_OFFSET);
+  if (![_issueNumber intValue]/1000) {
+    return SIZE_FOR_FOUR_AND_MORE_DIGITS;
+  }
+  return SIZE_FOR_ONE_TO_THREE_DIGIT;
 }
 
 -(void)layoutSubviews{

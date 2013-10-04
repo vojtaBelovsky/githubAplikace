@@ -16,6 +16,7 @@
 
 @property UIImageView *backgroundRectangle;
 @property UILabel *hashNumber;
+@property NSNumber *issueNumber;
 
 -(CGSize)countMySize;
 

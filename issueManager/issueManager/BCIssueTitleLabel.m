@@ -10,10 +10,9 @@
 #import <CoreText/CoreText.h>
 #import "BCIssueCell.h"
 
-#define EMPTY_STRING      @"          "
+#define EMPTY_STRING      @"         "
 #define LINE_BREAK_MODE   NSLineBreakByWordWrapping
-
-#define TITLE_FONT_COLOR              [UIColor colorWithRed:.26 green:.26 blue:.26 alpha:1.00]
+#define TITLE_FONT_COLOR  [UIColor colorWithRed:.26 green:.26 blue:.26 alpha:1.00]
 
 @implementation BCIssueTitleLabel
 
@@ -23,8 +22,9 @@
   if (self) {
     [self setNumberOfLines:0];
     [self setFont:font];
-    [self setTextColor:TITLE_FONT_COLOR];
-    [self setLineBreakMode:LINE_BREAK_MODE];
+    [self setFontColor:TITLE_FONT_COLOR];
+    [self setLineHeight:LINE_HEIGHT];
+//    [self setLineBreakMode:LINE_BREAK_MODE];
     [self setBackgroundColor:[UIColor clearColor]];
   }
   return self;

@@ -29,9 +29,8 @@
 @property BCIssueBodyLabel *bodyLabel;
 @property BCIssueUserView *userView;
 @property NSMutableArray* labelViewsArray;
-@property BCIssue *issue;
+@property (nonatomic) BCIssue *issue;
 
-- (void)setWithIssue:(BCIssue*)issue;
 - (id)initWithTitleFont:(UIFont *)font showAll:(BOOL)showAll offset:(CGFloat)offset;
 +(CGSize)sizeOfSingleIssueViewWithIssue:(BCIssue *)issue width:(CGFloat)width offset:(CGFloat)offset titleFont:(UIFont *)font showAll:(BOOL)show;
 

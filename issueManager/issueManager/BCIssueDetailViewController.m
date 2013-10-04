@@ -69,7 +69,7 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    [_issueDetailview.issueView setWithIssue:_editedIssue];
+    [_issueDetailview.issueView setIssue:_editedIssue];
 }
 
 #pragma mark -
@@ -155,7 +155,7 @@
 //    _editedIssue = [_issue copy];
 //    self.navigationItem.rightBarButtonItems = _buttons;
 //    
-//    [_issueDetailview.issueView setWithIssue:_issue];
+//    [_issueDetailview.issueView setIssue:_issue];
 //}
 
 #pragma mark -

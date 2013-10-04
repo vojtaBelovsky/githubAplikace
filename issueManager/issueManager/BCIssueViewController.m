@@ -25,6 +25,7 @@
 #import "BCAppDelegate.h"
 #import "TMViewDeckController.h"
 #import "UIScrollView+SVPulltoRefresh.h"
+#import "BCRepositoryViewController.h"
 
 #define GRAY_FONT_COLOR       [UIColor colorWithRed:.55 green:.55 blue:.55 alpha:1.00]
 #define WHITE_COLOR           [UIColor whiteColor]
@@ -33,6 +34,7 @@
 
 #define MILESTONES_KEY      @"milestones"
 #define ISSUES_KEY          @"issues"
+#define ANIMATION_DURATION  ( 0.3 )
 
 @interface BCIssueViewController ()
 
@@ -49,42 +51,36 @@
       _repositories = repositories;
       _nthRepository = 0;
       _userChanged = NO;
+      _isShownRepoVC = NO;
       _allDataSources = [[NSMutableArray alloc] init];
       _slideBack = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slideBackCenterView)];
+      [self getAllCollaborators];
+      _currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
     }
   return self;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  int index = [_tableView.allTableViews indexOfObject:tableView];
+  int index = [_tableView.tableViews indexOfObject:tableView];
   BCIssueDetailViewController *issueDetailViewController = [[BCIssueDetailViewController alloc] initWithIssue:[self getIssueForIndexPath:indexPath fromNthRepository:index] andController:self];
   [self presentViewController:issueDetailViewController animated:YES completion:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-  if (_userChanged) {
-    [self createModel];
-  }
-  [super viewWillAppear:animated];
-  [[_tableView.allTableViews objectAtIndex:_nthRepository] reloadData];
-  [_tableView setNeedsLayout];
-}
-
 - (void)loadView {
   _tableView = [[BCIssueView alloc] initWithNumberOfRepos:[_repositories count]];
-  [_tableView.tableViews setDelegate:self];
+  [_tableView.scrollViewForTableViews setDelegate:self];
   [_tableView.addNewIssueButton addTarget:self action:@selector(addButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_tableView.chooseCollaboratorButton addTarget:self action:@selector(chooseButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_tableView setRepoName:[(BCRepository *)[_repositories objectAtIndex:_nthRepository] name]];
   
-  for(__weak UITableView *tableView in _tableView.allTableViews){
+  for(__weak UITableView *tableView in _tableView.tableViews){
     [tableView addPullToRefreshWithActionHandler:^{
-      __block BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+      __block BCUser *currentUser = [_currentUser copy];
       __block int currentRepozitoryNumber = _nthRepository;
       __block BCRepository *currentRepozitory = [_repositories objectAtIndex:currentRepozitoryNumber];
       
       [tableView beginUpdates];
-      [UIView animateWithDuration:0.3 animations:^{
+      [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         [tableView setAlpha:0.5];
       }];
       [BCRepository getAllMilestonesOfRepository:currentRepozitory withSuccess:^(NSMutableArray *allMilestones) {
@@ -96,13 +92,13 @@
           [_allDataSources replaceObjectAtIndex:currentRepozitoryNumber withObject:currentDataSource];
           [tableView setDataSource:currentDataSource];
           [tableView reloadData];
-          [UIView animateWithDuration:0.3 animations:^{
+          [UIView animateWithDuration:ANIMATION_DURATION animations:^{
             [tableView setAlpha:1];
           }];
           [tableView endUpdates];
           [tableView.pullToRefreshView stopAnimating];
         } failure:^(NSError *error) {
-          [UIView animateWithDuration:0.3 animations:^{
+          [UIView animateWithDuration:ANIMATION_DURATION animations:^{
             [tableView setAlpha:1];
           }];
           [tableView endUpdates];
@@ -110,7 +106,7 @@
           [UIAlertView showWithError:error];
         }];
       } failure:^(NSError *error) {
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:ANIMATION_DURATION animations:^{
           [tableView setAlpha:1];
         }];
         [tableView endUpdates];
@@ -124,9 +120,8 @@
   
   self.view = _tableView;
   [self createModel];
-  [self getAllCollaborators];
   for (int i = 0; i < [_repositories count]; i++) {
-    [[_tableView.allTableViews objectAtIndex:i] setDelegate:self];
+    [[_tableView.tableViews objectAtIndex:i] setDelegate:self];
   }
 }
 
@@ -139,13 +134,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  int index = [_tableView.allTableViews indexOfObject:tableView];
+  int index = [_tableView.tableViews indexOfObject:tableView];
   BCIssue *currentIssue = [self getIssueForIndexPath:indexPath fromNthRepository:index];
   return [BCIssueCell heightOfCellWithIssue:currentIssue width:ISSUE_WIDTH titleFont:CELL_TITLE_FONT offset:OFFSET];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-  int index = [_tableView.allTableViews indexOfObject:tableView];
+  int index = [_tableView.tableViews indexOfObject:tableView];
   BCHeadeView *headerView;
   if ([_allDataSources count] > index) {
     BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:index];
@@ -173,8 +168,17 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-  if (scrollView == _tableView.tableViews) {
+  if (scrollView == _tableView.scrollViewForTableViews) {
     int contentOffset = scrollView.contentOffset.x;
+    if (contentOffset < 0 && !_isShownRepoVC) {
+      [_tableView.scrollViewForTableViews setUserInteractionEnabled:NO];
+      _isShownRepoVC = YES;
+      BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+      [myDelegate.deckController slideCenterControllerToTheRightWithLeftController:      [[BCRepositoryViewController alloc] initWithRepositories:[NSMutableArray arrayWithArray:_repositories]] animated:YES withCompletion:nil];
+      [self.view addGestureRecognizer:_slideBack];
+      [_tableView.scrollViewForTableViews setUserInteractionEnabled:NO];
+      [_tableView.chooseCollaboratorButton setEnabled:NO];
+    }
     if (contentOffset%(int)self.view.frame.size.width == 0) {
       int originalOffset = _nthRepository*self.view.frame.size.width;
       if (contentOffset != originalOffset) {
@@ -201,9 +205,12 @@
 }
 
 -(void)chooseButtonDidPress{
+  [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+    [[_tableView.tableViews objectAtIndex:_nthRepository] setAlpha:0.0];
+  }];
   BCCollaboratorsViewController *chooseCollVC = [[BCCollaboratorsViewController alloc] initWithCollaborators:_allCollaborators andIssueViewCtrl:self];
   [self.view addGestureRecognizer:_slideBack];
-  [_tableView.tableViews setUserInteractionEnabled:NO];
+  [_tableView.scrollViewForTableViews setUserInteractionEnabled:NO];
   [_tableView.chooseCollaboratorButton setEnabled:NO];
   BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
   [myDelegate.deckController slideCenterControllerToTheRightWithLeftController:chooseCollVC animated:YES withCompletion:nil];
@@ -215,22 +222,27 @@
 
 -(void)slideBackCenterView{
   BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-  if ([myDelegate.deckController leftControllerPresented] || [myDelegate.deckController rightControllerPresented]) {
-    if ([_tableView.chooseCollaboratorButton isEnabled]) {
-      [_tableView.addNewIssueButton setEnabled:YES];
+  if ([myDelegate.deckController leftControllerPresented]) {
+    if (_userChanged) {
+      [self createModel];
+      _userChanged = NO;
     }else{
-      [_tableView.chooseCollaboratorButton setEnabled:YES];
+      [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        [[_tableView.tableViews objectAtIndex:_nthRepository] setAlpha:1];
+      }];
     }
+    [_tableView.chooseCollaboratorButton setEnabled:YES];
     [self.view removeGestureRecognizer:_slideBack];
-    [_tableView.tableViews setUserInteractionEnabled:YES];
+    [_tableView.scrollViewForTableViews setUserInteractionEnabled:YES];
     [myDelegate.deckController slideCenterControllerBackAnimated:YES withCompletion:nil];
+    _isShownRepoVC = NO;
   }
 }
 
 -(void)addNewIssue:(BCIssue *)newIssue{
   BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:_nthRepository];
   [currentDataSource addNewIssue:newIssue];
-  [[_tableView.allTableViews objectAtIndex:_nthRepository] setDataSource:currentDataSource];
+  [[_tableView.tableViews objectAtIndex:_nthRepository] setDataSource:currentDataSource];
 }
 
 //to the future, for changing issues
@@ -263,10 +275,9 @@
 }
 
 -(void)createModel{
-  
   [_tableView.activityIndicatorView startAnimating];
   __block int i = 0;
-  __block BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+  __block BCUser *currentUser = [_currentUser copy];
   [_tableView setUserName:currentUser.userLogin];
   __block void (^myFailureBlock) (NSError *error) = [^(NSError *error){
     [_tableView.activityIndicatorView stopAnimating];
@@ -284,9 +295,13 @@
       } else {
         [_allDataSources addObject:currentDataSource];
       }
-      [[_tableView.allTableViews objectAtIndex:i] setDataSource:currentDataSource];
-      [[_tableView.allTableViews objectAtIndex:i] reloadData];
+      UITableView *currentTableView = [_tableView.tableViews objectAtIndex:i];
+      [currentTableView setDataSource:currentDataSource];
+      [currentTableView reloadData];
       i++;
+      [UIView animateWithDuration:0.5 animations:^{
+        [currentTableView setAlpha:1];
+      }];
       if (i != [_repositories count]) {
         [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
       }else{

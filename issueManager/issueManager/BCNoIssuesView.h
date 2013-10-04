@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BCUser;
 
 @interface BCNoIssuesView : UIView
+
+@property UILabel *noIssues;
+@property UILabel *userName;
+
+-(void)setUserNameWithText:(NSString *)userName;
 
 @end

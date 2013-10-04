@@ -43,9 +43,12 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  [BCUser sharedInstanceChangeableWithUser:[_dataSource.collaborators objectAtIndex:indexPath.row] succes:nil failure:nil];
-  [_issueViewCtrl setUserChanged:YES];
-  [_issueViewCtrl viewWillAppear:YES];
+  BCUser *collaborator = [_dataSource.collaborators objectAtIndex:indexPath.row];
+  if (![collaborator isEqual:_issueViewCtrl.currentUser]) {
+    [BCUser sharedInstanceChangeableWithUser:collaborator succes:nil failure:nil];
+    [_issueViewCtrl setCurrentUser:collaborator];
+    [_issueViewCtrl setUserChanged:YES]; 
+  }
   [_issueViewCtrl slideBackCenterView];
 //  [self.navigationController popViewControllerAnimated:YES];
 }

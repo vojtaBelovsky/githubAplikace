@@ -6,9 +6,12 @@
 //  Copyright (c) 2013 vojta. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#define LINE_HEIGHT 17
 
-@interface BCIssueTitleLabel : UILabel
+#import <UIKit/UIKit.h>
+#import "MTLabel.h"
+
+@interface BCIssueTitleLabel : MTLabel
 
 - (id)initWithFont:(UIFont*)font;
 
