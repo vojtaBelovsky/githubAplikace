@@ -15,14 +15,14 @@
 
 - (id)initWithUser:(BCUser *)user
 {
-    self = [super init];
-    if (self) {
-        _userId = user.userId;
-        _userLogin = user.userLogin;
-        _avatarUrl = user.avatarUrl;
-        _htmlUrl = user.htmlUrl;
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    _userId = user.userId;
+    _userLogin = user.userLogin;
+    _avatarUrl = user.avatarUrl;
+    _htmlUrl = user.htmlUrl;
+  }
+  return self;
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -56,27 +56,22 @@
   }];
 }
 
-+ (BCUser *)sharedInstanceChangeableWithUser:(BCUser *)changeUser succes:(void(^)(BCUser *user))succes failure:(void(^)(NSError *error))failure{
-    static BCUser *instance = nil;
-    if(changeUser == nil){
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            [[BCHTTPClient sharedInstance] getPath:@"user" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSDictionary *userInDict = responseObject;
-              BCUser *loggedUser = [MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:userInDict error:nil];
-              instance = loggedUser;
-              succes ( loggedUser );
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              onceToken++;
-              failure ( error );
-            }];
-        });
-    }else{
-        instance = changeUser;
-    }
-    return instance;
++ (BCUser *)sharedInstanceWithSuccess:(void (^)(BCUser *loggedInUser))success failure:(void(^)(NSError *error))failure{
+  static BCUser *instance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    [[BCHTTPClient sharedInstance] getPath:@"user" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      NSDictionary *userInDict = responseObject;
+      BCUser *loggedUser = [MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:userInDict error:nil];
+      instance = loggedUser;
+      success(instance);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      onceToken++;
+      failure(error);
+    }];
+  });
+  
+  return instance;
 }
-
-
 
 @end

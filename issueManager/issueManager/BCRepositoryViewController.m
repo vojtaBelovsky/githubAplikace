@@ -18,10 +18,6 @@
 #import "TMViewDeckController.h"
 #import "BCAppDelegate.h"
 
-#define KEY_OBJECT        @"object"
-#define KEY_REPOSITORIES  @"repositories"
-#define KEY_IMAGE         @"image"
-
 @interface BCRepositoryViewController ()
 - (void)createModel;
 @end
@@ -31,17 +27,19 @@
 #pragma mark -
 #pragma mark LifeCycles
 
-- (id)init{
+- (id)initWithLoggedInUser:(BCUser*)user{
   self = [super init];
   if ( self ) {
+    _loggedInUser = user;
     _chosenRepositories = [[NSMutableArray alloc] init];
   }
   return self;
 }
 
-- (id)initWithRepositories:(NSMutableArray*)repositories{
+- (id)initWithRepositories:(NSMutableArray*)repositories andLoggedInUser:(BCUser*)user{
   self = [super init];
   if ( self ) {
+    _loggedInUser = user;
     _chosenRepositories = repositories;
   }
   return self;
@@ -113,7 +111,7 @@
 
 -(void)doneButtonDidPress{
   if ([_chosenRepositories count]) {
-    BCIssueViewController *issuesVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories];
+    BCIssueViewController *issuesVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories andLoggedInUser:_loggedInUser];
     BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     [myDelegate.deckController setAndPresentCenterController:issuesVC];
   }else{
@@ -133,19 +131,17 @@
   
   __block NSMutableDictionary *dataSource = [[NSMutableDictionary alloc] init];
   __block NSDictionary *dataSourcePairs;
-  __block UIImageView *dataAvatar = [[UIImageView alloc] init];
   __block UIImage *placeholderImage = [UIImage imageNamed:@"gravatar-user-420.png"];
   __block NSMutableArray *dataSourceKeyNames = [[NSMutableArray alloc] init];
   
-  BCUser *chosenUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+  BCUser *chosenUser = _loggedInUser;
   
   [BCUser getAllRepositoriesOfUserWithSuccess:^(NSMutableArray *allRepositories) {
     if (![allRepositories count]) {
       [allRepositories addObject:[[BCRepository alloc] initNoRepositories]];
     }
     [dataSourceKeyNames addObject:chosenUser.userLogin];
-    [dataAvatar setImageWithURL:chosenUser.avatarUrl placeholderImage:placeholderImage];
-    dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: chosenUser, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, dataAvatar.image, KEY_IMAGE, nil];
+    dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: chosenUser, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, chosenUser.avatarUrl, KEY_IMAGE_URL, nil];
     [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[0]];
     [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
       if([allOrgs count] > 0){
@@ -163,9 +159,8 @@
           }
           BCOrg *myOrg = (BCOrg *)allOrgs[i];
           i++;
-          [dataAvatar setImageWithURL:[myOrg avatarUrl] placeholderImage:placeholderImage];
           [dataSourceKeyNames addObject:[myOrg orgLogin]];
-          dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: myOrg, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, dataAvatar.image, KEY_IMAGE, nil];
+          dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: myOrg, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, [myOrg avatarUrl], KEY_IMAGE_URL, nil];
           [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[i]];
           if([allOrgs count] == (i)){
             _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];

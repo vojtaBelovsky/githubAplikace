@@ -17,6 +17,8 @@
 #import "BCAvatarImgView.h"
 #import "UIImageView+AFNetworking.h"
 
+#define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
+
 @implementation BCRepositoryDataSource
 
 - (id)initWithRepositories:(NSDictionary *)repositories repositoryNames:(NSArray *) keyNames andNavigationController:(BCRepositoryViewController *)repoViewController{
@@ -36,7 +38,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   NSUInteger count = 1;
   if ([[_actualSelected objectAtIndex:(section)] isEqual:[NSNumber numberWithBool:YES]]) {
-    NSString * keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(section)], @"repositories" ];
+    NSString * keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(section)], KEY_REPOSITORIES ];
     return ([[_repositories valueForKeyPath:keyPath] count]+1);
   }
   return count;
@@ -50,22 +52,22 @@
   UITableViewCell *cell = nil;
   if (indexPath.row == 0) {
     BCUsrOrgCell *usrOrgCell;
-    NSString * keyPath = [NSString stringWithFormat:@"%@.object", (NSString *)[_keyNames objectAtIndex:(indexPath.section)]];
+    NSString * keyPath = [NSString stringWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], KEY_OBJECT];
     id object = [_repositories valueForKeyPath:keyPath];
     if ([object isKindOfClass:[BCUser class]]) {
-      keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"image" ];
+      keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], KEY_IMAGE_URL ];
       usrOrgCell = [BCUsrOrgCell createOrgOrUserRepositoryCellWithTableView:tableView];
       usrOrgCell.myTextLabel.text = [(BCUser *)object userLogin];
-      [usrOrgCell.avatar setImage:[_repositories valueForKeyPath:keyPath]];
+      [usrOrgCell.avatar setImageWithURL:[_repositories valueForKeyPath:keyPath] placeholderImage:PLACEHOLDER_IMG];
     }else{
-      keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"image" ];
+      keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], KEY_IMAGE_URL ];
       usrOrgCell = [BCUsrOrgCell createOrgOrUserRepositoryCellWithTableView:tableView];
       usrOrgCell.myTextLabel.text = [(BCOrg *)object orgLogin];
-      [usrOrgCell.avatar setImage:[_repositories valueForKeyPath:keyPath]];
+      [usrOrgCell.avatar setImageWithURL:[_repositories valueForKeyPath:keyPath] placeholderImage:PLACEHOLDER_IMG];
     }
     cell = usrOrgCell;
   }else{
-    NSString *keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"repositories" ];
+    NSString *keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], KEY_REPOSITORIES ];
     BCRepository *repo = [(NSArray *)[_repositories valueForKeyPath:keyPath] objectAtIndex:(indexPath.row-1)];
     if ([repo.name isEqualToString:NO_REPOSITORIES]) {
       BCNoRepoCell *noRepoCell = [BCNoRepoCell createNoRepoCellWithTableView:tableView];
@@ -84,7 +86,7 @@
 #pragma mark public
 
 -(NSInteger)getNumberOfRowsToAddToSection:(NSUInteger)section{
-  NSString * keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(section)], @"repositories" ];
+  NSString * keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(section)], KEY_REPOSITORIES ];
   int count = [[_repositories valueForKeyPath:keyPath] count];
   if (count) {
     return count;
@@ -94,7 +96,7 @@
 }
 
 -(BCRepository *)getRepositoryAtIndex:(NSIndexPath *)indexPath{
-  NSString *keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], @"repositories" ];
+  NSString *keyPath = [[NSString alloc] initWithFormat:@"%@.%@", (NSString *)[_keyNames objectAtIndex:(indexPath.section)], KEY_REPOSITORIES ];
   BCRepository *repo = [(NSArray *)[_repositories valueForKeyPath:keyPath] objectAtIndex:(indexPath.row-1)];
   return repo;
 }

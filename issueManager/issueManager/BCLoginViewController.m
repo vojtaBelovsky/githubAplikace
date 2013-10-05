@@ -38,7 +38,7 @@
 - (id)init {
   self = [super init];
   if (self) {
-    
+    _loginView = nil;
   }
   return self;
 }
@@ -55,8 +55,8 @@
     [_loginView.passwordTextField.textField setText:[credentials valueForKey:PASSWORD]];
     [_loginView.activityIndicatorView startAnimating];
     [_loginView setUserInteractionEnabled:NO];
-    [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user) {
-      BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
+    [BCUser sharedInstanceWithSuccess:^(BCUser *loggedInUser) {
+      BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] initWithLoggedInUser:loggedInUser];
       BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
       [_loginView.activityIndicatorView stopAnimating];
       [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
@@ -94,14 +94,12 @@
   NSDictionary *credentials = [[NSDictionary alloc] initWithObjectsAndKeys:_loginView.loginTextField.textField.text, @"login",_loginView.passwordTextField.textField.text, @"password", nil];
   [userDefaults setObject:credentials forKey:@"credentials"];
   [userDefaults synchronize];
-  
-  [BCUser sharedInstanceChangeableWithUser:nil succes:^(BCUser *user){
-    BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] init];
+  [BCUser sharedInstanceWithSuccess:^(BCUser *loggedInUser) {
+    BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] initWithLoggedInUser:loggedInUser];
     BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     [_loginView.activityIndicatorView stopAnimating];
     [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
-  } failure:^(NSError *error){
-    [_loginView.activityIndicatorView stopAnimating];
+  } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
   }];
 }

@@ -10,13 +10,15 @@
 
 #import <Foundation/Foundation.h>
 @class BCIssue;
+@class BCUser;
 
 @interface BCIssueDataSource : NSObject<UITableViewDataSource>
 
 @property NSMutableDictionary *dataSource;
 @property NSMutableArray *dataSourceKeyNames;
+@property BCUser *currentUser;
 
--(id) initWithIssues:(NSMutableArray *)issues milestones:(NSMutableArray *)milestones;
+-(id) initWithIssues:(NSMutableArray *)issues withMilestones:(NSMutableArray *)milestones withCurrentUser:(BCUser*)user;
 
 -(void)addNewIssue:(BCIssue *)newIssue;
 -(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue *)newIssue;

@@ -19,7 +19,7 @@
   self = [super init];
   if (self) {
     _commentId = 0;
-    _user = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+    _user = [BCUser sharedInstanceWithSuccess:nil failure:nil];
     _body = @"";
     _updatedAt = [NSDate date];
   }

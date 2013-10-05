@@ -45,7 +45,7 @@
 #pragma mark -
 #pragma mark lifecycles
 
-- (id) initWithRepositories:(NSArray *)repositories{
+- (id) initWithRepositories:(NSArray *)repositories andLoggedInUser:(BCUser *)user{
   self = [super init];
     if(self){
       _repositories = repositories;
@@ -55,7 +55,7 @@
       _allDataSources = [[NSMutableArray alloc] init];
       _slideBack = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slideBackCenterView)];
       [self getAllCollaborators];
-      _currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+      _currentUser = user;
     }
   return self;
 }
@@ -88,7 +88,7 @@
           if (![issues count]) {
             [issues addObject:[[BCIssue alloc] initNoIssues]];
           }
-          BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:allMilestones];
+          BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues withMilestones:allMilestones withCurrentUser:_currentUser];
           [_allDataSources replaceObjectAtIndex:currentRepozitoryNumber withObject:currentDataSource];
           [tableView setDataSource:currentDataSource];
           [tableView reloadData];
@@ -174,7 +174,7 @@
       [_tableView.scrollViewForTableViews setUserInteractionEnabled:NO];
       _isShownRepoVC = YES;
       BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-      [myDelegate.deckController slideCenterControllerToTheRightWithLeftController:      [[BCRepositoryViewController alloc] initWithRepositories:[NSMutableArray arrayWithArray:_repositories]] animated:YES withCompletion:nil];
+      [myDelegate.deckController slideCenterControllerToTheRightWithLeftController:      [[BCRepositoryViewController alloc] initWithRepositories:[NSMutableArray arrayWithArray:_repositories] andLoggedInUser:[BCUser sharedInstanceWithSuccess:nil failure:nil]] animated:YES withCompletion:nil];
       [self.view addGestureRecognizer:_slideBack];
       [_tableView.scrollViewForTableViews setUserInteractionEnabled:NO];
       [_tableView.chooseCollaboratorButton setEnabled:NO];
@@ -200,7 +200,7 @@
 #pragma mark buttonActions
 
 - (void)addButtonDidPress{
-  BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:_nthRepository] andController:self];
+  BCAddIssueViewController *addIssueVC = [[BCAddIssueViewController alloc] initWithRepository:[_repositories objectAtIndex:_nthRepository] withController:self withCurrentUser:_currentUser];
   [self.navigationController pushViewController:addIssueVC animated:YES];
 }
 
@@ -289,7 +289,7 @@
       if (![issues count]) {
         [issues addObject:[[BCIssue alloc] initNoIssues]];
       }
-      BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues milestones:milestones];
+      BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues withMilestones:milestones withCurrentUser:_currentUser];
       if ( _allDataSources.count > i ){
         [_allDataSources replaceObjectAtIndex:i withObject:currentDataSource];
       } else {

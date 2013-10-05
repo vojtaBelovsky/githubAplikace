@@ -17,7 +17,7 @@
 @property (nonatomic, copy, readonly) NSURL *avatarUrl;
 @property (nonatomic, copy, readonly) NSURL *htmlUrl;
 
-+ (BCUser *)sharedInstanceChangeableWithUser:(BCUser *)changeUser succes:(void(^)(BCUser *user))succes failure:(void(^)(NSError *error))failure;
++ (BCUser *)sharedInstanceWithSuccess:(void (^)(BCUser *loggedInUser))success failure:(void(^)(NSError *error))failure;
 
 + (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSMutableArray *allRepositories))success failure:(void(^) (NSError *error))failure;
 

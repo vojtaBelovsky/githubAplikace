@@ -15,8 +15,10 @@
     BCRepositoryView *_repoView;
     BCRepositoryDataSource *_dataSource;
     NSMutableArray *_chosenRepositories;
+  BCUser *_loggedInUser;
 }
 
-- (id)initWithRepositories:(NSMutableArray*)repositories;
+- (id)initWithLoggedInUser:(BCUser*)user;
+- (id)initWithRepositories:(NSMutableArray*)repositories andLoggedInUser:(BCUser*)user;
 
 @end

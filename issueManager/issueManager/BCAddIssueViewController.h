@@ -28,6 +28,6 @@
 @property NSArray *checkedLabels;
 @property BCIssueViewController *myParentViewController;
 
-- (id)initWithRepository:(BCRepository *)repository andController:(BCIssueViewController *)controller;
+- (id)initWithRepository:(BCRepository *)repository withController:(BCIssueViewController *)controller withCurrentUser:(BCUser*)user;
 
 @end

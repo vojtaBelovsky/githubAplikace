@@ -35,10 +35,10 @@
 
 @implementation BCAddIssueViewController
 
-- (id)initWithRepository:(BCRepository *)repository andController:(BCIssueViewController *)controller{
+- (id)initWithRepository:(BCRepository *)repository withController:(BCIssueViewController *)controller withCurrentUser:(BCUser*)user{
   self = [super init];
   if (self) {
-    BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
+    BCUser *currentUser = user;
     _checkedAssignee = currentUser;
     _checkedMilestone = nil;
     _checkedLabels = [[NSMutableArray alloc] init];

@@ -16,9 +16,10 @@
 
 @implementation BCIssueDataSource
 
--(id) initWithIssues:(NSMutableArray *)issues milestones:(NSMutableArray *)milestones{
+-(id) initWithIssues:(NSMutableArray *)issues withMilestones:(NSMutableArray *)milestones withCurrentUser:(BCUser*)user{
   self = [super init];
   if(self){
+    _currentUser = user;
     _dataSourceKeyNames = [[NSMutableArray alloc] init];
     _dataSource = [[NSMutableDictionary alloc] init];
     
@@ -62,9 +63,8 @@
   BCIssueCell *cell;
   BCIssue *issueForRow = [(NSArray*)[_dataSource objectForKey:[_dataSourceKeyNames objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
   if ([issueForRow.title isEqualToString:NO_ISSUES]) {
-    BCUser *currentUser = [BCUser sharedInstanceChangeableWithUser:nil succes:nil failure:nil];
     cell = [BCIssueCell createNoIssuesCellWithTableView:tableView];
-    [cell.noIssuesView setUserNameWithText:currentUser.userLogin];
+    [cell.noIssuesView setUserNameWithText:_currentUser.userLogin];
   }else{
     cell = [BCIssueCell createIssueCellWithTableView:tableView offset:OFFSET font:CELL_TITLE_FONT];
     [cell.issueView setIssue:issueForRow];

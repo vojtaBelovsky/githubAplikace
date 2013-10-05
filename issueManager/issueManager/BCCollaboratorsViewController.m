@@ -27,7 +27,7 @@
 {
   self = [super init];
   if (self) {
-    BCCollaboratorsDataSource *dataSource =   [[BCCollaboratorsDataSource alloc] initWithCollaborators:collaborators];
+    BCCollaboratorsDataSource *dataSource =  [[BCCollaboratorsDataSource alloc] initWithCollaborators:collaborators];
     _dataSource = dataSource;
     _issueViewCtrl = issueViewCtrl;
   }
@@ -45,12 +45,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   BCUser *collaborator = [_dataSource.collaborators objectAtIndex:indexPath.row];
   if (![collaborator isEqual:_issueViewCtrl.currentUser]) {
-    [BCUser sharedInstanceChangeableWithUser:collaborator succes:nil failure:nil];
     [_issueViewCtrl setCurrentUser:collaborator];
     [_issueViewCtrl setUserChanged:YES]; 
   }
   [_issueViewCtrl slideBackCenterView];
-//  [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

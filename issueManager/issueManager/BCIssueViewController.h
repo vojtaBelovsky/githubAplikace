@@ -29,7 +29,7 @@
 @property BOOL userChanged;
 @property BCUser *currentUser;
 
-- (id) initWithRepositories:(NSArray *)repositories;
+- (id) initWithRepositories:(NSArray *)repositories andLoggedInUser:(BCUser *)user;
 
 -(void)addNewIssue:(BCIssue *)newIssue;
 -(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue*)newIssue;
