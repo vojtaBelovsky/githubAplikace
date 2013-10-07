@@ -8,6 +8,7 @@
 
 #import "BCLoginView.h"
 #import "BCTextField.h"
+#import "BCConstants.h"
 
 #define RGB_COLOR(r, g, b, a) [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:a / 255.0f]
 
@@ -22,11 +23,10 @@
 #define BUTTON_FONT               [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define FORGOT_PASSWORD_FONT      [UIFont fontWithName:@"ProximaNova-Regular" size:12]//[UIFont fontWithName:@"Proxima Nova Regular" size:24.0f]
 
-#define EMPTY_TEXT_FIELD_FONT_COLOR      [UIColor colorWithRed:.68 green:.68 blue:.68 alpha:1.00];
-#define LOGIN_BUTTON_FONT_COLOR          [UIColor colorWithRed:1.00 green:1.00 blue:1.00 alpha:];
-#define LOGIN_BUTTON_TEXT_SHADOW_COLOR   [UIColor colorWithRed:.14 green:.42 blue:.65 alpha:1.00];
-#define FORGOT_PASSWD_FONT_COLOR         [UIColor colorWithRed:.68 green:.68 blue:.71 alpha:1.00];
-#define FORGOT_PASSWD_TEXT_SHADOW_COLOR  [UIColor colorWithRed:.95 green:.95 blue:.95 alpha:1.00];
+#define EMPTY_TEXT_FIELD_FONT_COLOR      [UIColor colorWithRed:.68 green:.68 blue:.68 alpha:1.00]
+#define FORGOT_PASSWD_FONT_COLOR         [UIColor colorWithRed:.68 green:.68 blue:.71 alpha:1.00]
+#define FORGOT_PASSWD_TEXT_SHADOW_COLOR  [UIColor colorWithRed:.95 green:.95 blue:.95 alpha:1.00]
+
 
 #define LOGIN_TEXT_FIELD_HEIGHT_OFFSET  ( 0.5f )
 
@@ -80,7 +80,10 @@
     [self addSubview:_forgotPasswordLabel];
     
     
-    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [_activityIndicatorView setColor:[UIColor blackColor]];
+    [_activityIndicatorView setAlpha:ACTIVITY_INDICATOR_ALPHA];
+    [_activityIndicatorView setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND];
     [self addSubview:_activityIndicatorView];
   }
   return self;
@@ -119,6 +122,12 @@
   frame.origin = CGPointMake((self.frame.size.width-frame.size.width)/2, CGRectGetMaxY( _loginButton.frame ) + self.frame.size.height*FORGOT_PASSWD_OFFSET);
   if ( !CGRectEqualToRect( _forgotPasswordLabel.frame, frame ) ) {
     _forgotPasswordLabel.frame = frame;
+  }
+  
+  frame.size = ACTIVITY_INDICATOR_SIZE;
+  frame.origin = _activityIndicatorView.frame.origin;
+  if (!CGRectEqualToRect(_activityIndicatorView.frame, frame)) {
+    _activityIndicatorView.frame = frame;
   }
   
   if (!CGPointEqualToPoint(_activityIndicatorView.center, self.center)) {

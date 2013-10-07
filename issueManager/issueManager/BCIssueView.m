@@ -8,6 +8,7 @@
 
 #import "BCIssueView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BCConstants.h"
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define NAV_BAR_HEIGHT                ( 44.0f )
@@ -93,7 +94,10 @@
       [_paginator setBackgroundColor:[UIColor clearColor]];
       [self addSubview:_paginator];
       
-      _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+      _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+      [_activityIndicatorView setColor:[UIColor blackColor]];
+      [_activityIndicatorView setAlpha:ACTIVITY_INDICATOR_ALPHA];
+      [_activityIndicatorView setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND];
       [self addSubview:_activityIndicatorView];
     }
     return self;
@@ -193,8 +197,14 @@
     _paginator.frame = frame;
   }
   
-  if (!CGPointEqualToPoint(_activityIndicatorView.center, _scrollViewForTableViews.center)) {
-    _activityIndicatorView.center = _scrollViewForTableViews.center;
+  frame.size = ACTIVITY_INDICATOR_SIZE;
+  frame.origin = _activityIndicatorView.frame.origin;
+  if (!CGRectEqualToRect(_activityIndicatorView.frame, frame)) {
+    _activityIndicatorView.frame = frame;
+  }
+  
+  if (!CGPointEqualToPoint(_activityIndicatorView.center, self.center)) {
+    _activityIndicatorView.center = self.center;
   }
 }
 

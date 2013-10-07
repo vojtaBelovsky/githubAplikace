@@ -28,6 +28,31 @@
   return self;
 }
 
+- (BOOL)isEqual:(id)other {
+  if (other == self)
+    return YES;
+  if (!other || ![other isKindOfClass:[self class]])
+    return NO;
+  return [self isEqualToRepository:other];
+}
+
+- (BOOL)isEqualToRepository:(BCRepository *)repo {
+  if (self == repo)
+    return YES;
+  if (![(id)[self name] isEqual:[repo name]])
+    return NO;
+  if (![[self repositoryId] isEqual:[repo repositoryId]])
+    return NO;
+  return YES;
+}
+
+- (NSUInteger)hash {
+  NSUInteger hash = 0;
+  hash += [[self name] hash];
+  hash += [[self repositoryId] hash];
+  return hash;
+}
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"repositoryId": @"id",
