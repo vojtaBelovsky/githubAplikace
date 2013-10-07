@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>Pods-SZTextView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -38,6 +43,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>0736178438D34ED997070CB4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>098E01E8A7C64C9488CE10D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,7 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3F9CDD736D45494083995AFD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>47EA7B7EB3074F599CE5314A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>590C89DA59B94628BC4B9364</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,6 +122,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>919B17E85277431A9F16628A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>954E7AB272414A62B55475D7</key>
 		<dict>
 			<key>primary</key>
@@ -123,6 +148,11 @@
 			<true/>
 		</dict>
 		<key>B0239ACB19014FC088B53876</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B8F85EC5984B4EC79CFB5084</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -168,6 +198,11 @@
 			<true/>
 		</dict>
 		<key>F55D96D89F2849F4BD067E44</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE65E2EA7EF24E30ADD58808</key>
 		<dict>
 			<key>primary</key>
 			<true/>

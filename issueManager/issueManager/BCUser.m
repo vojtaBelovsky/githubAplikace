@@ -42,6 +42,21 @@
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 
++(void)getAllCollaboratorsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allCollaborators))success failure:(void(^) (NSError * error))failure{
+  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/collaborators",repository.owner.userLogin,repository.name];
+  [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    NSMutableArray *collaboratorsInDictionaries = [[NSMutableArray alloc] initWithArray:responseObject];
+    NSMutableArray *collaborators = [[NSMutableArray alloc] init];
+    for(NSDictionary *object in collaboratorsInDictionaries){
+      [collaborators addObject:[MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:object error:nil]];
+    }
+    success ( collaborators );
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    failure(error);
+  }];
+}
+
 + (BCUser *)sharedInstanceWithSuccess:(void (^)(BCUser *loggedInUser))success failure:(void(^)(NSError *error))failure{
   static BCUser *instance = nil;
   static dispatch_once_t onceToken;

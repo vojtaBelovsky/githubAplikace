@@ -133,34 +133,4 @@
   [[BCHTTPClient sharedInstance] getPath:@"user/repos" parameters:params success:mySuccessBlock failure:myFailureBlock];
 }
 
-+(void)getAllMilestonesOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSMutableArray *allMilestones))success failure:(void(^) (NSError * error))failure{
-    NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/milestones",repository.owner.userLogin,repository.name];
-    [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSMutableArray *milestonesInDictionaries = [[NSMutableArray alloc] initWithArray:responseObject];
-        NSMutableArray *milestones = [[NSMutableArray alloc] init];
-        for(NSDictionary *object in milestonesInDictionaries){
-            [milestones addObject:[MTLJSONAdapter modelOfClass:[BCMilestone class] fromJSONDictionary:object error:nil]];
-        }
-        success ( milestones );
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      failure(error);
-    }];
-}
-
-+(void)getAllCollaboratorsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allCollaborators))success failure:(void(^) (NSError * error))failure{
-    NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/collaborators",repository.owner.userLogin,repository.name];
-    [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSMutableArray *collaboratorsInDictionaries = [[NSMutableArray alloc] initWithArray:responseObject];
-        NSMutableArray *collaborators = [[NSMutableArray alloc] init];
-        for(NSDictionary *object in collaboratorsInDictionaries){
-            [collaborators addObject:[MTLJSONAdapter modelOfClass:[BCUser class] fromJSONDictionary:object error:nil]];
-        }
-        success ( collaborators );
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"fail");
-    }];
-}
-
 @end

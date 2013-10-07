@@ -123,7 +123,7 @@
   [BCLabel getAllLabelsOfRepository:_repository withSuccess:^(NSArray *allLabels) {
     _labels = allLabels;
   } failure:^(NSError *error) {
-    NSLog(@"fail");
+    [UIAlertView showWithError:error];
   }];
 }
 
@@ -131,7 +131,7 @@
   [BCRepository getAllMilestonesOfRepository:_repository withSuccess:^(NSArray *allMilestones) {
     _milestones = allMilestones;
   } failure:^(NSError *error) {
-    NSLog(@"fail");
+    [UIAlertView showWithError:error];
   }];
 }
 
@@ -139,7 +139,7 @@
   [BCRepository getAllCollaboratorsOfRepository:_repository withSuccess:^(NSArray *allCollaborators) {
     _collaborators = allCollaborators;
   } failure:^(NSError *error) {
-    NSLog(@"fail");
+    [UIAlertView showWithError:error];
   }];
 }
 

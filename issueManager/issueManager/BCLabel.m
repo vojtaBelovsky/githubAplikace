@@ -35,7 +35,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
   }];
 }
 
-+(void)getAllLabelsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allLables))success failure:(void(^) (NSError * error))failure{
++(void)getAllLabelsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allLables))success failure:(void(^) (NSError * error))failure{  
   NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/labels",repository.owner.userLogin,repository.name];
   [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
@@ -46,7 +46,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     }
     success ( labels );
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"fail");
+    failure(error);
   }];
 }
 

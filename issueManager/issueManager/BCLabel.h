@@ -15,6 +15,6 @@
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) UIColor *color;
 
-+(void)getAllLabelsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allLables))success failure:(void(^) (NSError * error))failure;
++(void)getAllLabelsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *labels))success failure:(void(^) (NSError * error))failure;
 
 @end
