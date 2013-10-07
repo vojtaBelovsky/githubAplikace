@@ -19,6 +19,4 @@
 
 + (BCUser *)sharedInstanceWithSuccess:(void (^)(BCUser *loggedInUser))success failure:(void(^)(NSError *error))failure;
 
-+ (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSMutableArray *allRepositories))success failure:(void(^) (NSError *error))failure;
-
 @end

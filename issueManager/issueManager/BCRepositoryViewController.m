@@ -131,12 +131,11 @@
   
   __block NSMutableDictionary *dataSource = [[NSMutableDictionary alloc] init];
   __block NSDictionary *dataSourcePairs;
-  __block UIImage *placeholderImage = [UIImage imageNamed:@"gravatar-user-420.png"];
   __block NSMutableArray *dataSourceKeyNames = [[NSMutableArray alloc] init];
   
   BCUser *chosenUser = _loggedInUser;
   
-  [BCUser getAllRepositoriesOfUserWithSuccess:^(NSMutableArray *allRepositories) {
+  [BCRepository getAllRepositoriesOfUserWithSuccess:^(NSMutableArray *allRepositories) {
     if (![allRepositories count]) {
       [allRepositories addObject:[[BCRepository alloc] initNoRepositories]];
     }
@@ -146,14 +145,12 @@
     [BCOrg getAllOrgsWithSuccess:^(NSArray *allOrgs) {
       if([allOrgs count] > 0){
         __block int i = 0;
-        //// COPY!!!!!!!!!
         __block void (^myFailureBlock) (NSError *error);
-        myFailureBlock = [^ (NSError *error) {
+        myFailureBlock = [^(NSError *error) {
           [UIAlertView showWithError:error];
         } copy];
-        //// COPY!!!!!!!!!!!
         __block void (^mySuccessBlock) (NSMutableArray *allRepositories);
-        mySuccessBlock = [^ (NSMutableArray *allRepositories){
+        mySuccessBlock = [^(NSMutableArray *allRepositories){
           if (![allRepositories count]) {
             [allRepositories addObject:[[BCRepository alloc] initNoRepositories]];
           }
@@ -162,15 +159,16 @@
           [dataSourceKeyNames addObject:[myOrg orgLogin]];
           dataSourcePairs = [[NSDictionary alloc] initWithObjectsAndKeys: myOrg, KEY_OBJECT, allRepositories, KEY_REPOSITORIES, [myOrg avatarUrl], KEY_IMAGE_URL, nil];
           [dataSource setObject:dataSourcePairs forKey:(NSString *)dataSourceKeyNames[i]];
-          if([allOrgs count] == (i)){
+          if([allOrgs count] == i){
             _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
             [_repoView.tableView setDataSource:_dataSource];
             [_repoView.tableView reloadData];
+            mySuccessBlock = nil;
           }else{
-            [BCOrg getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
+            [BCRepository getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
           }
         } copy];
-        [BCOrg getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
+        [BCRepository getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
       }else{//set data source in case of user don't have Orgs
         _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
         [_repoView.tableView setDataSource:_dataSource];

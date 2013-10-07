@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <Mantle/Mantle.h>
+@class BCRepository;
 
 @interface BCLabel : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) UIColor *color;
+
++(void)getAllLabelsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allLables))success failure:(void(^) (NSError * error))failure;
 
 @end

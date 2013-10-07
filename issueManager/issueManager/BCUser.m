@@ -42,20 +42,6 @@
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 
-+ (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSMutableArray *allRepositories))success failure:(void(^) (NSError *error))failure{
-  [[BCHTTPClient sharedInstance] getPath:@"user/repos" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
-    NSArray *response = [NSArray arrayWithArray:responseObject];
-    NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:[response count]];
-    for (NSDictionary *object in response) {
-      BCRepository *repo = [MTLJSONAdapter modelOfClass:[BCRepository class] fromJSONDictionary:object error:nil];
-      [repositories addObject:repo];
-    }
-    success ( repositories );
-  }failure:^(AFHTTPRequestOperation *operation, NSError *error){
-    [UIAlertView showWithError:error];
-  }];
-}
-
 + (BCUser *)sharedInstanceWithSuccess:(void (^)(BCUser *loggedInUser))success failure:(void(^)(NSError *error))failure{
   static BCUser *instance = nil;
   static dispatch_once_t onceToken;

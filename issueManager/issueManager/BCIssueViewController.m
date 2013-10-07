@@ -306,6 +306,7 @@
         [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
       }else{
         [_tableView.activityIndicatorView stopAnimating];
+        milestonesSuccessBlock = nil;
       }
     }failure:myFailureBlock];
   } copy];
@@ -342,6 +343,7 @@
     i++;
     if ([_repositories count] == i) {
       _allCollaborators = allCollaborators;
+      mySuccessBlock = nil;
     }else{
       currentRepo = [_repositories objectAtIndex:i];
       [BCRepository getAllCollaboratorsOfRepository:currentRepo withSuccess:mySuccessBlock failure:myFailureBlock];

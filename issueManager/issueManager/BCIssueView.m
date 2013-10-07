@@ -94,7 +94,7 @@
       [_paginator setBackgroundColor:[UIColor clearColor]];
       [self addSubview:_paginator];
       
-      _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+      _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
       [_activityIndicatorView setColor:[UIColor blackColor]];
       [_activityIndicatorView setAlpha:ACTIVITY_INDICATOR_ALPHA];
       [_activityIndicatorView setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND];

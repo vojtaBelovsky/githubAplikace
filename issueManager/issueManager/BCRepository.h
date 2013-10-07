@@ -26,9 +26,9 @@ BCUser *owner;
 
 +(void)getAllMilestonesOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSMutableArray *allMilestones))success failure:(void(^) (NSError * error))failure;
 
-+(void)getAllLabelsOfRepository:(BCRepository *)repository withSuccess:(void(^)(NSArray *allLables))success failure:(void(^) (NSError * error))failure;
++ (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSMutableArray *repositories))success failure:(void(^) (NSError *error))failure;
 
-//+(void)getAllRepositoriesFromUser:(BCUser *)user WithSuccess:(void (^)(NSArray *allRepositories))success failure:(void(^) (NSError *error)) failure;
++ (void)getAllRepositoriesFromOrg:(BCOrg *)org WithSuccess:(void (^)(NSMutableArray *allRepositories))success failure:(void(^) (NSError *error)) failure;
 
 - (id)initNoRepositories;
 

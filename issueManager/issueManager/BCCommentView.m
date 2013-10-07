@@ -12,6 +12,8 @@
 #import "BCUser.h"
 #import "NSDate+Additions.h"
 #import "BCAvatarImgView.h"
+#import "BCConstants.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define HEADER_HEIGHT ( 15.0f )
 #define AVATAR_HEIGHT ( 20.0f )
@@ -27,8 +29,7 @@
 #define HEADER_FONT_COLOR   [UIColor colorWithRed:.67 green:.67 blue:.67 alpha:1.00]
 #define PLACEHOLDER_IMG     [UIImage imageNamed:@"gravatar-user-420.png"]
 #define COMMENT_MASK        [UIImage imageNamed:@"commentMask.png"]
-#define BUTTON_FONT         [UIFont fontWithName:@"ProximaNova-Regular" size:12]
-#define BUTTON_FONT_COLOR   [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
+#define SHADOW_FONT_COLOR   [UIColor whiteColor]
 
 #define WIDTH_OF_COMMENT_TEXT_VIEW_WITH_WIDTH(width) width-(AVATAR_WIDTH+BEAK_WIDTH)
 
@@ -79,6 +80,10 @@
     [_commentButton setTitleColor:BUTTON_FONT_COLOR forState:UIControlStateNormal];
     [_commentButton setEnabled:YES];
     [_commentButton setHidden:YES];
+    _commentButton.layer.shadowOpacity = 1.0;
+    _commentButton.layer.shadowRadius = 0.0;
+    _commentButton.layer.shadowColor = SHADOW_FONT_COLOR.CGColor;
+    _commentButton.layer.shadowOffset = CGSizeMake(1.0, 1.0);
     [self addSubview:_commentButton];
   }
   return self;

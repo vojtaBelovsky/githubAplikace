@@ -20,7 +20,7 @@
 #define LOGIN_BACKGROUND    [UIImage imageNamed:@"loginTextFieldTop.png"]
 #define PASSWORD_BACKGROUND [UIImage imageNamed:@"loginTextFieldBottom.png"]
 
-#define BUTTON_FONT               [UIFont fontWithName:@"ProximaNova-Regular" size:18]
+#define LOGIN_BUTTON_FONT         [UIFont fontWithName:@"ProximaNova-Regular" size:18]
 #define FORGOT_PASSWORD_FONT      [UIFont fontWithName:@"ProximaNova-Regular" size:12]//[UIFont fontWithName:@"Proxima Nova Regular" size:24.0f]
 
 #define EMPTY_TEXT_FIELD_FONT_COLOR      [UIColor colorWithRed:.68 green:.68 blue:.68 alpha:1.00]
@@ -53,7 +53,7 @@
     resizableImage = [LOGIN_HL_IMAGE stretchableImageWithLeftCapWidth:18 topCapHeight:18];
     [_loginButton setBackgroundImage:resizableImage forState:UIControlStateHighlighted];
     [_loginButton setTitle:NSLocalizedString( @"Login", @"" ) forState:UIControlStateNormal];
-    _loginButton.titleLabel.font = BUTTON_FONT;
+    _loginButton.titleLabel.font = LOGIN_BUTTON_FONT;
     [self addSubview:_loginButton];
     
     _loginTextField = [[BCTextField alloc] initWithBackground:LOGIN_BACKGROUND icon:LOGIN_ICON];
@@ -80,7 +80,7 @@
     [self addSubview:_forgotPasswordLabel];
     
     
-    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [_activityIndicatorView setColor:[UIColor blackColor]];
     [_activityIndicatorView setAlpha:ACTIVITY_INDICATOR_ALPHA];
     [_activityIndicatorView setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND];

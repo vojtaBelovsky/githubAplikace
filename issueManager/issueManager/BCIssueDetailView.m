@@ -20,12 +20,13 @@
 #import "UIAlertView+errorAlert.h"
 #import "BCRepository.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BCConstants.h"
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
-#define BACK_BUTTON_IMG               [UIImage imageNamed:@"issueNavbarXOff.png"]
-#define BACK_BUTTON_IMG_HL            [UIImage imageNamed:@"issueNavbarXOn.png"]
-#define CLOSE_BUTTON_IMG              [UIImage imageNamed:@"issueNavbarCheckOff.png"]
-#define CLOSE_BUTTON_IMG_HL           [UIImage imageNamed:@"issueNavbarCheckOn.png"]
+//#define BACK_BUTTON_IMG               [UIImage imageNamed:@"issueNavbarXOff.png"]
+//#define BACK_BUTTON_IMG_HL            [UIImage imageNamed:@"issueNavbarXOn.png"]
+//#define CLOSE_BUTTON_IMG              [UIImage imageNamed:@"issueNavbarCheckOff.png"]
+//#define CLOSE_BUTTON_IMG_HL           [UIImage imageNamed:@"issueNavbarCheckOn.png"]
 #define COMMENT_BUTTON_IMG            [UIImage imageNamed:@"issueCommentButtonOn.png"]
 #define COMMENT_BUTTON_IMG_HL         [UIImage imageNamed:@"issueCommentButtonOff.png"]
 
@@ -34,7 +35,7 @@
 #define NAV_BAR_HEIGHT                ( 44.0f )
 #define HEADER_HEIGHT                 ( 20.0f )
 
-#define USER_SHADOW_FONT_COLOR   [UIColor whiteColor]
+#define SHADOW_FONT_COLOR        [UIColor whiteColor]
 #define USER_NAME_FONT_COLOR     [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 #define USER_NAME_FONT           [UIFont fontWithName:@"ProximaNova-Regular" size:15]
 #define REPO_NAME_FONT           [UIFont fontWithName:@"ProximaNovaCond-Light" size:12]
@@ -73,7 +74,7 @@
       _repositoryNameLabel.backgroundColor = [UIColor clearColor];
       _repositoryNameLabel.layer.shadowOpacity = 1.0;
       _repositoryNameLabel.layer.shadowRadius = 0.0;
-      _repositoryNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
+      _repositoryNameLabel.layer.shadowColor = SHADOW_FONT_COLOR.CGColor;
       _repositoryNameLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
       [self addSubview:_repositoryNameLabel];
       
@@ -85,18 +86,34 @@
       _userNameLabel.backgroundColor = [UIColor clearColor];
       _userNameLabel.layer.shadowOpacity = 1.0;
       _userNameLabel.layer.shadowRadius = 0.0;
-      _userNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
+      _userNameLabel.layer.shadowColor = SHADOW_FONT_COLOR.CGColor;
       _userNameLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
       [self addSubview:_userNameLabel];
       
       _backButton = [[UIButton alloc] init];
-      [_backButton setImage:BACK_BUTTON_IMG forState:UIControlStateNormal];
-      [_backButton setImage:BACK_BUTTON_IMG_HL forState:UIControlStateSelected];
+      [_backButton setTitle:@"BACK" forState:UIControlStateNormal];
+      [_backButton setTitleColor:BUTTON_FONT_COLOR forState:UIControlStateNormal];
+      _backButton.titleLabel.backgroundColor = [UIColor clearColor];
+      _backButton.titleLabel.numberOfLines = 0;
+      _backButton.titleLabel.font = BUTTON_FONT;
+      _backButton.enabled = YES;
+      _backButton.layer.shadowOpacity = 1.0;
+      _backButton.layer.shadowRadius = 0.0;
+      _backButton.layer.shadowColor = SHADOW_FONT_COLOR.CGColor;
+      _backButton.layer.shadowOffset = CGSizeMake(1.0, 1.0);
       [self addSubview:_backButton];
       
       _closeButton = [[UIButton alloc] init];
-      [_closeButton setImage:CLOSE_BUTTON_IMG forState:UIControlStateNormal];
-      [_closeButton setImage:CLOSE_BUTTON_IMG_HL forState:UIControlStateSelected];
+      [_closeButton setTitle:@"CLOSE" forState:UIControlStateNormal];
+      [_closeButton setTitleColor:BUTTON_FONT_COLOR forState:UIControlStateNormal];
+      _closeButton.titleLabel.backgroundColor = [UIColor clearColor];
+      _closeButton.titleLabel.numberOfLines = 0;
+      _closeButton.titleLabel.font = BUTTON_FONT;
+      _closeButton.enabled = YES;
+      _closeButton.layer.shadowOpacity = 1.0;
+      _closeButton.layer.shadowRadius = 0.0;
+      _closeButton.layer.shadowColor = SHADOW_FONT_COLOR.CGColor;
+      _closeButton.layer.shadowOffset = CGSizeMake(1.0, 1.0);
       [self addSubview:_closeButton];
       
       _headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _navigationBarView.frame.size.height, self.frame.size.width, HEADER_HEIGHT) andMilestone:issue.milestone];

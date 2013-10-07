@@ -44,19 +44,4 @@
     }];
 }
 
-+ (void)getAllRepositoriesFromOrg:(BCOrg *)org WithSuccess:(void (^)(NSMutableArray *allRepositories))success failure:(void(^) (NSError *error)) failure{
-  NSString *path = [[NSString alloc] initWithFormat:@"orgs/%@/repos", org.orgLogin];
-  [[BCHTTPClient sharedInstance] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
-    
-    NSArray *response = [NSArray arrayWithArray:responseObject];
-    NSMutableArray *repositories = [NSMutableArray arrayWithCapacity:[response count]];
-    for (NSDictionary *object in response) {
-      [repositories addObject:[MTLJSONAdapter modelOfClass:[BCRepository class] fromJSONDictionary:object error:nil]];
-    }
-    success ( repositories );
-  }failure:^(AFHTTPRequestOperation *operation, NSError *error){
-    failure (error);
-  }];
-}
-
 @end

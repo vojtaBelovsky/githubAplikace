@@ -73,7 +73,7 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    [_addIssueView rewriteContentWithAssignee:_checkedAssignee milestone:_checkedMilestone andLabels:_checkedLabels];
+    [_addIssueView rewriteContentWithAssignee:_checkedAssignee milestone:_checkedMilestone andLabels:[NSMutableArray arrayWithArray:_checkedLabels]];
 }
 
 #pragma mark -
@@ -120,7 +120,7 @@
 }
 
 -(void)getLabels{
-  [BCRepository getAllLabelsOfRepository:_repository withSuccess:^(NSArray *allLabels) {
+  [BCLabel getAllLabelsOfRepository:_repository withSuccess:^(NSArray *allLabels) {
     _labels = allLabels;
   } failure:^(NSError *error) {
     NSLog(@"fail");

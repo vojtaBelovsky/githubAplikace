@@ -156,6 +156,7 @@
       [[BCHTTPClient sharedInstance] getPath:repository.issuesUrl parameters:params success:mySuccessBlock failure:myFailureBlock];
     }else{
       success(issues);
+      mySuccessBlock = nil;
     }
   } copy];
   
