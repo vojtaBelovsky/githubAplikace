@@ -22,6 +22,7 @@
 #import "BCAddIssueTextField.h"
 #import "BCaddIssueButton.h"
 #import "BCAddIssueButtonMC.h"
+#import "SZTextView.h"
 
 #define BODY_FONT_COLOR                 [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 
@@ -98,10 +99,7 @@
     }
   }
   
-  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues", _repository.owner.userLogin, _repository.name];  
-  if ([(NSString*)[params objectForKey:@"body"] isEqualToString:@"What is the problem?"]) {
-    [params setObject:@"" forKey:@"body"];
-  }
+  NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues", _repository.owner.userLogin, _repository.name];
   [[BCHTTPClient sharedInstance] postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
     BCIssue *newIssue = [MTLJSONAdapter modelOfClass:[BCIssue class] fromJSONDictionary:responseObject error:nil];
     [newIssue setRepository:_repository];
@@ -198,16 +196,6 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
   [textField resignFirstResponder];
   return YES;
-}
-
-#pragma mark - placeholder carrying
-
--(void)textViewDidBeginEditing:(UITextView *)textView{
-  if ([textView.text isEqualToString:@"What is the problem?"]) {
-    textView.text = @"";
-    textView.font = BODY_FONT;
-    textView.textColor = BODY_FONT_COLOR;
-  }
 }
 
 @end

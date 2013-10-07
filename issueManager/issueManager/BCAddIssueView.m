@@ -16,6 +16,7 @@
 #import "BCAddIssueTextField.h"
 #import "BCAddIssueButtonMC.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SZTextView.h"
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
@@ -25,18 +26,17 @@
 #define LINE_WIDTH           ( 0.972f )
 #define NAV_BAR_HEIGHT       ( 44.0f )
 #define TABLE_LINE_HEIGHT    ( 40.0f )
+#define CAP_SIZE_FOR_FORM    ( 8.0f )
 
-#define CAP_SIZE_FOR_FORM   ( 8.0f )
-
-#define NEW_ISSUE_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:18]
-#define NEW_ISSUE_FONT_COLOR          [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
-#define NEW_ISSUE_SHADOW_FONT_COLOR   [UIColor whiteColor]
+#define NEW_ISSUE_FONT                  [UIFont fontWithName:@"ProximaNova-Regular" size:18]
+#define NEW_ISSUE_FONT_COLOR            [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
+#define NEW_ISSUE_SHADOW_FONT_COLOR     [UIColor whiteColor]
 
 #define BODY_PLACEHOLDER_FONT_COLOR     [UIColor colorWithRed:.83 green:.83 blue:.83 alpha:1.00]
-#define BODY_FONT_ITALIC       [UIFont fontWithName:@"ProximaNova-RegItalic" size:16]
+#define BODY_FONT_ITALIC                [UIFont fontWithName:@"ProximaNova-RegItalic" size:16]
 
-#define DONE_AND_CANCEL_FONT          [UIFont fontWithName:@"ProximaNova-Regular" size:14]
-#define DONE_AND_CANCEL_FONT_COLOR    [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
+#define DONE_AND_CANCEL_FONT            [UIFont fontWithName:@"ProximaNova-Regular" size:14]
+#define DONE_AND_CANCEL_FONT_COLOR      [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 
 
 @implementation BCAddIssueView
@@ -99,10 +99,10 @@
       [_selectLabels setOriginalHeight:TABLE_LINE_HEIGHT];
       [self addSubview:_selectLabels];
       
-      _issueBody = [[UITextView alloc] init];
-      _issueBody.text = @"What is the problem?";
-      _issueBody.font = BODY_FONT_ITALIC;
-      _issueBody.textColor = BODY_PLACEHOLDER_FONT_COLOR;
+      _issueBody = [[SZTextView alloc] init];
+      [_issueBody setFont:BODY_FONT_ITALIC];
+      [_issueBody setPlaceholder:@"What is the problem?"];
+      [_issueBody setPlaceholderTextColor:BODY_PLACEHOLDER_FONT_COLOR];
       [self addSubview:_issueBody];
     }
     return self;
