@@ -7,6 +7,7 @@
 //
 
 #import "BCIssueViewController.h"
+#import "BCMilestone.h"
 #import "BCRepository.h"
 #import "BCIssue.h"
 #import "BCIssueView.h"
@@ -83,7 +84,7 @@
       [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         [tableView setAlpha:0.5];
       }];
-      [BCRepository getAllMilestonesOfRepository:currentRepozitory withSuccess:^(NSMutableArray *allMilestones) {
+      [BCMilestone getAllMilestonesOfRepository:currentRepozitory withSuccess:^(NSMutableArray *allMilestones) {
         [BCIssue getIssuesFromRepository:currentRepozitory forUser:currentUser WithSuccess:^(NSMutableArray *issues){
           if (![issues count]) {
             [issues addObject:[[BCIssue alloc] initNoIssues]];
@@ -303,7 +304,7 @@
         [currentTableView setAlpha:1];
       }];
       if (i != [_repositories count]) {
-        [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
+        [BCMilestone getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
       }else{
         [_tableView.activityIndicatorView stopAnimating];
         milestonesSuccessBlock = nil;
@@ -311,7 +312,7 @@
     }failure:myFailureBlock];
   } copy];
   
-  [BCRepository getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
+  [BCMilestone getAllMilestonesOfRepository:[_repositories objectAtIndex:i] withSuccess:milestonesSuccessBlock failure:myFailureBlock];
 }
 
 -(void)getAllCollaborators{
@@ -346,10 +347,10 @@
       mySuccessBlock = nil;
     }else{
       currentRepo = [_repositories objectAtIndex:i];
-      [BCRepository getAllCollaboratorsOfRepository:currentRepo withSuccess:mySuccessBlock failure:myFailureBlock];
+      [BCUser getAllCollaboratorsOfRepository:currentRepo withSuccess:mySuccessBlock failure:myFailureBlock];
     }
   } copy];
-  [BCRepository getAllCollaboratorsOfRepository:currentRepo withSuccess:mySuccessBlock failure:myFailureBlock];
+  [BCUser getAllCollaboratorsOfRepository:currentRepo withSuccess:mySuccessBlock failure:myFailureBlock];
 }
 
 

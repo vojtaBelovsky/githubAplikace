@@ -128,7 +128,7 @@
 }
 
 -(void)getMilestones{
-  [BCRepository getAllMilestonesOfRepository:_repository withSuccess:^(NSArray *allMilestones) {
+  [BCMilestone getAllMilestonesOfRepository:_repository withSuccess:^(NSArray *allMilestones) {
     _milestones = allMilestones;
   } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
@@ -136,7 +136,7 @@
 }
 
 -(void)getCollaborators{
-  [BCRepository getAllCollaboratorsOfRepository:_repository withSuccess:^(NSArray *allCollaborators) {
+  [BCUser getAllCollaboratorsOfRepository:_repository withSuccess:^(NSArray *allCollaborators) {
     _collaborators = allCollaborators;
   } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
