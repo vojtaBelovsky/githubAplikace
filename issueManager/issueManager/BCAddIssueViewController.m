@@ -63,10 +63,13 @@
   
   UITapGestureRecognizer *addMilestoneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectMilestoneVC)];
   [_addIssueView.addMilestone addGestureRecognizer:addMilestoneTapRecognizer];
+  [_addIssueView.addMilestone.theNewIssuePlus addGestureRecognizer:addMilestoneTapRecognizer];
   UITapGestureRecognizer *selectAssigneeTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectAssigneVC)];
-  [_addIssueView. selectAssignee addGestureRecognizer:selectAssigneeTapRecognizer];
+  [_addIssueView.selectAssignee addGestureRecognizer:selectAssigneeTapRecognizer];
+  [_addIssueView.selectAssignee.theNewIssuePlus addGestureRecognizer:selectAssigneeTapRecognizer];
   UITapGestureRecognizer *selectLabelsTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectLabelsVC)];
   [_addIssueView.selectLabels addGestureRecognizer:selectLabelsTapRecognizer];
+  [_addIssueView.selectLabels.theNewIssuePlus addGestureRecognizer:selectLabelsTapRecognizer];
   [_addIssueView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_addIssueView.createButton addTarget:self action:@selector(createButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_addIssueView.issueBody setDelegate:self];
