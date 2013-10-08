@@ -14,7 +14,8 @@
 
 @interface BCIssueDetailViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate>{
 @private
-    BCIssueDetailView *_issueDetailview;
+  BCIssueDetailView *_issueDetailView;
+  CGFloat _heightOfNewComment;
 }
 
 @property BCIssueViewController *myParentViewController;

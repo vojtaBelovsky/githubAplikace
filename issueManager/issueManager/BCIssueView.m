@@ -94,10 +94,14 @@
       [_paginator setBackgroundColor:[UIColor clearColor]];
       [self addSubview:_paginator];
       
-      _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-      [_activityIndicatorView setColor:[UIColor blackColor]];
+      _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+      [_activityIndicatorView setColor:ACTIVITY_INDICATOR_COLOR];
       [_activityIndicatorView setAlpha:ACTIVITY_INDICATOR_ALPHA];
       [_activityIndicatorView setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND];
+      [_activityIndicatorView.layer setBorderWidth:1];
+      [_activityIndicatorView.layer setBorderColor:ACTIVITY_INDICATOR_BORDER.CGColor];
+      [_activityIndicatorView.layer setCornerRadius:ACTIVITY_CORNER_RADIUS];
+      [_activityIndicatorView.layer setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND.CGColor];
       [self addSubview:_activityIndicatorView];
     }
     return self;

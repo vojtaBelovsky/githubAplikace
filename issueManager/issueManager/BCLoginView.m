@@ -9,6 +9,7 @@
 #import "BCLoginView.h"
 #import "BCTextField.h"
 #import "BCConstants.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define RGB_COLOR(r, g, b, a) [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:a / 255.0f]
 
@@ -80,10 +81,14 @@
     [self addSubview:_forgotPasswordLabel];
     
     
-    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [_activityIndicatorView setColor:[UIColor blackColor]];
+    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [_activityIndicatorView setColor:ACTIVITY_INDICATOR_COLOR];
     [_activityIndicatorView setAlpha:ACTIVITY_INDICATOR_ALPHA];
     [_activityIndicatorView setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND];
+    [_activityIndicatorView.layer setBorderWidth:1];
+    [_activityIndicatorView.layer setBorderColor:ACTIVITY_INDICATOR_BORDER.CGColor];
+    [_activityIndicatorView.layer setCornerRadius:ACTIVITY_CORNER_RADIUS];
+    [_activityIndicatorView.layer setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND.CGColor];
     [self addSubview:_activityIndicatorView];
   }
   return self;

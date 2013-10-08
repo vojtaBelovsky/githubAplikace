@@ -30,10 +30,9 @@
 #define COMMENT_BUTTON_IMG            [UIImage imageNamed:@"issueCommentButtonOn.png"]
 #define COMMENT_BUTTON_IMG_HL         [UIImage imageNamed:@"issueCommentButtonOff.png"]
 
-#define ISSUE_WIDTH                   ( 300.0f )
-#define OFFSET                        ( 10.f )
 #define NAV_BAR_HEIGHT                ( 44.0f )
 #define HEADER_HEIGHT                 ( 20.0f )
+#define OFFSET                        ( 10.f )
 
 #define SHADOW_FONT_COLOR        [UIColor whiteColor]
 #define USER_NAME_FONT_COLOR     [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
@@ -49,7 +48,7 @@
 
 @implementation BCIssueDetailView
 
--(id) initWithIssue:(BCIssue *)issue withComments:(NSMutableArray*)comments andController:(BCIssueDetailViewController *)controller{
+-(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller{
     self = [super init];
     if(self){
       _issue = issue;
@@ -127,6 +126,16 @@
       [_addNewCommentButton setImage:COMMENT_BUTTON_IMG forState:UIControlStateNormal];
       [_addNewCommentButton setImage:COMMENT_BUTTON_IMG_HL forState:UIControlStateSelected];
       [self addSubview:_addNewCommentButton];
+      
+      _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+      [_activityIndicatorView setColor:ACTIVITY_INDICATOR_COLOR];
+      [_activityIndicatorView setAlpha:ACTIVITY_INDICATOR_ALPHA];
+      [_activityIndicatorView setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND];
+      [_activityIndicatorView.layer setBorderWidth:1];
+      [_activityIndicatorView.layer setBorderColor:ACTIVITY_INDICATOR_BORDER.CGColor];
+      [_activityIndicatorView.layer setCornerRadius:ACTIVITY_CORNER_RADIUS];
+      [_activityIndicatorView.layer setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND.CGColor];
+      [self addSubview:_activityIndicatorView];
     }
     return self;
 }
@@ -216,7 +225,11 @@
     _addedNewComment = NO;
   }
   
-  frame.size.height = frame.origin.y+_addNewCommentButton.frame.size.height+3*OFFSET+_sizeOfKeyborad;
+  if ([_addNewCommentButton isHidden]) {
+    frame.size.height = frame.origin.y+BOTTOM_OFFSET+_sizeOfKeyborad;
+  }else{
+    frame.size.height = frame.origin.y+_addNewCommentButton.frame.size.height+BOTTOM_OFFSET;
+  }
   frame.size.width = self.frame.size.width;
   if (!CGSizeEqualToSize(self.contentSize, frame.size)) {
     self.contentSize = frame.size;
@@ -229,6 +242,16 @@
   }
   if (!CGRectEqualToRect(_backgroundImageView.frame, frame)){
     _backgroundImageView.frame = frame;
+  }
+
+  frame.size = ACTIVITY_INDICATOR_SIZE;
+  frame.origin = _activityIndicatorView.frame.origin;
+  if(!CGRectEqualToRect(_activityIndicatorView.frame, frame)){
+    _activityIndicatorView.frame = frame;
+  }
+
+  if(!CGPointEqualToPoint(_activityIndicatorView.center, self.center)){
+    _activityIndicatorView.center = self.center;
   }
 }
 

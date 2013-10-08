@@ -23,6 +23,7 @@
 #define NEW_ISSUE_SEPARATOR           [UIImage imageNamed:@"newIssueSeparator.png"]
 
 #define TABLE_WIDTH          ( 0.9f )
+#define BOUNDS               ( 0.95f )
 #define LINE_WIDTH           ( 0.972f )
 #define NAV_BAR_HEIGHT       ( 44.0f )
 #define TABLE_LINE_HEIGHT    ( 40.0f )
@@ -33,7 +34,8 @@
 #define NEW_ISSUE_SHADOW_FONT_COLOR     [UIColor whiteColor]
 
 #define BODY_PLACEHOLDER_FONT_COLOR     [UIColor colorWithRed:.83 green:.83 blue:.83 alpha:1.00]
-#define BODY_FONT_ITALIC                [UIFont fontWithName:@"ProximaNova-RegItalic" size:16]
+#define BODY_FONT                       [UIFont fontWithName:@"ProximaNova-Regular" size:14]
+#define BODY_FONT_COLOR                 [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 
 #define DONE_AND_CANCEL_FONT            [UIFont fontWithName:@"ProximaNova-Regular" size:14]
 #define DONE_AND_CANCEL_FONT_COLOR      [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
@@ -100,7 +102,8 @@
       [self addSubview:_selectLabels];
       
       _issueBody = [[SZTextView alloc] init];
-      [_issueBody setFont:BODY_FONT_ITALIC];
+      [_issueBody setFont:BODY_FONT];
+      [_issueBody setTextColor:BODY_FONT_COLOR];
       [_issueBody setPlaceholder:@"What is the problem?"];
       [_issueBody setPlaceholderTextColor:BODY_PLACEHOLDER_FONT_COLOR];
       [self addSubview:_issueBody];
@@ -179,6 +182,7 @@
   frame.size = CGSizeMake(frame.size.width, self.issueForm.frame.size.height-frame.origin.y);
   if (! CGRectEqualToRect(_issueBody.frame, frame)) {
     _issueBody.frame = frame;
+    _issueBody.bounds = CGRectMake(frame.origin.x,frame.origin.y,frame.size.width*BOUNDS,frame.size.height);
   }
 }
 

@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 vojta. All rights reserved.
 //
 
+#define ISSUE_WIDTH                   ( 300.0f )
+#define BOTTOM_OFFSET                        ( 44.f )
+
 #import <UIKit/UIKit.h>
 @class BCIssue;
 @class BCIssueDetailViewController;
@@ -31,8 +34,9 @@
 @property BCCommentView *myNewCommentView;
 @property BOOL addedNewComment;
 @property CGFloat sizeOfKeyborad;
+@property UIActivityIndicatorView *activityIndicatorView;
 
--(id) initWithIssue:(BCIssue *)issue withComments:(NSMutableArray*)comments andController:(BCIssueDetailViewController *)controller;
+-(id) initWithIssue:(BCIssue *)issue andController:(BCIssueDetailViewController *)controller;
 
 -(void)setCommentViewsWithComments:(NSArray*)comments;
 

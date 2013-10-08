@@ -42,8 +42,9 @@
     _issue = issue;
     _editedIssue = [issue copy];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillSHow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
   }
   return self;
 }
@@ -53,23 +54,30 @@
 }
 
 -(void) loadView{
-  _issueDetailview = [[BCIssueDetailView alloc] initWithIssue:_issue withComments:nil andController:self];
-  [_issueDetailview.backButton addTarget:self action:@selector(backButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-  [_issueDetailview.closeButton addTarget:self action:@selector(closeButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-  [_issueDetailview.addNewCommentButton addTarget:self action:@selector(addNewCommentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  _issueDetailView = [[BCIssueDetailView alloc] initWithIssue:_issue andController:self];
+
+  [_issueDetailView.backButton addTarget:self action:@selector(backButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  [_issueDetailView.closeButton addTarget:self action:@selector(closeButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  [_issueDetailView.addNewCommentButton addTarget:self action:@selector(addNewCommentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-  self.view = _issueDetailview;
+  self.view = _issueDetailView;
   [self.view addGestureRecognizer:tapRecognizer];
   
+  [_issueDetailView.activityIndicatorView startAnimating];
+  [_issueDetailView setUserInteractionEnabled:NO];
   [BCComment getCommentsForIssue:_issue withSuccess:^(NSMutableArray *comments) {
-    [_issueDetailview setCommentViewsWithComments:comments];
+    [_issueDetailView setCommentViewsWithComments:comments];
+    [_issueDetailView.activityIndicatorView stopAnimating];
+    [_issueDetailView setUserInteractionEnabled:YES];
   } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
+    [_issueDetailView.activityIndicatorView stopAnimating];
+    [_issueDetailView setUserInteractionEnabled:YES];
   }];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    [_issueDetailview.issueView setIssue:_editedIssue];
+    [_issueDetailView.issueView setIssue:_editedIssue];
 }
 
 #pragma mark -
@@ -94,29 +102,36 @@
   [commentView setEnabledForCommenting];
   [commentView.commentButton addTarget:self action:@selector(commentButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [commentView.commentTextView becomeFirstResponder];
-  _issueDetailview.myNewCommentView = commentView;
-  [_issueDetailview addSubview:_issueDetailview.myNewCommentView];
-  _issueDetailview.myNewCommentView.alpha = 0.0f;
+  _issueDetailView.myNewCommentView = commentView;
+  [_issueDetailView addSubview:_issueDetailView.myNewCommentView];
+  _issueDetailView.myNewCommentView.alpha = 0.0f;
   
   [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-    _issueDetailview.myNewCommentView.alpha = 1.0f;
+    _issueDetailView.myNewCommentView.alpha = 1.0f;
   }];
   
-  _issueDetailview.addedNewComment = YES;
+  _issueDetailView.addedNewComment = YES;
+  _heightOfNewComment = [commentView sizeOfViewWithWidth:ISSUE_WIDTH].height;
 }
 
 -(void)commentButtonDidPress{
   NSString *path = [[NSString alloc] initWithFormat:@"/repos/%@/%@/issues/%@/comments", _issue.repository.owner.userLogin, _issue.repository.name, _issue.number];
-  NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_issueDetailview.myNewCommentView.commentTextView.text, @"body", nil];
+  NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_issueDetailView.myNewCommentView.commentTextView.text, @"body", nil];
+  [_issueDetailView.activityIndicatorView startAnimating];
+  [_issueDetailView setUserInteractionEnabled:NO];
   [[BCHTTPClient sharedInstance] postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    [_issueDetailview.myNewCommentView setDisabledForCommenting];
-    _issueDetailview.myNewCommentView = nil;
-    [_issueDetailview setNeedsLayout];
+    [_issueDetailView.myNewCommentView setDisabledForCommenting];
+    _issueDetailView.myNewCommentView = nil;
+    [_issueDetailView setNeedsLayout];
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-      [_issueDetailview.addNewCommentButton setHidden:NO];
+      [_issueDetailView.addNewCommentButton setHidden:NO];
+      [_issueDetailView.activityIndicatorView stopAnimating];
+      [_issueDetailView setUserInteractionEnabled:YES];
     }];
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     [UIAlertView showWithError:error];
+    [_issueDetailView.activityIndicatorView stopAnimating];
+    [_issueDetailView setUserInteractionEnabled:YES];
   }];
 }
 
@@ -162,27 +177,47 @@
 #pragma mark private
 
 -(void)hideKeyboard{
-  [_issueDetailview.myNewCommentView.commentTextView resignFirstResponder];
+  [_issueDetailView.myNewCommentView.commentTextView resignFirstResponder];
 }
 
-- (void) keyboardDidHide:(NSNotification *)notification{//zmensi velikost skrolovatelneho obsahu
-  _issueDetailview.sizeOfKeyborad = 0;
-  [_issueDetailview setNeedsLayout];
+- (void) keyboardDidHide:(NSNotification *)notification{
+//  CGPoint bottomOffset = CGPointMake(0, _issueDetailView.contentSize.height-_issueDetailView.frame.size.height);
+//  if (bottomOffset.y > 0) {
+//    [_issueDetailView setContentOffset:bottomOffset animated:YES];
+//  }
 }
 
--(void)keyboardWillSHow:(NSNotification *) notification{
-  NSDictionary* keyboardInfo = [notification userInfo];
-  NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-  CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
-  _issueDetailview.sizeOfKeyborad = keyboardFrameBeginRect.size.height;
-  [_issueDetailview setNeedsLayout];
-}
-
-- (void) keyboardDidShow:(NSNotification *)notification{//zvetsi velikost skrolovatelneho obsahu
-  CGPoint bottomOffset = CGPointMake(0, _issueDetailview.contentSize.height-_issueDetailview.frame.size.height);
+-(void)keyboardWillHide:(NSNotification *) notification{
+  NSDictionary* info = [notification userInfo];
+  NSNumber *number = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+  double duration = [number doubleValue];
+  CGPoint bottomOffset = CGPointMake(0, _issueDetailView.contentSize.height-_issueDetailView.sizeOfKeyborad-_issueDetailView.frame.size.height);
   if (bottomOffset.y > 0) {
-    [_issueDetailview setContentOffset:bottomOffset animated:YES];
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+      [_issueDetailView setContentOffset:bottomOffset animated:NO];
+    } completion:nil];
   }
+  _issueDetailView.sizeOfKeyborad = 0;
+}
+
+-(void)keyboardWillShow:(NSNotification *) notification{
+  NSDictionary* info = [notification userInfo];
+  NSValue* keyboardFrameBegin = [info valueForKey:UIKeyboardFrameBeginUserInfoKey];
+  CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+  _issueDetailView.sizeOfKeyborad = keyboardFrameBeginRect.size.height;
+  NSNumber *number = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+  double duration = [number doubleValue];
+  
+  CGPoint bottomOffset = CGPointMake(0, _issueDetailView.contentSize.height+_issueDetailView.sizeOfKeyborad+_heightOfNewComment+BOTTOM_OFFSET-_issueDetailView.frame.size.height);
+  if (bottomOffset.y > 0) {
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+      [_issueDetailView setContentOffset:bottomOffset animated:NO];
+    } completion:nil];
+  }
+}
+
+- (void) keyboardDidShow:(NSNotification *)notification{
+
 }
 
 -(NSDictionary *) createParameters{
