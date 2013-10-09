@@ -8,6 +8,7 @@
 
 #import "BCRepositoryView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BCConstants.h"
 
 #define NAV_BAR_HEIGHT    ( 44.0f )
 #define BACKGROUND_IMAGE  [UIImage imageNamed:@"repositories_background.png"]
@@ -67,6 +68,16 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self addSubview:_tableView];
     
+    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [_activityIndicatorView setColor:ACTIVITY_INDICATOR_COLOR];
+    [_activityIndicatorView setAlpha:ACTIVITY_INDICATOR_ALPHA];
+    [_activityIndicatorView setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND];
+    [_activityIndicatorView.layer setBorderWidth:1];
+    [_activityIndicatorView.layer setBorderColor:ACTIVITY_INDICATOR_BORDER.CGColor];
+    [_activityIndicatorView.layer setCornerRadius:ACTIVITY_CORNER_RADIUS];
+    [_activityIndicatorView.layer setBackgroundColor:ACTIVITY_INDICATOR_BACKGROUND.CGColor];
+    [self addSubview:_activityIndicatorView];
+    
     [self setBackgroundColor:[UIColor clearColor]];
   }
   return self;
@@ -101,6 +112,16 @@
   frame.origin = CGPointMake((_navBarView.frame.size.width-frame.size.width)-10, (_navBarView.frame.size.height-frame.size.height)/2);
   if(! CGRectEqualToRect(_doneButton.frame, frame)){
     _doneButton.frame = frame;
+  }
+  
+  frame.size = ACTIVITY_INDICATOR_SIZE;
+  frame.origin = _activityIndicatorView.frame.origin;
+  if (!CGRectEqualToRect(_activityIndicatorView.frame, frame)) {
+    _activityIndicatorView.frame = frame;
+  }
+  
+  if (!CGPointEqualToPoint(_activityIndicatorView.center, self.center)) {
+    _activityIndicatorView.center = self.center;
   }
 }
 

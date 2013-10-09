@@ -54,6 +54,7 @@
       _userNameLabel.font = REPO_NAME_FONT;
       _userNameLabel.textColor = REPO_NAME_FONT_COLOR;
       _userNameLabel.backgroundColor = [UIColor clearColor];
+      _userNameLabel.textAlignment = NSTextAlignmentCenter;
       _userNameLabel.layer.shadowOpacity = 1.0;
       _userNameLabel.layer.shadowRadius = 0.0;
       _userNameLabel.layer.shadowColor = USER_NAME_SHADOW_FONT_COLOR.CGColor;
@@ -168,6 +169,8 @@
   }
   
   frame.size = [_userNameLabel sizeThatFits:_navigationBarView.frame.size];
+#warning otestovat, jestli se zkracuje jmena collaborators
+  frame.size.width = self.frame.size.width;
   frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), _repositoryNameLabel.frame.origin.y+_repositoryNameLabel.frame.size.height);
   if( !CGRectEqualToRect(_userNameLabel.frame, frame)){
     _userNameLabel.frame = frame;
@@ -186,13 +189,19 @@
   
   frame = CGRectMake(0, _navigationBarView.frame.size.height, self.frame.size.width*_numberOfRepos, self.frame.size.height-_navigationBarView.frame.size.height);
   if (!CGSizeEqualToSize(_scrollViewForTableViews.contentSize, frame.size)) {
+    frame.size.width += 1;
     _scrollViewForTableViews.contentSize = frame.size;
   }
   
   frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-NAV_BAR_HEIGHT);
   for (int i = 0; i < _numberOfRepos; i++) {
-    frame.origin.x = i*frame.size.width;
-    [[_tableViews objectAtIndex:i] setFrame:frame];
+//    if (i == 0) {
+//      CGRect firstRepoFrame = CGRectMake(-1, frame.origin.y, frame.size.width+1, frame.size.height);
+//      [[_tableViews objectAtIndex:i] setFrame:firstRepoFrame];
+//    }else{
+      frame.origin.x = i*frame.size.width;
+      [[_tableViews objectAtIndex:i] setFrame:frame];
+//    }
   }
   
   frame.size = [_paginator sizeThatFits:self.frame.size];

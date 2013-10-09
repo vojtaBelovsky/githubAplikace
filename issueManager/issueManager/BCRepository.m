@@ -12,6 +12,8 @@
 #import "BCMilestone.h"
 #import "BCOrg.h"
 #import "UIAlertView+errorAlert.h"
+#import "BCConstants.h"
+
 
 
 @implementation BCRepository
@@ -26,6 +28,24 @@
     _owner = nil;
   }
   return self;
+}
+
+- (id)initWithCoder:(NSCoder *)coder{
+  self = [super init];
+  if (self) {
+    self.repositoryId = [coder decodeObjectForKey:REPOSITORY_ID_KEY];
+    self.name = [coder decodeObjectForKey:NAME_KEY];
+    self.issuesUrl = [coder decodeObjectForKey:ISSUES_URL_KEY];
+    self.owner = [coder decodeObjectForKey:OWNER_KEY];
+  }
+  return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)coder{
+  [coder encodeObject:self.repositoryId forKey:REPOSITORY_ID_KEY];
+  [coder encodeObject:self.name forKey:NAME_KEY];
+  [coder encodeObject:self.issuesUrl forKey:ISSUES_URL_KEY];
+  [coder encodeObject:self.owner forKey:OWNER_KEY];
 }
 
 - (BOOL)isEqual:(id)other {
@@ -57,8 +77,7 @@
     return @{
              @"repositoryId": @"id",
              @"name": @"name",
-             @"issuesUrl": @"issues_url",
-             @"openIssues" : @"open_issues"
+             @"issuesUrl": @"issues_url"
              };
 }
 

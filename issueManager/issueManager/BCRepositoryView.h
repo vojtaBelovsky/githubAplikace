@@ -21,5 +21,6 @@
 @property UILabel *repositoryLabel;
 @property UILabel *repositoryLabelShadow;
 @property UIButton *doneButton;
+@property UIActivityIndicatorView *activityIndicatorView;
 
 @end

@@ -15,12 +15,11 @@
 
 @interface BCRepository : MTLModel <MTLJSONSerializing>
 
-@property (nonatomic, copy, readonly) NSNumber *repositoryId;
-@property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSString *issuesUrl;
-@property (nonatomic, copy, readonly)
+@property (nonatomic, copy) NSNumber *repositoryId;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *issuesUrl;
+@property (nonatomic, copy)
 BCUser *owner;
-@property int openIssues;
 
 + (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSMutableArray *repositories))success failure:(void(^) (NSError *error))failure;
 

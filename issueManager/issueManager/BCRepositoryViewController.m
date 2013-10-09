@@ -17,6 +17,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "TMViewDeckController.h"
 #import "BCAppDelegate.h"
+#import "BCConstants.h"
+#import "BCAppDelegate.h"
 
 @interface BCRepositoryViewController ()
 - (void)createModel;
@@ -47,13 +49,14 @@
 
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)loadView {
   _repoView = [[BCRepositoryView alloc] init];
-  [_repoView.tableView setMultipleTouchEnabled:YES];
+  [_repoView.activityIndicatorView startAnimating];
   self.view = _repoView;
+  [_chosenRepositories count];
+  [_repoView.tableView setMultipleTouchEnabled:YES];
   [_repoView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [self createModel];
   [_repoView.tableView setDelegate:self];
@@ -111,6 +114,10 @@
 
 -(void)doneButtonDidPress{
   if ([_chosenRepositories count]) {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *codedData = [NSKeyedArchiver archivedDataWithRootObject:_chosenRepositories];
+    [userDefaults setObject:codedData forKey:CHOSEN_REPOSITORIES];
+    [userDefaults synchronize];
     BCIssueViewController *issuesVC = [[BCIssueViewController alloc] initWithRepositories:_chosenRepositories andLoggedInUser:_loggedInUser];
     BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     [myDelegate.deckController setAndPresentCenterController:issuesVC];
@@ -163,6 +170,7 @@
             _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
             [_repoView.tableView setDataSource:_dataSource];
             [_repoView.tableView reloadData];
+            [_repoView.activityIndicatorView stopAnimating];
             mySuccessBlock = nil;
           }else{
             [BCRepository getAllRepositoriesFromOrg:allOrgs[i] WithSuccess:mySuccessBlock failure:myFailureBlock];
@@ -173,12 +181,15 @@
         _dataSource = [[BCRepositoryDataSource alloc] initWithRepositories:dataSource repositoryNames:dataSourceKeyNames andNavigationController:self];
         [_repoView.tableView setDataSource:_dataSource];
         [_repoView.tableView reloadData];
+        [_repoView.activityIndicatorView stopAnimating];
       }
     } failure:^(NSError *error) {
       [UIAlertView showWithError:error];
+      [_repoView.activityIndicatorView stopAnimating];
     }];
   } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
+    [_repoView.activityIndicatorView stopAnimating];
   }];
 
 }

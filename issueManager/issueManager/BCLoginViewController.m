@@ -15,6 +15,8 @@
 #import "UIAlertView+errorAlert.h"
 #import "BCAppDelegate.h"
 #import "TMViewDeckController.h"
+#import "BCConstants.h"
+#import "BCIssueViewController.h"
 
 #define VIEW_OFFSET         ( - 180.0f )
 #define ANIMATION_DURATION  0.2f
@@ -56,10 +58,21 @@
     [_loginView.activityIndicatorView startAnimating];
     [_loginView setUserInteractionEnabled:NO];
     [BCUser sharedInstanceWithSuccess:^(BCUser *loggedInUser) {
-      BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] initWithLoggedInUser:loggedInUser];
-      BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-      [_loginView.activityIndicatorView stopAnimating];
-      [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
+      NSArray *chosenRepositories = nil;
+      NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+      NSData *codedData = [userDefaults objectForKey:CHOSEN_REPOSITORIES];
+      if (codedData) {
+        chosenRepositories = [NSKeyedUnarchiver unarchiveObjectWithData:codedData];
+      }
+      if (chosenRepositories) {
+        BCIssueViewController *issueVC = [[BCIssueViewController alloc] initWithRepositories:chosenRepositories andLoggedInUser:loggedInUser];
+        BCAppDelegate *myAppDelegate = [[UIApplication sharedApplication] delegate];
+        [myAppDelegate.deckController setAndPresentCenterController:issueVC];
+      }else{
+        BCRepositoryViewController *repoViewCtrl = [[BCRepositoryViewController alloc] initWithLoggedInUser:loggedInUser];
+        BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
+      }
     } failure:^(NSError *error) {
       [_loginView.activityIndicatorView stopAnimating];
       [_loginView setUserInteractionEnabled:YES];
