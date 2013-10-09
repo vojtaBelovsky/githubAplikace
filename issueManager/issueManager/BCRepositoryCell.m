@@ -58,7 +58,7 @@
       [cell addSubview:cell.corpMask];
         
       [cell setSelectUsrOrOrgImgView:[[UIImageView alloc] initWithImage:USR_OR_ORG_SELECTION_IMAGE highlightedImage:USR_OR_ORG_SELECTION_HL_IMAGE]];
-      [[cell selectUsrOrOrgImgView] setFrame:CGRectMake((cell.frame.size.width-USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)-15, (cell.frame.size.height-USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)/2, USR_OR_ORG_IMG_WIDTH_AND_HEIGHT, USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)];
+      [[cell selectUsrOrOrgImgView] setFrame:CGRectMake((cell.frame.size.width-USR_OR_ORG_IMG_WIDTH_AND_HEIGHT), (cell.frame.size.height-USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)/2, USR_OR_ORG_IMG_WIDTH_AND_HEIGHT, USR_OR_ORG_IMG_WIDTH_AND_HEIGHT)];
       [cell addSubview:cell.selectUsrOrOrgImgView];
       
       [cell setSelectionStyle:UITableViewCellSelectionStyleGray];

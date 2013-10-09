@@ -11,7 +11,6 @@
 #import "BCConstants.h"
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
-#define NAV_BAR_HEIGHT                ( 44.0f )
 #define OFFSET                        ( 6.0f )
 #define USER_NAME_FONT                [UIFont fontWithName:@"ProximaNova-Regular" size:15]
 #define REPO_NAME_FONT                [UIFont fontWithName:@"ProximaNovaCond-Light" size:12]
@@ -157,7 +156,9 @@
   }
   
   frame.size = [_chooseCollaboratorButton sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake(15, (_navigationBarView.frame.size.height-frame.size.height)/2);
+  frame.size.height = NAV_BAR_HEIGHT;
+  frame.size.width += 2*TAP_AREA_ADDITON;
+  frame.origin = CGPointMake(0, (_navigationBarView.frame.size.height-frame.size.height)/2);
   if(! CGRectEqualToRect(_chooseCollaboratorButton.frame, frame)){
     _chooseCollaboratorButton.frame = frame;
   }
@@ -177,7 +178,9 @@
   }
   
   frame.size = [_addNewIssueButton sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width)-15, (_navigationBarView.frame.size.height-frame.size.height)/2);
+  frame.size.height = NAV_BAR_HEIGHT;
+  frame.size.width += 2*TAP_AREA_ADDITON;
+  frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width), (_navigationBarView.frame.size.height-frame.size.height)/2);
   if(! CGRectEqualToRect(_addNewIssueButton.frame, frame)){
     _addNewIssueButton.frame = frame;
   }

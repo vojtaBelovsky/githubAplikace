@@ -26,7 +26,7 @@
 - (id)initWithFrame:(CGRect)frame andMilestone:(BCMilestone *)milestone
 {
   self = [super initWithFrame:frame];
-  if (self) {
+  if (self) {    
     UIImage *resizableImage = [BACKGROUND stretchableImageWithLeftCapWidth:1 topCapHeight:10];
     _backgroundImageView = [[UIImageView alloc] initWithImage:resizableImage];
     [self addSubview:_backgroundImageView];

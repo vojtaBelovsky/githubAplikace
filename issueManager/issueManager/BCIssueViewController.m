@@ -143,6 +143,7 @@
       return [[BCHeadeView alloc] init];
     }
     headerView = [[BCHeadeView alloc] initWithFrame:CGRectMake(0, _issueView.navigationBarView.frame.size.height, _issueView.frame.size.width, HEADER_HEIGHT) andMilestone:currentIssue.milestone];
+    [headerView setAlpha:0.9];
     return headerView;
   }else{
     return [[BCHeadeView alloc] init];

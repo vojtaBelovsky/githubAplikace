@@ -30,7 +30,6 @@
 #define COMMENT_BUTTON_IMG            [UIImage imageNamed:@"issueCommentButtonOn.png"]
 #define COMMENT_BUTTON_IMG_HL         [UIImage imageNamed:@"issueCommentButtonOff.png"]
 
-#define NAV_BAR_HEIGHT                ( 44.0f )
 #define HEADER_HEIGHT                 ( 20.0f )
 #define OFFSET                        ( 10.f )
 
@@ -160,7 +159,9 @@
   }
   
   frame.size = [_backButton sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake(15, (_navigationBarView.frame.size.height-frame.size.height)/2);
+  frame.size.width += 2*TAP_AREA_ADDITON;
+  frame.size.height = NAV_BAR_HEIGHT;
+  frame.origin = CGPointMake(0, (_navigationBarView.frame.size.height-frame.size.height)/2);
   if(!CGRectEqualToRect(_backButton.frame, frame)){
     _backButton.frame = frame;
   }
@@ -178,7 +179,8 @@
   }
   
   frame.size = [_closeButton sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width)-15, (_navigationBarView.frame.size.height-frame.size.height)/2);
+  frame.size.width += 2*TAP_AREA_ADDITON;
+  frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width), (_navigationBarView.frame.size.height-frame.size.height)/2);
   if(!CGRectEqualToRect(_closeButton.frame, frame)){
     _closeButton.frame = frame;
   }

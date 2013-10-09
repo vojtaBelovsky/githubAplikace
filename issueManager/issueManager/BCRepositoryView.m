@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BCConstants.h"
 
-#define NAV_BAR_HEIGHT    ( 44.0f )
 #define BACKGROUND_IMAGE  [UIImage imageNamed:@"repositories_background.png"]
 
 #define REPOSITORIES_FONT               [UIFont fontWithName:@"ProximaNova-Light" size:24]
@@ -109,6 +108,7 @@
   }
   
   frame.size = [_confirmButton sizeThatFits:_navBarView.frame.size];
+  frame.size.height = NAV_BAR_HEIGHT;
   frame.origin = CGPointMake((_navBarView.frame.size.width-frame.size.width)-10, (_navBarView.frame.size.height-frame.size.height)/2);
   if(! CGRectEqualToRect(_confirmButton.frame, frame)){
     _confirmButton.frame = frame;

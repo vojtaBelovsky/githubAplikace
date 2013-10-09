@@ -17,6 +17,7 @@
 #import "BCAddIssueButtonMC.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SZTextView.h"
+#import "BCConstants.h"
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
@@ -25,7 +26,6 @@
 #define TABLE_WIDTH          ( 0.9f )
 #define BOUNDS               ( 0.95f )
 #define LINE_WIDTH           ( 0.972f )
-#define NAV_BAR_HEIGHT       ( 44.0f )
 #define TABLE_LINE_HEIGHT    ( 40.0f )
 #define CAP_SIZE_FOR_FORM    ( 8.0f )
 
@@ -133,7 +133,9 @@
   }
   
   frame.size = [_cancelButton sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake(15, (_navigationBarView.frame.size.height-frame.size.height)/2);
+  frame.size.width += 2*TAP_AREA_ADDITON;
+  frame.size.height = NAV_BAR_HEIGHT;
+  frame.origin = CGPointMake(0, (_navigationBarView.frame.size.height-frame.size.height)/2);
   if(! CGRectEqualToRect(_cancelButton.frame, frame)){
     _cancelButton.frame = frame;
   }
@@ -145,7 +147,9 @@
   }  
   
   frame.size = [_createButton sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width)-15, (_navigationBarView.frame.size.height-frame.size.height)/2);
+  frame.size.width += 2*TAP_AREA_ADDITON;
+  frame.size.height = NAV_BAR_HEIGHT;
+  frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width), (_navigationBarView.frame.size.height-frame.size.height)/2);
   if(! CGRectEqualToRect(_createButton.frame, frame)){
     _createButton.frame = frame;
   }

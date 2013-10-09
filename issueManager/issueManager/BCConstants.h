@@ -20,3 +20,6 @@
 #define NAME_KEY                          @"repository_name"
 #define ISSUES_URL_KEY                    @"issues_url"
 #define OWNER_KEY                         @"owner"
+
+#define NAV_BAR_HEIGHT                    ( 44.0f )
+#define TAP_AREA_ADDITON                  ( 15.0f )
