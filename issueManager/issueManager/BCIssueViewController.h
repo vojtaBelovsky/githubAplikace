@@ -14,18 +14,18 @@
 @class TMViewDeckController;
 @class BCUser;
 
-@interface BCIssueViewController : UITableViewController <UITableViewDelegate, UIScrollViewDelegate>{
+@interface BCIssueViewController : UIViewController <UITableViewDelegate, UIScrollViewDelegate>{
 @private
-  NSArray *_repositories;
-  BCIssueView *_tableView;
   int _nthRepository;
   NSMutableArray *_allDataSources;
   NSMutableArray *_allCollaborators;
   BOOL _isShownRepoVC;
 }
 
+@property BCIssueView *issueView;
+@property BOOL isChangedRepositories;
+@property NSArray *repositories;
 @property UITapGestureRecognizer *slideBack;
-@property TMViewDeckController *deckController;
 @property BOOL userChanged;
 @property BCUser *currentUser;
 
@@ -35,5 +35,6 @@
 -(void)changeIssue:(BCIssue *)issue forNewIssue:(BCIssue*)newIssue;
 -(void)removeIssue:(BCIssue *)issue;
 -(void)slideBackCenterView;
+-(void)setRepositoriesAndReloadDataWithRepositories:(NSArray*)repositories;
 
 @end

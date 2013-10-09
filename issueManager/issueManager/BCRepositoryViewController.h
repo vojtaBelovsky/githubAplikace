@@ -12,10 +12,11 @@
 
 @interface BCRepositoryViewController : UIViewController<UITableViewDelegate> {
 @private
-    BCRepositoryView *_repoView;
-    BCRepositoryDataSource *_dataSource;
-    NSMutableArray *_chosenRepositories;
+  BCRepositoryView *_repoView;
+  BCRepositoryDataSource *_dataSource;
+  NSMutableArray *_chosenRepositories;
   BCUser *_loggedInUser;
+  BOOL _isPresentedByIssueVC;
 }
 
 - (id)initWithLoggedInUser:(BCUser*)user;

@@ -23,6 +23,7 @@
 #import "BCaddIssueButton.h"
 #import "BCAddIssueButtonMC.h"
 #import "SZTextView.h"
+#import "BCIssueView.h"
 
 #define BODY_FONT_COLOR                 [UIColor colorWithRed:.32 green:.32 blue:.32 alpha:1.00]
 
@@ -64,13 +65,13 @@
   
   UITapGestureRecognizer *addMilestoneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectMilestoneVC)];
   [_addIssueView.addMilestone addGestureRecognizer:addMilestoneTapRecognizer];
-  [_addIssueView.addMilestone.theNewIssuePlus addGestureRecognizer:addMilestoneTapRecognizer];
+  [_addIssueView.addMilestone.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectMilestoneVC) forControlEvents:UIControlEventTouchUpInside];
   UITapGestureRecognizer *selectAssigneeTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectAssigneVC)];
   [_addIssueView.selectAssignee addGestureRecognizer:selectAssigneeTapRecognizer];
-  [_addIssueView.selectAssignee.theNewIssuePlus addGestureRecognizer:selectAssigneeTapRecognizer];
+  [_addIssueView.selectAssignee.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectAssigneVC) forControlEvents:UIControlEventTouchUpInside];
   UITapGestureRecognizer *selectLabelsTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createAndPushSelectLabelsVC)];
   [_addIssueView.selectLabels addGestureRecognizer:selectLabelsTapRecognizer];
-  [_addIssueView.selectLabels.theNewIssuePlus addGestureRecognizer:selectLabelsTapRecognizer];
+  [_addIssueView.selectLabels.theNewIssuePlus addTarget:self action:@selector(createAndPushSelectLabelsVC) forControlEvents:UIControlEventTouchUpInside];
   [_addIssueView.cancelButton addTarget:self action:@selector(cancelButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_addIssueView.createButton addTarget:self action:@selector(createButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
   [_addIssueView.issueBody setDelegate:self];

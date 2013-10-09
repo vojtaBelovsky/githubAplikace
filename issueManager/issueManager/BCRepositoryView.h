@@ -20,7 +20,9 @@
 @property UIImageView *backgroundImageView;
 @property UILabel *repositoryLabel;
 @property UILabel *repositoryLabelShadow;
-@property UIButton *doneButton;
+@property UIButton *confirmButton;
 @property UIActivityIndicatorView *activityIndicatorView;
+
+- (id)initWithButtonTitle:(NSString*)title ;
 
 @end

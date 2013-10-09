@@ -15,18 +15,18 @@
 
 #define REPOSITORIES_FONT               [UIFont fontWithName:@"ProximaNova-Light" size:24]
 #define REPOSITORIES_FONT_COLOR         [UIColor colorWithRed:.44 green:.44 blue:.44 alpha:1.00]
-#define REPOSITORIES_SHADOW_FONT_COLOR  [UIColor blackColor]
+#define REPOSITORIES_SHADOW_COLOR       [UIColor blackColor]
 
-#define DONE_FONT            [UIFont fontWithName:@"ProximaNova-Light" size:13]
-#define DONE_FONT_COLOR      [UIColor whiteColor]
-#define REPOSITORY_BG_COLOR  [UIColor colorWithRed:.11 green:.11 blue:.11 alpha:1.00]
+#define CONFIRM_FONT            [UIFont fontWithName:@"ProximaNova-Light" size:13]
+#define CONFIRM_FONT_COLOR      [UIColor whiteColor]
+#define REPOSITORY_BG_COLOR     [UIColor colorWithRed:.11 green:.11 blue:.11 alpha:1.00]
 
 @implementation BCRepositoryView
 
 #pragma mark -
 #pragma mark LifeCycles
 
-- (id)init {
+- (id)initWithButtonTitle:(NSString*)title {
   self = [super init];
   if ( self ) {
     UIImage *resizableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:10 topCapHeight:86];
@@ -44,23 +44,23 @@
     _repositoryLabel.backgroundColor = [UIColor clearColor];
     _repositoryLabel.layer.shadowOpacity = 1.0;
     _repositoryLabel.layer.shadowRadius = 0.0;
-    _repositoryLabel.layer.shadowColor = REPOSITORIES_SHADOW_FONT_COLOR.CGColor;
+    _repositoryLabel.layer.shadowColor = REPOSITORIES_SHADOW_COLOR.CGColor;
     _repositoryLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
     [_repositoryLabel setText:@"Repositories"];
     [self addSubview:_repositoryLabel];
     
-    _doneButton = [[UIButton alloc] init];
-    [_doneButton setTitle:@"DONE" forState:UIControlStateNormal];
-    [_doneButton setTitleColor:DONE_FONT_COLOR forState:UIControlStateNormal];
-    _doneButton.titleLabel.backgroundColor = [UIColor clearColor];
-    _doneButton.titleLabel.numberOfLines = 0;
-    _doneButton.titleLabel.font = DONE_FONT;
-    _doneButton.enabled = YES;
-    _doneButton.layer.shadowOpacity = 1.0;
-    _doneButton.layer.shadowRadius = 0.0;
-    _doneButton.layer.shadowColor = REPOSITORIES_SHADOW_FONT_COLOR.CGColor;
-    _doneButton.layer.shadowOffset = CGSizeMake(1.0, 1.0);
-    [self addSubview:_doneButton];
+    _confirmButton = [[UIButton alloc] init];
+    [_confirmButton setTitle:title forState:UIControlStateNormal];
+    [_confirmButton setTitleColor:CONFIRM_FONT_COLOR forState:UIControlStateNormal];
+    _confirmButton.titleLabel.backgroundColor = [UIColor clearColor];
+    _confirmButton.titleLabel.numberOfLines = 0;
+    _confirmButton.titleLabel.font = CONFIRM_FONT;
+    _confirmButton.enabled = YES;
+    _confirmButton.layer.shadowOpacity = 1.0;
+    _confirmButton.layer.shadowRadius = 0.0;
+    _confirmButton.layer.shadowColor = REPOSITORIES_SHADOW_COLOR.CGColor;
+    _confirmButton.layer.shadowOffset = CGSizeMake(1.0, 1.0);
+    [self addSubview:_confirmButton];
     
     _tableView = [[UITableView alloc] init];
     [_tableView setAllowsMultipleSelection:YES];
@@ -108,10 +108,10 @@
     _repositoryLabel.frame = frame;
   }
   
-  frame.size = [_doneButton sizeThatFits:_navBarView.frame.size];
+  frame.size = [_confirmButton sizeThatFits:_navBarView.frame.size];
   frame.origin = CGPointMake((_navBarView.frame.size.width-frame.size.width)-10, (_navBarView.frame.size.height-frame.size.height)/2);
-  if(! CGRectEqualToRect(_doneButton.frame, frame)){
-    _doneButton.frame = frame;
+  if(! CGRectEqualToRect(_confirmButton.frame, frame)){
+    _confirmButton.frame = frame;
   }
   
   frame.size = ACTIVITY_INDICATOR_SIZE;

@@ -20,6 +20,8 @@
 #import "BCConstants.h"
 #import "BCAppDelegate.h"
 
+#define CONFIRM_BUTTON_TEXT _isPresentedByIssueVC ? @"CHANGE" : @"DONE"
+
 @interface BCRepositoryViewController ()
 - (void)createModel;
 @end
@@ -34,6 +36,7 @@
   if ( self ) {
     _loggedInUser = user;
     _chosenRepositories = [[NSMutableArray alloc] init];
+    _isPresentedByIssueVC = NO;
   }
   return self;
 }
@@ -43,6 +46,7 @@
   if ( self ) {
     _loggedInUser = user;
     _chosenRepositories = repositories;
+    _isPresentedByIssueVC = YES;
   }
   return self;
 }
@@ -52,12 +56,16 @@
 }
 
 - (void)loadView {
-  _repoView = [[BCRepositoryView alloc] init];
+  _repoView = [[BCRepositoryView alloc] initWithButtonTitle:CONFIRM_BUTTON_TEXT];
   [_repoView.activityIndicatorView startAnimating];
   self.view = _repoView;
   [_chosenRepositories count];
   [_repoView.tableView setMultipleTouchEnabled:YES];
-  [_repoView.doneButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  if (_isPresentedByIssueVC) {
+    [_repoView.confirmButton addTarget:self action:@selector(changeButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  }else{
+    [_repoView.confirmButton addTarget:self action:@selector(doneButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
+  }
   [self createModel];
   [_repoView.tableView setDelegate:self];
 }
@@ -111,6 +119,23 @@
 
 #pragma mark -
 #pragma mark buttons
+
+-(void)changeButtonDidPress{
+  if ([_chosenRepositories count]) {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *codedData = [NSKeyedArchiver archivedDataWithRootObject:_chosenRepositories];
+    [userDefaults setObject:codedData forKey:CHOSEN_REPOSITORIES];
+    [userDefaults synchronize];
+    BCAppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    BCIssueViewController *myCentreVC = (BCIssueViewController*)myDelegate.deckController.centerController;
+    [myCentreVC setRepositories:_chosenRepositories];
+    [myCentreVC setIsChangedRepositories:YES];
+    [myCentreVC slideBackCenterView];
+  }else{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Empty repository list" message:@"You must select at least one repository" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alertView show];
+  }
+}
 
 -(void)doneButtonDidPress{
   if ([_chosenRepositories count]) {
