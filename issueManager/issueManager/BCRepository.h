@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSString *issuesUrl;
 @property (nonatomic, copy)
 BCUser *owner;
+@property BOOL hasIssues;
 
 + (void)getAllRepositoriesOfUserWithSuccess:(void (^)(NSMutableArray *repositories))success failure:(void(^) (NSError *error))failure;
 

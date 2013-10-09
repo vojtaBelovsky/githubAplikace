@@ -114,6 +114,7 @@
     [myDelegate.deckController setAndPresentCenterController:repoViewCtrl];
   } failure:^(NSError *error) {
     [UIAlertView showWithError:error];
+    [_loginView.activityIndicatorView stopAnimating];
   }];
 }
 

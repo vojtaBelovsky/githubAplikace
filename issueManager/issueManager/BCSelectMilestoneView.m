@@ -126,6 +126,7 @@
   
   frame.size = [_doneButton sizeThatFits:_navigationBarView.frame.size];
   frame.size.width += 2*TAP_AREA_ADDITON;
+  frame.size.height = NAV_BAR_HEIGHT;
   frame.origin = CGPointMake((_navigationBarView.frame.size.width-frame.size.width), (_navigationBarView.frame.size.height-frame.size.height)/2);
   if(! CGRectEqualToRect(_doneButton.frame, frame)){
     _doneButton.frame = frame;

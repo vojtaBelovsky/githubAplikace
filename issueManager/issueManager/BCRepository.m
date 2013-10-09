@@ -77,7 +77,8 @@
     return @{
              @"repositoryId": @"id",
              @"name": @"name",
-             @"issuesUrl": @"issues_url"
+             @"issuesUrl": @"issues_url",
+             @"hasIssues": @"has_issues"
              };
 }
 
@@ -116,6 +117,11 @@
       [params setObject:[[NSString alloc] initWithFormat:@"%d", page] forKey:@"page"];
       [[BCHTTPClient sharedInstance] getPath:@"user/repos" parameters:params success:mySuccessBlock failure:myFailureBlock];
     }else{
+      NSIndexSet *indexes = [allRepositories indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        BCRepository *currentRepo = obj;
+        return ![currentRepo hasIssues];
+      }];
+      [allRepositories removeObjectsAtIndexes:indexes];
       success ( allRepositories );
       mySuccessBlock = nil;
     }
@@ -144,6 +150,11 @@
       [params setObject:[[NSString alloc] initWithFormat:@"%d", page] forKey:@"page"];
       [[BCHTTPClient sharedInstance] getPath:@"user/repos" parameters:params success:mySuccessBlock failure:myFailureBlock];
     }else{
+      NSIndexSet *indexes = [allRepositories indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        BCRepository *currentRepo = obj;
+        return ![currentRepo hasIssues];
+      }];
+      [allRepositories removeObjectsAtIndexes:indexes];
       success ( allRepositories );
       mySuccessBlock = nil;
     }
