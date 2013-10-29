@@ -14,6 +14,7 @@
 #import "BCUser.h"
 #import "BCNoIssuesView.h"
 
+
 @implementation BCIssueDataSource
 
 -(id) initWithIssues:(NSMutableArray *)issues withMilestones:(NSMutableArray *)milestones withCurrentUser:(BCUser*)user{
@@ -72,6 +73,12 @@
   return cell;
 }
 
+-(NSIndexPath*)getIndexPathOfIssue:(BCIssue*)issue{
+  NSMutableArray *issuesInMilestone = [_dataSource objectForKey:WITHOUT_MILESTONE];
+  NSIndexPath *myIndexPath = [NSIndexPath indexPathForRow:[issuesInMilestone indexOfObject:issue] inSection:[_dataSourceKeyNames indexOfObject:issue.milestone.title]];
+  return [NSIndexPath indexPathForRow:1 inSection:0];
+}
+
 #pragma mark - private
 
 -(void)setDatasourcePairWithKeyName:(NSString *)keyName{
@@ -96,10 +103,18 @@
 #pragma mark public
 
 -(void)removeIssue:(BCIssue *)issue{
-  NSMutableArray *currentArray = [_dataSource objectForKey:issue.milestone.title];
-  [currentArray removeObject:issue];
-  if (![currentArray count]) {
-    [_dataSourceKeyNames removeObject:issue.milestone.title];
+  if (issue.milestone == nil) {
+    NSMutableArray *currentArray = [_dataSource objectForKey:WITHOUT_MILESTONE];
+    [currentArray removeObject:issue];
+    if (![currentArray count]) {
+      [_dataSourceKeyNames removeObject:WITHOUT_MILESTONE];
+    }
+  }else{
+    NSMutableArray *currentArray = [_dataSource objectForKey:issue.milestone.title];
+    [currentArray removeObject:issue];
+    if (![currentArray count]) {
+      [_dataSourceKeyNames removeObject:issue.milestone.title];
+    }
   }
 }
 

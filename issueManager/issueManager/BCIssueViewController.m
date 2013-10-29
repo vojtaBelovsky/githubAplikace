@@ -78,32 +78,31 @@
   for(__weak UITableView *tableView in _issueView.tableViews){
     [tableView addPullToRefreshWithActionHandler:^{
       __block BCUser *currentUser = [_currentUser copy];
-      __block int currentRepozitoryNumber = _nthRepository;
-      __block BCRepository *currentRepozitory = [_repositories objectAtIndex:currentRepozitoryNumber];
+      __block int currentRepositoryNumber = _nthRepository;
+      __block BCRepository *currentRepository = [_repositories objectAtIndex:currentRepositoryNumber];
       
-      [tableView beginUpdates];
       [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         [tableView setAlpha:0.5];
       }];
-      [BCMilestone getAllMilestonesOfRepository:currentRepozitory withSuccess:^(NSMutableArray *allMilestones) {
-        [BCIssue getIssuesFromRepository:currentRepozitory forUser:currentUser WithSuccess:^(NSMutableArray *issues){
+      [BCMilestone getAllMilestonesOfRepository:currentRepository withSuccess:^(NSMutableArray *allMilestones) {
+        [BCIssue getIssuesFromRepository:currentRepository forUser:currentUser WithSuccess:^(NSMutableArray *issues){
           if (![issues count]) {
             [issues addObject:[[BCIssue alloc] initNoIssues]];
           }
-          BCIssueDataSource *currentDataSource = [[BCIssueDataSource alloc] initWithIssues:issues withMilestones:allMilestones withCurrentUser:_currentUser];
-          [_allDataSources replaceObjectAtIndex:currentRepozitoryNumber withObject:currentDataSource];
-          [tableView setDataSource:currentDataSource];
+          BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:currentRepositoryNumber];
+          BCIssueDataSource *newDataSource = [[BCIssueDataSource alloc] initWithIssues:issues withMilestones:allMilestones withCurrentUser:_currentUser];
+          
+          [_allDataSources replaceObjectAtIndex:currentRepositoryNumber withObject:newDataSource];
+          [tableView setDataSource:newDataSource];
           [tableView reloadData];
           [UIView animateWithDuration:ANIMATION_DURATION animations:^{
             [tableView setAlpha:1];
           }];
-          [tableView endUpdates];
           [tableView.pullToRefreshView stopAnimating];
         } failure:^(NSError *error) {
           [UIView animateWithDuration:ANIMATION_DURATION animations:^{
             [tableView setAlpha:1];
           }];
-          [tableView endUpdates];
           [tableView.pullToRefreshView stopAnimating];
           [UIAlertView showWithError:error];
         }];
@@ -111,7 +110,6 @@
         [UIView animateWithDuration:ANIMATION_DURATION animations:^{
           [tableView setAlpha:1];
         }];
-        [tableView endUpdates];
         [tableView.pullToRefreshView stopAnimating];
         [UIAlertView showWithError:error];
       }];
@@ -248,7 +246,13 @@
 }
 
 -(void)removeIssue:(BCIssue *)issue{
-  [[_allDataSources objectAtIndex:_nthRepository] removeIssue:issue];
+  BCIssueDataSource *currentDataSource = [_allDataSources objectAtIndex:_nthRepository];
+  UITableView *myTableView = [_issueView.tableViews objectAtIndex:_nthRepository];
+  NSArray *myIndexPaths = [[NSArray alloc] initWithObjects:[currentDataSource getIndexPathOfIssue:issue], nil];
+  [myTableView deleteRowsAtIndexPaths:myIndexPaths withRowAnimation:UITableViewRowAnimationRight];
+  [currentDataSource removeIssue:issue];
+  [myTableView setDataSource:currentDataSource];
+//  [myTableView reloadData];
 }
 
 #pragma mark -
