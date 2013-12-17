@@ -109,7 +109,6 @@
   [UIView animateWithDuration:ANIMATION_DURATION animations:^{
     _issueDetailView.myNewCommentView.alpha = 1.0f;
   }];
-  
   _issueDetailView.addedNewComment = YES;
   _heightOfNewComment = [commentView sizeOfViewWithWidth:ISSUE_WIDTH].height;
 }
