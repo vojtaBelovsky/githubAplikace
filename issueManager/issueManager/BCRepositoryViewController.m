@@ -21,6 +21,7 @@
 #import "BCAppDelegate.h"
 
 #define CONFIRM_BUTTON_TEXT _isPresentedByIssueVC ? @"CHANGE" : @"DONE"
+#define ROW_HEIGHT  54;
 
 @interface BCRepositoryViewController ()
 - (void)createModel;
@@ -79,7 +80,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 54;
+  return ROW_HEIGHT;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
