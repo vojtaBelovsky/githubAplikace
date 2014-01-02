@@ -17,7 +17,6 @@
 @property UILabel *myTextLabel;
 @property UIImageView *checkboxImgView;
 
-
-
 + (BCSelectAssigneeCell *)createAssigneCellWithTableView:(UITableView *)tableView;
+
 @end

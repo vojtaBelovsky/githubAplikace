@@ -33,6 +33,5 @@
          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 + (BCHTTPClient *)sharedInstance;
-//+ (BCHTTPClient *)sharedInstanceWithUserName:(NSString *)userName andPassword:(NSString *)password;
 
 @end

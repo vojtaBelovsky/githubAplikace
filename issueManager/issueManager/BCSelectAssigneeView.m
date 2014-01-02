@@ -8,6 +8,7 @@
 
 #import "BCSelectAssigneeView.h"
 #import "BCConstants.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define BACKGROUND_IMAGE              [UIImage imageNamed:@"appBackground.png"]
 #define BACKGROUND_IMAGE_FOR_FORM     [UIImage imageNamed:@"profileIssueBackground.png"]
@@ -33,31 +34,30 @@
 {
     self = [super init];
     if (self) {
+      //Nastavení pozadí obrazovky.
       UIImage *resizableImage = [BACKGROUND_IMAGE stretchableImageWithLeftCapWidth:5 topCapHeight:64];
       _backgroundImageView = [[UIImageView alloc] initWithImage:resizableImage];
       [self addSubview:_backgroundImageView];
       
+      //Vytvoření mého navigation baru.
       _navigationBarView = [[UIImageView alloc] init];
       [_navigationBarView setBackgroundColor:[UIColor clearColor]];
       [self addSubview:_navigationBarView];
       
-      _theNewIssueShadowLabel = [[UILabel alloc] init];
-      _theNewIssueShadowLabel.numberOfLines = 0;
-      _theNewIssueShadowLabel.font = NEW_ISSUE_FONT;
-      _theNewIssueShadowLabel.textColor = NEW_ISSUE_SHADOW_FONT_COLOR;
-      _theNewIssueShadowLabel.backgroundColor = [UIColor clearColor];
-      [_theNewIssueShadowLabel setText:@"Select Assignee"];
-      [self addSubview:_theNewIssueShadowLabel];
-      
+      //Nastavení titulku, jeho font, barva, stín a text.
       _theNewIssueLabel = [[UILabel alloc] init];
       _theNewIssueLabel.numberOfLines = 0;
       _theNewIssueLabel.font = NEW_ISSUE_FONT;
       _theNewIssueLabel.textColor = NEW_ISSUE_FONT_COLOR;
       _theNewIssueLabel.backgroundColor = [UIColor clearColor];
+      _theNewIssueLabel.layer.shadowOpacity = 1.0;
+      _theNewIssueLabel.layer.shadowRadius = 0.0;
+      _theNewIssueLabel.layer.shadowColor = NEW_ISSUE_SHADOW_FONT_COLOR.CGColor;
+      _theNewIssueLabel.layer.shadowOffset = CGSizeMake(1.0, 1.0);
       [_theNewIssueLabel setText:@"Select Assignee"];
       [self addSubview:_theNewIssueLabel];
       
-      
+      //Vytvoření tlačítka pro akci zpět.
       _cancelButton = [[UIButton alloc] init];
       _cancelButton.titleLabel.numberOfLines = 0;
       _cancelButton.titleLabel.font = DONE_AND_CANCEL_FONT;
@@ -67,6 +67,7 @@
       [_cancelButton setEnabled:YES];
       [self addSubview:_cancelButton];
       
+      //Vytvoření tlačítka pro potvrzení výběru.
       _doneButton = [[UIButton alloc] init];
       _doneButton.titleLabel.numberOfLines = 0;
       _doneButton.titleLabel.font = DONE_AND_CANCEL_FONT;
@@ -75,10 +76,12 @@
       [_doneButton setEnabled:YES];
       [self addSubview:_doneButton];
       
+      //Okraj rámečku - lemování kolem formuláře
       resizableImage = [BACKGROUND_IMAGE_FOR_FORM stretchableImageWithLeftCapWidth:CAP_SIZE_FOR_FORM topCapHeight:CAP_SIZE_FOR_FORM];
       _form = [[UIImageView alloc] initWithImage:resizableImage];
       [self addSubview:_form];
       
+      //samotná tabulka pro výběr spolupracovníka
       _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
       _tableView.backgroundColor = [UIColor clearColor];
       _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -110,18 +113,11 @@
     _cancelButton.frame = frame;
   }
   
-  frame.size = [_theNewIssueShadowLabel sizeThatFits:_navigationBarView.frame.size];
-  frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2)+1, ((self.navigationBarView.frame.size.height-frame.size.height)/2)+1);
-  if( !CGRectEqualToRect(_theNewIssueShadowLabel.frame, frame)){
-    _theNewIssueShadowLabel.frame = frame;
-  }
-  
   frame.size = [_theNewIssueLabel sizeThatFits:_navigationBarView.frame.size];
   frame.origin = CGPointMake(((self.frame.size.width-frame.size.width)/2), ((self.navigationBarView.frame.size.height-frame.size.height)/2));
   if( !CGRectEqualToRect(_theNewIssueLabel.frame, frame)){
     _theNewIssueLabel.frame = frame;
   }
-  
   
   frame.size = [_doneButton sizeThatFits:_navigationBarView.frame.size];
   frame.size.width += 2*TAP_AREA_ADDITON;

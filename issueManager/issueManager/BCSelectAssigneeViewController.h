@@ -7,19 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-@class BCRepository;
 @class BCSelectAssigneeDataSource;
 @class BCSelectAssigneeView;
 @class BCIssueDetailViewController;
-@class BCUser;
 @class BCAddIssueViewController;
 
 @interface BCSelectAssigneeViewController : UIViewController<UITableViewDelegate>{
 @private
-    BCRepository *_repository;
-    BCSelectAssigneeView *_selectAssigneView;
-    BCSelectAssigneeDataSource *_dataSource;
-    BCAddIssueViewController *_controller;
+  BCSelectAssigneeView *_selectAssigneView;
+  BCSelectAssigneeDataSource *_dataSource;
+  BCAddIssueViewController *_controller;
   NSIndexPath *_checkedAssignee;
 }
 

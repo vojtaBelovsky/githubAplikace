@@ -32,14 +32,4 @@
   _maskImageView.frame = self.frame;
 }
 
-//-(void)layoutSubviews{
-//  [super layoutSubviews];
-//  
-//  if (!CGRectEqualToRect(_maskImageView.frame, self.frame)) {
-//    _maskImageView.frame = self.frame;
-//  }
-//}
-
-
-
 @end

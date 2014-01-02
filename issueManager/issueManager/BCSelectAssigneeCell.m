@@ -26,39 +26,52 @@
 
 @implementation BCSelectAssigneeCell
 
-+ (BCSelectAssigneeCell *)createAssigneCellWithTableView:(UITableView *)tableView {  
+//Tovární metoda pro vytvoření buňky
++ (BCSelectAssigneeCell *)createAssigneCellWithTableView:(UITableView *)tableView {
+  
+  //Použitím reuseIdentifieru zvyšíme výrazným způsobem rychlost aplikace,
+  //především v případech, kdy má tabulka mnoho buněk.
   BCSelectAssigneeCell *cell = [tableView dequeueReusableCellWithIdentifier:SelectAssigneeCellReuseIdentifier];
   if ( !cell ) {
+    //V případě že ještě není vytvořena žádná buňka, jež by se dala znovupoužít,
+    //vytvoříme novou.
     cell = [[BCSelectAssigneeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SelectAssigneeCellReuseIdentifier];
     
+    //Vytvoření a nastavení obrázků pro zaškrtávátko a avatara uživatele.
     cell.checkboxImgView = [[UIImageView alloc] initWithImage:NEW_ISSUE_CHECK_OFF highlightedImage:NEW_ISSUE_CHECK_ON];
-    [cell addSubview:cell.checkboxImgView];    
-    
+    [cell addSubview:cell.checkboxImgView];
     cell.avatarImgView = [[BCAvatarImgView alloc] init];
     [cell addSubview:cell.avatarImgView];
     
+    //Vytvoření a nastavení textového pole pro jméno spolupracovníka
     cell.myTextLabel = [[UILabel alloc] init];
     cell.myTextLabel.font = CELL_FONT;
     cell.myTextLabel.textColor = FONT_COLOR;
     [cell.myTextLabel setBackgroundColor:[UIColor clearColor]];
     [cell addSubview:cell.myTextLabel];
     
+    //Vytvoření linky, která od sebe graficky odděluje jednotlivé buňky v tabulce
     UIImage *image = [NEW_ISSUE_SEPARATOR stretchableImageWithLeftCapWidth:0 topCapHeight:1];
     cell.separatorImgView = [[UIImageView alloc] initWithImage:image];
     [cell addSubview:cell.separatorImgView];
     
+    //Nechceme aby se při kliknuťí na buňku měnila její barva
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     [cell.selectedBackgroundView setBackgroundColor:[UIColor clearColor]];
   }
   return cell;
 }
 
+//LayoutSubviews slouží k rozvržení uživatelského rozhraní
 -(void)layoutSubviews{
   [super layoutSubviews];
   CGRect frame;
   
+  //Nastavení velikosti avatara
   frame.size = CGSizeMake(self.frame.size.height*AVATAR_WIDTH_AND_HEIGHT, self.frame.size.height*AVATAR_WIDTH_AND_HEIGHT);
+  //Nastavení umístění avatara - zleva umístěn 10px od okraje a vertikálně zarovnán na střed
   frame.origin = CGPointMake(AVATAR_OFFSET, (self.frame.size.height-frame.size.height)/2);
+  //V případě že je rám avatara stejný jako nově vytvořený, k přiřazení nedojde.
   if (!CGRectEqualToRect(_avatarImgView.frame, frame)) {
     _avatarImgView.frame = frame;
   }

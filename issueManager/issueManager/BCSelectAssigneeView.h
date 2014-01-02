@@ -10,13 +10,12 @@
 
 @interface BCSelectAssigneeView : UIView
 
-@property (strong) UITableView *tableView;
+@property UITableView *tableView;
 @property UIImageView *backgroundImageView;
 @property UIView *navigationBarView;
 @property UIButton *cancelButton;
 @property UIButton *doneButton;
 @property UILabel *theNewIssueLabel;
-@property UILabel *theNewIssueShadowLabel;
 @property UIImageView *form;
 
 @end
